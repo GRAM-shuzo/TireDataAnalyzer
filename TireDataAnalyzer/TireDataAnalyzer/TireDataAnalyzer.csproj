@@ -383,7 +383,7 @@
       <Project>{e3961aef-0f2d-46cb-ab5b-2c8d43a2dfa1}</Project>
       <Name>TTCDataUtilsInterface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TireData\TTCDataUtils.csproj">
+    <ProjectReference Include="..\TTCDataUtils\TTCDataUtils.csproj">
       <Project>{8dc27439-4472-4e3a-87fe-7b6c96ee854f}</Project>
       <Name>TTCDataUtils</Name>
     </ProjectReference>

@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FittingSolverCore", "FittingSolverCore\FittingSolverCore.vcxproj", "{878BF22A-FE5A-4F43-8523-4B6BE19FC896}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTCDataUtils", "TireData\TTCDataUtils.csproj", "{8DC27439-4472-4E3A-87FE-7B6C96EE854F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTCDataUtils", "TTCDataUtils\TTCDataUtils.csproj", "{8DC27439-4472-4E3A-87FE-7B6C96EE854F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnuplot", "Gnuplot\Gnuplot.csproj", "{D113776F-8809-41ED-AB3E-B07B42773EFE}"
 EndProject
