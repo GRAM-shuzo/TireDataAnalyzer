@@ -371,7 +371,7 @@
       <Project>{4dbfe2cf-45e4-4594-8e6a-5ebc2eef85ae}</Project>
       <Name>CustomTabControl</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FYFittingSolverCore\FYFittingSolverCore.vcxproj">
+    <ProjectReference Include="..\FittingSolverCore\FittingSolverCore.vcxproj">
       <Project>{878bf22a-fe5a-4f43-8523-4b6be19fc896}</Project>
       <Name>FittingSolverCore</Name>
     </ProjectReference>
