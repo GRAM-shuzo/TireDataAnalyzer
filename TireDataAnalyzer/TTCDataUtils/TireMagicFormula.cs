@@ -1429,7 +1429,7 @@ namespace TTCDataUtils
             double a22 = a[22];
             double a23 = a[23];
 
-            return IA * (FZ * a22 + a23 * FZ * FZ);
+            return (a23 * Math.Pow(FZ, 2) + a22 * FZ) * IA;
         }
 
         public FuncResult Error(TireData data)
@@ -1635,7 +1635,7 @@ namespace TTCDataUtils
             double a13 = a[13];
             double a14 = a[14];
 
-            return dF_dBCD(args) * FZ * (1 - a13 * Math.Abs(IA)) * (a8 * P + 1) * Math.Sin(a9 * Math.Atan(FZ * Math.Pow(a11 *
+            return dF_dBCD(args)* FZ * (1 - a13 * Math.Abs(IA)) * (a8 * P + 1) * Math.Sin(a9 * Math.Atan(FZ * Math.Pow(a11 *
     Math.Pow(IA, 2) + a10, -1) * Math.Pow(a12 * P + 1, -1))) * (a14 * T + 1);
         }
         private double dF_da8(MagicFormulaArguments args)
