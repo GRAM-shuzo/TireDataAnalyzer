@@ -1,0 +1,24 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TireDataAnalyzer.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="MyWindowLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">0, 17</Value>
+    </Setting>
+    <Setting Name="MyWindowState" Type="System.Windows.Forms.FormWindowState" Scope="User">
+      <Value Profile="(Default)">Normal</Value>
+    </Setting>
+    <Setting Name="MyBounds" Type="System.Drawing.Rectangle" Scope="User">
+      <Value Profile="(Default)">100, 100, 700, 687</Value>
+    </Setting>
+    <Setting Name="MySplitterDistance1" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">261</Value>
+    </Setting>
+    <Setting Name="OpenInitialDirectory" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\</Value>
+    </Setting>
+    <Setting Name="MySplitterDistance2" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">150</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

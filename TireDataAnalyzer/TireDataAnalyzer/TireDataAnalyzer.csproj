@@ -1,0 +1,441 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{462F3B99-9B28-4E5C-B6E3-F44B0D2E3218}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TireDataAnalyzer</RootNamespace>
+    <AssemblyName>TireDataAnalyzer</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MySql.Data, Version=6.9.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ProjectTree\Node_MagicFormula.cs" />
+    <Compile Include="ProjectTree\Node_DataSelector.cs" />
+    <Compile Include="ProjectTree\Node_Project.cs" />
+    <Compile Include="ProjectTree\Node_RawTireData.cs" />
+    <Compile Include="ProjectTree\Node_TireDataSet.cs" />
+    <Compile Include="ProjectTree\ProjectTreeNode.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DoubleTrackbar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserControls\FittingWizard\CombinedSlipPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\FittingWizard\CombinedSlipPage.Designer.cs">
+      <DependentUpon>CombinedSlipPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\FittingWizard\FinishedPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\FittingWizard\FinishedPage.Designer.cs">
+      <DependentUpon>FinishedPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\FittingWizard\FittingWizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\FittingWizard\FittingWizard.Designer.cs">
+      <DependentUpon>FittingWizard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\FittingWizard\FittingWizardPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\FittingWizard\FittingWizardPage.Designer.cs">
+      <DependentUpon>FittingWizardPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\FittingWizard\MFInitialValuePage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\FittingWizard\MFInitialValuePage.Designer.cs">
+      <DependentUpon>MFInitialValuePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\FittingWizard\NormalizeCoeficientPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\FittingWizard\NormalizeCoeficientPage.Designer.cs">
+      <DependentUpon>NormalizeCoeficientPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\FittingWizard\ProgressPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\FittingWizard\ProgressPage.Designer.cs">
+      <DependentUpon>ProgressPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\FittingWizard\PureCorneringPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\FittingWizard\PureCorneringPage.Designer.cs">
+      <DependentUpon>PureCorneringPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\FittingWizard\PureDriveBrakePage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\FittingWizard\PureDriveBrakePage.Designer.cs">
+      <DependentUpon>PureDriveBrakePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\FittingWizard\SelfAligningTorquePage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\FittingWizard\SelfAligningTorquePage.Designer.cs">
+      <DependentUpon>SelfAligningTorquePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\FittingWizard\SolverSettingPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\FittingWizard\SolverSettingPage.Designer.cs">
+      <DependentUpon>SolverSettingPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\GraphViewer\DataNode.cs" />
+    <Compile Include="UserControls\GraphViewer\GraphNode.cs" />
+    <Compile Include="UserControls\GraphViewer\GraphViewTreeNode.cs" />
+    <Compile Include="UserControls\GraphViewer\TopNode.cs" />
+    <Compile Include="UserControls\TireDataViewer\MFGraphDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\TireDataViewer\MFGraphDialog.Designer.cs">
+      <DependentUpon>MFGraphDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\TireDataViewer\MultiTireDataViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\TireDataViewer\MultiTireDataViewer.Designer.cs">
+      <DependentUpon>MultiTireDataViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PropertyPage\DataSelectorProperty\MaxMinDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\PropertyPage\DataSelectorProperty\MaxMinDialog.Designer.cs">
+      <DependentUpon>MaxMinDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PropertyPage\PropertyPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\PropertyPage\PropertyPage.Designer.cs">
+      <DependentUpon>PropertyPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PropertyPage\DataSelectorProperty\DataSelectorProperty.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\PropertyPage\DataSelectorProperty\DataSelectorProperty.Designer.cs">
+      <DependentUpon>DataSelectorProperty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PropertyPage\RawTireDataProperty.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\PropertyPage\RawTireDataProperty.Designer.cs">
+      <DependentUpon>RawTireDataProperty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PropertyPage\DataSelectorProperty\TireDataSelectorElement.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\PropertyPage\DataSelectorProperty\TireDataSelectorElement.Designer.cs">
+      <DependentUpon>TireDataSelectorElement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PropertyPage\DataSelectorProperty\TireDataSelectorWithViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\PropertyPage\DataSelectorProperty\TireDataSelectorWithViewer.Designer.cs">
+      <DependentUpon>TireDataSelectorWithViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PropertyPage\TireMagicFormulaParameterProperty.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\PropertyPage\TireMagicFormulaParameterProperty.Designer.cs">
+      <DependentUpon>TireMagicFormulaParameterProperty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\TireDataViewer\SeriesEditorHeader.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\TireDataViewer\SeriesEditorHeader.Designer.cs">
+      <DependentUpon>SeriesEditorHeader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\TireDataViewer\SeriesEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\TireDataViewer\SeriesEditor.Designer.cs">
+      <DependentUpon>SeriesEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SimpleTireDataSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\SimpleTireDataSelector.Designer.cs">
+      <DependentUpon>SimpleTireDataSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\TireDataViewer\TireDataViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\TireDataViewer\TireDataViewer.Designer.cs">
+      <DependentUpon>TireDataViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\TireDataViewer\TireDataViewerGridEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\TireDataViewer\TireDataViewerGridEditor.Designer.cs">
+      <DependentUpon>TireDataViewerGridEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\TireDataViewer\TireDataViewerProperty.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\TireDataViewer\TireDataViewerProperty.Designer.cs">
+      <DependentUpon>TireDataViewerProperty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\TreeViewNodes\MyTreeNode.cs" />
+    <Compile Include="Utils\RandomBoxMuller.cs.cs" />
+    <Compile Include="Utils\StaticFunctions.cs" />
+    <Compile Include="UserControls\TreeViewNodes\TreeViewNode_RawTireData.cs" />
+    <Compile Include="UserControls\TreeViewNodes\TreeViewNode_MagicFormula.cs" />
+    <Compile Include="UserControls\TreeViewNodes\TreeViewNode_Selector.cs" />
+    <Compile Include="UserControls\TreeViewNodes\TreeViewNode_Project.cs" />
+    <Compile Include="Utils\Log.cs" />
+    <Compile Include="UserControls\MainWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\MainWindow.Designer.cs">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControls\PropertyPage\DataSelectorProperty\TireDataSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\PropertyPage\DataSelectorProperty\TireDataSelector.Designer.cs">
+      <DependentUpon>TireDataSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\ProjectManager.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\FittingWizard\CombinedSlipPage.resx">
+      <DependentUpon>CombinedSlipPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\FittingWizard\FinishedPage.resx">
+      <DependentUpon>FinishedPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\FittingWizard\FittingWizard.resx">
+      <DependentUpon>FittingWizard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\FittingWizard\FittingWizardPage.resx">
+      <DependentUpon>FittingWizardPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\FittingWizard\MFInitialValuePage.resx">
+      <DependentUpon>MFInitialValuePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\FittingWizard\NormalizeCoeficientPage.resx">
+      <DependentUpon>NormalizeCoeficientPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\FittingWizard\ProgressPage.resx">
+      <DependentUpon>ProgressPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\FittingWizard\PureCorneringPage.resx">
+      <DependentUpon>PureCorneringPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\FittingWizard\PureDriveBrakePage.resx">
+      <DependentUpon>PureDriveBrakePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\FittingWizard\SelfAligningTorquePage.resx">
+      <DependentUpon>SelfAligningTorquePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\FittingWizard\SolverSettingPage.resx">
+      <DependentUpon>SolverSettingPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\TireDataViewer\MFGraphDialog.resx">
+      <DependentUpon>MFGraphDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\TireDataViewer\MultiTireDataViewer.resx">
+      <DependentUpon>MultiTireDataViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\PropertyPage\DataSelectorProperty\MaxMinDialog.resx">
+      <DependentUpon>MaxMinDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\PropertyPage\PropertyPage.resx">
+      <DependentUpon>PropertyPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\PropertyPage\DataSelectorProperty\DataSelectorProperty.resx">
+      <DependentUpon>DataSelectorProperty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\PropertyPage\RawTireDataProperty.resx">
+      <DependentUpon>RawTireDataProperty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\PropertyPage\DataSelectorProperty\TireDataSelectorElement.resx">
+      <DependentUpon>TireDataSelectorElement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\PropertyPage\DataSelectorProperty\TireDataSelector.resx">
+      <DependentUpon>TireDataSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\PropertyPage\DataSelectorProperty\TireDataSelectorWithViewer.resx">
+      <DependentUpon>TireDataSelectorWithViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\TireDataViewer\SeriesEditorHeader.resx">
+      <DependentUpon>SeriesEditorHeader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\TireDataViewer\SeriesEditor.resx">
+      <DependentUpon>SeriesEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\SimpleTireDataSelector.resx">
+      <DependentUpon>SimpleTireDataSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\TireDataViewer\TireDataViewer.resx">
+      <DependentUpon>TireDataViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\TireDataViewer\TireDataViewerGridEditor.resx">
+      <DependentUpon>TireDataViewerGridEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\TireDataViewer\TireDataViewerProperty.resx">
+      <DependentUpon>TireDataViewerProperty.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Utils\App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CustomTabControl\CustomTabControl.csproj">
+      <Project>{4dbfe2cf-45e4-4594-8e6a-5ebc2eef85ae}</Project>
+      <Name>CustomTabControl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FYFittingSolverCore\FYFittingSolverCore.vcxproj">
+      <Project>{878bf22a-fe5a-4f43-8523-4b6be19fc896}</Project>
+      <Name>FittingSolverCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gnuplot\Gnuplot.csproj">
+      <Project>{d113776f-8809-41ed-ab3e-b07b42773efe}</Project>
+      <Name>Gnuplot</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TireDataUtilsInterface\TTCDataUtilsInterface.csproj">
+      <Project>{e3961aef-0f2d-46cb-ab5b-2c8d43a2dfa1}</Project>
+      <Name>TTCDataUtilsInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TireData\TTCDataUtils.csproj">
+      <Project>{8dc27439-4472-4e3a-87fe-7b6c96ee854f}</Project>
+      <Name>TTCDataUtils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PFy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PFy_BCD.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PFy_D.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PFy_E.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PFy_Sh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PFy_Sv.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PFy_C.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\action_add_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\action_Cancel_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_Down_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_Up_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_Next_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_previous_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Copy_16x.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

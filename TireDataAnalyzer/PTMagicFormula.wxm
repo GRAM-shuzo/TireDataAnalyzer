@@ -1,0 +1,153 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 14.09.0 ] */
+
+/* [wxMaxima: input   start ] */
+load("E:/Desktop/kart/FSAEUtils/FSAEVehicleDesigner/TireDataAnalyzer/cform.lisp")$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+B(a0,a1,a2,a3) := a0*(1+a1*FZ+a2*FZ*FZ)*(1+a3*abs(IA));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+D(a5,a6,a7,a8,a9) := a5*(1+a6+FZ)*(1-a7*P)*(1+a8*abs(IA)+a9*IA*IA)*FZ;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+SH(a15,a16,a17,a18):=a15+a16*FZ + a17*(1+a18*FZ)*IA;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+E(a0,a1,a2,a3,a4,a5,a10,a11,a12,a13,a14,a15,a16,a17,a18) := a10*(1+a11*FZ+a12*FZ*FZ)*(1+(a13+a14*IA)*(2/%pi)*atan(B(a0,a1,a2,a3)*a4*(SA+SH(a15,a16,a17,a18))));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(B(a0,a1,a2,a3));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(D(a5,a6,a7,a8,a9));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(E(a0,a1,a2,a3,a4,a5,a10,a11,a12,a13,a14,a15,a16,a17,a18));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(B(a0,a1,a2,a3),a0,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(B(a0,a1,a2,a3),a1,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(B(a0,a1,a2,a3),a2,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(B(a0,a1,a2,a3),a3,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(D(a5,a6,a7,a8,a9),a5,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(D(a5,a6,a7,a8,a9),a6,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(D(a5,a6,a7,a8,a9),a7,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(D(a5,a6,a7,a8,a9),a8,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(D(a5,a6,a7,a8,a9),a9,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(E(a0,a1,a2,a3,a4,a5,a10,a11,a12,a13,a14,a15,a16,a17,a18),a10,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(E(a0,a1,a2,a3,a4,a5,a10,a11,a12,a13,a14,a15,a16,a17,a18),a11,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(E(a0,a1,a2,a3,a4,a5,a10,a11,a12,a13,a14,a15,a16,a17,a18),a12,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(E(a0,a1,a2,a3,a4,a5,a10,a11,a12,a13,a14,a15,a16,a17,a18),a13,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(E(a0,a1,a2,a3,a4,a5,a10,a11,a12,a13,a14,a15,a16,a17,a18),a14,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(SH(a15,a16,a17,a18),a15,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(SH(a15,a16,a17,a18),a16,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(SH(a15,a16,a17,a18),a17,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(SH(a15,a16,a17,a18),a18,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(E(a0,a1,a2,a3,a4,a5,a10,a11,a12,a13,a14,a15,a16,a17,a18),a0,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(E(a0,a1,a2,a3,a4,a5,a10,a11,a12,a13,a14,a15,a16,a17,a18),a1,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(E(a0,a1,a2,a3,a4,a5,a10,a11,a12,a13,a14,a15,a16,a17,a18),a2,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(E(a0,a1,a2,a3,a4,a5,a10,a11,a12,a13,a14,a15,a16,a17,a18),a3,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(E(a0,a1,a2,a3,a4,a5,a10,a11,a12,a13,a14,a15,a16,a17,a18),a4,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(E(a0,a1,a2,a3,a4,a5,a10,a11,a12,a13,a14,a15,a16,a17,a18),a5,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(E(a0,a1,a2,a3,a4,a5,a10,a11,a12,a13,a14,a15,a16,a17,a18),a15,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(E(a0,a1,a2,a3,a4,a5,a10,a11,a12,a13,a14,a15,a16,a17,a18),a16,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(E(a0,a1,a2,a3,a4,a5,a10,a11,a12,a13,a14,a15,a16,a17,a18),a17,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(E(a0,a1,a2,a3,a4,a5,a10,a11,a12,a13,a14,a15,a16,a17,a18),a18\,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(E(a0,a1,a2,a3,a4,a5,a10,a11,a12,a13,a14,a15,a16,a17,a18),a18,1));
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$

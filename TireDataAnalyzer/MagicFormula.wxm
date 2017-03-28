@@ -1,0 +1,91 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 14.09.0 ] */
+
+/* [wxMaxima: input   start ] */
+load("E:/Desktop/cform.lisp")$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+MF(x,d,c,b,e,sh,sv):=d*sin(c*atan(b*(x+sh)-e*(b*(x+sh)-atan(b*(x+sh)))))+sv;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(MF(x,d,c,b,e,sh,sv),d,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(MF(x,d,c,b,e,sh,sv),c,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(MF(x,d,c,b,e,sh,sv),b,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(MF(x,d,c,b,e,sh,sv),e,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+diff(-sin(c*atan(e*(b*(x+sh)-atan(b*(x+sh)))-b*(x+sh))),c,1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(-atan(e*(b*(x+sh)-atan(b*(x+sh)))-b*(x+sh))*
+cos(c*atan(e*(b*(x+sh)-atan(b*(x+sh)))-b*(x+sh))),b,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(MF(x,d,c,b,e,sh,sv),sh,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+diff(MF(x,d,c,b,e,sh,sv),sv,1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+G(y,shy,by,cy,ey) := cos(cy * atan(by*(y+shy)-ey*(by*(y+shy)-atan(by*(y+shy)))))/
+cos(cy * atan(by*shy-ey*(by*shy-atan(by*+shy))));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(G(y,shy,by,cy,ey),shy,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(G(y,shy,by,cy,ey),by,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(G(y,shy,by,cy,ey),cy,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(G(y,shy,by,cy,ey),ey,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+diff(sgn(x),x,1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(G(y,shy,by,cy,ey));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+diff(abs(x),x,1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+D(a[1],a[2],a[3],a[4],a[5]) := a[1] * (1 + a[2] * FZ) * (1 - a[3] * IA * IA) * (1 + a[4] * P + a[5] * P * P) * FZ;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+D(a1,a2,a3,a4,a5) := a1 * (1 + a2 * FZ) * (1 - a3 * IA * IA) * (1 + a4 * P + a5 * P * P) * FZ;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+(
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$

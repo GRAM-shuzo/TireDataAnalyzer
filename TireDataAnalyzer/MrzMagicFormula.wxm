@@ -1,0 +1,57 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 14.09.0 ] */
+
+/* [wxMaxima: input   start ] */
+load("E:/Desktop/kart/FSAEUtils/FSAEVehicleDesigner/TireDataAnalyzer/cform.lisp")$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+B(a0,a1) := a0*(1 + a1*By*Cy);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+D(a2,a3,a4,a5,a6,a7,a8) := (a2*(1+a3*FZ)+a4*(1+a5*FZ)*(1+a6*P)*IA+a7*(1+a8*FZ)*IA*abs(IA))*FZ;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(D(a2,a3,a4,a5,a6,a7,a8));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(B(a0,a1),a0,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(B(a0,a1),a1,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(D(a2,a3,a4,a5,a6,a7,a8),a2,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(D(a2,a3,a4,a5,a6,a7,a8),a3,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(D(a2,a3,a4,a5,a6,a7,a8),a4,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(D(a2,a3,a4,a5,a6,a7,a8),a5,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(D(a2,a3,a4,a5,a6,a7,a8),a6,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(D(a2,a3,a4,a5,a6,a7,a8),a7,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(D(a2,a3,a4,a5,a6,a7,a8),a8,1));
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$

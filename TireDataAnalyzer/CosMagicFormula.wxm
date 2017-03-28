@@ -1,0 +1,33 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 14.09.0 ] */
+
+/* [wxMaxima: input   start ] */
+load("E:/Desktop/kart/FSAEUtils/FSAEVehicleDesigner/TireDataAnalyzer/cform.lisp")$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+MF(b,c,d,e,sh,x) := d*cos(c*atan(b*(x+sh)-e*(b*(x+sh)-atan(b*(x+sh)))))*cos(x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(MF(b,c,d,e,sh,x),b,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(MF(b,c,d,e,sh,x),c,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(MF(b,c,d,e,sh,x),d,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(MF(b,c,d,e,sh,x),e,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(diff(MF(b,c,d,e,sh,x),sh,1));
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$
