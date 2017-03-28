@@ -1378,8 +1378,8 @@ namespace TTCDataUtils
             double a13 = a[13];
             double a14 = a[14];
 
-            return a7 * FZ * (1 - a13 * Math.Abs(IA)) * (a8 * P + 1) * Math.Sin(a9 * Math.Atan(Math.Pow(a10, -1) *
-    Math.Pow(a11 * Math.Pow(IA, 2) + 1, -1) * Math.Pow(a12 * P + 1, -1))) * (a14 * T + 1);
+            return a7 * FZ * (1 - a13 * Math.Abs(IA)) * (a8 * P + 1) * Math.Sin(a9 * Math.Atan(FZ * Math.Pow(a11 *
+    Math.Pow(IA, 2) + a10, -1) * Math.Pow(a12 * P + 1, -1))) * (a14 * T + 1);
 
         }
         override public double E(MagicFormulaArguments args)
