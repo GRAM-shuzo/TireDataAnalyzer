@@ -89,7 +89,6 @@
             // LMMethodRB
             // 
             this.LMMethodRB.AutoSize = true;
-            this.LMMethodRB.Enabled = false;
             this.LMMethodRB.Location = new System.Drawing.Point(7, 41);
             this.LMMethodRB.Name = "LMMethodRB";
             this.LMMethodRB.Size = new System.Drawing.Size(237, 16);

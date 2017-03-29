@@ -59,8 +59,8 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             else if (MFFD.Solver is LMFittingSolver)
             {
                 LMMethodRB.Checked = true;
-                MaxEvalTB.Text = (MFFD.Solver as NLOptFittingSolver).Maxeval.ToString();
-                XtolTB.Text = (MFFD.Solver as NLOptFittingSolver).Xtol.ToString();
+                MaxEvalTB.Text = (MFFD.Solver as LMFittingSolver).Maxeval.ToString();
+                XtolTB.Text = (MFFD.Solver as LMFittingSolver).Xtol.ToString();
             }
                 
             init = false;
@@ -91,7 +91,10 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             }
             if(LMMethodRB.Checked)
             {
-                MFFD.Solver = new NoFitting();
+                var solver = new MagicFormulaFittingSolver.LMFittingSolver();
+                solver.Maxeval = int.Parse(MaxEvalTB.Text);
+                solver.Xtol = double.Parse(XtolTB.Text);
+                MFFD.Solver = solver;
             }
                
         }

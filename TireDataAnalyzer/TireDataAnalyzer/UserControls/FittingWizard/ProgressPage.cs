@@ -25,6 +25,9 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
         Progress<ProgressNotification> Progress;
 
         bool notConfirm = false;
+        TireMagicFormula TMF_Save;
+
+
         protected async override void Reload(bool back)
         {
             NextButton.Enabled = false;
@@ -41,6 +44,9 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
                 CountBar.Maximum = MFFD.Solver.Maxeval;
                 Progress = new Progress<ProgressNotification>();
                 Progress.ProgressChanged += Progress_ProgressChanged;
+
+                TMF_Save = MFFD.MagicFormula.Copy();
+
                 using (CancellationTokenSource = new CancellationTokenSource())
                 {
                     try
@@ -51,13 +57,14 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
                     {
                         // キャンセルされた場合
                         MessageBox.Show("キャンセル");
-                        
+                        MFFD.SetInitialValue(TMF_Save);
                         return;
                     }
                     catch (Exception e)
                     {
                         // キャンセルされた場合
                         MessageBox.Show("失敗\n" + e.Message);
+                        MFFD.SetInitialValue(TMF_Save);
                         notConfirm = true;
                         Previous();
                         return;
