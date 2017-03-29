@@ -158,7 +158,7 @@ namespace TTCDataUtils
         public bool FittingPFY = true;
         public bool FittingCFX = true;
         public bool FittingCFY = true;
-        public bool FittingSAT = true;
+        public bool FittingSAT = false;
 
         public static MagicFormulaFittingDelegate Load(Stream reader)
         {
