@@ -119,7 +119,10 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             {
                 tb.KeyDown += TextBox_KeyDown;
             }
-
+            foreach (var cb in FittingParametersCB)
+            {
+                cb.CheckedChanged += FittingCheckedChanged;
+            }
             for (int i = 0; i < TDSs.Count; ++i)
             {
                 TDSs[i].MFFD = MFFD;

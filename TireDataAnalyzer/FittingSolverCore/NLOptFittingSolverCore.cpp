@@ -32,15 +32,19 @@ namespace MagicFormulaFittingSolver
 		int Run(TTCDataUtils::ApproximatingCurve^ curve, List<TireData^>^ dataList, CancellationTokenSource^ cancel, IProgress<TTCDataUtils::ProgressNotification^>^ prg)
 		{
 
-			int numParameters = curve->Parameters->Count;
+			int numParameters = 0;
+			for (int i = 0; i < curve->Parameters->Count; ++i)
+			{
+				if (curve->FittingParameters[i]) ++numParameters;
+			}
 			int numData = dataList->Count;
 			vector<double> p(numParameters);
-			GetListDouble(p, curve->Parameters);
+			GetListDouble(p, curve->Parameters, curve->FittingParameters);
 
 			//最小化ソルバ
-			nlopt::opt opt(Algorithm, curve->Parameters->Count);
+			nlopt::opt opt(Algorithm, numParameters);
 			//ソルバーに関数登録
-			opt.set_min_objective(ObjectiveFunction::Function, new ObjectiveFunction(curve, dataList, cancel, prg));
+			opt.set_min_objective(ObjectiveFunction::Function, new ObjectiveFunction(curve, dataList, cancel, prg, numParameters));
 
 			//最小最大値制約
 			std::vector<double> lb(numParameters, -HUGE_VAL);
@@ -97,27 +101,30 @@ namespace MagicFormulaFittingSolver
 
 		}
 
-		static void GetListDouble(vector<double>& p, List<double>^ params)
+		static void GetListDouble(vector<double>& p, List<double>^ params, List<bool>^ enable)
 		{
+			int j = 0;
 			for (int i = 0; i < params->Count; ++i)
 			{
-				p[i] = params[i];
+				if (enable[i]) p[j++] = params[i];
 			}
 		}
-		static void SetListDouble(List<double>^ params, const vector<double>& p)
+		static void SetListDouble(List<double>^ params, const vector<double>& p, List<bool>^ enable)
 		{
+			int j = 0;
 			for (int i = 0; i < params->Count; ++i)
 			{
-				params[i] = p[i];
+				if(enable[i]) params[i] = p[j++];
 			}
 		}
 
 		struct ObjectiveFunction
 		{
-			ObjectiveFunction(msclr::gcroot<ApproximatingCurve^> c, msclr::gcroot<List<TireData^>^> d, msclr::gcroot<CancellationTokenSource^> can, msclr::gcroot<IProgress<ProgressNotification^>^> prg)
-				:curve(c), dataList(d),cancel(can), progress(prg),count(0)
+			ObjectiveFunction(msclr::gcroot<ApproximatingCurve^> c, msclr::gcroot<List<TireData^>^> d, msclr::gcroot<CancellationTokenSource^> can, msclr::gcroot<IProgress<ProgressNotification^>^> prg, int numParams_)
+				:curve(c), dataList(d),cancel(can), progress(prg),count(0),numParams(numParams_)
 				{
 				}
+			int numParams;
 			int count;
 			msclr::gcroot<ApproximatingCurve^> curve;
 			msclr::gcroot<List<TireData^>^> dataList;
@@ -127,9 +134,9 @@ namespace MagicFormulaFittingSolver
 			{
 				auto of = static_cast<ObjectiveFunction*>(data);
 				++(of->count);
-				int numParams = of->curve->Parameters->Count;
+				int numParams = of->numParams;
 				int numData = of->dataList->Count;
-				SetListDouble(of->curve->Parameters, x);
+				SetListDouble(of->curve->Parameters, x, of->curve->FittingParameters);
 				double result = 0;
 
 				for (int i = 0; i < numData; ++i)
@@ -138,9 +145,10 @@ namespace MagicFormulaFittingSolver
 					auto err = of->curve->Error(dataListH[i]);
 					result += err.value;
 					if (!grad.empty()) {
-						for (int j = 0; j < numParams; ++j)
+						int k = 0;
+						for (int j = 0; j < of->curve->Parameters->Count; ++j)
 						{
-							grad[j] += 2 * err.value*err.grads[j];
+							if(of->curve->FittingParameters[j]) grad[k++] += 2 * err.value*err.grads[j];
 						}
 					}
 				}
@@ -157,9 +165,9 @@ namespace MagicFormulaFittingSolver
 				{
 					throw gcnew Exception("User Cancel");
 				}
+
 				ProgressNotification^ notification= gcnew ProgressNotification();
 				notification->Count = of->count;
-				notification->Stage = -1;
 				notification->Error = result;
 				of->progress->Report(notification);
 				return result;

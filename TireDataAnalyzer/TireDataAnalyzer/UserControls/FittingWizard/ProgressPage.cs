@@ -51,6 +51,15 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
                     {
                         // キャンセルされた場合
                         MessageBox.Show("キャンセル");
+                        
+                        return;
+                    }
+                    catch (Exception e)
+                    {
+                        // キャンセルされた場合
+                        MessageBox.Show("失敗\n" + e.Message);
+                        notConfirm = true;
+                        Previous();
                         return;
                     }
                 }

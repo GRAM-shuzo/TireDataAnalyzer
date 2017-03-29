@@ -123,7 +123,6 @@ namespace TTCDataUtils
             pn.Stage = 4;
             prg.Report(pn);
             if (FittingCFX) solver.Run(MagicFormula.CFX, dataset.DriveBrakeTable, cancel, prg);
-
             if (FittingSAT)
             {
                 //PnumaticTrail
