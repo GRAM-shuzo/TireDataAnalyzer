@@ -10,6 +10,10 @@ D(a1,a2,a3,a4,a5,a6) := a1*(1+a2*FZ)*(1-a3*IA*IA)*(1+a4*P+a5*P*P)*(1+a6*T)*FZ;
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
+cform(D(a1,a2,a3,a4,a5,a6));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
 BCD(a7,a8,a9,a10,a11,a12) := a7*(1+a8*FZ)*exp(a9*FZ)*(1+a10*P+a11*P*P)*(1+a12*T)*FZ;
 /* [wxMaxima: input   end   ] */
 
@@ -19,6 +23,18 @@ cform(BCD(a7,a8,a9,a10,a11,a12));
 
 /* [wxMaxima: input   start ] */
 E(a13,a14,a15,a16) := a13*(1+a14*FZ+a15*FZ*FZ)*(1-a16*sgn(SR));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(E(a13,a14,a15,a16));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+Sh(a17,a18) := a17+a18*FZ;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cform(Sh(a17,a18));
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
@@ -116,7 +132,6 @@ cform(diff(Ey(b4,b5),b4,1));
 /* [wxMaxima: input   start ] */
 cform(diff(Ey(b4,b5),b5,1));
 /* [wxMaxima: input   end   ] */
-
 
 /* Maxima can't load/batch files which end with a comment! */
 "Created with wxMaxima"$

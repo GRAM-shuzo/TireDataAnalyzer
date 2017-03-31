@@ -34,7 +34,7 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             SelfAligningTorqueCB.Checked = MFFD.FittingSAT;
             MaxEvalTB.Text = "100";
             XtolTB.Text = "0.1";
-
+            MaxDataTB.Text = "50000";
             NloptAlgorithmCB.Items.Clear();
             foreach(NLOptFittingSolver.algorithm item in Enum.GetValues(typeof(NLOptFittingSolver.algorithm)))
             {
@@ -61,6 +61,7 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
                 LMMethodRB.Checked = true;
                 MaxEvalTB.Text = (MFFD.Solver as LMFittingSolver).Maxeval.ToString();
                 XtolTB.Text = (MFFD.Solver as LMFittingSolver).Xtol.ToString();
+                MaxDataTB.Text = (MFFD.Solver as LMFittingSolver).MaxDataUsage.ToString();
             }
                 
             init = false;
@@ -94,6 +95,7 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
                 var solver = new MagicFormulaFittingSolver.LMFittingSolver();
                 solver.Maxeval = int.Parse(MaxEvalTB.Text);
                 solver.Xtol = double.Parse(XtolTB.Text);
+                solver.MaxDataUsage = int.Parse(MaxDataTB.Text);
                 MFFD.Solver = solver;
             }
                

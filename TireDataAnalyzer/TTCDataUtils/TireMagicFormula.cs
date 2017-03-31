@@ -528,7 +528,7 @@ namespace TTCDataUtils
     [Serializable]
     public class PureFXMagicFormula : SinTypePureMagicFormula, ApproximatingCurve
     {
-        const int numParam = 17;
+        const int numParam = 19;
         public PureFXMagicFormula()
         {
             Parameters = new List<double>(numParam);
@@ -624,7 +624,7 @@ namespace TTCDataUtils
             double a5 = a[5];
             double a6 = a[6];
 
-            return a1 * (1 + a2 * FZ) * (1 - a3 * IA * IA) * (1 + a4 * P + a5 * P * P) * (1 + a6 * T) * FZ;
+            return a1 * FZ * (a2 * FZ + 1) * (1 - a3 * Math.Pow(IA, 2)) * (a5 * Math.Pow(P, 2) + a4 * P + 1) * (a6 * T + 1);
         }
         override public double BCD(MagicFormulaArguments args)
         {
@@ -662,11 +662,23 @@ namespace TTCDataUtils
             double a16 = a[16];
 
 
-            return a13 * (1 + a14 * FZ + a15 * FZ * FZ) * (1 - a16 * Math.Sign(SR)); ;
+            return a13 * (a15 * Math.Pow(FZ, 2) + a14 * FZ + 1) * (1 - a16 * Math.Sign(SR));
         }
         override public double Sh(MagicFormulaArguments args)
         {
-            return 0;
+            var a = Parameters;
+            double SA = args.SA;
+            double SR = args.SR;
+            double FZ = args.FZ;
+            double IA = args.IA;
+            double P = args.P;
+            double T = args.T;
+
+            double a17 = a[17];
+            double a18 = a[18];
+
+
+            return a18 * FZ + a17;
         }
         override public double Sv(MagicFormulaArguments args)
         {
@@ -711,6 +723,8 @@ namespace TTCDataUtils
             GradPureFunctions.Add(dF_da14);
             GradPureFunctions.Add(dF_da15);
             GradPureFunctions.Add(dF_da16);
+            GradPureFunctions.Add(dF_da17);
+            GradPureFunctions.Add(dF_da18);
         }
         public FuncResult Error(TireData data)
         {
@@ -773,7 +787,7 @@ namespace TTCDataUtils
             double a4 = a[4];
             double a5 = a[5];
             double a6 = a[6];
-            return dF_dD(args) * a1 * Math.Pow(FZ, 2) * (1 - a3 * Math.Pow(IA, 2)) * (a5 * Math.Pow(P, 2) + a4 * P + 1) * (a6 * T + 1); ;
+            return dF_dD(args) * a1 * Math.Pow(FZ, 2) * (1 - a3 * Math.Pow(IA, 2)) * (a5 * Math.Pow(P, 2) + a4 * P + 1) * (a6 * T + 1);
         }
         private double dF_da3(MagicFormulaArguments args)
         {
@@ -791,7 +805,7 @@ namespace TTCDataUtils
             double a4 = a[4];
             double a5 = a[5];
             double a6 = a[6];
-            return dF_dD(args) * (-a1 * FZ * (a2 * FZ + 1) * Math.Pow(IA, 2) * (a5 * Math.Pow(P, 2) + a4 * P + 1) * (a6 * T + 1));
+            return dF_dD(args) * -a1 * FZ * (a2 * FZ + 1) * Math.Pow(IA, 2) * (a5 * Math.Pow(P, 2) + a4 * P + 1) * (a6 * T + 1);
         }
         private double dF_da4(MagicFormulaArguments args)
         {
@@ -809,7 +823,7 @@ namespace TTCDataUtils
             double a4 = a[4];
             double a5 = a[5];
             double a6 = a[6];
-            return dF_dD(args) * (a1 * FZ * (a2 * FZ + 1) * (1 - a3 * Math.Pow(IA, 2)) * P * (a6 * T + 1));
+            return dF_dD(args) * a1 * FZ * (a2 * FZ + 1) * (1 - a3 * Math.Pow(IA, 2)) * P * (a6 * T + 1);
         }
         private double dF_da5(MagicFormulaArguments args)
         {
@@ -827,7 +841,7 @@ namespace TTCDataUtils
             double a4 = a[4];
             double a5 = a[5];
             double a6 = a[6];
-            return dF_dD(args) * (a1 * FZ * (a2 * FZ + 1) * (1 - a3 * Math.Pow(IA, 2)) * Math.Pow(P, 2) * (a6 * T + 1));
+            return dF_dD(args) * a1 * FZ * (a2 * FZ + 1) * (1 - a3 * Math.Pow(IA, 2)) * Math.Pow(P, 2) * (a6 * T + 1);
         }
         private double dF_da6(MagicFormulaArguments args)
         {
@@ -845,7 +859,7 @@ namespace TTCDataUtils
             double a4 = a[4];
             double a5 = a[5];
             double a6 = a[6];
-            return dF_dD(args) * (a1 * FZ * (a2 * FZ + 1) * (1 - a3 * Math.Pow(IA, 2)) * (a5 * Math.Pow(P, 2) + a4 * P + 1) * T);
+            return dF_dD(args) * a1 * FZ * (a2 * FZ + 1) * (1 - a3 * Math.Pow(IA, 2)) * Math.Pow(P, 2) * (a6 * T + 1);
         }
 
         private double dF_da7(MagicFormulaArguments args)
@@ -866,7 +880,7 @@ namespace TTCDataUtils
             double a12 = a[12];
 
 
-            return dF_dBCD(args) * (FZ * (a8 * FZ + 1) * Math.Exp(a9 * FZ) * (a11 * Math.Pow(P, 2) + a10 * P + 1) * (a12 * T + 1));
+            return dF_dBCD(args) * FZ * (a8 * FZ + 1) * Math.Exp(a9 * FZ) * (a11 * Math.Pow(P, 2) + a10 * P + 1) * (a12 * T + 1);
         }
         private double dF_da8(MagicFormulaArguments args)
         {
@@ -887,7 +901,7 @@ namespace TTCDataUtils
             double a13 = a[13];
             double a14 = a[14];
 
-            return dF_dBCD(args) * (a7 * Math.Pow(FZ, 2) * Math.Exp(a9 * FZ) * (a11 * Math.Pow(P, 2) + a10 * P + 1) * (a12 * T + 1));
+            return dF_dBCD(args) * a7 * Math.Pow(FZ, 2) * Math.Exp(a9 * FZ) * (a11 * Math.Pow(P, 2) + a10 * P + 1) * (a12 * T + 1);
         }
         private double dF_da9(MagicFormulaArguments args)
         {
@@ -906,7 +920,8 @@ namespace TTCDataUtils
             double a11 = a[11];
             double a12 = a[12];
 
-            return dF_dBCD(args) * (a7 * Math.Pow(FZ, 2) * (a8 * FZ + 1) * Math.Exp(a9 * FZ) * (a11 * Math.Pow(P, 2) + a10 * P + 1) * (a12 * T + 1));
+            return dF_dBCD(args) * a7 * Math.Pow(FZ, 2) * (a8 * FZ + 1) * Math.Exp(a9 * FZ) * (a11 * Math.Pow(P, 2) + a10 * P + 1) * (a12 *
+               T + 1);
         }
         private double dF_da10(MagicFormulaArguments args)
         {
@@ -925,7 +940,7 @@ namespace TTCDataUtils
             double a11 = a[11];
             double a12 = a[12];
 
-            return dF_dBCD(args) * (a7 * FZ * (a8 * FZ + 1) * Math.Exp(a9 * FZ) * P * (a12 * T + 1));
+            return dF_dBCD(args) * a7 * FZ * (a8 * FZ + 1) * Math.Exp(a9 * FZ) * P * (a12 * T + 1);
         }
         private double dF_da11(MagicFormulaArguments args)
         {
@@ -944,7 +959,7 @@ namespace TTCDataUtils
             double a11 = a[11];
             double a12 = a[12];
 
-            return dF_dBCD(args) * (a7 * FZ * (a8 * FZ + 1) * Math.Exp(a9 * FZ) * Math.Pow(P, 2) * (a12 * T + 1));
+            return dF_dBCD(args) * a7 * FZ * (a8 * FZ + 1) * Math.Exp(a9 * FZ) * Math.Pow(P, 2) * (a12 * T + 1);
         }
         private double dF_da12(MagicFormulaArguments args)
         {
@@ -963,7 +978,7 @@ namespace TTCDataUtils
             double a11 = a[11];
             double a12 = a[12];
 
-            return dF_dBCD(args) * (a7 * FZ * (a8 * FZ + 1) * Math.Exp(a9 * FZ) * (a11 * Math.Pow(P, 2) + a10 * P + 1) * T);
+            return dF_dBCD(args) * a7 * FZ * (a8 * FZ + 1) * Math.Exp(a9 * FZ) * (a11 * Math.Pow(P, 2) + a10 * P + 1) * T;
         }
 
         private double dF_da13(MagicFormulaArguments args)
@@ -982,7 +997,7 @@ namespace TTCDataUtils
             double a15 = a[15];
             double a16 = a[16];
 
-            return dF_dE(args) * ((a15 * Math.Pow(FZ, 2) + a14 * FZ + 1) * (1 - a16 * Math.Sign(SR)));
+            return dF_dE(args) * (a15 * Math.Pow(FZ, 2) + a14 * FZ + 1) * (1 - a16 * Math.Sign(SR));
         }
         private double dF_da14(MagicFormulaArguments args)
         {
@@ -1000,7 +1015,7 @@ namespace TTCDataUtils
             double a15 = a[15];
             double a16 = a[16];
 
-            return dF_dE(args) * (a13 * FZ * (1 - a16 * Math.Sign(SR)));
+            return dF_dE(args) * a13 * FZ * (1 - a16 * Math.Sign(SR));
         }
         private double dF_da15(MagicFormulaArguments args)
         {
@@ -1018,7 +1033,7 @@ namespace TTCDataUtils
             double a15 = a[15];
             double a16 = a[16];
 
-            return dF_dE(args) * (a13 * Math.Pow(FZ, 2) * (1 - a16 * Math.Sign(SR)));
+            return dF_dE(args) * -a13 * (a15 * Math.Pow(FZ, 2) + a14 * FZ + 1) * Math.Sign(SR);
         }
         private double dF_da16(MagicFormulaArguments args)
         {
@@ -1037,6 +1052,37 @@ namespace TTCDataUtils
             double a16 = a[16];
 
             return dF_dE(args) * (-a13 * (a15 * Math.Pow(FZ, 2) + a14 * FZ + 1) * Math.Sign(SR));
+        }
+
+        private double dF_da17(MagicFormulaArguments args)
+        {
+            var a = Parameters;
+            double SA = args.SA;
+            double SR = args.SR;
+            double FZ = args.FZ;
+            double IA = args.IA;
+            double P = args.P;
+            double T = args.T;
+
+            double a17 = a[17];
+            double a18 = a[18];
+
+            return dF_dSh(args) *1;
+        }
+        private double dF_da18(MagicFormulaArguments args)
+        {
+            var a = Parameters;
+            double SA = args.SA;
+            double SR = args.SR;
+            double FZ = args.FZ;
+            double IA = args.IA;
+            double P = args.P;
+            double T = args.T;
+
+            double a17 = a[17];
+            double a18 = a[18];
+
+            return dF_dSh(args) * FZ;
         }
         #endregion
     }

@@ -46,6 +46,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.MaxEvalTB = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.MaxDataTB = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -196,6 +198,8 @@
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.MaxDataTB);
+            this.groupBox3.Controls.Add(this.label4);
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.XtolTB);
             this.groupBox3.Controls.Add(this.label2);
@@ -250,6 +254,22 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Max Evaluation";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 71);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(82, 12);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "MaxDataUsage";
+            // 
+            // MaxDataTB
+            // 
+            this.MaxDataTB.Location = new System.Drawing.Point(95, 68);
+            this.MaxDataTB.Name = "MaxDataTB";
+            this.MaxDataTB.Size = new System.Drawing.Size(100, 19);
+            this.MaxDataTB.TabIndex = 10;
+            // 
             // SolverSettingPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -294,5 +314,7 @@
         private System.Windows.Forms.TextBox MaxEvalTB;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox MaxDataTB;
     }
 }

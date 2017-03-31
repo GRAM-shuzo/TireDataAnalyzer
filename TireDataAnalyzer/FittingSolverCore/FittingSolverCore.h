@@ -60,18 +60,7 @@ namespace MagicFormulaFittingSolver
 			System::IProgress<TTCDataUtils::ProgressNotification^>^ prg
 			) override
 		{
-			for (int i = 0; i < 200; ++i)
-			{
-				System::Threading::Thread::Sleep(20);
-				TTCDataUtils::ProgressNotification^ pn = gcnew TTCDataUtils::ProgressNotification();
-				pn->Count = i;
-				pn->Error = 201-i;
-				prg->Report(pn);
-				if (cancel->IsCancellationRequested)
-				{
-					throw gcnew System::OperationCanceledException("User Cancel");
-				}
-			}
+			
 			
 			return 0;
 		}

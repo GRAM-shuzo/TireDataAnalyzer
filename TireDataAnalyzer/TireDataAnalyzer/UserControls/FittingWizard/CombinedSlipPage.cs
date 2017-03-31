@@ -70,7 +70,7 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             FittingParametersCBY.Add(checkBox12);
             FittingParametersCBY.Add(checkBox13);
             FittingParametersCBY.Add(checkBox14);
-            FittingParametersCBY.Add(checkBox15);
+            FittingParametersCBX.Add(checkBox15);
             FittingParametersCBX.Add(checkBox16);
             FittingParametersCBX.Add(checkBox17);
             FittingParametersCBX.Add(checkBox18);
@@ -159,11 +159,13 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             for (int i = 0; i < ParameterTBX.Count(); ++i)
             {
                 ParameterTBX[i].Text = ParamsX[i].ToString();
+                FittingParametersCBX[i].Checked = MFFD.MagicFormula.CFX.FittingParameters[i];
             }
             var ParamsY = MFFD.MagicFormula.CFY.Parameters;
             for (int i = 0; i < ParameterTBY.Count(); ++i)
             {
                 ParameterTBY[i].Text = ParamsY[i].ToString();
+                FittingParametersCBY[i].Checked = MFFD.MagicFormula.CFY.FittingParameters[i];
             }
             for (int i = 0; i < TDSs.Count; ++i)
             {

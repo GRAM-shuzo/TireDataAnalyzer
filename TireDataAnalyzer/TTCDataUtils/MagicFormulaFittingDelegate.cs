@@ -101,28 +101,30 @@ namespace TTCDataUtils
             if (FittingPFY) solver.Run(MagicFormula.FY, dataset.CorneringTable, cancel, prg);
 
 
-            TireDataSelector fxSelector = new TireDataSelector();
-            fxSelector.AddConstrain(new TireDataConstrain("fx", TireDataColumn.SA, 5, -5));
-            fxSelector.Update(dataset.DriveBrakeTable, dataset.MaxminSet.DriveBrakeTableLimit);
-
-
             //PureFX
             pn = new ProgressNotification();
             pn.Stage = 2;
             prg.Report(pn);
-            if (FittingPFX) solver.Run(MagicFormula.FX, fxSelector.ExtractedData, cancel, prg);
+            if (FittingPFX)
+            {
+                TireDataSelector fxSelector = new TireDataSelector();
+                fxSelector.AddConstrain(new TireDataConstrain("fx", TireDataColumn.SA, 5, -5));
+                fxSelector.Update(dataset.DriveBrakeTable, dataset.MaxminSet.DriveBrakeTableLimit);
+                solver.Run(MagicFormula.FX, fxSelector.ExtractedData, cancel, prg);
+            }
 
+            var list = dataset.GetDataList(Table.StaticTable);
 
             //CombinedFY
             pn = new ProgressNotification();
             pn.Stage = 3;
             prg.Report(pn);
-            if (FittingCFY) solver.Run(MagicFormula.CFY, dataset.DriveBrakeTable, cancel, prg);
+            if (FittingCFY) solver.Run(MagicFormula.CFY, list, cancel, prg);
             //CombinedFX
             pn = new ProgressNotification();
             pn.Stage = 4;
             prg.Report(pn);
-            if (FittingCFX) solver.Run(MagicFormula.CFX, dataset.DriveBrakeTable, cancel, prg);
+            if (FittingCFX) solver.Run(MagicFormula.CFX, list, cancel, prg);
             if (FittingSAT)
             {
                 //PnumaticTrail
@@ -140,9 +142,6 @@ namespace TTCDataUtils
                 pn = new ProgressNotification();
                 pn.Stage = 7;
                 prg.Report(pn);
-                var list = new List<TireData>();
-                list.AddRange(dataset.CorneringTable);
-                list.AddRange(dataset.DriveBrakeTable);
                 solver.Run(MagicFormula.MZ.MZR, list, cancel, prg);
             }
             

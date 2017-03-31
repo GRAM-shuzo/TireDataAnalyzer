@@ -50,6 +50,8 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             ParameterTB.Add(a14TB);
             ParameterTB.Add(a15TB);
             ParameterTB.Add(a16TB);
+            ParameterTB.Add(a17TB);
+            ParameterTB.Add(a18TB);
             FittingParametersCB.Add(checkBox0);
             FittingParametersCB.Add(checkBox1);
             FittingParametersCB.Add(checkBox2);
@@ -67,6 +69,8 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             FittingParametersCB.Add(checkBox14);
             FittingParametersCB.Add(checkBox15);
             FittingParametersCB.Add(checkBox16);
+            FittingParametersCB.Add(checkBox17);
+            FittingParametersCB.Add(checkBox18);
             TDSs.Add(simpleTireDataSelector1);
             TDSs.Add(simpleTireDataSelector2);
             TDSs.Add(simpleTireDataSelector3);

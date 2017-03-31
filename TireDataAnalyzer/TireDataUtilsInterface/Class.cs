@@ -577,6 +577,7 @@ namespace TTCDataUtils
                     var list = new List<TireData>(CorneringTable.Count + DriveBrakeTable.Count);
                     list.AddRange(CorneringTable);
                     list.AddRange(DriveBrakeTable);
+                    list.Sort((j, k) => Guid.NewGuid().CompareTo(Guid.NewGuid()));
                     return list;
                 case Table.TransientTable:
                     return TransientTable;
