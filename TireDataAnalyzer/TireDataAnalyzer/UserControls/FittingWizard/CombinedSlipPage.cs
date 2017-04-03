@@ -198,7 +198,6 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
                 e.Cancel = true;
                 return;
             }
-
             
             int i = ParameterTBX.IndexOf((TextBox)sender);
             if(i>=0)
@@ -209,6 +208,9 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             else
             {
                 i = ParameterTBY.IndexOf((TextBox)sender);
+                if (i < 0)
+                    return;
+
                 var Params = MFFD.MagicFormula.CFY.Parameters;
                 Params[i] = double.Parse(((TextBox)sender).Text);
             }
@@ -258,8 +260,10 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             }
             if ((ReplotFormula || !FirstPlot[tabIndex]))
             {
-
-                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, TDSs[tabIndex].CenterValue, formulaLegend);
+                var formula = TDSs[tabIndex].CenterValue;
+                formula.SA = double.Parse(SATB0.Text);
+                formula.SR = double.Parse(SRTB0.Text);
+                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, formula , formulaLegend);
                 Viewers[tabIndex].DrawGraph(formulaLegend);
                 ReplotFormula = false;
                 FirstPlot[tabIndex] = true;

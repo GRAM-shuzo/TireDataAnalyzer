@@ -27,7 +27,6 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
         bool notConfirm = false;
         TireMagicFormula TMF_Save;
 
-
         protected async override void Reload(bool back)
         {
             NextButton.Enabled = false;
@@ -41,6 +40,8 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             else
             {
                 notConfirm = false;
+                cancel = false;
+                previous = false;
                 CountBar.Maximum = MFFD.Solver.Maxeval;
                 Progress = new Progress<ProgressNotification>();
                 Progress.ProgressChanged += Progress_ProgressChanged;
@@ -53,28 +54,42 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
                     {
                         await Task.Run(() => MFFD.Run(CancellationTokenSource, Progress), CancellationTokenSource.Token);
                     }
-                    catch (OperationCanceledException)
-                    {
-                        // キャンセルされた場合
-                        MessageBox.Show("キャンセル");
-                        MFFD.SetInitialValue(TMF_Save);
-                        return;
-                    }
                     catch (Exception e)
                     {
                         // キャンセルされた場合
-                        MessageBox.Show("失敗\n" + e.Message);
                         MFFD.SetInitialValue(TMF_Save);
-                        notConfirm = true;
-                        Previous();
-                        return;
+                        if (e is OperationCanceledException)
+                        {
+                            MessageBox.Show("キャンセル");
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("失敗\n" + e.Message);
+                            notConfirm = true;
+                            Previous();
+                            return;
+                        }
+                        if (cancel)
+                        {
+                            CancelButton_Click(this, new EventArgs());
+                            return;
+                        }
+                        if (previous)
+                        {
+                            notConfirm = true;
+                            Previous();
+                            return;
+                        }
                     }
                 }
             }
         }
 
+        bool cancel = false;
         public override bool Cancel()
         {
+            if (cancel) return true;
             DialogResult result = MessageBox.Show("フィッティングをキャンセルしますか？",
     "質問",
     MessageBoxButtons.OKCancel,
@@ -85,11 +100,12 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             if (result == DialogResult.OK)
             {
                 FittingCancel();
-                return true;
+                cancel = true;
             }
             return false;
         }
 
+        bool previous = false;
         protected override bool OnPrevious()
         {
             if (notConfirm) return true;
@@ -103,7 +119,7 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             if (result == DialogResult.OK)
             {
                 FittingCancel();
-                return true;
+                previous = true;
             }
             return false;
         }
@@ -136,7 +152,7 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
         public void FittingCancel()
         {
             CancellationTokenSource.Cancel();
-            Task.WaitAll();
+            MFFD.SetInitialValue(TMF_Save);
         }
 
     }

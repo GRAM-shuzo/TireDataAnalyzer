@@ -91,59 +91,64 @@ namespace TTCDataUtils
 
         public void Run( CancellationTokenSource cancel, IProgress<ProgressNotification> prg)
         {
-            if (!Initialized) throw new Exception("初期化されていません");
-            var dataset = IDataset.GetDataSet();
-
-            //PureFY
             var pn = new ProgressNotification();
-            pn.Stage = 1;
-            prg.Report(pn);
-            if (FittingPFY) solver.Run(MagicFormula.FY, dataset.CorneringTable, cancel, prg);
-
-
-            //PureFX
-            pn = new ProgressNotification();
-            pn.Stage = 2;
-            prg.Report(pn);
-            if (FittingPFX)
+            if (!(Solver is NoFitting))
             {
-                TireDataSelector fxSelector = new TireDataSelector();
-                fxSelector.AddConstrain(new TireDataConstrain("fx", TireDataColumn.SA, 5, -5));
-                fxSelector.Update(dataset.DriveBrakeTable, dataset.MaxminSet.DriveBrakeTableLimit);
-                solver.Run(MagicFormula.FX, fxSelector.ExtractedData, cancel, prg);
+                if (!Initialized) throw new Exception("初期化されていません");
+                var dataset = IDataset.GetDataSet();
+
+                //PureFY
+                
+                pn.Stage = 1;
+                prg.Report(pn);
+                if (FittingPFY) solver.Run(MagicFormula.FY, dataset.CorneringTable, cancel, prg);
+
+
+                //PureFX
+                pn = new ProgressNotification();
+                pn.Stage = 2;
+                prg.Report(pn);
+                if (FittingPFX)
+                {
+                    TireDataSelector fxSelector = new TireDataSelector();
+                    fxSelector.AddConstrain(new TireDataConstrain("fx", TireDataColumn.SA, 5, -5));
+                    fxSelector.Update(dataset.DriveBrakeTable, dataset.MaxminSet.DriveBrakeTableLimit);
+                    solver.Run(MagicFormula.FX, fxSelector.ExtractedData, cancel, prg);
+                }
+
+                var list = dataset.GetDataList(Table.StaticTable);
+
+                //CombinedFY
+                pn = new ProgressNotification();
+                pn.Stage = 3;
+                prg.Report(pn);
+                if (FittingCFY) solver.Run(MagicFormula.CFY, list, cancel, prg);
+                //CombinedFX
+                pn = new ProgressNotification();
+                pn.Stage = 4;
+                prg.Report(pn);
+                if (FittingCFX) solver.Run(MagicFormula.CFX, list, cancel, prg);
+                if (FittingSAT)
+                {
+                    //PnumaticTrail
+                    pn = new ProgressNotification();
+                    pn.Stage = 5;
+                    prg.Report(pn);
+                    solver.Run(MagicFormula.MZ.PT, dataset.CorneringTable, cancel, prg);
+                    //CombinedMzMember
+                    pn = new ProgressNotification();
+                    pn.Stage = 6;
+                    prg.Report(pn);
+                    solver.Run(MagicFormula.MZ.CMZM, dataset.DriveBrakeTable, cancel, prg);
+
+                    //MzR
+                    pn = new ProgressNotification();
+                    pn.Stage = 7;
+                    prg.Report(pn);
+                    solver.Run(MagicFormula.MZ.MZR, list, cancel, prg);
+                }
             }
-
-            var list = dataset.GetDataList(Table.StaticTable);
-
-            //CombinedFY
-            pn = new ProgressNotification();
-            pn.Stage = 3;
-            prg.Report(pn);
-            if (FittingCFY) solver.Run(MagicFormula.CFY, list, cancel, prg);
-            //CombinedFX
-            pn = new ProgressNotification();
-            pn.Stage = 4;
-            prg.Report(pn);
-            if (FittingCFX) solver.Run(MagicFormula.CFX, list, cancel, prg);
-            if (FittingSAT)
-            {
-                //PnumaticTrail
-                pn = new ProgressNotification();
-                pn.Stage = 5;
-                prg.Report(pn);
-                solver.Run(MagicFormula.MZ.PT, dataset.CorneringTable, cancel, prg);
-                //CombinedMzMember
-                pn = new ProgressNotification();
-                pn.Stage = 6;
-                prg.Report(pn);
-                solver.Run(MagicFormula.MZ.CMZM, dataset.DriveBrakeTable, cancel, prg);
-
-                //MzR
-                pn = new ProgressNotification();
-                pn.Stage = 7;
-                prg.Report(pn);
-                solver.Run(MagicFormula.MZ.MZR, list, cancel, prg);
-            }
+            
             
 
             FittingResolved = true;

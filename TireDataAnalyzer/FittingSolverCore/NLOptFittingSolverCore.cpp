@@ -44,7 +44,8 @@ namespace MagicFormulaFittingSolver
 			//最小化ソルバ
 			nlopt::opt opt(Algorithm, numParameters);
 			//ソルバーに関数登録
-			opt.set_min_objective(ObjectiveFunction::Function, new ObjectiveFunction(curve, dataList, cancel, prg, numParameters));
+			auto objf = new ObjectiveFunction(curve, dataList, cancel, prg, numParameters);
+			opt.set_min_objective(ObjectiveFunction::Function, objf);
 
 			//最小最大値制約
 			std::vector<double> lb(numParameters, -HUGE_VAL);
@@ -95,7 +96,23 @@ namespace MagicFormulaFittingSolver
 			opt.set_xtol_rel(Xtol);
 			opt.set_maxeval(Maxeval);
 			double minf;
-			nlopt::result result = opt.optimize(p, minf);
+	 		nlopt::result result;
+			try
+			{
+				result = opt.optimize(p, minf);
+			}
+			catch (...)
+			{
+				if (objf->canceled)
+				{
+					throw gcnew OperationCanceledException("User Cancel");
+				}
+				else
+				{
+					throw gcnew Exception("Failure");
+				}
+				
+			}
 
 			return result;
 
@@ -123,9 +140,11 @@ namespace MagicFormulaFittingSolver
 			ObjectiveFunction(msclr::gcroot<ApproximatingCurve^> c, msclr::gcroot<List<TireData^>^> d, msclr::gcroot<CancellationTokenSource^> can, msclr::gcroot<IProgress<ProgressNotification^>^> prg, int numParams_)
 				:curve(c), dataList(d),cancel(can), progress(prg),count(0),numParams(numParams_)
 				{
+					canceled = false;
 				}
 			int numParams;
 			int count;
+			bool canceled;
 			msclr::gcroot<ApproximatingCurve^> curve;
 			msclr::gcroot<List<TireData^>^> dataList;
 			msclr::gcroot<System::Threading::CancellationTokenSource^> cancel;
@@ -163,6 +182,7 @@ namespace MagicFormulaFittingSolver
 				}
 				if (of->cancel->IsCancellationRequested)
 				{
+					of->canceled = true;
 					throw gcnew Exception("User Cancel");
 				}
 
@@ -209,10 +229,12 @@ namespace MagicFormulaFittingSolver
 						grad[j] = result.grads[j];
 					}
 				}
+				/*
 				if (cf->cancel->IsCancellationRequested)
 				{
 					throw gcnew Exception("User Cancel");
 				}
+				*/
 				return result.value;
 			}
 		};

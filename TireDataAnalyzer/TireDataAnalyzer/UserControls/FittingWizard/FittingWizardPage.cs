@@ -127,7 +127,7 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             }
         }
 
-        private void CancelButton_Click(object sender, EventArgs e)
+        protected void CancelButton_Click(object sender, EventArgs e)
         {
             if(Cancel())
             {

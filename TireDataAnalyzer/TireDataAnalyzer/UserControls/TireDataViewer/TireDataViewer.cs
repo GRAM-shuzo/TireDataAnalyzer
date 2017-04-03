@@ -573,13 +573,21 @@ namespace TireDataAnalyzer.UserControls
                 var arg = saveData.DicMFArgs[legendText].Copy();
                 if(X2 == MagicFormulaInputVariables.SR && Y2 == MagicFormulaOutputVariables.FY)
                 {
-                    var Ylim = magicFormula.FY.GetPeak(arg);
-                    arg.SA = Ylim.Item1;
+                    if(arg.SA == 0)
+                    {
+                        var Ylim = magicFormula.FY.GetPeak(arg);
+                        arg.SA = Ylim.Item1;
+                    }
+                    
                 }
                 if (X2 == MagicFormulaInputVariables.SA && Y2 == MagicFormulaOutputVariables.FX)
                 {
-                    var Xlim = magicFormula.FX.GetPeak(arg);
-                    arg.SR = Xlim.Item1;
+                    if(arg.SR == 0)
+                    {
+                        var Xlim = magicFormula.FX.GetPeak(arg);
+                        arg.SR = Xlim.Item1;
+                    }
+                    
                 }
                 for (int i = 0; i <= GraphSample; ++i)
                 {

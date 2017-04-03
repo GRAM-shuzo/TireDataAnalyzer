@@ -549,7 +549,7 @@ namespace TTCDataUtils
         public override Tuple<double, double> GetPeak(MagicFormulaArguments args)
         {
             var argsN = Normalize(args);
-            double sh = Sh(argsN);
+            
             double d = D(argsN);
             double c = C(argsN);
             double bcd = BCD(argsN);
@@ -565,6 +565,7 @@ namespace TTCDataUtils
             x = x / b;
             var argNp = argsN.Copy();
             var argNm = argsN.Copy();
+            double sh = Sh(argsN);
             argNp.SR = x - sh;
             argNm.SR = -x - sh;
             argNp = Denormalize(argNp);
@@ -1232,7 +1233,7 @@ namespace TTCDataUtils
             double b2 = b[2];
 
 
-            return dCF_dBy(args) * ((b1 * Math.Pow(IA, 2) + 1) / Math.Sqrt(Math.Pow(b2, 2) * Math.Pow(SR, 2) + 1));
+            return dCF_dBy(args) * (b1 * Math.Pow(IA, 2) + 1) / Math.Sqrt(Math.Pow(b2, 2) * Math.Pow(SR, 2) + 1);
         }
         private double dCF_db1(MagicFormulaArguments args)
         {
@@ -1249,7 +1250,7 @@ namespace TTCDataUtils
             double b2 = b[2];
 
 
-            return dCF_dBy(args) * (b0 * Math.Pow(IA, 2) / Math.Sqrt(Math.Pow(b2, 2) * Math.Pow(SR, 2) + 1));
+            return dCF_dBy(args) * b0 * Math.Pow(IA, 2) / Math.Sqrt(Math.Pow(b2, 2) * Math.Pow(SR, 2) + 1);
         }
         private double dCF_db2(MagicFormulaArguments args)
         {
@@ -1266,7 +1267,8 @@ namespace TTCDataUtils
             double b2 = b[2];
 
 
-            return dCF_dBy(args) * (-b0 * b2 * (b1 * Math.Pow(IA, 2) + 1) * Math.Pow(SR, 2) * Math.Pow(Math.Pow(b2, 2) * Math.Pow(SR, 2) + 1, (-3.0) / 2.0));
+            return dCF_dBy(args) * -b0 * b2 * (b1 * Math.Pow(IA, 2) + 1) * Math.Pow(SR, 2) * Math.Pow(Math.Pow(b2, 2) *
+    Math.Pow(SR, 2) + 1, (-3.0) / 2.0);
         }
 
         private double dCF_db3(MagicFormulaArguments args)
@@ -1302,7 +1304,7 @@ namespace TTCDataUtils
             double b4 = b[4];
             double b5 = b[5];
 
-            return dCF_dEy(args) * (b4 * FZ);
+            return dCF_dEy(args) * b4 * FZ;
         }
         private double dCF_db6(MagicFormulaArguments args)
         {
@@ -1357,7 +1359,7 @@ namespace TTCDataUtils
             }
             
             x = x / b;
-            if (x < 0) x = -x;
+            if (x > 0) x = -x;
             var argNp = argsN.Copy();
             var argNm = argsN.Copy();
             argNp.SA = x - sh;
