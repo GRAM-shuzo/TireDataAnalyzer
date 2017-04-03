@@ -91,7 +91,17 @@ namespace TireDataAnalyzer.UserControls.TreeViewNodes
 
         override protected void OnCopy()
         {
+            
+           // Clipboard.SetDataObject(, false);
+        }
+        protected override void OnPaste()
+        {
 
+        }
+
+        override protected bool Pastable()
+        {
+            return false;
         }
 
         UserControls.PropertyPage.TireMagicFormulaParameterProperty Property;

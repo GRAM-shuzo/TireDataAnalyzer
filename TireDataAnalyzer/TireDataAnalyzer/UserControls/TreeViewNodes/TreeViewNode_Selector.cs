@@ -78,6 +78,16 @@ namespace TireDataAnalyzer.UserControls.TreeViewNodes
 
         }
 
+        protected override void OnPaste()
+        {
+
+        }
+
+        override protected bool Pastable()
+        {
+            return false;
+        }
+
         PropertyPage.DataSelectorProperty Property;
         override public void OnProperty()
         {

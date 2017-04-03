@@ -399,8 +399,20 @@ namespace TireDataAnalyzer
             {
                 ProjectTreeViewDoubleClicked = false;
             }
+            // 右クリックでもノードを選択させる
+            if (e.Button == MouseButtons.Right)
+            {
+                var node = ProjectTreeView.GetNodeAt(e.X, e.Y);
+                ProjectTreeView.SelectedNode = node;
+                var mynode = node as MyTreeNode;
+                if(mynode != null)
+                {
+                    mynode.CheckPastable();
+                }
+            }
 
         }
+
         private void ProjectTreeView_BeforeExpand(object sender, TreeViewCancelEventArgs e)
         {
             if (ProjectTreeViewDoubleClicked == true)

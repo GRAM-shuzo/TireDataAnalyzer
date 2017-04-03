@@ -64,6 +64,17 @@ namespace TireDataAnalyzer.UserControls.TreeViewNodes
 
         }
 
+        protected override void OnPaste()
+        {
+
+        }
+
+        override protected bool Pastable()
+        {
+            return false;
+        }
+
+
         override protected bool OnRemove()
         {
             if (Property != null)

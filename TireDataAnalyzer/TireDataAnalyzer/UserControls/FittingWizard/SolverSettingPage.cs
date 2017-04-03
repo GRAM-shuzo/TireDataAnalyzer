@@ -116,7 +116,15 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
                 {
                     return false;
                 }
-
+                result = MessageBox.Show("現在の値のコピーを作成しますか？",
+                   "質問",
+                   MessageBoxButtons.YesNo,
+                   MessageBoxIcon.Exclamation,
+                   MessageBoxDefaultButton.Button1);
+                if (result == DialogResult.Yes)
+                {
+                    //MFFD.
+                }
             }
 
             return true;

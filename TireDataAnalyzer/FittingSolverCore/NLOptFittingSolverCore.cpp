@@ -162,7 +162,7 @@ namespace MagicFormulaFittingSolver
 				{
 					List<TireData^>^ dataListH = of->dataList;
 					auto err = of->curve->Error(dataListH[i]);
-					result += err.value;
+					result += err.value*err.value;
 					if (!grad.empty()) {
 						int k = 0;
 						for (int j = 0; j < of->curve->Parameters->Count; ++j)

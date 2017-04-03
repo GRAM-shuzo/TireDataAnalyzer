@@ -32,8 +32,6 @@ namespace TireDataAnalyzer.UserControls.TreeViewNodes
 
             OnImplStateChanged(Impl.State);
             OnUpdateStateChanged(Impl.Updated);
-
-
         }
 
         ToolStripMenuItem UpdateMenu;
@@ -125,7 +123,28 @@ namespace TireDataAnalyzer.UserControls.TreeViewNodes
 
         abstract protected void OnCopy();
 
+        abstract protected void OnPaste();
+
         abstract public void OnProperty();
+
+        public void CheckPastable()
+        {
+            if(Pastable())
+            {
+                PasteTSMI.Visible = true;
+
+            }
+            else
+            {
+                PasteTSMI.Visible = false;
+            }
+        }
+
+        virtual protected bool Pastable()
+        {
+            return false;
+        }
+
 
         #region ContextMenu
         private void TreeView_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
@@ -142,10 +161,10 @@ namespace TireDataAnalyzer.UserControls.TreeViewNodes
         void Copy(object sender, EventArgs e)
         {
             OnCopy();
-            foreach(MyTreeNode child in Nodes)
+            /*foreach(MyTreeNode child in Nodes)
             {
                 child.Copy(sender,e);
-            }
+            }*/
         }
 
         void Delete(object sender, EventArgs e)
@@ -168,15 +187,22 @@ namespace TireDataAnalyzer.UserControls.TreeViewNodes
             OnProperty();
         }
 
+        void Paste(object sender, EventArgs e)
+        {
+            OnPaste();
+        }
 
         protected ToolStripMenuItem CopyTSMI;
         protected ToolStripMenuItem DeleteTSMI;
         protected ToolStripMenuItem RenameTSMI;
         protected ToolStripMenuItem PropertyTSMI;
+        ToolStripMenuItem PasteTSMI;
         ContextMenuStrip Menu()
         {
             var CopyTSMI = new ToolStripMenuItem("コピー(&C)", null, Copy, Keys.C | Keys.Control);
 
+            PasteTSMI = new ToolStripMenuItem("貼り付け(&V)", null, Copy, Keys.V | Keys.Control);
+            PasteTSMI.Visible = false;
             var DeleteTSMI = new ToolStripMenuItem("削除(&D)", null, Delete, Keys.D | Keys.Control);
 
             var RenameTSMI = new ToolStripMenuItem("名前の変更(&M)", null, Rename, Keys.M | Keys.Control);
@@ -185,6 +211,7 @@ namespace TireDataAnalyzer.UserControls.TreeViewNodes
 
             var menu = new ContextMenuStrip();
             menu.Items.Add(CopyTSMI);
+            menu.Items.Add(PasteTSMI);
             menu.Items.Add(DeleteTSMI);
             menu.Items.Add(RenameTSMI);
             menu.Items.Add(new ToolStripSeparator());
