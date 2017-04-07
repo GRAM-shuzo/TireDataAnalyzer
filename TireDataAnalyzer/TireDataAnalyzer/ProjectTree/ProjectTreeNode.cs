@@ -22,7 +22,7 @@ namespace TireDataAnalyzer.ProjectTree
 
         }
         SaveData savedata = new SaveData();
-
+        public bool Copying = false;
         public Guid ID {
             get
             {
@@ -84,7 +84,10 @@ namespace TireDataAnalyzer.ProjectTree
                 if(OnUpdated != null) OnUpdated();
             }
         }
-
+        public void ConfirmNotUpdated()
+        {
+            Updated = UpdateState.NotUpdated;
+        }
         public void Save( ZipArchive archive, string directoryPath )
         {
             ZipArchiveEntry entry = StaticFunctions.GetEntity(directoryPath + "node.xml", archive, true);

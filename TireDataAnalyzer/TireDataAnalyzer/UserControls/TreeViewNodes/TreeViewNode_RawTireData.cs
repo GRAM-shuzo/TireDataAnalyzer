@@ -71,12 +71,16 @@ namespace TireDataAnalyzer.UserControls.TreeViewNodes
             {
                 var newNmf = ProjectManager.CopyProjectTree(obj, this.Impl);
                 var myNode = StaticFunctions.GetTreeView(newNmf);
+                ProjectManager.ResetCopyFlag(newNmf);
+                
                 this.Nodes.Add(myNode);
             }
             else if (obj != null && obj is Node_DataSelector)
             {
                 var newNds = ProjectManager.CopyProjectTree(obj, this.Impl);
                 var myNode = StaticFunctions.GetTreeView(newNds);
+                ProjectManager.ResetCopyFlag(newNds);
+                
                 this.Nodes.Add(myNode);
             }
         }

@@ -204,6 +204,7 @@ namespace TireDataAnalyzer
         public static ProjectTree.ProjectTreeNode CopyProjectTree(ProjectTree.ProjectTreeNode original, ProjectTree.ProjectTreeNode parent)
         {
             ProjectTree.ProjectTreeNode newNode = null;
+            bool childrenToUpdate = false;
             if (original is ProjectTree.Node_DataSelector)
             {
                 var nds = new ProjectTree.Node_DataSelector(original.Name, parent as ProjectTree.Node_TireDataSet, true);
@@ -215,6 +216,7 @@ namespace TireDataAnalyzer
                 var nmf = new ProjectTree.Node_MagicFormula(original.Name, parent as ProjectTree.Node_TireDataSet);
                 nmf.MFFD.CopyFrom((original as ProjectTree.Node_MagicFormula).MFFD.Copy(), original.Parent == parent);
                 newNode = nmf;
+                childrenToUpdate = original.Parent != parent;
             }
             else if (original is ProjectTree.Node_RawTireData)
             {
@@ -222,13 +224,27 @@ namespace TireDataAnalyzer
                 nrt.RTDM.CopyFrom((original as ProjectTree.Node_RawTireData).RTDM);
                 newNode = nrt;
             }
+            newNode.Copying = true;
             foreach (var child in original.Children)
             {
+                if (child.Copying) continue;
                 var node = CopyProjectTree(child, newNode);
-                newNode.Children.Add(node);
+                //newNode.Children.Add(node);
                 
             }
+            if (childrenToUpdate) newNode.ConfirmNotUpdated();
             return newNode;
+        }
+
+        public static void ResetCopyFlag(ProjectTree.ProjectTreeNode original)
+        {
+            original.Copying = false;
+            foreach (var child in original.Children)
+            {
+                ResetCopyFlag(child);
+
+            }
+            
         }
 
         static void LoadGraph(ZipArchive archive)

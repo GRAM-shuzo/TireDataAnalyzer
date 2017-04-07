@@ -54,6 +54,7 @@ namespace TireDataAnalyzer.UserControls.TreeViewNodes
             if (obj != null && obj is Node_RawTireData)
             {
                 var newNrt = ProjectManager.CopyProjectTree(obj, this.Impl);
+                ProjectManager.ResetCopyFlag(newNrt);
                 var myNode = StaticFunctions.GetTreeView(newNrt);
                 this.Nodes.Add(myNode);
             }

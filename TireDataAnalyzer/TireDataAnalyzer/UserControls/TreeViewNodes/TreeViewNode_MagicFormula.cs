@@ -69,6 +69,7 @@ namespace TireDataAnalyzer.UserControls.TreeViewNodes
             if(wizard.DialogResult== DialogResult.OK)
             {
                 Impl.MFFD.CopyFrom(wizard.MagicFormulaFD, Impl.MFFD.FittingResolved);
+                Impl.Update();
                 return true;
             }
             return false;

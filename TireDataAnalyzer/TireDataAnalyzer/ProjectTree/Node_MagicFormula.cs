@@ -34,10 +34,7 @@ namespace TireDataAnalyzer.ProjectTree
         }
        
 
-        public  void ConfirmNotUpdated()
-        {
-            Updated = UpdateState.NotUpdated;
-        }
+        
 
         protected override bool OnLoad(ZipArchive archive, string directoryPath)
         {
