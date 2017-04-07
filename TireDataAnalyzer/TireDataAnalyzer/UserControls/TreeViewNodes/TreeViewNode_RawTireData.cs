@@ -99,7 +99,6 @@ namespace TireDataAnalyzer.UserControls.TreeViewNodes
             return false;
         }
 
-
         override protected bool OnRemove()
         {
             if (Property != null)
