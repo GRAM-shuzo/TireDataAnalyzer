@@ -8,6 +8,7 @@ using TTCDataUtils;
 
 namespace TireDataAnalyzer.ProjectTree
 {
+    [Serializable]
     public class Node_MagicFormula : ProjectTreeNode
     {
         string saveDataName = "MagicFormulaFittingDelegate.mffd";

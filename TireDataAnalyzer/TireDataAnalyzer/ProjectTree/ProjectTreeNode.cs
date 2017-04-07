@@ -8,8 +8,10 @@ using System.IO.Compression;
 
 namespace TireDataAnalyzer.ProjectTree
 {
+    [Serializable]
     public abstract class ProjectTreeNode
     {
+        [Serializable]
         public class SaveData
         {
             public string Name;
@@ -178,10 +180,12 @@ namespace TireDataAnalyzer.ProjectTree
                 }
             }
         }
+        [NonSerialized]
+        ProjectTreeNode parent;
         public ProjectTreeNode Parent
         {
-            get;
-            private set;
+            get { return parent; }
+            private set { parent = value; }
         }
         public List<ProjectTreeNode> Children
         {
@@ -214,8 +218,10 @@ namespace TireDataAnalyzer.ProjectTree
         }
 
         public delegate void OnStateChangedDelegate(ProjectTreeState newState);
+        [field: NonSerialized]
         public OnStateChangedDelegate OnStateChanged;
         public delegate void OnUpdateStateChangedDelegate(UpdateState newState);
+        [field: NonSerialized]
         public OnUpdateStateChangedDelegate OnUpdateStateChanged;
         public ProjectTreeState state = ProjectTreeState.Changed;
 

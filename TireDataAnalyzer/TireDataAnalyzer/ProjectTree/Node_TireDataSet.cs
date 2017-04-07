@@ -8,6 +8,7 @@ using TTCDataUtils;
 
 namespace TireDataAnalyzer.ProjectTree
 {
+    [Serializable]
     public abstract class Node_TireDataSet:ProjectTreeNode
     {
         public Node_TireDataSet(string name, ProjectTreeNode parent)

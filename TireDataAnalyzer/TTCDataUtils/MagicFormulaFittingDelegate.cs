@@ -42,12 +42,12 @@ namespace TTCDataUtils
             return mffd;
         }
 
-        public void  CopyFrom(MagicFormulaFittingDelegate mffd)
+        public void  CopyFrom(MagicFormulaFittingDelegate mffd, bool sameParent)
         {
             MagicFormula = mffd.MagicFormula;
             idataset = mffd.IDataset;
             this.Initialized = mffd.Initialized;
-            this.FittingResolved = mffd.FittingResolved;
+            this.FittingResolved = mffd.FittingResolved && sameParent;
             FittingPFX = mffd.FittingPFX;
             FittingPFY = mffd.FittingPFY;
             FittingCFX = mffd.FittingCFX;

@@ -20,6 +20,7 @@ namespace TireDataAnalyzer
         public MainWindow()
         {
             InitializeComponent();
+            Instance = this;
             WindowName = Text;
 
             OnMWStateChanging += BeforeClosed;
@@ -48,7 +49,7 @@ namespace TireDataAnalyzer
             ProjectTreeView.AfterCollapse += ProjectTreeView_AfterExpandChange;
         }
 
-        
+        public static MainWindow Instance;
 
         private void ProjectTreeView_AfterExpandChange(object sender, TreeViewEventArgs e)
         {
@@ -351,7 +352,7 @@ namespace TireDataAnalyzer
             return done;
         }
 
-        MyTreeNode GetTreeView(ProjectTree.ProjectTreeNode node)
+        public MyTreeNode GetTreeView(ProjectTree.ProjectTreeNode node)
         {
             MyTreeNode mtn;
             if(node is ProjectTree.Node_Project )

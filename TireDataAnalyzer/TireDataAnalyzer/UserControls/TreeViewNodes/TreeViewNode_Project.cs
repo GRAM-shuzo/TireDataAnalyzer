@@ -18,7 +18,7 @@ namespace TireDataAnalyzer.UserControls.TreeViewNodes
         {
             Impl = impl;
             ContextMenuStrip.Items.RemoveAt(0); //コピーはできないので削除
-            ContextMenuStrip.Items.RemoveAt(0);  //削除もできないので削除
+            ContextMenuStrip.Items.RemoveAt(1);  //削除もできないので削除
             ContextMenuStrip.Items.Insert(0,
                 new ToolStripMenuItem("タイヤデータを追加(&A)", null, AddRawTireData, Keys.A & Keys.Control)
                 );
@@ -50,11 +50,22 @@ namespace TireDataAnalyzer.UserControls.TreeViewNodes
 
         protected override void OnPaste()
         {
-            
+            var obj = StaticFunctions.ClipBoad;
+            if (obj != null && obj is Node_RawTireData)
+            {
+                var newNrt = ProjectManager.CopyProjectTree(obj, this.Impl);
+                var myNode = StaticFunctions.GetTreeView(newNrt);
+                this.Nodes.Add(myNode);
+            }
         }
 
         override protected bool Pastable()
         {
+            var obj = StaticFunctions.ClipBoad;
+            if (obj != null && obj is Node_RawTireData)
+            {
+                return true;
+            }
             return false;
         }
 

@@ -18,6 +18,9 @@ namespace TireDataAnalyzer
 {
     public static class StaticFunctions
     {
+
+        public static ProjectTree.ProjectTreeNode ClipBoad;
+
         public static bool IsNotValidValue(double d)
         {
             return double.IsInfinity(d) || double.IsNaN(d);
@@ -178,7 +181,10 @@ namespace TireDataAnalyzer
 
         }
         
-
+        public static MyTreeNode GetTreeView(ProjectTree.ProjectTreeNode node)
+        {
+            return MainWindow.Instance.GetTreeView(node);
+        }
 
         public static TTCDataUtils.TireMagicFormula GetDefaultMFValue()
         {

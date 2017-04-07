@@ -175,6 +175,10 @@ namespace TTCDataUtils
             ChangeState(ManagerState.NotChanged, Table.None);
         }
 
+        public void CopyFrom(RawTireDataManager other)
+        {
+            saveData = other.saveData.Copy();
+        }
         #endregion
     }
 }

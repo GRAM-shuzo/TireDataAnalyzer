@@ -58,8 +58,12 @@ namespace TireDataAnalyzer.UserControls.PropertyPage
 
         private void Ctc_TabClosing(object sender, TabControlCancelEventArgs e)
         {
-            e.Cancel = true;
-            Remove();
+            if(e.TabPage == this.Parent)
+            {
+                e.Cancel = true;
+                Remove();
+            }
+            
         }
 
         public void SetTabText(string name)

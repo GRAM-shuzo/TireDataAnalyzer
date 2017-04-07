@@ -66,11 +66,32 @@ namespace TireDataAnalyzer.UserControls.TreeViewNodes
 
         protected override void OnPaste()
         {
-
+            var obj = StaticFunctions.ClipBoad;
+            if (obj != null && obj is Node_MagicFormula)
+            {
+                var newNmf = ProjectManager.CopyProjectTree(obj, this.Impl);
+                var myNode = StaticFunctions.GetTreeView(newNmf);
+                this.Nodes.Add(myNode);
+            }
+            else if (obj != null && obj is Node_DataSelector)
+            {
+                var newNds = ProjectManager.CopyProjectTree(obj, this.Impl);
+                var myNode = StaticFunctions.GetTreeView(newNds);
+                this.Nodes.Add(myNode);
+            }
         }
 
         override protected bool Pastable()
         {
+            var obj = StaticFunctions.ClipBoad;
+            if (obj != null && obj is Node_MagicFormula)
+            {
+                return true;
+            }
+            else if (obj != null && obj is Node_DataSelector)
+            {
+                return true;
+            }
             return false;
         }
 
@@ -87,7 +108,7 @@ namespace TireDataAnalyzer.UserControls.TreeViewNodes
 
         override protected void OnCopy()
         {
-
+            StaticFunctions.ClipBoad = Impl;
         }
 
         PropertyPage.RawTireDataProperty Property;

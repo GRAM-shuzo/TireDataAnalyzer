@@ -434,6 +434,7 @@ namespace TTCDataUtils
         None
     }
 
+    [Serializable]
     public class TireDataSet
     {
         public enum TireDataSetState

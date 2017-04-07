@@ -201,6 +201,36 @@ namespace TireDataAnalyzer
             return null;
         }
 
+        public static ProjectTree.ProjectTreeNode CopyProjectTree(ProjectTree.ProjectTreeNode original, ProjectTree.ProjectTreeNode parent)
+        {
+            ProjectTree.ProjectTreeNode newNode = null;
+            if (original is ProjectTree.Node_DataSelector)
+            {
+                var nds = new ProjectTree.Node_DataSelector(original.Name, parent as ProjectTree.Node_TireDataSet, true);
+                nds.TDSS.CopyFrom((original as ProjectTree.Node_DataSelector).TDSS.Copy());
+                newNode = nds;
+            }
+            else if(original is ProjectTree.Node_MagicFormula)
+            {
+                var nmf = new ProjectTree.Node_MagicFormula(original.Name, parent as ProjectTree.Node_TireDataSet);
+                nmf.MFFD.CopyFrom((original as ProjectTree.Node_MagicFormula).MFFD.Copy(), original.Parent == parent);
+                newNode = nmf;
+            }
+            else if (original is ProjectTree.Node_RawTireData)
+            {
+                var nrt = new ProjectTree.Node_RawTireData(original.Name, parent as ProjectTree.Node_Project);
+                nrt.RTDM.CopyFrom((original as ProjectTree.Node_RawTireData).RTDM);
+                newNode = nrt;
+            }
+            foreach (var child in original.Children)
+            {
+                var node = CopyProjectTree(child, newNode);
+                newNode.Children.Add(node);
+                
+            }
+            return newNode;
+        }
+
         static void LoadGraph(ZipArchive archive)
         {
             var node = UserControls.GraphViewer.TopNode.Load(archive, MainWindow.GraphTreeView);

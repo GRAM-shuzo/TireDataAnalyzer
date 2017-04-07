@@ -201,7 +201,7 @@ namespace TireDataAnalyzer.UserControls.TreeViewNodes
         {
             var CopyTSMI = new ToolStripMenuItem("コピー(&C)", null, Copy, Keys.C | Keys.Control);
 
-            PasteTSMI = new ToolStripMenuItem("貼り付け(&V)", null, Copy, Keys.V | Keys.Control);
+            PasteTSMI = new ToolStripMenuItem("貼り付け(&V)", null, Paste, Keys.V | Keys.Control);
             PasteTSMI.Visible = false;
             var DeleteTSMI = new ToolStripMenuItem("削除(&D)", null, Delete, Keys.D | Keys.Control);
 

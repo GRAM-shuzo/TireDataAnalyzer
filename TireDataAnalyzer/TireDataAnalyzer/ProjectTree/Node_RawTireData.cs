@@ -8,6 +8,7 @@ using TTCDataUtils;
 
 namespace TireDataAnalyzer.ProjectTree
 {
+    [Serializable]
     public class Node_RawTireData : Node_TireDataSet
     {
         string saveDataName = "RawTireData.rtd";

@@ -8,6 +8,7 @@ using TTCDataUtils;
 
 namespace TireDataAnalyzer.ProjectTree
 {
+    [Serializable]
     public class Node_DataSelector : Node_TireDataSet
     {
         string saveDataName = "DataSelector.ds";

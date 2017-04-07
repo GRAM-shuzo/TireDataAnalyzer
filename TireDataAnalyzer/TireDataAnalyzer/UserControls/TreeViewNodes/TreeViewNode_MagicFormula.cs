@@ -35,7 +35,7 @@ namespace TireDataAnalyzer.UserControls.TreeViewNodes
             impl.OnUpdateStateChanged += OnUpdateStateChanged;
         }
 
-        Node_MagicFormula Impl { get; set; }
+        new Node_MagicFormula Impl { get; set; }
         ToolStripMenuItem UpdateMenu;
 
         void OnUpdateStateChanged(ProjectTree.ProjectTreeNode.UpdateState newState)
@@ -68,7 +68,7 @@ namespace TireDataAnalyzer.UserControls.TreeViewNodes
             wizard.ShowDialog();
             if(wizard.DialogResult== DialogResult.OK)
             {
-                Impl.MFFD.CopyFrom(wizard.MagicFormulaFD);
+                Impl.MFFD.CopyFrom(wizard.MagicFormulaFD, Impl.MFFD.FittingResolved);
                 return true;
             }
             return false;
@@ -91,8 +91,7 @@ namespace TireDataAnalyzer.UserControls.TreeViewNodes
 
         override protected void OnCopy()
         {
-            
-           // Clipboard.SetDataObject(, false);
+           StaticFunctions.ClipBoad = Impl;
         }
         protected override void OnPaste()
         {
