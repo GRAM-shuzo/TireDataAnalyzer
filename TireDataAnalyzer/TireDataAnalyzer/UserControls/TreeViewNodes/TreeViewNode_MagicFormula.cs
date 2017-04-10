@@ -17,9 +17,8 @@ namespace TireDataAnalyzer.UserControls.TreeViewNodes
             :base(tv,impl)
         {
             Impl = impl;
-            ContextMenuStrip.Items.Insert(0,
-                new ToolStripMenuItem("フィッティングウィザードの開始(&S)", null, Wizard, Keys.A & Keys.Control)
-                );
+            FittinWizardMenu = new ToolStripMenuItem("フィッティングウィザードの開始(&W)", null, Wizard, Keys.W & Keys.Control);
+            ContextMenuStrip.Items.Insert(0, FittinWizardMenu);
             base.UpdateMenuShow = false;
             UpdateMenu = new ToolStripMenuItem("親ノードを更新してウィザードを開始(&U)", null, delegate
             {
@@ -28,32 +27,43 @@ namespace TireDataAnalyzer.UserControls.TreeViewNodes
                 {
                     Impl.ConfirmNotUpdated();
                 }
-                
-                
+
+
             }, Keys.U | Keys.Control);
+            ContextMenuStrip.Items.Insert(0, UpdateMenu);
+
+            var tsmi = new ToolStripMenuItem("マジックフォーミュラを保存(&S)", null, delegate
+            {
+                SaveAs();
+            }, Keys.S & Keys.Control);
+            ContextMenuStrip.Items.Insert(1, tsmi);
+            tsmi = new ToolStripMenuItem("エクスポート", null, null, Keys.None);
+            tsmi.DropDownItems.Add(new ToolStripMenuItem("エクセル形式(.xlsx)", null, delegate
+            {
+                ExportMagicFormula();
+            }, Keys.None));
+            ContextMenuStrip.Items.Insert(2, tsmi);
+
+            UpdateMenu.Visible = false;
             OnUpdateStateChanged(Impl.Updated);
             impl.OnUpdateStateChanged += OnUpdateStateChanged;
         }
 
         new Node_MagicFormula Impl { get; set; }
         ToolStripMenuItem UpdateMenu;
-
+        ToolStripMenuItem FittinWizardMenu;
         void OnUpdateStateChanged(ProjectTree.ProjectTreeNode.UpdateState newState)
         {
             
-            if (newState == ProjectTreeNode.UpdateState.Normal && UpdateMenuShow)
+            if (newState == ProjectTreeNode.UpdateState.Normal)
             {
-                if (ContextMenuStrip.Items.Contains(UpdateMenu))
-                {
-                    ContextMenuStrip.Items.Remove(UpdateMenu);
-                }
+                UpdateMenu.Visible = false;
+                FittinWizardMenu.Visible = true;
             }
-            else if (newState == ProjectTreeNode.UpdateState.NotUpdated && UpdateMenuShow)
+            else if (newState == ProjectTreeNode.UpdateState.NotUpdated)
             {
-                if (!ContextMenuStrip.Items.Contains(UpdateMenu))
-                {
-                    ContextMenuStrip.Items.Add(UpdateMenu);
-                }
+                UpdateMenu.Visible = true;
+                FittinWizardMenu.Visible = false;
             }
         }
 
@@ -69,9 +79,18 @@ namespace TireDataAnalyzer.UserControls.TreeViewNodes
             if(wizard.DialogResult== DialogResult.OK)
             {
                 Impl.MFFD.CopyFrom(wizard.MagicFormulaFD, Impl.MFFD.FittingResolved);
-                Impl.Update();
                 return true;
             }
+            return false;
+        }
+
+        bool SaveAs()
+        {
+            return false;
+        }
+
+        bool ExportMagicFormula()
+        {
             return false;
         }
 

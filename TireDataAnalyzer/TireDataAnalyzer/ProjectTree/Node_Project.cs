@@ -65,7 +65,12 @@ namespace TireDataAnalyzer.ProjectTree
         private void GetMagicFormula(ProjectTreeNode node, List<Node_MagicFormula> list)
         {
             if (node is Node_MagicFormula)
-                list.Add(node as Node_MagicFormula);
+            {
+                var mfn = node as Node_MagicFormula;
+                if(mfn.MFFD.Initialized)
+                    list.Add(node as Node_MagicFormula);
+            }
+                
             foreach (var child in node.Children)
             {
                 GetMagicFormula(child, list);

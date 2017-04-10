@@ -93,6 +93,7 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             }
             else if(NowValueRB.Checked)
             {
+                MFFD.SetInitialValue(MFFD.MagicFormula);
                 return true;
             }
             

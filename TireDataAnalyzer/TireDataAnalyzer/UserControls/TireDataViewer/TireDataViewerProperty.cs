@@ -39,14 +39,21 @@ namespace TireDataAnalyzer.UserControls
             Reload();
             foreach (var s in Viewer.GetLegents())
             {
-                var raw = new SeriesEditor(Viewer, s, DataSourceList);
-                if (raw.Initialized)
+                try
                 {
-                    raw.Dock = DockStyle.Top;
+                    var raw = new SeriesEditor(Viewer, s, DataSourceList);
+                    if (raw.Initialized)
+                    {
+                        raw.Dock = DockStyle.Top;
 
-                    DataSourceList.Controls.Add(raw);
-                    raw.Click += SeriesEditor_Click;
-                    DataSourceList.Controls.SetChildIndex(raw, 0);
+                        DataSourceList.Controls.Add(raw);
+                        raw.Click += SeriesEditor_Click;
+                        DataSourceList.Controls.SetChildIndex(raw, 0);
+                    }
+                }
+                catch(Exception)
+                {
+                    //Viewe
                 }
             }
         }

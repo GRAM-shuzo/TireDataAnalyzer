@@ -76,8 +76,41 @@ namespace TTCDataUtils
             IDataset = other.IDataset;
         }
 
-        public bool Initialized{ get; private set; }
-        public bool FittingResolved { get; private set; }
+        bool initialized;
+        public EventHandler OnInitialized;
+        public EventHandler OnFittingResolved;
+        public bool Initialized
+        {
+            get
+            {
+                return initialized;
+            }
+            private set
+            {
+                initialized = value;
+                if(initialized == true && OnInitialized != null)
+                {
+                    OnInitialized(this, new EventArgs());
+                }
+            }
+        }
+        bool fittingResolved;
+        public bool FittingResolved
+        {
+            get
+            {
+                return fittingResolved;
+            }
+            private set
+            {
+                fittingResolved = value;
+                if (fittingResolved == true && OnFittingResolved != null)
+                {
+                    OnFittingResolved(this, new EventArgs());
+                }
+            }
+        }
+
         [NonSerialized]
         FittingSolver solver;
         public FittingSolver Solver { get { return solver; } set { solver = value; } }
