@@ -31,8 +31,8 @@
             this.LoadDefaultRB = new System.Windows.Forms.RadioButton();
             this.LoadFromFileRB = new System.Windows.Forms.RadioButton();
             this.LoadFromOtherRB = new System.Windows.Forms.RadioButton();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.FileNameTB = new System.Windows.Forms.TextBox();
+            this.MFLoadedCB = new System.Windows.Forms.ComboBox();
             this.BrowseButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -61,36 +61,37 @@
             this.LoadFromFileRB.TabIndex = 5;
             this.LoadFromFileRB.Text = "ファイルから読み込み";
             this.LoadFromFileRB.UseVisualStyleBackColor = true;
+            this.LoadFromFileRB.CheckedChanged += new System.EventHandler(this.LoadFromOtherRB_CheckedChanged);
             // 
             // LoadFromOtherRB
             // 
             this.LoadFromOtherRB.AutoSize = true;
-            this.LoadFromOtherRB.Enabled = false;
             this.LoadFromOtherRB.Location = new System.Drawing.Point(3, 53);
             this.LoadFromOtherRB.Name = "LoadFromOtherRB";
             this.LoadFromOtherRB.Size = new System.Drawing.Size(112, 16);
             this.LoadFromOtherRB.TabIndex = 6;
             this.LoadFromOtherRB.Text = "次の値を読み込み";
             this.LoadFromOtherRB.UseVisualStyleBackColor = true;
+            this.LoadFromOtherRB.CheckedChanged += new System.EventHandler(this.LoadFromOtherRB_CheckedChanged);
             // 
-            // textBox1
+            // FileNameTB
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.FileNameTB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(130, 27);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(686, 19);
-            this.textBox1.TabIndex = 7;
+            this.FileNameTB.Location = new System.Drawing.Point(130, 27);
+            this.FileNameTB.Name = "FileNameTB";
+            this.FileNameTB.Size = new System.Drawing.Size(686, 19);
+            this.FileNameTB.TabIndex = 7;
             // 
-            // comboBox1
+            // MFLoadedCB
             // 
-            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.MFLoadedCB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(130, 52);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(767, 20);
-            this.comboBox1.TabIndex = 8;
+            this.MFLoadedCB.FormattingEnabled = true;
+            this.MFLoadedCB.Location = new System.Drawing.Point(130, 52);
+            this.MFLoadedCB.Name = "MFLoadedCB";
+            this.MFLoadedCB.Size = new System.Drawing.Size(767, 20);
+            this.MFLoadedCB.TabIndex = 8;
             // 
             // BrowseButton
             // 
@@ -141,18 +142,21 @@
             this.Controls.Add(this.NowValueRB);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.BrowseButton);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.MFLoadedCB);
+            this.Controls.Add(this.FileNameTB);
             this.Controls.Add(this.LoadFromOtherRB);
             this.Controls.Add(this.LoadFromFileRB);
             this.Controls.Add(this.LoadDefaultRB);
             this.Name = "MFInitialValuePage";
             this.Load += new System.EventHandler(this.MFInitialValuePage_Load);
+            this.Controls.SetChildIndex(this.CancelButton, 0);
+            this.Controls.SetChildIndex(this.NextButton, 0);
+            this.Controls.SetChildIndex(this.PreviousButton, 0);
             this.Controls.SetChildIndex(this.LoadDefaultRB, 0);
             this.Controls.SetChildIndex(this.LoadFromFileRB, 0);
             this.Controls.SetChildIndex(this.LoadFromOtherRB, 0);
-            this.Controls.SetChildIndex(this.textBox1, 0);
-            this.Controls.SetChildIndex(this.comboBox1, 0);
+            this.Controls.SetChildIndex(this.FileNameTB, 0);
+            this.Controls.SetChildIndex(this.MFLoadedCB, 0);
             this.Controls.SetChildIndex(this.BrowseButton, 0);
             this.Controls.SetChildIndex(this.groupBox1, 0);
             this.Controls.SetChildIndex(this.NowValueRB, 0);
@@ -168,8 +172,8 @@
         private System.Windows.Forms.RadioButton LoadDefaultRB;
         private System.Windows.Forms.RadioButton LoadFromFileRB;
         private System.Windows.Forms.RadioButton LoadFromOtherRB;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox FileNameTB;
+        private System.Windows.Forms.ComboBox MFLoadedCB;
         private System.Windows.Forms.Button BrowseButton;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;

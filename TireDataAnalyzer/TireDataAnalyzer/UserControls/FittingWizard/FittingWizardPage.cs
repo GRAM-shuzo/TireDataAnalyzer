@@ -94,19 +94,22 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
 
         private void PreviousButton_Click(object sender, EventArgs e)
         {
+            PreviousButton.Enabled = false;
             if (!OnPrevious()) return;
-
+            
             var parent = this.Parent;
             parent.Controls.Remove(this);
             parent.Controls.Add(PreviousPage);
             PreviousPage.Reload(true);
-            
+            PreviousPage.NextButton.Enabled = true;
+            PreviousPage.PreviousButton.Enabled = true;
             parent.Text = "ウィザード - " + PreviousPage.PageName;
             PreviousPage.Update();
         }
 
         private void NextButton_Click(object sender, EventArgs e)
         {
+            NextButton.Enabled = false;
             if(NextPage != null)
             {
                 if (!OnNext()) return;
@@ -115,6 +118,8 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
                 parent.Controls.Remove(this);
                 parent.Controls.Add(NextPage);
                 NextPage.Reload(false);
+                NextPage.NextButton.Enabled = true;
+                NextPage.PreviousButton.Enabled = true;
                 parent.Text = "ウィザード - " + NextPage.PageName;
                 NextPage.Update();
             }

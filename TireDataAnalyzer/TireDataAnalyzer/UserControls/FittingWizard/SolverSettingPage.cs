@@ -123,7 +123,29 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
                    MessageBoxDefaultButton.Button1);
                 if (result == DialogResult.Yes)
                 {
-                    //MFFD.
+                    var list = ProjectManager.ProjectNode.GetMagicFormula();
+                    bool found = false;
+                    foreach(var node in list)
+                    {
+                        if(node.MFFD.ID == MFFD.ID)
+                        {
+                            var newNmf = ProjectManager.CopyProjectTree(node, node.Parent);
+                            ProjectManager.ResetCopyFlag(newNmf);
+                            newNmf.Name = newNmf.Name + "(コピー)";
+                            (newNmf as ProjectTree.Node_MagicFormula).MFFD.ID = Guid.NewGuid();
+                            found = true;
+                        }
+                    }
+                    if(found)
+                    {
+                        MainWindow.Instance.ResetTreeView();
+                        return true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("コピーできませんでした");
+                        return false;
+                    }
                 }
             }
 

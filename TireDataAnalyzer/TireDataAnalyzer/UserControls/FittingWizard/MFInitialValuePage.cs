@@ -15,13 +15,37 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
         public MFInitialValuePage(MagicFormulaFittingDelegate magicFormula)
             :base(magicFormula,"初期パラメータ設定")
         {
-            
             InitializeComponent();
         }
 
         private void BrowseButton_Click(object sender, EventArgs e)
         {
+            //OpenFileDialogクラスのインスタンスを作成
+            OpenFileDialog ofd = new OpenFileDialog();
 
+            //はじめのファイル名を指定する
+            //はじめに「ファイル名」で表示される文字列を指定する
+            ofd.FileName = "default.mf";
+            //はじめに表示されるフォルダを指定する
+            //指定しない（空の文字列）の時は、現在のディレクトリが表示される
+            ofd.InitialDirectory = @"C:\";
+            //[ファイルの種類]に表示される選択肢を指定する
+            //指定しないとすべてのファイルが表示される
+            ofd.Filter = "MagicFormulaファイル(*.mf)|*.mf|すべてのファイル(*.*)|*.*";
+            //[ファイルの種類]ではじめに選択されるものを指定する
+            //2番目の「すべてのファイル」が選択されているようにする
+            ofd.FilterIndex = 1;
+            //タイトルを設定する
+            ofd.Title = "開くファイルを選択してください";
+            //ダイアログボックスを閉じる前に現在のディレクトリを復元するようにする
+            ofd.RestoreDirectory = true;
+
+            //ダイアログを表示する
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                //OKボタンがクリックされたとき、選択されたファイル名を表示する
+               FileNameTB.Text = ofd.FileName;
+            }
         }
 
         override protected bool OnNext()
@@ -89,12 +113,44 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             }
             else if(LoadFromFileRB.Checked)
             {
-
+                if(System.IO.File.Exists(FileNameTB.Text))
+                {
+                    try
+                    {
+                        using (System.IO.FileStream stream = new System.IO.FileStream(FileNameTB.Text, System.IO.FileMode.Open))
+                        {
+                            var mf = TireMagicFormula.Load(stream);
+                            MFFD.SetInitialValue(mf);
+                        }
+                        return true;
+                    }
+                    catch(Exception　e)
+                    {
+                        Log.Output(e.Message);
+                        MessageBox.Show("読み込みに失敗しました");
+                        return false;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("ファイルがありません");
+                    return false;
+                }
             }
             else if(NowValueRB.Checked)
             {
                 MFFD.SetInitialValue(MFFD.MagicFormula);
                 return true;
+            }
+            else if(LoadFromOtherRB.Checked)
+            {
+                var node = MFLoadedCB.SelectedItem as ProjectTree.Node_MagicFormula;
+                if(node != null)
+                {
+                    MFFD.SetInitialValue(node.MFFD.MagicFormula.Copy());
+                    return true;
+                }
+                
             }
             
             return false;
@@ -108,11 +164,43 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
                 NowValueRB.Enabled = true;
                 NowValueRB.Checked = true;
             }
-        }
+            else
+            {
+                LoadDefaultRB.Checked = true;
+                NowValueRB.Enabled = false;
+            }
 
+            var list = ProjectManager.ProjectNode.GetMagicFormula();
+            MFLoadedCB.Items.Clear();
+            LoadFromOtherRB.Enabled = true;
+            MFLoadedCB.Enabled = false;
+            BrowseButton.Enabled = false;
+            FileNameTB.Enabled = false;
+            foreach (var node in list)
+            {
+                if (node.MFFD.Initialized)
+                    MFLoadedCB.Items.Add(node);
+            }
+            if(MFLoadedCB.Items.Count >0)
+            {
+                MFLoadedCB.SelectedIndex = 0;
+            }
+            else
+            {
+                LoadFromOtherRB.Enabled = false;
+            }
+        }
+        
         private void MFInitialValuePage_Load(object sender, EventArgs e)
         {
             Reload(false);
+        }
+
+        private void LoadFromOtherRB_CheckedChanged(object sender, EventArgs e)
+        {
+            MFLoadedCB.Enabled = LoadFromOtherRB.Checked;
+            BrowseButton.Enabled = LoadFromFileRB.Checked;
+            FileNameTB.Enabled = LoadFromFileRB.Checked;
         }
     }
 }

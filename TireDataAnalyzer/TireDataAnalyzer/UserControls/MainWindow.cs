@@ -51,6 +51,12 @@ namespace TireDataAnalyzer
 
         public static MainWindow Instance;
 
+        public void ResetTreeView()
+        {
+            ProjectTreeView.Nodes.Clear();
+            ProjectTreeView.Nodes.Add(GetTreeView(ProjectManager.ProjectNode));
+        }
+
         private void ProjectTreeView_AfterExpandChange(object sender, TreeViewEventArgs e)
         {
             (e.Node as MyTreeNode).ExpandChanged();

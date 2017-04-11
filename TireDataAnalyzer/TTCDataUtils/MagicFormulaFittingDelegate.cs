@@ -21,6 +21,9 @@ namespace TTCDataUtils
             FittingResolved = false;
             Initialized = false;
         }
+        [NonSerialized]
+        public Guid ID;
+
         private MagicFormulaFittingDelegate(TireMagicFormula formula, IDataSet iDataset)
         {
             MagicFormula = formula;
@@ -39,6 +42,7 @@ namespace TTCDataUtils
             mffd.FittingCFX = FittingCFX;
             mffd.FittingCFY = FittingCFY;
             mffd.FittingSAT = FittingSAT;
+            mffd.ID = ID;
             return mffd;
         }
 
@@ -53,6 +57,7 @@ namespace TTCDataUtils
             FittingCFX = mffd.FittingCFX;
             FittingCFY = mffd.FittingCFY;
             FittingSAT = mffd.FittingSAT;
+            ID = mffd.ID;
             if (ValueChanged != null) ValueChanged();
         }
 
@@ -77,7 +82,9 @@ namespace TTCDataUtils
         }
 
         bool initialized;
+        [field: NonSerialized]
         public EventHandler OnInitialized;
+        [field: NonSerialized]
         public EventHandler OnFittingResolved;
         public bool Initialized
         {
@@ -202,6 +209,7 @@ namespace TTCDataUtils
             BinaryFormatter binaryFormatter = new BinaryFormatter();
             var data = binaryFormatter.Deserialize(reader) as MagicFormulaFittingDelegate;
             data.MagicFormula.ResetDiff();
+            data.ID = Guid.NewGuid();
             return data;
         }
 

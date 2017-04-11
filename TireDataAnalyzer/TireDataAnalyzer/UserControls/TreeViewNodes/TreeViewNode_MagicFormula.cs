@@ -36,17 +36,22 @@ namespace TireDataAnalyzer.UserControls.TreeViewNodes
             {
                 SaveAs();
             }, Keys.S & Keys.Control);
-            ContextMenuStrip.Items.Insert(1, tsmi);
+            tsmi.Visible = Impl.MFFD.Initialized;
+            ContextMenuStrip.Items.Add(tsmi);
             tsmi = new ToolStripMenuItem("エクスポート", null, null, Keys.None);
+
             tsmi.DropDownItems.Add(new ToolStripMenuItem("エクセル形式(.xlsx)", null, delegate
             {
                 ExportMagicFormula();
             }, Keys.None));
-            ContextMenuStrip.Items.Insert(2, tsmi);
+            tsmi.Visible = Impl.MFFD.Initialized;
+            ContextMenuStrip.Items.Add(tsmi);
 
             UpdateMenu.Visible = false;
             OnUpdateStateChanged(Impl.Updated);
             impl.OnUpdateStateChanged += OnUpdateStateChanged;
+            impl.MFFD.OnInitialized += OnMFInitialized;
+
         }
 
         new Node_MagicFormula Impl { get; set; }
@@ -86,12 +91,51 @@ namespace TireDataAnalyzer.UserControls.TreeViewNodes
 
         bool SaveAs()
         {
+            //SaveFileDialogクラスのインスタンスを作成
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.FileName = Impl.Name + ".mf";
+            //はじめに表示されるフォルダを指定する
+            sfd.InitialDirectory = @"C:\";
+            //[ファイルの種類]に表示される選択肢を指定する
+            //指定しない（空の文字列）の時は、現在のディレクトリが表示される
+            sfd.Filter = "MagicFormulaファイル(*.mf)|*.mf|すべてのファイル(*.*)|*.*";
+            //[ファイルの種類]ではじめに選択されるものを指定する
+            //2番目の「すべてのファイル」が選択されているようにする
+            sfd.FilterIndex = 1;
+            //タイトルを設定する
+            sfd.Title = "保存先のファイルを選択してください";
+            //ダイアログボックスを閉じる前に現在のディレクトリを復元するようにする
+            sfd.RestoreDirectory = true;
+
+            //ダイアログを表示する
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                using (System.IO.Stream stream = sfd.OpenFile())
+                {
+                    if (stream != null)
+                    {
+
+                        Impl.MFFD.MagicFormula.Save(stream);
+                    }
+                }
+                MessageBox.Show("保存しました");
+                return true;
+                    
+
+                 
+            }
             return false;
         }
 
         bool ExportMagicFormula()
         {
             return false;
+        }
+
+        void OnMFInitialized(object sender, EventArgs e)
+        {
+            ContextMenuStrip.Items[ContextMenuStrip.Items.Count - 1].Visible = true;
+            ContextMenuStrip.Items[ContextMenuStrip.Items.Count - 2].Visible = true;
         }
 
         override protected void OnRename(string name)
