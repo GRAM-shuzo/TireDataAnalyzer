@@ -70,6 +70,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Utils\MagicFormulaExpoter.cs" />
     <Compile Include="ProjectTree\Node_MagicFormula.cs" />
     <Compile Include="ProjectTree\Node_DataSelector.cs" />
     <Compile Include="ProjectTree\Node_Project.cs" />
@@ -306,6 +307,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\PropertyPage\TireMagicFormulaParameterProperty.resx">
+      <DependentUpon>TireMagicFormulaParameterProperty.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\TireDataViewer\MFGraphDialog.resx">
       <DependentUpon>MFGraphDialog.cs</DependentUpon>

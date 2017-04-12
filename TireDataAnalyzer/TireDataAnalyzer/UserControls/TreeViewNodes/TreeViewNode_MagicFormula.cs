@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TireDataAnalyzer.ProjectTree;
+using TireDataAnalyzer.Export;
 
 namespace TireDataAnalyzer.UserControls.TreeViewNodes
 {
@@ -42,7 +43,7 @@ namespace TireDataAnalyzer.UserControls.TreeViewNodes
 
             tsmi.DropDownItems.Add(new ToolStripMenuItem("エクセル形式(.xlsx)", null, delegate
             {
-                ExportMagicFormula();
+                ExportMagicFormula(ExportMode.excel);
             }, Keys.None));
             tsmi.Visible = Impl.MFFD.Initialized;
             ContextMenuStrip.Items.Add(tsmi);
@@ -127,8 +128,43 @@ namespace TireDataAnalyzer.UserControls.TreeViewNodes
             return false;
         }
 
-        bool ExportMagicFormula()
+        bool ExportMagicFormula(ExportMode mode)
         {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.InitialDirectory = @"C:\";
+
+            switch (mode)
+            {
+                case ExportMode.excel:
+                    sfd.FileName = Impl.Name + ".xlsx";
+                    sfd.Filter = "Excelファイル(*.xlsx)|*.xlsx|すべてのファイル(*.*)|*.*";
+                    break;
+                case ExportMode.tsv:
+                    sfd.FileName = Impl.Name + ".tsv";
+                    sfd.Filter = "タブ区切りテキスト(*.tsv)|*.tsv|すべてのファイル(*.*)|*.*";
+                    break;
+                case ExportMode.ini:
+                    sfd.FileName = Impl.Name + ".ini";
+                    sfd.Filter = "iniファイル(*.ini)|*.ini|すべてのファイル(*.*)|*.*";
+                    break;
+            }
+            sfd.FilterIndex = 1;
+            sfd.Title = "保存先のファイルを選択してください";
+            sfd.RestoreDirectory = true;
+
+            //ダイアログを表示する
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                if (MagicFormulaExpoter.Export(sfd.FileName, mode))
+                {
+                    MessageBox.Show("保存しました");
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show("保存に失敗しました");
+                }
+            }
             return false;
         }
 
