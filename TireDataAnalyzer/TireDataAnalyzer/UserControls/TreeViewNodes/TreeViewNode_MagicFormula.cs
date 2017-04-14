@@ -206,13 +206,13 @@ namespace TireDataAnalyzer.UserControls.TreeViewNodes
         UserControls.PropertyPage.TireMagicFormulaParameterProperty Property;
         override public void OnProperty()
         {
-            /*
+            
             if (!StaticFunctions.IsAlreadyAdded(Property))
             {
                 Property = new UserControls.PropertyPage.TireMagicFormulaParameterProperty(Impl);
                 StaticFunctions.AddPropertyPage(Property);
             }
-            */
+            
         }
     }
 }

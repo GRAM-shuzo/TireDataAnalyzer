@@ -28,6 +28,9 @@ namespace TireDataAnalyzer
             OnMWStateChanged += OnClosed;
 
             ProjectManager.DataStateChanged += AddAsterisk_toWindowName;
+
+            WPFMathTest test = new WPFMathTest();
+            test.ShowDialog();
         }
 
         public static CustomTabControl MainTabControl;
