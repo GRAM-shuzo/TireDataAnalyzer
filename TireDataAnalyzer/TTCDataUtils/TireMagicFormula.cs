@@ -67,7 +67,7 @@ namespace TTCDataUtils
             }
 
         }
-        public void setValue( TireData data )
+        public void setValue(TireData data)
         {
             SA = data.SA;
             SR = data.SR;
@@ -97,7 +97,52 @@ namespace TTCDataUtils
             }
 
         }
+        public double this[int i]
+        {
+            set
+            {
+                switch (i)
+                {
+                    case 0:
+                        SA = value;
+                        break;
+                    case 1:
+                        SR = value;
+                        break;
+                    case 2:
+                        IA = value;
+                        break;
+                    case 3:
+                        FZ = value;
+                        break;
+                    case 4:
+                        P = value;
+                        break;
+                    default:
+                        T = value;
+                        break;
+                }
+            }
+            get
+            {
+                switch (i)
+                {
+                    case 0:
+                        return SA;
+                    case 1:
+                        return SR;
+                    case 2:
+                        return IA;
+                    case 3:
+                        return FZ;
+                    case 4:
+                        return P;
+                    default:
+                        return T;
+                }
 
+            }
+        }
     };
 
     [Serializable]

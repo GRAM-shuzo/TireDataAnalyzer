@@ -155,7 +155,7 @@ namespace TireDataAnalyzer.UserControls.TreeViewNodes
             //ダイアログを表示する
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-                if (MagicFormulaExpoter.Export(sfd.FileName, mode))
+                if (MagicFormulaExpoter.Export(sfd.FileName, mode,Impl.MFFD.MagicFormula))
                 {
                     MessageBox.Show("保存しました");
                     return true;
