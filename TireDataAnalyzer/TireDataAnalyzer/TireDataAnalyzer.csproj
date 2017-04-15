@@ -88,6 +88,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MagicFormula_TexEquation.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MagicFormula_TexEquation.Designer.cs">
+      <DependentUpon>MagicFormula_TexEquation.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\WPFMathTest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -292,6 +298,9 @@
       <DependentUpon>TireDataSelector.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\ProjectManager.cs" />
+    <EmbeddedResource Include="MagicFormula_TexEquation.resx">
+      <DependentUpon>MagicFormula_TexEquation.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
