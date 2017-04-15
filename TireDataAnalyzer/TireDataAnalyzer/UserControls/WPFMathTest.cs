@@ -8,12 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WpfMath;
+
 namespace TireDataAnalyzer.UserControls
 {
     public partial class WPFMathTest : Form
     {
         private TexFormulaParser formulaParser = new TexFormulaParser();
         private System.Windows.Forms.Integration.ElementHost elementHost1;
+        private WpfMath.Controls.FormulaControl formula;
 
         private TexFormula ParseFormula(string input)
         {
@@ -35,20 +37,49 @@ namespace TireDataAnalyzer.UserControls
         public WPFMathTest()
         {
             InitializeComponent();
-            var testFormula1 = "\\int_0^{\\infty}{x^{2n} e^{-a x^2} dx} = \\frac{2n-1}{2a} \\int_0^{\\infty}{x^{2(n-1)} e^{-a x^2} dx} = \\frac{(2n-1)!!}{2^{n+1}} \\sqrt{\\frac{\\pi}{a^{2n+1}}}";
-            var testFormula2 = "\\int_a^b{f(x) dx} = (b - a) \\sum_{n = 1}^{\\infty}  {\\sum_{m = 1}^{2^n  - 1} { ( { - 1} )^{m + 1} } } 2^{ - n} f(a + m ( {b - a}  )2^{-n} )";
-            var testFormula3 = @"L = \int_a^b \sqrt[4]{ \left| \sum_{i,j=1}^ng_{ij}\left(\gamma(t)\right) \left[\frac{d}{dt}x^i\circ\gamma(t) \right] \left{\frac{d}{dt}x^j\circ\gamma(t) \right} \right|}dt";
-            var formula = new WpfMath.Controls.FormulaControl();
+            var testFormula1 = @"{F_y} = D\, \sin(C \arctan(B(x+ S_h) - E(B(x + S_h)  - \arctan B(x+ S_h) ))) + S_v";
+            var testFormula2 = @"{D} = { FZ}\,\left({ a_2}\,{ FZ}+{ a_1}\right)\,\left(1-{ a_3}\,{ IA}^2\right)\,\left({ a_5}\,P^2+{ a_4}\,P+1\right)\,\left({ a_6}\,T+1\right)";
+            var testFormula3 = @"{BCD}={ a_7}\,{ FZ}\,\left({ a_8}\,P + 1\right)\,\sin \left({ a_9}\,\arctan \left({\frac{ { FZ} } {\left({ a_{ 10} } +{ a_{ 11} }\, { IA}^ 2\right)\,\left(1 +{ a_{ 12} }\,P\right)} }\right)\right)\,\left(1 -{ a_{ 13} }\,\left | { IA}\right | \right)\,\left({ a_{ 14} }\,T + 1\right)";
+            var testFormula4 = @"{E}=\left({ a_{15}}+{ a_{16}}\,{ FZ}\right)\,\left({ a_{17}}\,{ IA}^2-{ a_{18}}\,{ IA}\,{ sgn}\left({ x}+{ Sh}\right)+1\right)";
+            var testFormula5 = @"{S_h}=\left({ a_{19}}\,{ FZ}+{ a_{20}}\,{ FZ}^2\right)\,\left({ a_{21}}\,P+1\right){ IA}";
+            var testFormula6 = @"{S_v}= \left({ a_{23}}\,{ FZ}+{ a_{24}}\,{ FZ}^2 \right)\, { IA}";
+            formula = new WpfMath.Controls.FormulaControl();
             formula.Formula = testFormula1;
 
 
             elementHost1 = new System.Windows.Forms.Integration.ElementHost();
             //コントロールの位置と大きさを設定する
-            elementHost1.SetBounds(0,0,500, 100);
+            elementHost1.Dock = DockStyle.Fill;
+            //elementHost1.SetBounds(0,0,760, 100);
             elementHost1.Child = formula;
 
             //ElementHostをフォームに配置する
             this.Controls.Add(elementHost1);
+            
+        }
+        private void DoEvents()
+        {
+            var frame = new System.Windows.Threading.DispatcherFrame();
+            var callback = new System.Windows.Threading.DispatcherOperationCallback(obj =>
+            {
+                ((System.Windows.Threading.DispatcherFrame)obj).Continue = false;
+                return null;
+            });
+            System.Windows.Threading.Dispatcher.CurrentDispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Background, callback, frame);
+            System.Windows.Threading.Dispatcher.PushFrame(frame);
+        }
+
+        private void WPFMathTest_Resize(object sender, EventArgs e)
+        {
+            elementHost1.Update();
+            formula.Scale = 30;
+            DoEvents();
+            
+            while (formula.DesiredSize.Width >= elementHost1.Width)
+            {
+                --formula.Scale;
+                DoEvents();
+            }
         }
     }
 }

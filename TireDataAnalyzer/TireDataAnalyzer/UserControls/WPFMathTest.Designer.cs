@@ -37,6 +37,7 @@
             this.ClientSize = new System.Drawing.Size(764, 603);
             this.Name = "WPFMathTest";
             this.Text = "WPFMathTest";
+            this.ResizeEnd += new System.EventHandler(this.WPFMathTest_Resize);
             this.ResumeLayout(false);
 
         }
