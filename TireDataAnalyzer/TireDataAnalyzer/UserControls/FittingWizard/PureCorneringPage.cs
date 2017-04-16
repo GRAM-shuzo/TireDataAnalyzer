@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TTCDataUtils;
+using TireDataAnalyzer.TexEquation;
 namespace TireDataAnalyzer.UserControls.FittingWizard
 {
     public partial class PureCorneringPage : FittingWizardPage
@@ -16,6 +17,7 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
         List<CheckBox> FittingParametersCB = new List<CheckBox>();
         List<SimpleTireDataSelector> TDSs = new List<SimpleTireDataSelector>();
         List<TireDataViewer> Viewers = new List<TireDataViewer>();
+        List<MagicFormula_TexEquation> Equations = new List<MagicFormula_TexEquation>();
         List<bool> FirstPlot = new List<bool>();
         List<TireDataViewer.XY> EList = new List<TireDataViewer.XY>();
         List<int> NumPointList = new List<int>();
@@ -118,9 +120,11 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             foreach( var tb in ParameterTB)
             {
                 tb.KeyDown += TextBox_KeyDown;
+                tb.Enter += Tb_Enter;
             }
             foreach (var cb in FittingParametersCB)
             {
+                cb.Enter += Tb_Enter;
                 cb.CheckedChanged += FittingCheckedChanged;
             }
             for (int i = 0; i < TDSs.Count; ++i)
@@ -137,10 +141,42 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             Viewers[5].SetChartType(System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine, ELowerLegend);
             Viewers[5].SetLineWidth(5, EUpperLegend);
             Viewers[5].SetLineWidth(5, ELowerLegend);
+
+            Equations.Add(magicFormula_TexEquation0);
+            Equations.Add(magicFormula_TexEquation1);
+            Equations.Add(magicFormula_TexEquation2);
+            Equations.Add(magicFormula_TexEquation3);
+            Equations.Add(magicFormula_TexEquation4);
+            Equations.Add(magicFormula_TexEquation5);
+            
+            
+        }
+
+        private void Tb_Enter(object sender, EventArgs e)
+        {
+            int i = -1;
+            if (sender is TextBox)
+            {
+                i = ParameterTB.IndexOf(sender as TextBox);
+            }
+            else
+            {
+                i = FittingParametersCB.IndexOf(sender as CheckBox);
+            }
+            foreach (var mf in Equations)
+            {
+                mf.Highlight(i);
+            }
         }
 
         private void PureCorneringPage_Load(object sender, EventArgs e)
         {
+            foreach (var mf in Equations)
+            {
+                (Parent as Form).ResizeEnd += mf.Control_Resize;
+                mf.Type = MagicFormula_TexEquation.MagicFormulaType.FY;
+            }
+
             Viewers[0].SetAxis(MagicFormulaInputVariables.SA, MagicFormulaOutputVariables.FY);
             Viewers[1].SetAxis(MagicFormulaInputVariables.FZ, MagicFormulaOutputVariables.FY_D);
             Viewers[2].SetAxis(MagicFormulaInputVariables.FZ, MagicFormulaOutputVariables.FY_BCD);
@@ -173,6 +209,10 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             ReplotFormula = true;
             ReplotData = true;
 
+            foreach (var mf in Equations)
+            {
+                mf.Control_Resize(mf, new EventArgs());
+            }
             RePlot();
         }
 
