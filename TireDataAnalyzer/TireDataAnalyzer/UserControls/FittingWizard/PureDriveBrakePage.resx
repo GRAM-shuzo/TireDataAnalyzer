@@ -117,48 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AdviseText.Text" xml:space="preserve">
-    <value>D(a1,a2,a3,a4,a5,a6) := a1*(1+a2*FZ)*(1-a3*IA*IA)*(1+a4*P+a5*P*P)*(1+a6*T)*FZ;
-BCD(a7,a8,a9,a10,a11,a12) := a7*(1+a8*FZ)*exp(a9*FZ)*(1+a10*P+a11*P*P)*(1+a12*T)*FZ;
-E(a13,a14,a15,a16) := a13*(1+a14*FZ+a15*FZ*FZ)*(1-a16*sgn(SR));
-By(b0,b1,b2) := b0*(1+b1*IA*IA)*cos(atan(b2*SR));
-Ey(b4,b5) := b4*(1+b5*FZ);</value>
-  </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>D(a1,a2,a3,a4,a5,a6) := a1*(1+a2*FZ)*(1-a3*IA*IA)*(1+a4*P+a5*P*P)*(1+a6*T)*FZ;
-BCD(a7,a8,a9,a10,a11,a12) := a7*(1+a8*FZ)*exp(a9*FZ)*(1+a10*P+a11*P*P)*(1+a12*T)*FZ;
-E(a13,a14,a15,a16) := a13*(1+a14*FZ+a15*FZ*FZ)*(1-a16*sgn(SR));
-By(b0,b1,b2) := b0*(1+b1*IA*IA)*cos(atan(b2*SR));
-Ey(b4,b5) := b4*(1+b5*FZ);</value>
-  </data>
-  <data name="label4.Text" xml:space="preserve">
-    <value>D(a1,a2,a3,a4,a5,a6) := a1*(1+a2*FZ)*(1-a3*IA*IA)*(1+a4*P+a5*P*P)*(1+a6*T)*FZ;
-BCD(a7,a8,a9,a10,a11,a12) := a7*(1+a8*FZ)*exp(a9*FZ)*(1+a10*P+a11*P*P)*(1+a12*T)*FZ;
-E(a13,a14,a15,a16) := a13*(1+a14*FZ+a15*FZ*FZ)*(1-a16*sgn(SR));
-By(b0,b1,b2) := b0*(1+b1*IA*IA)*cos(atan(b2*SR));
-Ey(b4,b5) := b4*(1+b5*FZ);</value>
-  </data>
-  <data name="label5.Text" xml:space="preserve">
-    <value>D(a1,a2,a3,a4,a5,a6) := a1*(1+a2*FZ)*(1-a3*IA*IA)*(1+a4*P+a5*P*P)*(1+a6*T)*FZ;
-BCD(a7,a8,a9,a10,a11,a12) := a7*(1+a8*FZ)*exp(a9*FZ)*(1+a10*P+a11*P*P)*(1+a12*T)*FZ;
-E(a13,a14,a15,a16) := a13*(1+a14*FZ+a15*FZ*FZ)*(1-a16*sgn(SR));
-By(b0,b1,b2) := b0*(1+b1*IA*IA)*cos(atan(b2*SR));
-Ey(b4,b5) := b4*(1+b5*FZ);</value>
-  </data>
-  <data name="label6.Text" xml:space="preserve">
-    <value>D(a1,a2,a3,a4,a5,a6) := a1*(1+a2*FZ)*(1-a3*IA*IA)*(1+a4*P+a5*P*P)*(1+a6*T)*FZ;
-BCD(a7,a8,a9,a10,a11,a12) := a7*(1+a8*FZ)*exp(a9*FZ)*(1+a10*P+a11*P*P)*(1+a12*T)*FZ;
-E(a13,a14,a15,a16) := a13*(1+a14*FZ+a15*FZ*FZ)*(1-a16*sgn(SR));
-By(b0,b1,b2) := b0*(1+b1*IA*IA)*cos(atan(b2*SR));
-Ey(b4,b5) := b4*(1+b5*FZ);</value>
-  </data>
-  <data name="label7.Text" xml:space="preserve">
-    <value>D(a1,a2,a3,a4,a5,a6) := a1*(1+a2*FZ)*(1-a3*IA*IA)*(1+a4*P+a5*P*P)*(1+a6*T)*FZ;
-BCD(a7,a8,a9,a10,a11,a12) := a7*(1+a8*FZ)*exp(a9*FZ)*(1+a10*P+a11*P*P)*(1+a12*T)*FZ;
-E(a13,a14,a15,a16) := a13*(1+a14*FZ+a15*FZ*FZ)*(1-a16*sgn(SR));
-By(b0,b1,b2) := b0*(1+b1*IA*IA)*cos(atan(b2*SR));
-Ey(b4,b5) := b4*(1+b5*FZ);</value>
-  </data>
   <metadata name="EP_NumericalInput.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>

@@ -64,6 +64,9 @@
             this.TabControl = new System.Windows.Forms.TabControl();
             this.FZ_FYMax = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.magicFormula_TexEquation1 = new TireDataAnalyzer.TexEquation.MagicFormula_TexEquation();
+            this.label25 = new System.Windows.Forms.Label();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -81,6 +84,9 @@
             this.Fz_FyViewer = new TireDataAnalyzer.UserControls.TireDataViewer();
             this.FZ_CP = new System.Windows.Forms.TabPage();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.magicFormula_TexEquation2 = new TireDataAnalyzer.TexEquation.MagicFormula_TexEquation();
+            this.label38 = new System.Windows.Forms.Label();
             this.checkBox13 = new System.Windows.Forms.CheckBox();
             this.checkBox11 = new System.Windows.Forms.CheckBox();
             this.checkBox10 = new System.Windows.Forms.CheckBox();
@@ -106,6 +112,9 @@
             this.Fz_CpViewer = new TireDataAnalyzer.UserControls.TireDataViewer();
             this.P_FYMax = new System.Windows.Forms.TabPage();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.magicFormula_TexEquation3 = new TireDataAnalyzer.TexEquation.MagicFormula_TexEquation();
+            this.label39 = new System.Windows.Forms.Label();
             this.checkBox6 = new System.Windows.Forms.CheckBox();
             this.checkBox5 = new System.Windows.Forms.CheckBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
@@ -123,6 +132,9 @@
             this.P_FyViewer = new TireDataAnalyzer.UserControls.TireDataViewer();
             this.P_CP = new System.Windows.Forms.TabPage();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.magicFormula_TexEquation4 = new TireDataAnalyzer.TexEquation.MagicFormula_TexEquation();
+            this.label40 = new System.Windows.Forms.Label();
             this.checkBox14 = new System.Windows.Forms.CheckBox();
             this.checkBox12 = new System.Windows.Forms.CheckBox();
             this.checkBox8 = new System.Windows.Forms.CheckBox();
@@ -140,6 +152,9 @@
             this.P_CpViewer = new TireDataAnalyzer.UserControls.TireDataViewer();
             this.CurvatureFactor = new System.Windows.Forms.TabPage();
             this.splitContainer5 = new System.Windows.Forms.SplitContainer();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.magicFormula_TexEquation5 = new TireDataAnalyzer.TexEquation.MagicFormula_TexEquation();
+            this.label41 = new System.Windows.Forms.Label();
             this.checkBox18 = new System.Windows.Forms.CheckBox();
             this.checkBox17 = new System.Windows.Forms.CheckBox();
             this.checkBox16 = new System.Windows.Forms.CheckBox();
@@ -160,21 +175,6 @@
             this.comboBox5 = new System.Windows.Forms.ComboBox();
             this.CurveFactorViewer = new TireDataAnalyzer.UserControls.TireDataViewer();
             this.EP_NumericalInput = new System.Windows.Forms.ErrorProvider(this.components);
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.magicFormula_TexEquation1 = new TireDataAnalyzer.TexEquation.MagicFormula_TexEquation();
-            this.label25 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.magicFormula_TexEquation2 = new TireDataAnalyzer.TexEquation.MagicFormula_TexEquation();
-            this.label38 = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.magicFormula_TexEquation3 = new TireDataAnalyzer.TexEquation.MagicFormula_TexEquation();
-            this.label39 = new System.Windows.Forms.Label();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.magicFormula_TexEquation4 = new TireDataAnalyzer.TexEquation.MagicFormula_TexEquation();
-            this.label40 = new System.Windows.Forms.Label();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.magicFormula_TexEquation5 = new TireDataAnalyzer.TexEquation.MagicFormula_TexEquation();
-            this.label41 = new System.Windows.Forms.Label();
             this.theta_FY.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Theta_FySC)).BeginInit();
             this.Theta_FySC.Panel1.SuspendLayout();
@@ -187,32 +187,32 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.FZ_CP.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.P_FYMax.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.P_CP.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
             this.splitContainer4.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.CurvatureFactor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).BeginInit();
             this.splitContainer5.Panel1.SuspendLayout();
             this.splitContainer5.Panel2.SuspendLayout();
             this.splitContainer5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.EP_NumericalInput)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.EP_NumericalInput)).BeginInit();
             this.SuspendLayout();
             // 
             // theta_FY
@@ -632,6 +632,37 @@
             this.splitContainer1.SplitterDistance = 485;
             this.splitContainer1.TabIndex = 1;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.magicFormula_TexEquation1);
+            this.groupBox1.Controls.Add(this.label25);
+            this.groupBox1.Location = new System.Drawing.Point(3, 429);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(479, 200);
+            this.groupBox1.TabIndex = 55;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Advise";
+            // 
+            // magicFormula_TexEquation1
+            // 
+            this.magicFormula_TexEquation1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.magicFormula_TexEquation1.Location = new System.Drawing.Point(3, 49);
+            this.magicFormula_TexEquation1.Name = "magicFormula_TexEquation1";
+            this.magicFormula_TexEquation1.Size = new System.Drawing.Size(473, 148);
+            this.magicFormula_TexEquation1.TabIndex = 40;
+            this.magicFormula_TexEquation1.Type = TireDataAnalyzer.TexEquation.MagicFormula_TexEquation.MagicFormulaType.FY;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(6, 15);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(23, 12);
+            this.label25.TabIndex = 39;
+            this.label25.Text = "aaa";
+            // 
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
@@ -837,6 +868,37 @@
             this.splitContainer2.Size = new System.Drawing.Size(879, 632);
             this.splitContainer2.SplitterDistance = 485;
             this.splitContainer2.TabIndex = 1;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.magicFormula_TexEquation2);
+            this.groupBox2.Controls.Add(this.label38);
+            this.groupBox2.Location = new System.Drawing.Point(3, 429);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(479, 200);
+            this.groupBox2.TabIndex = 73;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Advise";
+            // 
+            // magicFormula_TexEquation2
+            // 
+            this.magicFormula_TexEquation2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.magicFormula_TexEquation2.Location = new System.Drawing.Point(3, 49);
+            this.magicFormula_TexEquation2.Name = "magicFormula_TexEquation2";
+            this.magicFormula_TexEquation2.Size = new System.Drawing.Size(473, 148);
+            this.magicFormula_TexEquation2.TabIndex = 40;
+            this.magicFormula_TexEquation2.Type = TireDataAnalyzer.TexEquation.MagicFormula_TexEquation.MagicFormulaType.FY;
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(6, 15);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(23, 12);
+            this.label38.TabIndex = 39;
+            this.label38.Text = "aaa";
             // 
             // checkBox13
             // 
@@ -1110,6 +1172,37 @@
             this.splitContainer3.SplitterDistance = 485;
             this.splitContainer3.TabIndex = 1;
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.magicFormula_TexEquation3);
+            this.groupBox3.Controls.Add(this.label39);
+            this.groupBox3.Location = new System.Drawing.Point(3, 429);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(479, 200);
+            this.groupBox3.TabIndex = 63;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Advise";
+            // 
+            // magicFormula_TexEquation3
+            // 
+            this.magicFormula_TexEquation3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.magicFormula_TexEquation3.Location = new System.Drawing.Point(3, 49);
+            this.magicFormula_TexEquation3.Name = "magicFormula_TexEquation3";
+            this.magicFormula_TexEquation3.Size = new System.Drawing.Size(473, 148);
+            this.magicFormula_TexEquation3.TabIndex = 40;
+            this.magicFormula_TexEquation3.Type = TireDataAnalyzer.TexEquation.MagicFormula_TexEquation.MagicFormulaType.FY;
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(6, 15);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(23, 12);
+            this.label39.TabIndex = 39;
+            this.label39.Text = "aaa";
+            // 
             // checkBox6
             // 
             this.checkBox6.AutoSize = true;
@@ -1307,6 +1400,37 @@
             this.splitContainer4.Size = new System.Drawing.Size(879, 632);
             this.splitContainer4.SplitterDistance = 485;
             this.splitContainer4.TabIndex = 1;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox4.Controls.Add(this.magicFormula_TexEquation4);
+            this.groupBox4.Controls.Add(this.label40);
+            this.groupBox4.Location = new System.Drawing.Point(3, 429);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(479, 200);
+            this.groupBox4.TabIndex = 74;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Advise";
+            // 
+            // magicFormula_TexEquation4
+            // 
+            this.magicFormula_TexEquation4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.magicFormula_TexEquation4.Location = new System.Drawing.Point(3, 49);
+            this.magicFormula_TexEquation4.Name = "magicFormula_TexEquation4";
+            this.magicFormula_TexEquation4.Size = new System.Drawing.Size(473, 148);
+            this.magicFormula_TexEquation4.TabIndex = 40;
+            this.magicFormula_TexEquation4.Type = TireDataAnalyzer.TexEquation.MagicFormula_TexEquation.MagicFormulaType.FY;
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(6, 15);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(23, 12);
+            this.label40.TabIndex = 39;
+            this.label40.Text = "aaa";
             // 
             // checkBox14
             // 
@@ -1510,6 +1634,37 @@
             this.splitContainer5.SplitterDistance = 485;
             this.splitContainer5.TabIndex = 1;
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox5.Controls.Add(this.magicFormula_TexEquation5);
+            this.groupBox5.Controls.Add(this.label41);
+            this.groupBox5.Location = new System.Drawing.Point(3, 429);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(479, 200);
+            this.groupBox5.TabIndex = 76;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Advise";
+            // 
+            // magicFormula_TexEquation5
+            // 
+            this.magicFormula_TexEquation5.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.magicFormula_TexEquation5.Location = new System.Drawing.Point(3, 49);
+            this.magicFormula_TexEquation5.Name = "magicFormula_TexEquation5";
+            this.magicFormula_TexEquation5.Size = new System.Drawing.Size(473, 148);
+            this.magicFormula_TexEquation5.TabIndex = 40;
+            this.magicFormula_TexEquation5.Type = TireDataAnalyzer.TexEquation.MagicFormula_TexEquation.MagicFormulaType.FY;
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Location = new System.Drawing.Point(6, 15);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(23, 12);
+            this.label41.TabIndex = 39;
+            this.label41.Text = "aaa";
+            // 
             // checkBox18
             // 
             this.checkBox18.AutoSize = true;
@@ -1705,161 +1860,6 @@
             // 
             this.EP_NumericalInput.ContainerControl = this;
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.magicFormula_TexEquation1);
-            this.groupBox1.Controls.Add(this.label25);
-            this.groupBox1.Location = new System.Drawing.Point(3, 429);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(479, 200);
-            this.groupBox1.TabIndex = 55;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Advise";
-            // 
-            // magicFormula_TexEquation1
-            // 
-            this.magicFormula_TexEquation1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.magicFormula_TexEquation1.Location = new System.Drawing.Point(3, 49);
-            this.magicFormula_TexEquation1.Name = "magicFormula_TexEquation1";
-            this.magicFormula_TexEquation1.Size = new System.Drawing.Size(473, 148);
-            this.magicFormula_TexEquation1.TabIndex = 40;
-            this.magicFormula_TexEquation1.Type = TireDataAnalyzer.TexEquation.MagicFormula_TexEquation.MagicFormulaType.FY;
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(6, 15);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(23, 12);
-            this.label25.TabIndex = 39;
-            this.label25.Text = "aaa";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.magicFormula_TexEquation2);
-            this.groupBox2.Controls.Add(this.label38);
-            this.groupBox2.Location = new System.Drawing.Point(3, 429);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(479, 200);
-            this.groupBox2.TabIndex = 73;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Advise";
-            // 
-            // magicFormula_TexEquation2
-            // 
-            this.magicFormula_TexEquation2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.magicFormula_TexEquation2.Location = new System.Drawing.Point(3, 49);
-            this.magicFormula_TexEquation2.Name = "magicFormula_TexEquation2";
-            this.magicFormula_TexEquation2.Size = new System.Drawing.Size(473, 148);
-            this.magicFormula_TexEquation2.TabIndex = 40;
-            this.magicFormula_TexEquation2.Type = TireDataAnalyzer.TexEquation.MagicFormula_TexEquation.MagicFormulaType.FY;
-            // 
-            // label38
-            // 
-            this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(6, 15);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(23, 12);
-            this.label38.TabIndex = 39;
-            this.label38.Text = "aaa";
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox3.Controls.Add(this.magicFormula_TexEquation3);
-            this.groupBox3.Controls.Add(this.label39);
-            this.groupBox3.Location = new System.Drawing.Point(3, 429);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(479, 200);
-            this.groupBox3.TabIndex = 63;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Advise";
-            // 
-            // magicFormula_TexEquation3
-            // 
-            this.magicFormula_TexEquation3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.magicFormula_TexEquation3.Location = new System.Drawing.Point(3, 49);
-            this.magicFormula_TexEquation3.Name = "magicFormula_TexEquation3";
-            this.magicFormula_TexEquation3.Size = new System.Drawing.Size(473, 148);
-            this.magicFormula_TexEquation3.TabIndex = 40;
-            this.magicFormula_TexEquation3.Type = TireDataAnalyzer.TexEquation.MagicFormula_TexEquation.MagicFormulaType.FY;
-            // 
-            // label39
-            // 
-            this.label39.AutoSize = true;
-            this.label39.Location = new System.Drawing.Point(6, 15);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(23, 12);
-            this.label39.TabIndex = 39;
-            this.label39.Text = "aaa";
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox4.Controls.Add(this.magicFormula_TexEquation4);
-            this.groupBox4.Controls.Add(this.label40);
-            this.groupBox4.Location = new System.Drawing.Point(3, 429);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(479, 200);
-            this.groupBox4.TabIndex = 74;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Advise";
-            // 
-            // magicFormula_TexEquation4
-            // 
-            this.magicFormula_TexEquation4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.magicFormula_TexEquation4.Location = new System.Drawing.Point(3, 49);
-            this.magicFormula_TexEquation4.Name = "magicFormula_TexEquation4";
-            this.magicFormula_TexEquation4.Size = new System.Drawing.Size(473, 148);
-            this.magicFormula_TexEquation4.TabIndex = 40;
-            this.magicFormula_TexEquation4.Type = TireDataAnalyzer.TexEquation.MagicFormula_TexEquation.MagicFormulaType.FY;
-            // 
-            // label40
-            // 
-            this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(6, 15);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(23, 12);
-            this.label40.TabIndex = 39;
-            this.label40.Text = "aaa";
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox5.Controls.Add(this.magicFormula_TexEquation5);
-            this.groupBox5.Controls.Add(this.label41);
-            this.groupBox5.Location = new System.Drawing.Point(3, 429);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(479, 200);
-            this.groupBox5.TabIndex = 76;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Advise";
-            // 
-            // magicFormula_TexEquation5
-            // 
-            this.magicFormula_TexEquation5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.magicFormula_TexEquation5.Location = new System.Drawing.Point(3, 49);
-            this.magicFormula_TexEquation5.Name = "magicFormula_TexEquation5";
-            this.magicFormula_TexEquation5.Size = new System.Drawing.Size(473, 148);
-            this.magicFormula_TexEquation5.TabIndex = 40;
-            this.magicFormula_TexEquation5.Type = TireDataAnalyzer.TexEquation.MagicFormula_TexEquation.MagicFormulaType.FY;
-            // 
-            // label41
-            // 
-            this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(6, 15);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(23, 12);
-            this.label41.TabIndex = 39;
-            this.label41.Text = "aaa";
-            // 
             // PureCorneringPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1886,41 +1886,41 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.FZ_CP.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel1.PerformLayout();
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.P_FYMax.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
             this.splitContainer3.Panel1.PerformLayout();
             this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.P_CP.ResumeLayout(false);
             this.splitContainer4.Panel1.ResumeLayout(false);
             this.splitContainer4.Panel1.PerformLayout();
             this.splitContainer4.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
             this.splitContainer4.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.CurvatureFactor.ResumeLayout(false);
             this.splitContainer5.Panel1.ResumeLayout(false);
             this.splitContainer5.Panel1.PerformLayout();
             this.splitContainer5.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).EndInit();
             this.splitContainer5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.EP_NumericalInput)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.EP_NumericalInput)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -40,7 +40,8 @@ namespace TireDataAnalyzer.TexEquation
 
         public enum MagicFormulaType
         {
-            FY
+            FY,
+            FX
         }
 
         MagicFormulaType type;
@@ -53,6 +54,7 @@ namespace TireDataAnalyzer.TexEquation
             set
             {
                 type = value;
+                Highlight(-1);
             }
         }
 
@@ -60,8 +62,9 @@ namespace TireDataAnalyzer.TexEquation
         {
             var formula = GetFormula();
             var param = GetParameterString(k);
-            string Coef = "nothing__";
-            for(int i=1; i<formula.Count(); ++i)
+            formulaControl[1].Formula = formula[1];
+            formulaControl[0].Formula = formula[0];
+            for (int i=1; i<formula.Count(); ++i)
             {
                 var r = new System.Text.RegularExpressions.Regex(param);
                 System.Text.RegularExpressions.Match m = r.Match(formula[i]);
@@ -92,20 +95,32 @@ namespace TireDataAnalyzer.TexEquation
             {
                 case MagicFormulaType.FY:
                     return FY;
+                case MagicFormulaType.FX:
+                    return FX;
             }
             return null;
         }
 
         string GetParameterString(int i)
         {
-            if (i < 0) return "";
+            if (i < 0) return "nothing_____";
             switch (Type)
             {
                 case MagicFormulaType.FY:
+                case MagicFormulaType.FX:
                     return @"a_{?[\s\t]*"+i.ToString()+ @"\D[\s\t]*}?";
             }
             return "nothing_____";
         }
+
+        string[] FX = {
+            @"{F_x} = D\, \sin(C \arctan(B(x+ S_h) - E(B(x + S_h)  - \arctan B(x+ S_h) ))) + S_v",
+            @"{C} = {a_0}",
+            @"{D} = { a_1}\,{ FZ}\,\left({ a_2}\,{ FZ}+1\right)\,\left(1- { a_3}\,{ IA}^2\right)\,\left({ a_5}\,P^2+{ a_4}\,P+1\right)\,\left({ a_6}\,T+1\right)",
+            @"{BCD}={BCD} = { a_7}\,{ FZ}\,\left({ a_8}\,{ FZ}+1\right)\,e^{ { a_9}\,{ FZ}}\,\left({ a_{11}}\,P^2+{ a_{10}}\,P+1\right)\,\left({ a_{12}}\,T+1\right)",
+            @"{E} ={ a_{13}}\,\left({ a_{15}}\,{ FZ}^2+{ a_{14}}\,{ FZ}+1\right)\,\left(1-{ a_{16}}\,{ sgn}\left({ SR}\right)\right)",
+            @"{S_h} = {a_{17}}+{a_{18}}\,{FZ}"
+        };
 
         string[] FY = {
             @"{F_y} = D\, \sin(C \arctan(B(x+ S_h) - E(B(x + S_h)  - \arctan B(x+ S_h) ))) + S_v",
@@ -114,7 +129,17 @@ namespace TireDataAnalyzer.TexEquation
             @"{BCD}={ a_7}\,{ FZ}\,\left({ a_8}\,P + 1\right)\,\sin \left({ a_9}\,\arctan \left({\frac{ { FZ} } {\left({ a_{10} } +{ a_{ 11} }\, { IA}^ 2\right)\,\left(1 +{ a_{ 12} }\,P\right)} }\right)\right)\,\left(1 -{ a_{ 13} }\,\left | { IA}\right | \right)\,\left({ a_{ 14} }\,T + 1\right)",
             @"{E}=\left({ a_{15}}+{ a_{16}}\,{ FZ}\right)\,\left({ a_{17}}\,{ IA}^2-{ a_{18}}\,{ IA}\,{ sgn}\left({ x}+{ Sh}\right)+1\right)",
             @"{S_h}=\left({ a_{19}}\,{+ FZ}+{ a_{20}}\,{ FZ}^2\right)\,\left({ a_{21}}\,P+1\right){ IA}",
-            @"{S_v}= \left({ a_{23}}\,{ FZ}+{ a_{24}}\,{ FZ}^2 \right)\, { IA}"
+            @"{S_v}= \left({ a_{22}}\,{ FZ}+{ a_{23}}\,{ FZ}^2 \right)\, { IA}"
+        };
+
+        string[] CFX = {
+            @"{CF_x} = {F_x}{G_x}+{S_v}\,\,,{G_x} = \frac {\cos \left(c\,\arctan \left(b\,\left(x+{ sh}\right) - e\,\left(b\,\left(x+{ sh}\right)- \arctan \left(b\,\left(x+{ sh}\right)\right)\right)\right)\right)} {\cos \left(c\,\arctan \left(b\,{ sh} -e\, \left(b\,{ sh}-\arctan \left(b\,{ sh}\right)\right)\right)\right)}",
+            @"{C} = {a_0}",
+            @"{D} = { FZ}\,\left({ a_2}\,{ FZ}+{ a_1}\right)\,\left(1-{ a_3}\,{ IA}^2\right)\,\left({ a_5}\,P^2+{ a_4}\,P+1\right)\,\left({ a_6}\,T+1\right)",
+            @"{BCD}={ a_7}\,{ FZ}\,\left({ a_8}\,P + 1\right)\,\sin \left({ a_9}\,\arctan \left({\frac{ { FZ} } {\left({ a_{10} } +{ a_{ 11} }\, { IA}^ 2\right)\,\left(1 +{ a_{ 12} }\,P\right)} }\right)\right)\,\left(1 -{ a_{ 13} }\,\left | { IA}\right | \right)\,\left({ a_{ 14} }\,T + 1\right)",
+            @"{E}=\left({ a_{15}}+{ a_{16}}\,{ FZ}\right)\,\left({ a_{17}}\,{ IA}^2-{ a_{18}}\,{ IA}\,{ sgn}\left({ x}+{ Sh}\right)+1\right)",
+            @"{S_h}=\left({ a_{19}}\,{+ FZ}+{ a_{20}}\,{ FZ}^2\right)\,\left({ a_{21}}\,P+1\right){ IA}",
+            @"{S_v}= \left({ a_{22}}\,{ FZ}+{ a_{23}}\,{ FZ}^2 \right)\, { IA}"
         };
 
         private void DoEvents()

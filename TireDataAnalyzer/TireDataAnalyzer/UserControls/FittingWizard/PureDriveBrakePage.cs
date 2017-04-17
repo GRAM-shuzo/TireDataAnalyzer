@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TTCDataUtils;
-
+using TireDataAnalyzer.TexEquation;
 namespace TireDataAnalyzer.UserControls.FittingWizard
 {
     public partial class PureDriveBrakePage : FittingWizardPage
@@ -19,6 +19,7 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
         List<TireDataViewer> Viewers = new List<TireDataViewer>();
         List<bool> FirstPlot = new List<bool>();
         List<TireDataViewer.XY> EList = new List<TireDataViewer.XY>();
+        List<MagicFormula_TexEquation> Equations = new List<MagicFormula_TexEquation>();
         List<int> NumPointList = new List<int>();
         bool ReplotData = false;
         bool ReplotFormula = false;
@@ -108,11 +109,13 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             foreach (var tb in ParameterTB)
             {
                 tb.KeyDown += TextBox_KeyDown;
+                tb.Enter += mf_Enter;
 
             }
             foreach( var cb in FittingParametersCB)
             {
                 cb.CheckedChanged += FittingCheckedChanged;
+                cb.Enter += mf_Enter;
             }
 
             for (int i = 0; i < TDSs.Count; ++i)
@@ -129,16 +132,46 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             Viewers[5].SetChartType(System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine, ELowerLegend);
             Viewers[5].SetLineWidth(5, EUpperLegend);
             Viewers[5].SetLineWidth(5, ELowerLegend);
+
+            Equations.Add(magicFormula_TexEquation0);
+            Equations.Add(magicFormula_TexEquation1);
+            Equations.Add(magicFormula_TexEquation2);
+            Equations.Add(magicFormula_TexEquation3);
+            Equations.Add(magicFormula_TexEquation4);
+            Equations.Add(magicFormula_TexEquation5);
         }
 
         private void PureDriveBrakePage_Load(object sender, EventArgs e)
         {
+            foreach (var mf in Equations)
+            {
+                (Parent as Form).ResizeEnd += mf.Control_Resize;
+                mf.Type = MagicFormula_TexEquation.MagicFormulaType.FX;
+            }
+
             Viewers[0].SetAxis(MagicFormulaInputVariables.SR, MagicFormulaOutputVariables.FX);
             Viewers[1].SetAxis(MagicFormulaInputVariables.FZ, MagicFormulaOutputVariables.FX_D);
             Viewers[2].SetAxis(MagicFormulaInputVariables.FZ, MagicFormulaOutputVariables.FX_BCD);
             Viewers[3].SetAxis(MagicFormulaInputVariables.P, MagicFormulaOutputVariables.FX_D);
             Viewers[4].SetAxis(MagicFormulaInputVariables.P, MagicFormulaOutputVariables.FX_BCD);
             Viewers[5].SetAxis(MagicFormulaInputVariables.SR, MagicFormulaOutputVariables.FX_E);
+        }
+
+        private void mf_Enter(object sender, EventArgs e)
+        {
+            int i = -1;
+            if (sender is TextBox)
+            {
+                i = ParameterTB.IndexOf(sender as TextBox);
+            }
+            else
+            {
+                i = FittingParametersCB.IndexOf(sender as CheckBox);
+            }
+            foreach (var mf in Equations)
+            {
+                mf.Highlight(i);
+            }
         }
 
         protected override void Reload(bool back)
@@ -165,6 +198,10 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             ReplotFormula = true;
             ReplotData = true;
 
+            foreach (var mf in Equations)
+            {
+                mf.Control_Resize(mf, new EventArgs());
+            }
             RePlot();
         }
 
