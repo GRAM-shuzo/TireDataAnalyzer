@@ -555,8 +555,12 @@ namespace TireDataAnalyzer.UserControls
                             {
                                 y = mf.GetVariables(Y2, mfa);
                             }
-                            var point = new DataPoint(data[X1], y);
-                            series.Points.Add(point);
+                            if (!StaticFunctions.IsNotValidValue(data[X1]) && !StaticFunctions.IsNotValidValue(y))
+                            {
+                                var point = new DataPoint(data[X1], y);
+                                series.Points.Add(point);
+                            }
+                                
                         }
                     }
                 }
@@ -665,7 +669,11 @@ namespace TireDataAnalyzer.UserControls
                 }
                 for(int i = 0; i< chan.Count; ++i)
                 {
-                    series.Points.Add(new DataPoint(chan[i].Item1,chan[i].Item2));
+                    if (!StaticFunctions.IsNotValidValue(chan[i].Item1) && !StaticFunctions.IsNotValidValue(chan[i].Item2))
+                    {
+                        series.Points.Add(new DataPoint(chan[i].Item1, chan[i].Item2));
+                    }
+                    
                 }
                 
             }

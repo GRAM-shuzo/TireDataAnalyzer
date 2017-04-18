@@ -185,7 +185,15 @@ namespace TTCDataUtils
         }
         public MagicFormulaArguments GetNormalizedValue(MagicFormulaArguments args)
         {
-            return FX.Normalize(args);
+            args = FX.Normalize(args);
+            foreach(MagicFormulaInputVariables iv in Enum.GetValues(typeof(MagicFormulaInputVariables)))
+            {
+                if(double.IsNaN(args.getValue(iv)) || double.IsInfinity(args.getValue(iv)))
+                {
+                    args.setValue(iv, 0.01);
+                }
+            }
+            return args;
         }
         public MagicFormulaArguments GetDenormalizedValue(MagicFormulaArguments args)
         {
