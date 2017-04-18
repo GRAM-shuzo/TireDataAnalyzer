@@ -190,7 +190,7 @@ namespace TTCDataUtils
             {
                 if(double.IsNaN(args.getValue(iv)) || double.IsInfinity(args.getValue(iv)))
                 {
-                    args.setValue(iv, 0.01);
+                    args.setValue(iv, 0);
                 }
             }
             return args;
