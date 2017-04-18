@@ -1,12 +1,17 @@
 /* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
 /* [ Created with wxMaxima version 14.09.0 ] */
 
+
 /* [wxMaxima: input   start ] */
 load("E:/Desktop/kart/FSAEUtils/FSAEVehicleDesigner/TireDataAnalyzer/cform.lisp")$
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
 D(a1,a2,a3,a4,a5,a6) := a1*(1+a2*FZ)*(1-a3*IA*IA)*(1+a4*P+a5*P*P)*(1+a6*T)*FZ;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+tex(D(a1,a2,a3,a4,a5,a6));
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
@@ -18,11 +23,19 @@ BCD(a7,a8,a9,a10,a11,a12) := a7*(1+a8*FZ)*exp(a9*FZ)*(1+a10*P+a11*P*P)*(1+a12*T)
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
+tex(BCD(a7,a8,a9,a10,a11,a12));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
 cform(BCD(a7,a8,a9,a10,a11,a12));
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
 E(a13,a14,a15,a16) := a13*(1+a14*FZ+a15*FZ*FZ)*(1-a16*sgn(SR));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+tex(E(a13,a14,a15,a16));
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
@@ -34,6 +47,10 @@ Sh(a17,a18) := a17+a18*FZ;
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
+tex
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
 cform(Sh(a17,a18));
 /* [wxMaxima: input   end   ] */
 
@@ -42,11 +59,15 @@ By(b0,b1,b2) := b0*(1+b1*IA*IA)*cos(atan(b2*SR));
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
+tex(By(b0,b1,b2));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
 cform(By(b0,b1,b2));
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
-Ey(b4,b5) := b4*(1+b5*FZ);
+b4*(1+b5*FZ)
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */

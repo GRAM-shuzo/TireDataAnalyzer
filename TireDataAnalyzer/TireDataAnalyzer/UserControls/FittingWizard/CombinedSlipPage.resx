@@ -117,56 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="label6.Text" xml:space="preserve">
-    <value>By(b8,b9,b10,b11) := (b8+b9*IA*IA)*cos(atan(b10*(SA-b11)));
-Ey(b13,b14) := (b13+b14*FZ );
-SVy(b0,b1,b2,b3,b4,b5) := m*FZ*(b0+b1*FZ+b2*IA)*cos(atan(b3*SA))*sin(b4*atan(b5*IA));
-SHy(b6,b7) := (b6+b7*FZ )*IA;
-
-By(b0,b1,b2) := b0*(1+b1*IA*IA)*cos(atan(b2*SR));
-Ey(b4,b5) := b4*(1+b5*FZ);
-Shy(b6) := b5</value>
-  </data>
-  <data name="label5.Text" xml:space="preserve">
-    <value>By(b8,b9,b10,b11) := (b8+b9*IA*IA)*cos(atan(b10*(SA-b11)));
-Ey(b13,b14) := (b13+b14*FZ );
-SVy(b0,b1,b2,b3,b4,b5) := m*FZ*(b0+b1*FZ+b2*IA)*cos(atan(b3*SA))*sin(b4*atan(b5*IA));
-SHy(b6,b7) := (b6+b7*FZ )*IA;
-
-By(b0,b1,b2) := b0*(1+b1*IA*IA)*cos(atan(b2*SR));
-Ey(b4,b5) := b4*(1+b5*FZ);
-Shy(b6) := b5</value>
-  </data>
-  <data name="label4.Text" xml:space="preserve">
-    <value>By(b8,b9,b10,b11) := (b8+b9*IA*IA)*cos(atan(b10*(SA-b11)));
-Ey(b13,b14) := (b13+b14*FZ );
-SVy(b0,b1,b2,b3,b4,b5) := m*FZ*(b0+b1*FZ+b2*IA)*cos(atan(b3*SA))*sin(b4*atan(b5*IA));
-SHy(b6,b7) := (b6+b7*FZ )*IA;
-
-By(b0,b1,b2) := b0*(1+b1*IA*IA)*cos(atan(b2*SR));
-Ey(b4,b5) := b4*(1+b5*FZ);
-Shy(b6) := b5</value>
-  </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>By(b8,b9,b10,b11) := (b8+b9*IA*IA)*cos(atan(b10*(SA-b11)));
-Ey(b13,b14) := (b13+b14*FZ );
-SVy(b0,b1,b2,b3,b4,b5) := m*FZ*(b0+b1*FZ+b2*IA)*cos(atan(b3*SA))*sin(b4*atan(b5*IA));
-SHy(b6,b7) := (b6+b7*FZ )*IA;
-
-By(b0,b1,b2) := b0*(1+b1*IA*IA)*cos(atan(b2*SR));
-Ey(b4,b5) := b4*(1+b5*FZ);
-Shy(b6) := b5</value>
-  </data>
-  <data name="AdviseText.Text" xml:space="preserve">
-    <value>By(b8,b9,b10,b11) := (b8+b9*IA*IA)*cos(atan(b10*(SA-b11)));
-Ey(b13,b14) := (b13+b14*FZ );
-SVy(b0,b1,b2,b3,b4,b5) := m*FZ*(b0+b1*FZ+b2*IA)*cos(atan(b3*SA))*sin(b4*atan(b5*IA));
-SHy(b6,b7) := (b6+b7*FZ )*IA;
-
-By(b0,b1,b2) := b0*(1+b1*IA*IA)*cos(atan(b2*SR));
-Ey(b4,b5) := b4*(1+b5*FZ);
-Shy(b6) := b5</value>
-  </data>
   <metadata name="EP_NumericalInput.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>

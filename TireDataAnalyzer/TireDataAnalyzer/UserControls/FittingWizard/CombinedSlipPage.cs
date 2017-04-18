@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TTCDataUtils;
-
+using TireDataAnalyzer.TexEquation;
 namespace TireDataAnalyzer.UserControls.FittingWizard
 {
     public partial class CombinedSlipPage : FittingWizardPage
@@ -18,6 +18,7 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
         List<CheckBox> FittingParametersCBX = new List<CheckBox>();
         List<CheckBox> FittingParametersCBY = new List<CheckBox>();
         List<SimpleTireDataSelector> TDSs = new List<SimpleTireDataSelector>();
+        List<MagicFormula_TexEquation> Equations = new List<MagicFormula_TexEquation>();
         List<TireDataViewer> Viewers = new List<TireDataViewer>();
         List<bool> FirstPlot = new List<bool>();
         List<int> NumPointList = new List<int>();
@@ -114,20 +115,24 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
                 tb.KeyDown += TextBox_KeyDown;
                 tb.Validated += IsReal_Validated;
                 tb.Validating += IsReal_Validating;
+                tb.Enter += CFX_Enter;
             }
             foreach (var tb in ParameterTBY)
             {
                 tb.KeyDown += TextBox_KeyDown;
                 tb.Validated += IsReal_Validated;
                 tb.Validating += IsReal_Validating;
+                tb.Enter += CFY_Enter;
             }
             foreach (var cb in FittingParametersCBX)
             {
                 cb.CheckedChanged += FittingCheckedChanged;
+                cb.Enter += CFX_Enter;
             }
             foreach (var cb in FittingParametersCBY)
             {
                 cb.CheckedChanged += FittingCheckedChanged;
+                cb.Enter += CFY_Enter;
             }
             for (int i = 0; i < TDSs.Count; ++i)
             {
@@ -140,10 +145,56 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
                 Viewers[i].SetLineWidth(5, formulaLegend);
                 Viewers[i].GraphSample = 2500;
             }
+
+            Equations.Add(magicFormula_TexEquation0);
+            Equations.Add(magicFormula_TexEquation1);
+            Equations.Add(magicFormula_TexEquation2);
+            Equations.Add(magicFormula_TexEquation3);
+            Equations.Add(magicFormula_TexEquation4);
         }
 
+        private void CFY_Enter(object sender, EventArgs e)
+        {
+            int i = -1;
+            if (sender is TextBox)
+            {
+                i = ParameterTBY.IndexOf(sender as TextBox);
+            }
+            else
+            {
+                i = FittingParametersCBY.IndexOf(sender as CheckBox);
+            }
+            foreach (var mf in Equations)
+            {
+                mf.Type = MagicFormula_TexEquation.MagicFormulaType.CFY;
+                mf.Highlight(i);
+            }
+        }
+        private void CFX_Enter(object sender, EventArgs e)
+        {
+            int i = -1;
+            if (sender is TextBox)
+            {
+                i = ParameterTBX.IndexOf(sender as TextBox);
+            }
+            else
+            {
+                i = FittingParametersCBX.IndexOf(sender as CheckBox);
+            }
+            foreach (var mf in Equations)
+            {
+                mf.Type = MagicFormula_TexEquation.MagicFormulaType.CFX;
+                mf.Highlight(i);
+            }
+        }
         private void CombinedSlipPage_Load(object sender, EventArgs e)
         {
+            foreach (var mf in Equations)
+            {
+                (Parent as Form).ResizeEnd += mf.Control_Resize;
+                mf.Type = MagicFormula_TexEquation.MagicFormulaType.CFY;
+            }
+
             Viewers[0].SetAxis(MagicFormulaInputVariables.FY, MagicFormulaOutputVariables.FX);
             Viewers[1].SetAxis(MagicFormulaInputVariables.FY, MagicFormulaOutputVariables.FX);
             Viewers[2].SetAxis(MagicFormulaInputVariables.FY, MagicFormulaOutputVariables.FX);
@@ -180,7 +231,10 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             stopReplot = false;
             ReplotFormula = true;
             ReplotData = true;
-
+            foreach (var mf in Equations)
+            {
+                mf.Control_Resize(mf, new EventArgs());
+            }
             RePlot();
         }
 
