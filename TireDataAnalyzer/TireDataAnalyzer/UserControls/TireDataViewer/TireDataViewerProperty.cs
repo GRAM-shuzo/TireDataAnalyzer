@@ -51,9 +51,9 @@ namespace TireDataAnalyzer.UserControls
                         DataSourceList.Controls.SetChildIndex(raw, 0);
                     }
                 }
-                catch(Exception)
+                catch(Exception e )
                 {
-                    //Viewe
+                    Log.Output(e.Message);
                 }
             }
         }

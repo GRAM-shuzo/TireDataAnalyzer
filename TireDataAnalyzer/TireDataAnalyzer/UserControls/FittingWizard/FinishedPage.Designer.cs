@@ -36,9 +36,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(139, 24);
+            this.label1.Size = new System.Drawing.Size(139, 12);
             this.label1.TabIndex = 5;
-            this.label1.Text = "フィッティングが完了しました。\r\n出力は以下の通りです。";
+            this.label1.Text = "フィッティングが完了しました。";
             // 
             // FinishedPage
             // 

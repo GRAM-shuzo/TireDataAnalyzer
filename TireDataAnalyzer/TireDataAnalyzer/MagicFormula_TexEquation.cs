@@ -123,10 +123,10 @@ namespace TireDataAnalyzer.TexEquation
         }
 
         string[] FX = {
-            @"{F_x} = D\, \sin(C \arctan(B(x+ S_h) - E(B(x + S_h)  - \arctan B(x+ S_h) ))) + S_v",
+            @"{F_x} = D\, \sin(C \arctan(B(x+ S_h) - E(B(x + S_h)  - \arctan B(x+ S_h) )))",
             @"{C} = {a_0}",
             @"{D} = { a_1}\,{ FZ}\,\left({ a_2}\,{ FZ}+1\right)\,\left(1- { a_3}\,{ IA}^2\right)\,\left({ a_5}\,P^2+{ a_4}\,P+1\right)\,\left({ a_6}\,T+1\right)",
-            @"{BCD}={BCD} = { a_7}\,{ FZ}\,\left({ a_8}\,{ FZ}+1\right)\,e^{ { a_9}\,{ FZ}}\,\left({ a_{11}}\,P^2+{ a_{10}}\,P+1\right)\,\left({ a_{12}}\,T+1\right)",
+            @"{BCD}= { a_7}\,{ FZ}\,\left({ a_8}\,{ FZ}+1\right)\,e^{ { a_9}\,{ FZ}}\,\left({ a_{11}}\,P^2+{ a_{10}}\,P+1\right)\,\left({ a_{12}}\,T+1\right)",
             @"{E} ={ a_{13}}\,\left({ a_{15}}\,{ FZ}^2+{ a_{14}}\,{ FZ}+1\right)\,\left(1-{ a_{16}}\,{ sgn}\left({ SR}\right)\right)",
             @"{S_h} = {a_{17}}+{a_{18}}\,{FZ}"
         };
