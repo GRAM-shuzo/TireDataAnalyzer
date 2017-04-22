@@ -255,7 +255,7 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
                 if (ReplotData || !FirstPlot[tabIndex])
                 {
                     var driveBrakeTable = TDSs[tabIndex].SelectedData().GetDataSet().DriveBrakeTable;
-                    Viewers[tabIndex].SetDataList(driveBrakeTable, dataLegend);
+                    Viewers[tabIndex].SetDataList(driveBrakeTable, Table.DriveBrakeTable, dataLegend);
                     Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, TDSs[tabIndex].CenterValue, formulaLegend);
 
                     Viewers[tabIndex].DrawGraph(dataLegend);

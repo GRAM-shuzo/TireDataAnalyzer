@@ -66,7 +66,7 @@ namespace TireDataAnalyzer.UserControls.PropertyPage
                     }
                     
                 }
-                DataViewer.SetDataList(dataLists[i], LegendTexts[i]);
+                DataViewer.SetDataList(dataLists[i],Table,  LegendTexts[i]);
             }
         }
 

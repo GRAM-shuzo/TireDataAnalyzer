@@ -38,6 +38,12 @@ namespace TireDataAnalyzer.UserControls
             }
             InitColorList();
             InitSourceList();
+            foreach(Table t in Enum.GetValues(typeof(Table)))
+            {
+                if (t == Table.None) continue;
+                TableCB.Items.Add(t);
+            }
+            TableCB.SelectedItem = Table.StaticTable;
             Initialized = false;
 
             PlotTypeCB.Items.Add("Line");
@@ -75,6 +81,7 @@ namespace TireDataAnalyzer.UserControls
                 Reload(ID);
             }
             ShowCB.Checked = Viewer.GetEnable(ID);
+            if (Viewer.GetTableInfo(ID) != null) TableCB.SelectedItem = Viewer.GetTableInfo(ID);
             init = false;
         }
 
@@ -120,6 +127,7 @@ namespace TireDataAnalyzer.UserControls
                 PlotTypeCB.SelectedIndex = 1;
                 PlotTypeCB.Enabled = false;
                 IsMagicFormula = false;
+                TableCB.Enabled = true;
             }
             else
             {
@@ -128,6 +136,7 @@ namespace TireDataAnalyzer.UserControls
                 ArgumentsButton.Visible = true;
                 MFSourceCB.Visible = false;
                 IsMagicFormula = true;
+                TableCB.Enabled = false;
             }
         }
 
@@ -298,6 +307,7 @@ namespace TireDataAnalyzer.UserControls
         public void BeforeReplot()
         {
             CheckInitialized();
+            Table t = (TableCB.SelectedItem as Table?).Value;
             if (Initialized)
             {
                 
@@ -309,14 +319,14 @@ namespace TireDataAnalyzer.UserControls
                         OnDelete();
                     }
                     ID = suffix.ToString("000") + "_" + node.ID.ToString();
-                    Viewer.SetDataList(node.IDataSet.GetDataSet().GetDataList(Table.StaticTable), ID);
+                    Viewer.SetDataList(node.IDataSet.GetDataSet().GetDataList(t), t, ID);
                     if (MFSourceCB.SelectedIndex >= 0)
                     {
                         
                         if (Args == null)
                         {
                             var mfnode = MFSourceCB.SelectedItem as ProjectTree.Node_MagicFormula;
-                            var data = mfnode.MFFD.IDataset.GetDataSet().MaxminSet.Limit(Table.StaticTable).Mean;
+                            var data = mfnode.MFFD.IDataset.GetDataSet().MaxminSet.Limit(t).Mean;
                             Args = new MagicFormulaArguments(data);
                         }
                         var nodeMF = MFSourceCB.SelectedItem as ProjectTree.Node_MagicFormula;
@@ -341,13 +351,13 @@ namespace TireDataAnalyzer.UserControls
                             MessageBoxDefaultButton.Button2);
                         if (result == DialogResult.Yes)
                         {
-                            var data = node.MFFD.IDataset.GetDataSet().MaxminSet.Limit(Table.StaticTable).Mean;
+                            var data = node.MFFD.IDataset.GetDataSet().MaxminSet.Limit(t).Mean;
                             Args = new MagicFormulaArguments(data);
                         }
                     }
                     if (Args == null)
                     {
-                        var data = node.MFFD.IDataset.GetDataSet().MaxminSet.Limit(Table.StaticTable).Mean;
+                        var data = node.MFFD.IDataset.GetDataSet().MaxminSet.Limit(t).Mean;
                         Args = new MagicFormulaArguments(data);
                     }
                     ID = suffix.ToString("000") + "_" + node.ID.ToString();
@@ -446,7 +456,12 @@ namespace TireDataAnalyzer.UserControls
 
         private void MFSourceCB_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Changed = true;
+        }
 
+        private void TableCB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Changed = true;
         }
     }
 }

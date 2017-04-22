@@ -269,7 +269,7 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
                 if ( ReplotData || !FirstPlot[tabIndex] )
                 {
                     var corneringTable = TDSs[tabIndex].SelectedData().GetDataSet().CorneringTable;
-                        Viewers[tabIndex].SetDataList(corneringTable, dataLegend);
+                        Viewers[tabIndex].SetDataList(corneringTable, Table.CorneringTable, dataLegend);
                         Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, TDSs[tabIndex].CenterValue, formulaLegend);
 
                         Viewers[tabIndex].DrawGraph(dataLegend);

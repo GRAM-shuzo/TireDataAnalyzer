@@ -38,6 +38,7 @@
             this.SizeTB = new System.Windows.Forms.TextBox();
             this.EP_NumericalInput = new System.Windows.Forms.ErrorProvider(this.components);
             this.MFSourceCB = new System.Windows.Forms.ComboBox();
+            this.TableCB = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.EP_NumericalInput)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,7 +46,7 @@
             // 
             this.NameTB.Location = new System.Drawing.Point(0, 0);
             this.NameTB.Name = "NameTB";
-            this.NameTB.Size = new System.Drawing.Size(150, 19);
+            this.NameTB.Size = new System.Drawing.Size(140, 19);
             this.NameTB.TabIndex = 0;
             this.NameTB.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Nint_KeyDown);
             this.NameTB.Validated += new System.EventHandler(this.ValueChanged);
@@ -54,9 +55,9 @@
             // 
             this.SourceCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.SourceCB.FormattingEnabled = true;
-            this.SourceCB.Location = new System.Drawing.Point(156, 0);
+            this.SourceCB.Location = new System.Drawing.Point(146, 0);
             this.SourceCB.Name = "SourceCB";
-            this.SourceCB.Size = new System.Drawing.Size(130, 20);
+            this.SourceCB.Size = new System.Drawing.Size(120, 20);
             this.SourceCB.TabIndex = 1;
             this.SourceCB.SelectedIndexChanged += new System.EventHandler(this.ValueChanged);
             this.SourceCB.Click += new System.EventHandler(this.SourceCB_Click);
@@ -65,9 +66,9 @@
             // 
             this.PlotTypeCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.PlotTypeCB.FormattingEnabled = true;
-            this.PlotTypeCB.Location = new System.Drawing.Point(292, 0);
+            this.PlotTypeCB.Location = new System.Drawing.Point(272, 0);
             this.PlotTypeCB.Name = "PlotTypeCB";
-            this.PlotTypeCB.Size = new System.Drawing.Size(130, 20);
+            this.PlotTypeCB.Size = new System.Drawing.Size(83, 20);
             this.PlotTypeCB.TabIndex = 2;
             this.PlotTypeCB.SelectedIndexChanged += new System.EventHandler(this.ValueChanged);
             // 
@@ -77,7 +78,7 @@
             this.ColorCB.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.ColorCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ColorCB.FormattingEnabled = true;
-            this.ColorCB.Location = new System.Drawing.Point(428, 0);
+            this.ColorCB.Location = new System.Drawing.Point(467, 0);
             this.ColorCB.Name = "ColorCB";
             this.ColorCB.Size = new System.Drawing.Size(130, 20);
             this.ColorCB.TabIndex = 3;
@@ -106,9 +107,9 @@
             // 
             // SizeTB
             // 
-            this.SizeTB.Location = new System.Drawing.Point(564, 0);
+            this.SizeTB.Location = new System.Drawing.Point(603, 0);
             this.SizeTB.Name = "SizeTB";
-            this.SizeTB.Size = new System.Drawing.Size(90, 19);
+            this.SizeTB.Size = new System.Drawing.Size(50, 19);
             this.SizeTB.TabIndex = 6;
             this.SizeTB.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Nint_KeyDown);
             this.SizeTB.Validating += new System.ComponentModel.CancelEventHandler(this.IsNInt_Validating);
@@ -128,11 +129,22 @@
             this.MFSourceCB.SelectedIndexChanged += new System.EventHandler(this.MFSourceCB_SelectedIndexChanged);
             this.MFSourceCB.SelectedValueChanged += new System.EventHandler(this.ValueChanged);
             // 
+            // TableCB
+            // 
+            this.TableCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.TableCB.FormattingEnabled = true;
+            this.TableCB.Location = new System.Drawing.Point(361, 0);
+            this.TableCB.Name = "TableCB";
+            this.TableCB.Size = new System.Drawing.Size(100, 20);
+            this.TableCB.TabIndex = 8;
+            this.TableCB.SelectedIndexChanged += new System.EventHandler(this.TableCB_SelectedIndexChanged);
+            // 
             // SeriesEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
+            this.Controls.Add(this.TableCB);
             this.Controls.Add(this.MFSourceCB);
             this.Controls.Add(this.SizeTB);
             this.Controls.Add(this.ArgumentsButton);
@@ -160,5 +172,6 @@
         private System.Windows.Forms.TextBox SizeTB;
         private System.Windows.Forms.ErrorProvider EP_NumericalInput;
         private System.Windows.Forms.ComboBox MFSourceCB;
+        private System.Windows.Forms.ComboBox TableCB;
     }
 }

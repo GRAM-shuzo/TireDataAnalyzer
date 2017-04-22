@@ -416,13 +416,17 @@ namespace TireDataAnalyzer.UserControls
             Viewers[ViewerNumber].SetLegend(l);
             changed = true;
         }
-        public void SetDataList(List<TireData> dataList, string legendText)
+        public void SetDataList(List<TireData> dataList, Table t, string legendText)
         {
             foreach (var viewer in Viewers)
             {
-                viewer.SetDataList(dataList, legendText);
+                viewer.SetDataList(dataList, t, legendText);
             }
             changed = true;
+        }
+        public Table? GetTableInfo(string legendText)
+        {
+            return Viewers[0].GetTableInfo(legendText);
         }
         public void SetDataListRefMF(string dataListLegend, string magicFormulaLegend)
         {

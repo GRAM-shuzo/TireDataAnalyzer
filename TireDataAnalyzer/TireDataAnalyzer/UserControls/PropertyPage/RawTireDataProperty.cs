@@ -71,7 +71,7 @@ namespace TireDataAnalyzer.UserControls.PropertyPage
             {
                 
                 
-                GetViewer(table).SetDataList(dataLists[i], legends[i]);
+                GetViewer(table).SetDataList(dataLists[i],table,  legends[i]);
                 
                 GetViewer(table).DrawGraph(legends[i]);
             }

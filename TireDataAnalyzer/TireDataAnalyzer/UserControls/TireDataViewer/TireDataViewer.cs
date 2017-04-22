@@ -77,6 +77,7 @@ namespace TireDataAnalyzer.UserControls
             {
                 saveData.DicSeries.Add(series.Name, series);
             }
+            if (saveData.TableInfo == null) saveData.TableInfo = new Dictionary<string, Table>();
             SetMenu();
         }
 
@@ -339,11 +340,22 @@ namespace TireDataAnalyzer.UserControls
             }
             return mfLegend;
         }
-        public void SetDataList(List<TireData> dataList, string legendText)
+        public void SetDataList(List<TireData> dataList, Table table, string legendText)
         {
             saveData.DicTireData[legendText] = dataList;
             saveData.DicDataType[legendText] = DataType.RawTireData;
+            saveData.TableInfo[legendText] = table;
         }
+        public Table? GetTableInfo(string legendText)
+        {
+            Table t;
+            if(saveData.TableInfo.TryGetValue(legendText, out t))
+            {
+                return t;
+            }
+            return null;
+        }
+
         public void SetMagicFormula(TireMagicFormula formula, MagicFormulaArguments constantArgs, string legendText)
         {
             //if (Axis == EnumAxis.RawTireData) throw new Exception("軸タイプ違反");
@@ -996,6 +1008,7 @@ namespace TireDataAnalyzer.UserControls
             [NonSerialized]
             public Dictionary<string, List<XY>> DicNotManagedData = new Dictionary<string, List<XY>>();
             public Dictionary<string, string> legendTextOverride = new Dictionary<string, string>();
+            public Dictionary<string, Table> TableInfo = new Dictionary<string, Table>();
         }
 
         private void chart_Click(object sender, EventArgs e)

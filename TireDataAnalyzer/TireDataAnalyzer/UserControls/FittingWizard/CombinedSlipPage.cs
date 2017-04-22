@@ -306,7 +306,7 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
                 combinedTable.AddRange(corneringTable);
                 corneringTable.AddRange(driveBrakeTable);
 
-                Viewers[tabIndex].SetDataList(corneringTable, dataLegend);
+                Viewers[tabIndex].SetDataList(corneringTable, Table.CorneringTable, dataLegend);
                 Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, TDSs[tabIndex].CenterValue, formulaLegend);
 
                 Viewers[tabIndex].DrawGraph(dataLegend);
