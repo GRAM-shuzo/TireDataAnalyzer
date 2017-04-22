@@ -22,7 +22,7 @@ namespace TireDataAnalyzer.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace TireDataAnalyzer.Properties {
         ///   このクラスで使用されているキャッシュされた ResourceManager インスタンスを返します。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TireDataAnalyzer.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace TireDataAnalyzer.Properties {
         ///   現在のスレッドの CurrentUICulture プロパティをオーバーライドします。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace TireDataAnalyzer.Properties {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
-        internal static System.Drawing.Bitmap action_add_16xLG {
+        public static System.Drawing.Bitmap action_add_16xLG {
             get {
                 object obj = ResourceManager.GetObject("action_add_16xLG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -73,7 +73,7 @@ namespace TireDataAnalyzer.Properties {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
-        internal static System.Drawing.Bitmap action_Cancel_16xLG {
+        public static System.Drawing.Bitmap action_Cancel_16xLG {
             get {
                 object obj = ResourceManager.GetObject("action_Cancel_16xLG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -83,7 +83,7 @@ namespace TireDataAnalyzer.Properties {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
-        internal static System.Drawing.Bitmap arrow_Down_16xLG {
+        public static System.Drawing.Bitmap arrow_Down_16xLG {
             get {
                 object obj = ResourceManager.GetObject("arrow_Down_16xLG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -93,7 +93,7 @@ namespace TireDataAnalyzer.Properties {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
-        internal static System.Drawing.Bitmap arrow_Next_16xLG {
+        public static System.Drawing.Bitmap arrow_Next_16xLG {
             get {
                 object obj = ResourceManager.GetObject("arrow_Next_16xLG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -103,7 +103,7 @@ namespace TireDataAnalyzer.Properties {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
-        internal static System.Drawing.Bitmap arrow_previous_16xLG {
+        public static System.Drawing.Bitmap arrow_previous_16xLG {
             get {
                 object obj = ResourceManager.GetObject("arrow_previous_16xLG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -113,7 +113,7 @@ namespace TireDataAnalyzer.Properties {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
-        internal static System.Drawing.Bitmap arrow_Up_16xLG {
+        public static System.Drawing.Bitmap arrow_Up_16xLG {
             get {
                 object obj = ResourceManager.GetObject("arrow_Up_16xLG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -123,7 +123,7 @@ namespace TireDataAnalyzer.Properties {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
-        internal static System.Drawing.Bitmap Copy_16x {
+        public static System.Drawing.Bitmap Copy_16x {
             get {
                 object obj = ResourceManager.GetObject("Copy_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -131,9 +131,29 @@ namespace TireDataAnalyzer.Properties {
         }
         
         /// <summary>
+        ///   (アイコン) に類似した型 System.Drawing.Icon のローカライズされたリソースを検索します。
+        /// </summary>
+        public static System.Drawing.Icon Icon {
+            get {
+                object obj = ResourceManager.GetObject("Icon", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
-        internal static System.Drawing.Bitmap PFy {
+        public static System.Drawing.Bitmap icon_114550_256 {
+            get {
+                object obj = ResourceManager.GetObject("icon_114550_256", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
+        public static System.Drawing.Bitmap PFy {
             get {
                 object obj = ResourceManager.GetObject("PFy", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -143,7 +163,7 @@ namespace TireDataAnalyzer.Properties {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
-        internal static System.Drawing.Bitmap PFy_BCD {
+        public static System.Drawing.Bitmap PFy_BCD {
             get {
                 object obj = ResourceManager.GetObject("PFy_BCD", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -153,7 +173,7 @@ namespace TireDataAnalyzer.Properties {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
-        internal static System.Drawing.Bitmap PFy_C {
+        public static System.Drawing.Bitmap PFy_C {
             get {
                 object obj = ResourceManager.GetObject("PFy_C", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -163,7 +183,7 @@ namespace TireDataAnalyzer.Properties {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
-        internal static System.Drawing.Bitmap PFy_D {
+        public static System.Drawing.Bitmap PFy_D {
             get {
                 object obj = ResourceManager.GetObject("PFy_D", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -173,7 +193,7 @@ namespace TireDataAnalyzer.Properties {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
-        internal static System.Drawing.Bitmap PFy_E {
+        public static System.Drawing.Bitmap PFy_E {
             get {
                 object obj = ResourceManager.GetObject("PFy_E", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -183,7 +203,7 @@ namespace TireDataAnalyzer.Properties {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
-        internal static System.Drawing.Bitmap PFy_Sh {
+        public static System.Drawing.Bitmap PFy_Sh {
             get {
                 object obj = ResourceManager.GetObject("PFy_Sh", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -193,7 +213,7 @@ namespace TireDataAnalyzer.Properties {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
-        internal static System.Drawing.Bitmap PFy_Sv {
+        public static System.Drawing.Bitmap PFy_Sv {
             get {
                 object obj = ResourceManager.GetObject("PFy_Sv", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));

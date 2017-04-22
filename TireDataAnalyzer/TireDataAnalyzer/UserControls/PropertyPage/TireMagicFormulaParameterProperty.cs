@@ -34,6 +34,10 @@ namespace TireDataAnalyzer.UserControls.PropertyPage
             DGVList.Add(dataGridView3);
             MTDVList.Add(multiTireDataViewer3);
             MFTEList.Add(magicFormula_TexEquation3);
+            MF = Impl.MFFD.MagicFormula.Copy();
+
+
+
             foreach (var mtdv in MTDVList)
             {
                 string id = "000_" + Impl.ID.ToString();
@@ -69,6 +73,7 @@ namespace TireDataAnalyzer.UserControls.PropertyPage
                 dgv.KeyDown += dataGridView_KeyDown;
                 dgv.CellEnter += dataGridView_CellEnter;
                 dgv.CellValidating += dataGridView_CellValidating;
+                dgv.CellValidated += dataGridView_CellValidated;
             }
 
             MFList.Add(Impl.MFFD.MagicFormula.FX);
@@ -86,6 +91,8 @@ namespace TireDataAnalyzer.UserControls.PropertyPage
         List<MultiTireDataViewer> MTDVList = new List<MultiTireDataViewer>();
         List<MagicFormula_TexEquation> MFTEList = new List<MagicFormula_TexEquation>();
         List<ApproximatingCurve> MFList = new List<ApproximatingCurve>();
+        TireMagicFormula MF;
+
 
         void OnRename(string name)
         {
@@ -97,7 +104,6 @@ namespace TireDataAnalyzer.UserControls.PropertyPage
         private void TireMagicFormulaParameterProperty_Load(object sender, EventArgs e)
         {
             OnRename(Impl.Name);
-            InitializeGraph();
             //NumPoint.SelectedIndex = 4;
             for(int k = 0; k<MFList.Count; ++k)
             {
@@ -134,6 +140,7 @@ namespace TireDataAnalyzer.UserControls.PropertyPage
                 }
                 else if (result == DialogResult.No)
                 {
+                    OnCancelClick();
                     return true;
                 }
                 else if (result == DialogResult.Cancel)
@@ -142,28 +149,6 @@ namespace TireDataAnalyzer.UserControls.PropertyPage
                 }
             }
             return true;
-        }
-
-        private void InitializeGraph()
-        {
-            /*
-            CorneringDataViewer.SetAxis(TireDataColumn.SA, TireDataColumn.FY);
-            DriveBrakeDataViewer.SetAxis(TireDataColumn.SL, TireDataColumn.FX);
-            TransientDataViewer.SetAxis(TireDataColumn.ET, TireDataColumn.SA);
-
-            string[] legends = { "追加済みデータ", "新規データ" };
-            foreach (Table table in Enum.GetValues(typeof(Table)))
-            {
-                if (table != Table.None && table != Table.StaticTable)
-                {
-                    GetViewer(table).SetColor(Color.ForestGreen, legends[0]);
-                    GetViewer(table).SetChartType(SeriesChartType.FastPoint, legends[0]);
-                    GetViewer(table).SetColor(Color.Red, legends[1]);
-                    GetViewer(table).SetChartType(SeriesChartType.FastPoint, legends[1]);
-                }
-
-            }
-            */
         }
 
         private void dataGridView_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
@@ -262,6 +247,13 @@ namespace TireDataAnalyzer.UserControls.PropertyPage
                 MFList[n].FittingParameters[i] = bool.Parse(dgv.Rows[i].Cells[0].Value.ToString());
                 MFList[n].Parameters[i] = double.Parse(dgv.Rows[i].Cells[2].Value.ToString());
             }
+            foreach (var mtdv in MTDVList)
+            {
+
+                TireDataViewerProperty p = new TireDataViewerProperty(mtdv);
+                p.ReplotAll();
+            }
+            this.State = PropertyPageState.Changed;
         }
 
         private void splitContainer_SplitterMoved(object sender, SplitterEventArgs e)
@@ -291,6 +283,28 @@ namespace TireDataAnalyzer.UserControls.PropertyPage
             int i = DGVList.IndexOf(dgv);
             MFTEList[i].Highlight(e.RowIndex);
             
+        }
+
+        public override bool OnOKClick()
+        {
+
+            OnApplyClick();
+            Impl.OnRename -= OnRename;
+            
+            return true;
+        }
+
+        public override bool OnCancelClick()
+        {
+            Impl.OnRename -= OnRename;
+            Impl.MFFD.SetInitialValue(MF);
+            return true;
+        }
+
+        public override void OnApplyClick()
+        {
+            Impl.MFFD.SetInitialValue(Impl.MFFD.MagicFormula);
+            this.State = PropertyPageState.NotChanged;
         }
     }
 }

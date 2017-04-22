@@ -117,7 +117,7 @@
             this.CorneringPage.Padding = new System.Windows.Forms.Padding(3);
             this.CorneringPage.Size = new System.Drawing.Size(884, 638);
             this.CorneringPage.TabIndex = 0;
-            this.CorneringPage.Text = "PureSlip - コーナリング";
+            this.CorneringPage.Text = "PureSlip - 加減速";
             // 
             // splitContainer1
             // 
@@ -355,7 +355,7 @@
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(884, 638);
             this.tabPage2.TabIndex = 2;
-            this.tabPage2.Text = "PureSlip - コーナリング";
+            this.tabPage2.Text = "CombinedSlip - 加減速";
             // 
             // splitContainer5
             // 

@@ -31,6 +31,7 @@ namespace TireDataAnalyzer
 
             //WPFMathTest test = new WPFMathTest();
             //test.ShowDialog();
+            
         }
 
         public static CustomTabControl MainTabControl;
@@ -299,7 +300,8 @@ namespace TireDataAnalyzer
 
         private void バージョン情報ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            var dialog = new VersionInfo();
+            dialog.ShowDialog();
         }
 
         #endregion
