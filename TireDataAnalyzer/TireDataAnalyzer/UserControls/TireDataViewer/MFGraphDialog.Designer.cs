@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.ApplyButton = new System.Windows.Forms.Button();
             this.CancelButton = new System.Windows.Forms.Button();
             this.OKButton = new System.Windows.Forms.Button();
@@ -53,6 +53,8 @@
             this.PreviousButton = new System.Windows.Forms.Button();
             this.SelectButton = new System.Windows.Forms.Button();
             this.SelectedIndexTB = new System.Windows.Forms.TextBox();
+            this.SourceCB = new System.Windows.Forms.ComboBox();
+            this.TableCB = new System.Windows.Forms.ComboBox();
             this.seriesEditorHeader1 = new TireDataAnalyzer.UserControls.SeriesEditorHeader();
             ((System.ComponentModel.ISupportInitialize)(this.EP_NumericalInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MainChart)).BeginInit();
@@ -217,16 +219,16 @@
             // 
             // MainChart
             // 
-            chartArea1.Name = "ChartArea1";
-            this.MainChart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.MainChart.Legends.Add(legend1);
+            chartArea2.Name = "ChartArea1";
+            this.MainChart.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.MainChart.Legends.Add(legend2);
             this.MainChart.Location = new System.Drawing.Point(11, 161);
             this.MainChart.Name = "MainChart";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.MainChart.Series.Add(series1);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.MainChart.Series.Add(series2);
             this.MainChart.Size = new System.Drawing.Size(790, 400);
             this.MainChart.TabIndex = 49;
             this.MainChart.Text = "chart1";
@@ -273,6 +275,26 @@
             this.SelectedIndexTB.Validating += new System.ComponentModel.CancelEventHandler(this.IsNInt_Validating);
             this.SelectedIndexTB.Validated += new System.EventHandler(this.IsNInt_Validated);
             // 
+            // SourceCB
+            // 
+            this.SourceCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.SourceCB.FormattingEnabled = true;
+            this.SourceCB.Location = new System.Drawing.Point(397, 133);
+            this.SourceCB.Name = "SourceCB";
+            this.SourceCB.Size = new System.Drawing.Size(120, 20);
+            this.SourceCB.TabIndex = 54;
+            this.SourceCB.SelectedIndexChanged += new System.EventHandler(this.SorceDataSIC);
+            // 
+            // TableCB
+            // 
+            this.TableCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.TableCB.FormattingEnabled = true;
+            this.TableCB.Location = new System.Drawing.Point(523, 133);
+            this.TableCB.Name = "TableCB";
+            this.TableCB.Size = new System.Drawing.Size(100, 20);
+            this.TableCB.TabIndex = 55;
+            this.TableCB.SelectedIndexChanged += new System.EventHandler(this.SorceDataSIC);
+            // 
             // seriesEditorHeader1
             // 
             this.seriesEditorHeader1.Location = new System.Drawing.Point(12, 12);
@@ -285,6 +307,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(813, 602);
+            this.Controls.Add(this.TableCB);
+            this.Controls.Add(this.SourceCB);
             this.Controls.Add(this.SelectedIndexTB);
             this.Controls.Add(this.SelectButton);
             this.Controls.Add(this.NextButton);
@@ -340,5 +364,7 @@
         private System.Windows.Forms.Button PreviousButton;
         private System.Windows.Forms.TextBox SelectedIndexTB;
         private System.Windows.Forms.Button SelectButton;
+        private System.Windows.Forms.ComboBox SourceCB;
+        private System.Windows.Forms.ComboBox TableCB;
     }
 }

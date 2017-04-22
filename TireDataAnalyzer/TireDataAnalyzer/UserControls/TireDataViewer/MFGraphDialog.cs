@@ -16,6 +16,8 @@ namespace TireDataAnalyzer.UserControls
             InitializeComponent();
         }
         SeriesEditor Editor;
+        List<ProjectTree.Node_TireDataSet> DataList;
+        bool init = true;
         public MFGraphDialog(MultiTireDataViewer viewer, string ID)
         {
             Viewer = viewer;
@@ -32,12 +34,32 @@ namespace TireDataAnalyzer.UserControls
             IATB.Text = args.IA.ToString();
             PTB.Text = args.P.ToString();
             TTB.Text = args.T.ToString();
-            
+            foreach (Table t in Enum.GetValues(typeof(Table)))
+            {
+                if (t == Table.None) continue;
+                if (t == Table.StaticTable) continue;
+                TableCB.Items.Add(t);
+            }
+            TableCB.SelectedItem = Table.CorneringTable;
+            InitSourceList();
+            init = false;
         }
         MultiTireDataViewer Viewer;
         bool hasError = false;
         int SeriesData = 0;
         int SeriesSelected = 1;
+
+        private void InitSourceList()
+        {
+            SourceCB.Items.Clear();
+            DataList = ProjectManager.ProjectNode.GetTireDataSet();
+            SourceCB.Items.Add("Parent");
+            foreach (var data in DataList)
+            {
+                SourceCB.Items.Add(data);
+            }
+            SourceCB.SelectedIndex = 0;
+        }
 
         private void IsReal_Validating(object sender, CancelEventArgs e)
         {
@@ -149,11 +171,21 @@ namespace TireDataAnalyzer.UserControls
 
         void SelectBin(TireDataColumn column)
         {
+            TireDataSet tds = Editor.SelectedDataSet;
+            var table = (TableCB.SelectedItem as Table?).Value;
+            if (SourceCB.SelectedItem as ProjectTree.Node_TireDataSet !=null)
+            {
+                var ntds = SourceCB.SelectedItem as ProjectTree.Node_TireDataSet;
+                tds = ntds.GetIDataSet().GetDataSet();
+            }
+            if (tds.GetDataList(table).Count == 0) return;
+
             ValidateCount();
             int i = SortedBin[selected[column]].Item1;
-            TireDataSet tds = Editor.SelectedDataSet;
-            var max = tds.MaxminSet.Limit(Table.CorneringTable).Max[column];
-            var min = tds.MaxminSet.Limit(Table.CorneringTable).Min[column];
+            
+
+            var max = tds.MaxminSet.Limit(table).Max[column];
+            var min = tds.MaxminSet.Limit(table).Min[column];
             double dif = (max - min) / Bin.Count;
             var data = new DataPoint(i * dif + dif / 2 + min, Bin[i]);
             MainChart.Series[SeriesSelected].Points.Clear();
@@ -169,22 +201,31 @@ namespace TireDataAnalyzer.UserControls
         private void CalcBin_ShowGraph(TireDataColumn column)
         {
             TireDataSet tds = Editor.SelectedDataSet;
+            if (SourceCB.SelectedItem as ProjectTree.Node_TireDataSet !=null)
+            {
+                var ntds = SourceCB.SelectedItem as ProjectTree.Node_TireDataSet;
+                tds = ntds.GetIDataSet().GetDataSet();
+            }
+
+            var table = (TableCB.SelectedItem as Table?).Value;
 
             Target = new List<double>();
-            foreach (var data in tds.GetDataList(Table.CorneringTable))
+            foreach (var data in tds.GetDataList(table))
             {
                 Target.Add(data[column]);
             }
             Target.Sort();
-
+            MainChart.Series[SeriesData].Points.Clear();
+            if (Target.Count == 0) return;
             
 
-            var max = tds.MaxminSet.Limit(Table.CorneringTable).Max[column];
-            var min = tds.MaxminSet.Limit(Table.CorneringTable).Min[column];
+            var max = tds.MaxminSet.Limit(table).Max[column];
+            var min = tds.MaxminSet.Limit(table).Min[column];
             var bin = CalculateMinimumEntropyBin(Target, TireData.Resolution()[column], max, min);
             double dif = (max - min) / bin.Count;
 
-            MainChart.Series[SeriesData].Points.Clear();
+            
+
             for (int i = 0; i < bin.Count; ++i)
             {
                 var data = new DataPoint(i * dif + dif / 2 + min, bin[i]);
@@ -316,11 +357,19 @@ namespace TireDataAnalyzer.UserControls
 
         private void SelectButton_Click(object sender, EventArgs e)
         {
+            TireDataSet tds = Editor.SelectedDataSet;
+            var table = (TableCB.SelectedItem as Table?).Value;
+            if (SourceCB.SelectedItem as ProjectTree.Node_TireDataSet != null)
+            {
+                var ntds = SourceCB.SelectedItem as ProjectTree.Node_TireDataSet;
+                tds = ntds.GetIDataSet().GetDataSet();
+            }
+            if (tds.GetDataList(table).Count == 0) return;
+
             ValidateCount();
             int i = SortedBin[selected[SelectedColumn]].Item1;
-            TireDataSet tds = Editor.SelectedDataSet;
-            var max = tds.MaxminSet.Limit(Table.CorneringTable).Max[SelectedColumn];
-            var min = tds.MaxminSet.Limit(Table.CorneringTable).Min[SelectedColumn];
+            var max = tds.MaxminSet.Limit(table).Max[SelectedColumn];
+            var min = tds.MaxminSet.Limit(table).Min[SelectedColumn];
             double dif = (max - min) / Bin.Count;
             var value = i * dif + dif / 2 + min;
 
@@ -362,6 +411,12 @@ namespace TireDataAnalyzer.UserControls
                     IsNInt_Validated(sender, e);
                 }
             }
+        }
+
+        private void SorceDataSIC(object sender, EventArgs e)
+        {
+            if (init) return;
+            ResetChart(SelectedColumn);
         }
     }
 }
