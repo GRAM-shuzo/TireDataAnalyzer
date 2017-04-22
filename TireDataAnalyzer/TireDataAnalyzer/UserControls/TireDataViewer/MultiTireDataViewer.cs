@@ -563,6 +563,10 @@ namespace TireDataAnalyzer.UserControls
 
         public int numPoints
         {
+            get
+            {
+                return Viewers[0].NumPoints;
+            }
             set
             {
                 foreach (var viewer in Viewers)

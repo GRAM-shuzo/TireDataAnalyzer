@@ -132,6 +132,7 @@ namespace TireDataAnalyzer.UserControls
             YGridLabelFormat.Text = yas.format;
             //XGridLineOffsetCB.Checked = xas.offset;
             //YGridLineOffsetCB.Checked = xas.offset;
+            PointsToRenderTB.Text = Viewer.numPoints.ToString();
             init = false;
         }
 
@@ -198,6 +199,48 @@ namespace TireDataAnalyzer.UserControls
                 if (cea.Cancel != true)
                 {
                     IsReal_Validated(sender, e);
+                }
+            }
+        }
+
+        private void IsNatural_Validating(object sender, CancelEventArgs e)
+        {
+            var tb = (sender as TextBox);
+
+            string s = tb.Text;
+            if (!(StaticFunctions.IsNInt(s) || s == ""))
+            {
+                this.EP_NumericalInput.SetError(tb, "自然数のみ入力");
+
+                hasError = true;
+                e.Cancel = true;
+                return;
+            }
+        }
+
+        private void IsNatural_Validated(object sender, EventArgs e)
+        {
+            hasError = false;
+            var tb = (sender as TextBox);
+            this.EP_NumericalInput.SetError(tb, null);
+            Viewer.numPoints = StaticFunctions.IsNInt(PointsToRenderTB.Text) ? int.Parse(PointsToRenderTB.Text) : 3000;
+            axisChanged = true;
+        }
+
+        private void TextBox_KeyDown2(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (sender == TitleTB)
+                {
+                    ChartItemChanged(sender, e);
+                    return;
+                }
+                var cea = new CancelEventArgs(false);
+                IsReal_Validating(sender, cea);
+                if (cea.Cancel != true)
+                {
+                    IsNatural_Validated(sender, e);
                 }
             }
         }
@@ -345,6 +388,7 @@ namespace TireDataAnalyzer.UserControls
             Viewer.GetArea().AxisX.Maximum = XMaxTB.Text == "" ? Double.NaN : Double.Parse(XMaxTB.Text);
             Viewer.GetArea().AxisY.Minimum = YMinTB.Text == "" ? Double.NaN : Double.Parse(YMinTB.Text);
             Viewer.GetArea().AxisY.Maximum= YMaxTB.Text == "" ? Double.NaN : Double.Parse(YMaxTB.Text);
+            
             Viewer.UpdateViewer();
 
             

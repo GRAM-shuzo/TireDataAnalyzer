@@ -48,7 +48,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.LegendAlignCB = new System.Windows.Forms.ComboBox();
             this.DataSourceList = new System.Windows.Forms.Panel();
-            this.seriesEditorHeader1 = new TireDataAnalyzer.UserControls.SeriesEditorHeader();
             this.ShowTitleCB = new System.Windows.Forms.CheckBox();
             this.ApplyButton = new System.Windows.Forms.Button();
             this.CancelButton = new System.Windows.Forms.Button();
@@ -77,6 +76,9 @@
             this.UpButton = new System.Windows.Forms.Button();
             this.DeleteButton = new System.Windows.Forms.Button();
             this.CopyButton = new System.Windows.Forms.Button();
+            this.PointsToRenderTB = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.seriesEditorHeader1 = new TireDataAnalyzer.UserControls.SeriesEditorHeader();
             this.DataSourceList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.EP_NumericalInput)).BeginInit();
             this.SuspendLayout();
@@ -266,14 +268,6 @@
             this.DataSourceList.Name = "DataSourceList";
             this.DataSourceList.Size = new System.Drawing.Size(790, 272);
             this.DataSourceList.TabIndex = 27;
-            // 
-            // seriesEditorHeader1
-            // 
-            this.seriesEditorHeader1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.seriesEditorHeader1.Location = new System.Drawing.Point(0, 0);
-            this.seriesEditorHeader1.Name = "seriesEditorHeader1";
-            this.seriesEditorHeader1.Size = new System.Drawing.Size(790, 20);
-            this.seriesEditorHeader1.TabIndex = 0;
             // 
             // ShowTitleCB
             // 
@@ -559,11 +553,40 @@
             this.CopyButton.UseVisualStyleBackColor = true;
             this.CopyButton.Click += new System.EventHandler(this.CopyButton_Click);
             // 
+            // PointsToRenderTB
+            // 
+            this.PointsToRenderTB.Location = new System.Drawing.Point(557, 167);
+            this.PointsToRenderTB.Name = "PointsToRenderTB";
+            this.PointsToRenderTB.Size = new System.Drawing.Size(100, 19);
+            this.PointsToRenderTB.TabIndex = 59;
+            this.PointsToRenderTB.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown2);
+            this.PointsToRenderTB.Validating += new System.ComponentModel.CancelEventHandler(this.IsNatural_Validating);
+            this.PointsToRenderTB.Validated += new System.EventHandler(this.IsNatural_Validated);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(457, 170);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(94, 12);
+            this.label5.TabIndex = 60;
+            this.label5.Text = "Points To Render";
+            // 
+            // seriesEditorHeader1
+            // 
+            this.seriesEditorHeader1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.seriesEditorHeader1.Location = new System.Drawing.Point(0, 0);
+            this.seriesEditorHeader1.Name = "seriesEditorHeader1";
+            this.seriesEditorHeader1.Size = new System.Drawing.Size(790, 20);
+            this.seriesEditorHeader1.TabIndex = 0;
+            // 
             // TireDataViewerProperty
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(814, 507);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.PointsToRenderTB);
             this.Controls.Add(this.CopyButton);
             this.Controls.Add(this.YAdvanced);
             this.Controls.Add(this.XAdvanced);
@@ -669,5 +692,7 @@
         private System.Windows.Forms.Button YAdvanced;
         private System.Windows.Forms.Button XAdvanced;
         private System.Windows.Forms.Button CopyButton;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox PointsToRenderTB;
     }
 }
