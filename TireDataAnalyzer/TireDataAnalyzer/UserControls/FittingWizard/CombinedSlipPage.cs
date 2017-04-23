@@ -234,6 +234,7 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             foreach (var mf in Equations)
             {
                 mf.Control_Resize(mf, new EventArgs());
+                mf.Size = new Size(mf.Size.Width, 100);
             }
             RePlot();
         }

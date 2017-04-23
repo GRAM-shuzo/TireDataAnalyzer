@@ -29,8 +29,8 @@ namespace TireDataAnalyzer
 
             ProjectManager.DataStateChanged += AddAsterisk_toWindowName;
 
-            //WPFMathTest test = new WPFMathTest();
-            //test.ShowDialog();
+            WPFMathTest test = new WPFMathTest();
+            test.ShowDialog();
             
         }
 

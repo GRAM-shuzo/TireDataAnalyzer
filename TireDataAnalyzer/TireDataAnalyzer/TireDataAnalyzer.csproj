@@ -92,10 +92,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MagicFormula_TexEquation.cs">
+    <Compile Include="UserControls\MagicFormula_TexEquation.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="MagicFormula_TexEquation.Designer.cs">
+    <Compile Include="UserControls\MagicFormula_TexEquation.Designer.cs">
       <DependentUpon>MagicFormula_TexEquation.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
@@ -308,7 +308,7 @@
       <DependentUpon>TireDataSelector.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\ProjectManager.cs" />
-    <EmbeddedResource Include="MagicFormula_TexEquation.resx">
+    <EmbeddedResource Include="UserControls\MagicFormula_TexEquation.resx">
       <DependentUpon>MagicFormula_TexEquation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
