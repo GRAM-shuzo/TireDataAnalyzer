@@ -41,13 +41,13 @@
             this.PureFYCB = new System.Windows.Forms.CheckBox();
             this.PureFXCB = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.MaxDataTB = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.XtolTB = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.MaxEvalTB = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.MaxDataTB = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -73,9 +73,9 @@
             this.MethodDescription.AutoSize = true;
             this.MethodDescription.Location = new System.Drawing.Point(6, 112);
             this.MethodDescription.Name = "MethodDescription";
-            this.MethodDescription.Size = new System.Drawing.Size(356, 12);
+            this.MethodDescription.Size = new System.Drawing.Size(486, 12);
             this.MethodDescription.TabIndex = 4;
-            this.MethodDescription.Text = "非線形最小二乗法を使用します。制約条件にはペナルティ法を使用します";
+            this.MethodDescription.Text = "最適化ライブラリのNLOptを使用します。最適化ソルバは以下から下のコンボボックスから選択してください";
             // 
             // NLoptRB
             // 
@@ -213,6 +213,22 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "SolverSetting";
             // 
+            // MaxDataTB
+            // 
+            this.MaxDataTB.Location = new System.Drawing.Point(95, 68);
+            this.MaxDataTB.Name = "MaxDataTB";
+            this.MaxDataTB.Size = new System.Drawing.Size(100, 19);
+            this.MaxDataTB.TabIndex = 10;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 71);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(82, 12);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "MaxDataUsage";
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -253,22 +269,6 @@
             this.label1.Size = new System.Drawing.Size(83, 12);
             this.label1.TabIndex = 4;
             this.label1.Text = "Max Evaluation";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 71);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(82, 12);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "MaxDataUsage";
-            // 
-            // MaxDataTB
-            // 
-            this.MaxDataTB.Location = new System.Drawing.Point(95, 68);
-            this.MaxDataTB.Name = "MaxDataTB";
-            this.MaxDataTB.Size = new System.Drawing.Size(100, 19);
-            this.MaxDataTB.TabIndex = 10;
             // 
             // SolverSettingPage
             // 

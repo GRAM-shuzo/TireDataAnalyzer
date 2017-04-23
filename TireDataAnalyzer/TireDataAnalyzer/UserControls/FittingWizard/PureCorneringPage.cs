@@ -201,9 +201,6 @@ Dは最大横力、BCDはX + Sh = 0での傾き（コーナリングパワー相
             }
 
             string[] text = new string[24];
-
-            
-
             text[0] = "Cはカーブ形状を決めます。通常は1<C<1.65の値をとります。";
             text[19] = @"Shはカーブを水平方向にオフセットします。主にキャンバスラストを表します。
 このためキャンバが0の時にはSh=0をとります";
@@ -349,6 +346,8 @@ Eは-(1+0.5C^2) < E < 1を満たす必要があり、
 
                 hasError = true;
                 e.Cancel = true;
+                NextButton.Enabled = false;
+                PreviousButton.Enabled = false;
                 return;
             }
 
@@ -365,6 +364,8 @@ Eは-(1+0.5C^2) < E < 1を満たす必要があり、
             var tb = (sender as TextBox);
             this.EP_NumericalInput.SetError(tb, null);
             ReplotFormula = true;
+            NextButton.Enabled = true;
+            PreviousButton.Enabled = true;
             RePlot();
         }
 

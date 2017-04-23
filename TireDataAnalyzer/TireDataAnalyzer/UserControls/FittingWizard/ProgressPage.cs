@@ -19,6 +19,7 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             : base(page,"フィッティング中")
         {
             InitializeComponent();
+            NextButton.Enabled = false;
         }
 
         private CancellationTokenSource CancellationTokenSource;

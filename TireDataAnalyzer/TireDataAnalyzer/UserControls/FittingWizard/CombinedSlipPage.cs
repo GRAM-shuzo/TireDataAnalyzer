@@ -251,6 +251,8 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
 
                 hasError = true;
                 e.Cancel = true;
+                NextButton.Enabled = false;
+                PreviousButton.Enabled = false;
                 return;
             }
             
@@ -279,6 +281,8 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             var tb = (sender as TextBox);
             this.EP_NumericalInput.SetError(tb, null);
             ReplotFormula = true;
+            NextButton.Enabled = true;
+            PreviousButton.Enabled = true;
             RePlot();
         }
 

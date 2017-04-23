@@ -41,7 +41,10 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
                 NloptAlgorithmCB.Items.Add(item);
             }
             NloptAlgorithmCB.SelectedItem = NLOptFittingSolver.algorithm.LN_COBYLA;
-
+            NoFittingRB.Checked = false;
+            NLoptRB.Checked = false;
+            LMMethodRB.Checked = false;
+            init = false;
             if (MFFD.Solver == null)
             {
                 NoFittingRB.Checked = true;
@@ -64,7 +67,7 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
                 MaxDataTB.Text = (MFFD.Solver as LMFittingSolver).MaxDataUsage.ToString();
             }
                 
-            init = false;
+            
 
         }
         private void FormulaCheckedChanged(object sender, EventArgs e)
@@ -81,7 +84,11 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
         {
             if (init) return;
             if (NoFittingRB.Checked)
+            {
                 MFFD.Solver = new NoFitting();
+                MethodDescription.Text = "最適化は行いません";
+                NloptAlgorithmCB.Enabled = false;
+            }   
             if (NLoptRB.Checked)
             {
                 var solver = new MagicFormulaFittingSolver.NLOptFittingSolver();
@@ -89,6 +96,8 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
                 solver.Xtol = double.Parse(XtolTB.Text);
                 solver.Algorithm = (NloptAlgorithmCB.SelectedItem as NLOptFittingSolver.algorithm?).Value;
                 MFFD.Solver = solver;
+                NloptAlgorithmCB.Enabled = true;
+                MethodDescription.Text = "最適化ライブラリのNLOptを使用します。最適化ソルバは下部のコンボボックスから選択してください";
             }
             if(LMMethodRB.Checked)
             {
@@ -97,14 +106,21 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
                 solver.Xtol = double.Parse(XtolTB.Text);
                 solver.MaxDataUsage = int.Parse(MaxDataTB.Text);
                 MFFD.Solver = solver;
+                NloptAlgorithmCB.Enabled = false;
+                MethodDescription.Text = "非線形最小二乗法を使用します。制約条件にはペナルティ法を使用します";
             }
                
         }
 
         protected override bool OnNext()
         {
-            if (hasError) return false;
-            if(!NoFittingRB.Checked)
+            if (hasError)
+            {
+                NextButton.Enabled = true;
+                return false;
+            }
+            FittingSolver_CheckedChanged(this, new EventArgs());
+            if (!NoFittingRB.Checked)
             {
                 DialogResult result = MessageBox.Show("フィッティングを実行しますか？",
                     "質問",
@@ -114,6 +130,7 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
 
                 if (result == DialogResult.Cancel)
                 {
+                    NextButton.Enabled = true;
                     return false;
                 }
                 result = MessageBox.Show("現在の値のコピーを作成しますか？",
@@ -144,6 +161,7 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
                     else
                     {
                         MessageBox.Show("コピーできませんでした");
+                        NextButton.Enabled = true;
                         return false;
                     }
                 }

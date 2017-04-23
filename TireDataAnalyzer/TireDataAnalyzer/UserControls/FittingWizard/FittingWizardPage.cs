@@ -100,9 +100,10 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             var parent = this.Parent;
             parent.Controls.Remove(this);
             parent.Controls.Add(PreviousPage);
-            PreviousPage.Reload(true);
             PreviousPage.NextButton.Enabled = true;
             PreviousPage.PreviousButton.Enabled = true;
+            PreviousPage.Reload(true);
+            
             parent.Text = "ウィザード - " + PreviousPage.PageName;
             PreviousPage.Update();
         }
@@ -117,9 +118,10 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
                 var parent = this.Parent as FittingWizard;
                 parent.Controls.Remove(this);
                 parent.Controls.Add(NextPage);
-                NextPage.Reload(false);
                 NextPage.NextButton.Enabled = true;
                 NextPage.PreviousButton.Enabled = true;
+                NextPage.Reload(false);
+
                 parent.Text = "ウィザード - " + NextPage.PageName;
                 NextPage.Update();
             }
