@@ -50,6 +50,16 @@
             this.TC = new System.Windows.Forms.Label();
             this.IAC = new System.Windows.Forms.Label();
             this.PC = new System.Windows.Forms.Label();
+            this.SRC = new System.Windows.Forms.Label();
+            this.SAC = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.SRMin = new System.Windows.Forms.Label();
+            this.SRMax = new System.Windows.Forms.Label();
+            this.SRBar = new CustomTrackBar.DoubleTrackBar();
+            this.SAMin = new System.Windows.Forms.Label();
+            this.SAMax = new System.Windows.Forms.Label();
+            this.SABar = new CustomTrackBar.DoubleTrackBar();
             this.SuspendLayout();
             // 
             // label108
@@ -163,7 +173,7 @@
             // NormalizedCB
             // 
             this.NormalizedCB.AutoSize = true;
-            this.NormalizedCB.Location = new System.Drawing.Point(396, 123);
+            this.NormalizedCB.Location = new System.Drawing.Point(396, 183);
             this.NormalizedCB.Name = "NormalizedCB";
             this.NormalizedCB.Size = new System.Drawing.Size(80, 16);
             this.NormalizedCB.TabIndex = 96;
@@ -263,10 +273,118 @@
             this.PC.TabIndex = 97;
             this.PC.Text = "0000000";
             // 
+            // SRC
+            // 
+            this.SRC.AutoSize = true;
+            this.SRC.Location = new System.Drawing.Point(26, 158);
+            this.SRC.Name = "SRC";
+            this.SRC.Size = new System.Drawing.Size(47, 12);
+            this.SRC.TabIndex = 110;
+            this.SRC.Text = "0000000";
+            // 
+            // SAC
+            // 
+            this.SAC.AutoSize = true;
+            this.SAC.Location = new System.Drawing.Point(26, 128);
+            this.SAC.Name = "SAC";
+            this.SAC.Size = new System.Drawing.Size(47, 12);
+            this.SAC.TabIndex = 109;
+            this.SAC.Text = "0000000";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 158);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(20, 12);
+            this.label3.TabIndex = 108;
+            this.label3.Text = "SR";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 128);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(20, 12);
+            this.label4.TabIndex = 107;
+            this.label4.Text = "SA";
+            // 
+            // SRMin
+            // 
+            this.SRMin.AutoSize = true;
+            this.SRMin.Location = new System.Drawing.Point(109, 158);
+            this.SRMin.Name = "SRMin";
+            this.SRMin.Size = new System.Drawing.Size(47, 12);
+            this.SRMin.TabIndex = 106;
+            this.SRMin.Text = "0000000";
+            // 
+            // SRMax
+            // 
+            this.SRMax.AutoSize = true;
+            this.SRMax.Location = new System.Drawing.Point(429, 158);
+            this.SRMax.Name = "SRMax";
+            this.SRMax.Size = new System.Drawing.Size(47, 12);
+            this.SRMax.TabIndex = 105;
+            this.SRMax.Text = "0000000";
+            // 
+            // SRBar
+            // 
+            this.SRBar.Location = new System.Drawing.Point(162, 153);
+            this.SRBar.Max = 100D;
+            this.SRBar.Min = -100D;
+            this.SRBar.Name = "SRBar";
+            this.SRBar.NumberTicks = 0;
+            this.SRBar.Size = new System.Drawing.Size(260, 24);
+            this.SRBar.TabIndex = 104;
+            this.SRBar.Text = "doubleTrackBar3";
+            this.SRBar.valueL = -100D;
+            this.SRBar.valueR = 100D;
+            // 
+            // SAMin
+            // 
+            this.SAMin.AutoSize = true;
+            this.SAMin.Location = new System.Drawing.Point(109, 128);
+            this.SAMin.Name = "SAMin";
+            this.SAMin.Size = new System.Drawing.Size(47, 12);
+            this.SAMin.TabIndex = 103;
+            this.SAMin.Text = "0000000";
+            // 
+            // SAMax
+            // 
+            this.SAMax.AutoSize = true;
+            this.SAMax.Location = new System.Drawing.Point(429, 128);
+            this.SAMax.Name = "SAMax";
+            this.SAMax.Size = new System.Drawing.Size(47, 12);
+            this.SAMax.TabIndex = 102;
+            this.SAMax.Text = "0000000";
+            // 
+            // SABar
+            // 
+            this.SABar.Location = new System.Drawing.Point(162, 123);
+            this.SABar.Max = 100D;
+            this.SABar.Min = -100D;
+            this.SABar.Name = "SABar";
+            this.SABar.NumberTicks = 0;
+            this.SABar.Size = new System.Drawing.Size(260, 24);
+            this.SABar.TabIndex = 101;
+            this.SABar.Text = "doubleTrackBar2";
+            this.SABar.valueL = -100D;
+            this.SABar.valueR = 100D;
+            // 
             // SimpleTireDataSelector
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.SRC);
+            this.Controls.Add(this.SAC);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.SRMin);
+            this.Controls.Add(this.SRMax);
+            this.Controls.Add(this.SRBar);
+            this.Controls.Add(this.SAMin);
+            this.Controls.Add(this.SAMax);
+            this.Controls.Add(this.SABar);
             this.Controls.Add(this.FzC);
             this.Controls.Add(this.TC);
             this.Controls.Add(this.IAC);
@@ -289,7 +407,7 @@
             this.Controls.Add(this.PMax);
             this.Controls.Add(this.PBar);
             this.Name = "SimpleTireDataSelector";
-            this.Size = new System.Drawing.Size(479, 142);
+            this.Size = new System.Drawing.Size(479, 203);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -319,5 +437,15 @@
         private System.Windows.Forms.Label TC;
         private System.Windows.Forms.Label IAC;
         private System.Windows.Forms.Label PC;
+        private System.Windows.Forms.Label SRC;
+        private System.Windows.Forms.Label SAC;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label SRMin;
+        private System.Windows.Forms.Label SRMax;
+        private CustomTrackBar.DoubleTrackBar SRBar;
+        private System.Windows.Forms.Label SAMin;
+        private System.Windows.Forms.Label SAMax;
+        private CustomTrackBar.DoubleTrackBar SABar;
     }
 }

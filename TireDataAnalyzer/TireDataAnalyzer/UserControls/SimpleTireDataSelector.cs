@@ -37,6 +37,20 @@ namespace TireDataAnalyzer.UserControls
                 return new MagicFormulaArguments(0,0,FZBar.valueMean, IABar.valueMean, PBar.valueMean, TBar.valueMean);
             }
         }
+        public MagicFormulaArguments UpperValue
+        {
+            get
+            {
+                return new MagicFormulaArguments(0, 0, FZBar.valueR, IABar.valueR, PBar.valueR, TBar.valueR);
+            }
+        }
+        public MagicFormulaArguments LowerValue
+        {
+            get
+            {
+                return new MagicFormulaArguments(0, 0, FZBar.valueL, IABar.valueL, PBar.valueL, TBar.valueL);
+            }
+        }
 
         public MagicFormulaFittingDelegate MFFD
         {
