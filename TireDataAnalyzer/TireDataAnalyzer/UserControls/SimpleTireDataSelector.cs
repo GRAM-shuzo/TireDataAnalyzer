@@ -18,6 +18,20 @@ namespace TireDataAnalyzer.UserControls
             get;
             set;
         }
+        public bool SASREnable
+        {
+            get
+            {
+                return SABar.Enabled;
+            }
+            set
+            {
+                SABar.Enabled = value;
+                SRBar.Enabled = value;
+            }
+        }
+
+
         public bool PureSlipX { get; set; }
         public SimpleTireDataSelector()
         {
@@ -34,21 +48,21 @@ namespace TireDataAnalyzer.UserControls
         {
             get
             {
-                return new MagicFormulaArguments(0,0,FZBar.valueMean, IABar.valueMean, PBar.valueMean, TBar.valueMean);
+                return new MagicFormulaArguments(SASREnable?SABar.valueMean:0 , SASREnable ? SRBar.valueMean : 0, FZBar.valueMean, IABar.valueMean, PBar.valueMean, TBar.valueMean);
             }
         }
         public MagicFormulaArguments UpperValue
         {
             get
             {
-                return new MagicFormulaArguments(0, 0, FZBar.valueR, IABar.valueR, PBar.valueR, TBar.valueR);
+                return new MagicFormulaArguments(SASREnable ? SABar.valueR : 0, SASREnable ? SRBar.valueR : 0, FZBar.valueR, IABar.valueR, PBar.valueR, TBar.valueR);
             }
         }
         public MagicFormulaArguments LowerValue
         {
             get
             {
-                return new MagicFormulaArguments(0, 0, FZBar.valueL, IABar.valueL, PBar.valueL, TBar.valueL);
+                return new MagicFormulaArguments(SASREnable ? SABar.valueL : 0, SASREnable ? SRBar.valueL : 0, FZBar.valueL, IABar.valueL, PBar.valueL, TBar.valueL);
             }
         }
 
@@ -73,7 +87,14 @@ namespace TireDataAnalyzer.UserControls
             var limit = MFFD.IDataset.GetDataSet().MaxminSet.Limit(AttachedTable);
             if (PureSlipX)
             {
-                
+                if (Selector != null)
+                {
+                    Selector.RemoveConstrain(FZ, AttachedTable);
+                    Selector.RemoveConstrain(P, AttachedTable);
+                    Selector.RemoveConstrain(IA, AttachedTable);
+                    Selector.RemoveConstrain(T, AttachedTable);
+                    Selector.RemoveConstrain(SA, AttachedTable);
+                }
                 FZ = new TireDataConstrain("FZ", TireDataColumn.FZ, limit.Max.FZ, limit.Min.FZ);
                 P = new TireDataConstrain("P", TireDataColumn.P, limit.Max.P, limit.Min.P);
                 IA = new TireDataConstrain("IA", TireDataColumn.IA, limit.Max.IA, limit.Min.IA);
@@ -88,6 +109,22 @@ namespace TireDataAnalyzer.UserControls
             }
             else
             {
+                if(Selector != null)
+                {
+                    Selector.RemoveConstrain(FZ, Table.CorneringTable);
+                    Selector.RemoveConstrain(P, Table.CorneringTable);
+                    Selector.RemoveConstrain(IA, Table.CorneringTable);
+                    Selector.RemoveConstrain(T, Table.CorneringTable);
+                    Selector.RemoveConstrain(SA, Table.CorneringTable);
+                    Selector.RemoveConstrain(SR, Table.CorneringTable);
+
+                    Selector.RemoveConstrain(FZ, Table.DriveBrakeTable);
+                    Selector.RemoveConstrain(P, Table.DriveBrakeTable);
+                    Selector.RemoveConstrain(IA, Table.DriveBrakeTable);
+                    Selector.RemoveConstrain(T, Table.DriveBrakeTable);
+                    Selector.RemoveConstrain(SA, Table.DriveBrakeTable);
+                    Selector.RemoveConstrain(SR, Table.DriveBrakeTable);
+                }
                 limit = StaticFunctions.TireDataMaxminMerge(
                     MFFD.IDataset.GetDataSet().MaxminSet.Limit(Table.CorneringTable),
                     MFFD.IDataset.GetDataSet().MaxminSet.Limit(Table.DriveBrakeTable)
@@ -97,15 +134,21 @@ namespace TireDataAnalyzer.UserControls
                 IA = new TireDataConstrain("IA", TireDataColumn.IA, limit.Max.IA, limit.Min.IA);
                 T = new TireDataConstrain("T", TireDataColumn.TSTC, limit.Max.TSTC, limit.Min.TSTC);
                 SA = new TireDataConstrain("SA", TireDataColumn.SA, limit.Max.SA, limit.Min.SA);
+                SR = new TireDataConstrain("SR", TireDataColumn.SR, limit.Max.SR, limit.Min.SR);
                 Selector = new TireDataSetSelector(mffd.IDataset);
-                Selector.RemoveConstrain(FZ, Table.CorneringTable);
-                Selector.RemoveConstrain(P, Table.CorneringTable);
-                Selector.RemoveConstrain(IA, Table.CorneringTable);
-                Selector.RemoveConstrain(T, Table.CorneringTable);
-                Selector.RemoveConstrain(FZ, Table.DriveBrakeTable);
-                Selector.RemoveConstrain(P, Table.DriveBrakeTable);
-                Selector.RemoveConstrain(IA, Table.DriveBrakeTable);
-                Selector.RemoveConstrain(T, Table.DriveBrakeTable);
+                Selector.AddConstrain(FZ, Table.CorneringTable);
+                Selector.AddConstrain(P, Table.CorneringTable);
+                Selector.AddConstrain(IA, Table.CorneringTable);
+                Selector.AddConstrain(T, Table.CorneringTable);
+                Selector.AddConstrain(SA, Table.CorneringTable);
+                Selector.AddConstrain(SR, Table.CorneringTable);
+
+                Selector.AddConstrain(FZ, Table.DriveBrakeTable);
+                Selector.AddConstrain(P, Table.DriveBrakeTable);
+                Selector.AddConstrain(IA, Table.DriveBrakeTable);
+                Selector.AddConstrain(T, Table.DriveBrakeTable);
+                Selector.AddConstrain(SA, Table.DriveBrakeTable);
+                Selector.AddConstrain(SR, Table.DriveBrakeTable);
             }
             FZBar.Max = limit.Max.FZ;
             FZBar.Min = limit.Min.FZ;
@@ -137,6 +180,7 @@ namespace TireDataAnalyzer.UserControls
         TireDataConstrain IA;
         TireDataConstrain T;
         TireDataConstrain SA;
+        TireDataConstrain SR;
         public IDataSet SelectedData()
         {
 
@@ -169,24 +213,35 @@ namespace TireDataAnalyzer.UserControls
                     Selector.RemoveConstrain(P, Table.CorneringTable);
                     Selector.RemoveConstrain(IA, Table.CorneringTable);
                     Selector.RemoveConstrain(T, Table.CorneringTable);
+                    Selector.RemoveConstrain(SA, Table.CorneringTable);
+                    Selector.RemoveConstrain(SR, Table.CorneringTable);
+
                     Selector.RemoveConstrain(FZ, Table.DriveBrakeTable);
                     Selector.RemoveConstrain(P, Table.DriveBrakeTable);
                     Selector.RemoveConstrain(IA, Table.DriveBrakeTable);
                     Selector.RemoveConstrain(T, Table.DriveBrakeTable);
+                    Selector.RemoveConstrain(SA, Table.DriveBrakeTable);
+                    Selector.RemoveConstrain(SR, Table.DriveBrakeTable);
                     FZ = new TireDataConstrain("FZ", TireDataColumn.FZ, FZBar.valueR, FZBar.valueL);
                     P = new TireDataConstrain("P", TireDataColumn.P, PBar.valueR, PBar.valueL);
                     IA = new TireDataConstrain("IA", TireDataColumn.IA, IABar.valueR, IABar.valueL);
                     T = new TireDataConstrain("T", TireDataColumn.TSTC, TBar.valueR, TBar.valueL);
-                    
+                    SA = new TireDataConstrain("SA", TireDataColumn.SA, SABar.valueR, SABar.valueL);
+                    SR = new TireDataConstrain("SR", TireDataColumn.SR, SRBar.valueR, SRBar.valueL);
 
                     Selector.AddConstrain(FZ, Table.CorneringTable);
                     Selector.AddConstrain(P, Table.CorneringTable);
                     Selector.AddConstrain(IA, Table.CorneringTable);
                     Selector.AddConstrain(T, Table.CorneringTable);
+                    Selector.AddConstrain(SA, Table.CorneringTable);
+                    Selector.AddConstrain(SR, Table.CorneringTable);
+
                     Selector.AddConstrain(FZ, Table.DriveBrakeTable);
                     Selector.AddConstrain(P, Table.DriveBrakeTable);
                     Selector.AddConstrain(IA, Table.DriveBrakeTable);
                     Selector.AddConstrain(T, Table.DriveBrakeTable);
+                    Selector.AddConstrain(SA, Table.DriveBrakeTable);
+                    Selector.AddConstrain(SR, Table.DriveBrakeTable);
                     Selector.ExtractData(Table.CorneringTable, NumSearch/4);
                     Selector.ExtractData(Table.DriveBrakeTable, NumSearch*3/4);
                 }

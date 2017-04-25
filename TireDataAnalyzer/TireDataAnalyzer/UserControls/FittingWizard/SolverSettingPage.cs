@@ -140,7 +140,7 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
                    MessageBoxDefaultButton.Button1);
                 if (result == DialogResult.Yes)
                 {
-                    var list = ProjectManager.ProjectNode.GetMagicFormula();
+                    var list = ProjectManager.ProjectNode.GetMagicFormula( true );
                     bool found = false;
                     foreach(var node in list)
                     {

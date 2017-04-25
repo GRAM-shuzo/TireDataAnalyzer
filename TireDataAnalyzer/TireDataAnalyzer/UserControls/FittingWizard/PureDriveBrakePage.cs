@@ -26,7 +26,9 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
         bool stopReplot = false;
         
         string dataLegend = "data";
-        string formulaLegend = "MagicFormula";
+        string formulaLegend = "CenterLine";
+        string formulaLegendU = "UpperLine";
+        string formulaLegendL = "LowerLine";
         string EUpperLegend = "EUpperLine";
         string ELowerLegend = "ELowerLine";
 
@@ -120,11 +122,14 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
 
             for (int i = 0; i < TDSs.Count; ++i)
             {
+                TDSs[i].SASREnable = false;
                 TDSs[i].MFFD = MFFD;
                 TDSs[i].ValueChanged += SelectorValueChanged;
 
                 Viewers[i].SetChartType(System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastPoint, dataLegend);
                 Viewers[i].SetChartType(System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine, formulaLegend);
+                Viewers[i].SetChartType(System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine, formulaLegendU);
+                Viewers[i].SetChartType(System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine, formulaLegendL);
                 Viewers[i].SetDataListRefMF(dataLegend, formulaLegend);
                 Viewers[i].SetLineWidth(5, formulaLegend);
             }
@@ -262,6 +267,8 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
                     var driveBrakeTable = TDSs[tabIndex].SelectedData().GetDataSet().DriveBrakeTable;
                     Viewers[tabIndex].SetDataList(driveBrakeTable, Table.DriveBrakeTable, dataLegend);
                     Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, TDSs[tabIndex].CenterValue, formulaLegend);
+                    Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, TDSs[tabIndex].UpperValue, formulaLegendU);
+                    Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, TDSs[tabIndex].LowerValue, formulaLegendL);
 
                     Viewers[tabIndex].DrawGraph(dataLegend);
                     ReplotData = false;
@@ -270,7 +277,11 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
                 {
 
                     Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, TDSs[tabIndex].CenterValue, formulaLegend);
+                    Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, TDSs[tabIndex].UpperValue, formulaLegendU);
+                    Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, TDSs[tabIndex].LowerValue, formulaLegendL);
                     Viewers[tabIndex].DrawGraph(formulaLegend);
+                    Viewers[tabIndex].DrawGraph(formulaLegendU);
+                    Viewers[tabIndex].DrawGraph(formulaLegendL);
                     ReplotFormula = false;
                     FirstPlot[tabIndex] = true;
                 }

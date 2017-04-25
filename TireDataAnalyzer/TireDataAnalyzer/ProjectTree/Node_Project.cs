@@ -55,25 +55,25 @@ namespace TireDataAnalyzer.ProjectTree
             }
         }
 
-        public List<Node_MagicFormula> GetMagicFormula()
+        public List<Node_MagicFormula> GetMagicFormula(bool containNotInitialized = false)
         {
             var list = new List<Node_MagicFormula>();
-            GetMagicFormula(this, list);
+            GetMagicFormula(this, list, containNotInitialized);
             return list;
         }
 
-        private void GetMagicFormula(ProjectTreeNode node, List<Node_MagicFormula> list)
+        private void GetMagicFormula(ProjectTreeNode node, List<Node_MagicFormula> list, bool containNotInitialized)
         {
             if (node is Node_MagicFormula)
             {
                 var mfn = node as Node_MagicFormula;
-                if(mfn.MFFD.Initialized)
+                if(mfn.MFFD.Initialized || containNotInitialized)
                     list.Add(node as Node_MagicFormula);
             }
                 
             foreach (var child in node.Children)
             {
-                GetMagicFormula(child, list);
+                GetMagicFormula(child, list, containNotInitialized);
             }
         }
     }

@@ -26,7 +26,9 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
         bool ReplotFormula = false;
         bool stopReplot = false;
         string dataLegend = "data";
-        string formulaLegend = "MagicFormula";
+        string formulaLegend = "CenterLine";
+        string formulaLegendU = "UpperLine";
+        string formulaLegendL = "LowerLine";
 
         public CombinedSlipPage(FittingWizardPage page)
             :base(page,"コンバインドスリップパラメータ")
@@ -142,6 +144,8 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
                 Viewers[i].SetChartType(System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastPoint, dataLegend);
                 Viewers[i].SetChartType(System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine, formulaLegend);
                 Viewers[i].SetDataListRefMF(dataLegend, formulaLegend);
+                Viewers[i].SetChartType(System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine, formulaLegendU);
+                Viewers[i].SetChartType(System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine, formulaLegendL);
                 Viewers[i].SetLineWidth(5, formulaLegend);
                 Viewers[i].GraphSample = 2500;
             }
@@ -313,6 +317,8 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
 
                 Viewers[tabIndex].SetDataList(corneringTable, Table.CorneringTable, dataLegend);
                 Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, TDSs[tabIndex].CenterValue, formulaLegend);
+                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, TDSs[tabIndex].UpperValue, formulaLegendU);
+                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, TDSs[tabIndex].LowerValue, formulaLegendL);
 
                 Viewers[tabIndex].DrawGraph(dataLegend);
                 ReplotData = false;
@@ -320,10 +326,12 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             if ((ReplotFormula || !FirstPlot[tabIndex]))
             {
                 var formula = TDSs[tabIndex].CenterValue;
-                formula.SA = double.Parse(SATB0.Text);
-                formula.SR = double.Parse(SRTB0.Text);
                 Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, formula , formulaLegend);
+                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, TDSs[tabIndex].UpperValue, formulaLegendU);
+                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, TDSs[tabIndex].LowerValue, formulaLegendL);
                 Viewers[tabIndex].DrawGraph(formulaLegend);
+                Viewers[tabIndex].DrawGraph(formulaLegendU);
+                Viewers[tabIndex].DrawGraph(formulaLegendL);
                 ReplotFormula = false;
                 FirstPlot[tabIndex] = true;
             }

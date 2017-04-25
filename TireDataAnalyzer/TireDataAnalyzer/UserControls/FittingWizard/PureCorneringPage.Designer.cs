@@ -275,7 +275,7 @@
             // checkBox23
             // 
             this.checkBox23.AutoSize = true;
-            this.checkBox23.Location = new System.Drawing.Point(103, 208);
+            this.checkBox23.Location = new System.Drawing.Point(103, 183);
             this.checkBox23.Name = "checkBox23";
             this.checkBox23.Size = new System.Drawing.Size(15, 14);
             this.checkBox23.TabIndex = 76;
@@ -284,7 +284,7 @@
             // checkBox22
             // 
             this.checkBox22.AutoSize = true;
-            this.checkBox22.Location = new System.Drawing.Point(103, 183);
+            this.checkBox22.Location = new System.Drawing.Point(103, 158);
             this.checkBox22.Name = "checkBox22";
             this.checkBox22.Size = new System.Drawing.Size(15, 14);
             this.checkBox22.TabIndex = 75;
@@ -329,18 +329,19 @@
             // simpleTireDataSelector1
             // 
             this.simpleTireDataSelector1.AttachedTable = TTCDataUtils.Table.CorneringTable;
-            this.simpleTireDataSelector1.Location = new System.Drawing.Point(4, 230);
+            this.simpleTireDataSelector1.Location = new System.Drawing.Point(3, 205);
             this.simpleTireDataSelector1.MFFD = null;
             this.simpleTireDataSelector1.Name = "simpleTireDataSelector1";
             this.simpleTireDataSelector1.NumSearch = 5000;
             this.simpleTireDataSelector1.PureSlipX = false;
+            this.simpleTireDataSelector1.SASREnable = true;
             this.simpleTireDataSelector1.Size = new System.Drawing.Size(479, 200);
             this.simpleTireDataSelector1.TabIndex = 50;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(67, 208);
+            this.label13.Location = new System.Drawing.Point(67, 183);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(23, 12);
             this.label13.TabIndex = 49;
@@ -349,7 +350,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(67, 183);
+            this.label12.Location = new System.Drawing.Point(67, 158);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(23, 12);
             this.label12.TabIndex = 48;
@@ -394,7 +395,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 208);
+            this.label7.Location = new System.Drawing.Point(3, 183);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(24, 12);
             this.label7.TabIndex = 43;
@@ -403,7 +404,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 183);
+            this.label6.Location = new System.Drawing.Point(3, 158);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(24, 12);
             this.label6.TabIndex = 42;
@@ -448,7 +449,7 @@
             // a23TB
             // 
             this.a23TB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.a23TB.Location = new System.Drawing.Point(361, 205);
+            this.a23TB.Location = new System.Drawing.Point(361, 180);
             this.a23TB.Name = "a23TB";
             this.a23TB.Size = new System.Drawing.Size(121, 19);
             this.a23TB.TabIndex = 37;
@@ -519,7 +520,7 @@
             // a22TB
             // 
             this.a22TB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.a22TB.Location = new System.Drawing.Point(361, 180);
+            this.a22TB.Location = new System.Drawing.Point(361, 155);
             this.a22TB.Name = "a22TB";
             this.a22TB.Size = new System.Drawing.Size(121, 19);
             this.a22TB.TabIndex = 32;
@@ -694,11 +695,12 @@
             // simpleTireDataSelector2
             // 
             this.simpleTireDataSelector2.AttachedTable = TTCDataUtils.Table.CorneringTable;
-            this.simpleTireDataSelector2.Location = new System.Drawing.Point(3, 207);
+            this.simpleTireDataSelector2.Location = new System.Drawing.Point(3, 205);
             this.simpleTireDataSelector2.MFFD = null;
             this.simpleTireDataSelector2.Name = "simpleTireDataSelector2";
             this.simpleTireDataSelector2.NumSearch = 5000;
             this.simpleTireDataSelector2.PureSlipX = false;
+            this.simpleTireDataSelector2.SASREnable = true;
             this.simpleTireDataSelector2.Size = new System.Drawing.Size(479, 216);
             this.simpleTireDataSelector2.TabIndex = 51;
             // 
@@ -949,11 +951,12 @@
             // simpleTireDataSelector3
             // 
             this.simpleTireDataSelector3.AttachedTable = TTCDataUtils.Table.CorneringTable;
-            this.simpleTireDataSelector3.Location = new System.Drawing.Point(3, 207);
+            this.simpleTireDataSelector3.Location = new System.Drawing.Point(3, 205);
             this.simpleTireDataSelector3.MFFD = null;
             this.simpleTireDataSelector3.Name = "simpleTireDataSelector3";
             this.simpleTireDataSelector3.NumSearch = 5000;
             this.simpleTireDataSelector3.PureSlipX = false;
+            this.simpleTireDataSelector3.SASREnable = true;
             this.simpleTireDataSelector3.Size = new System.Drawing.Size(479, 216);
             this.simpleTireDataSelector3.TabIndex = 53;
             // 
@@ -1234,11 +1237,12 @@
             // simpleTireDataSelector4
             // 
             this.simpleTireDataSelector4.AttachedTable = TTCDataUtils.Table.CorneringTable;
-            this.simpleTireDataSelector4.Location = new System.Drawing.Point(3, 207);
+            this.simpleTireDataSelector4.Location = new System.Drawing.Point(3, 205);
             this.simpleTireDataSelector4.MFFD = null;
             this.simpleTireDataSelector4.Name = "simpleTireDataSelector4";
             this.simpleTireDataSelector4.NumSearch = 5000;
             this.simpleTireDataSelector4.PureSlipX = false;
+            this.simpleTireDataSelector4.SASREnable = true;
             this.simpleTireDataSelector4.Size = new System.Drawing.Size(479, 216);
             this.simpleTireDataSelector4.TabIndex = 59;
             // 
@@ -1463,11 +1467,12 @@
             // simpleTireDataSelector5
             // 
             this.simpleTireDataSelector5.AttachedTable = TTCDataUtils.Table.CorneringTable;
-            this.simpleTireDataSelector5.Location = new System.Drawing.Point(3, 207);
+            this.simpleTireDataSelector5.Location = new System.Drawing.Point(3, 205);
             this.simpleTireDataSelector5.MFFD = null;
             this.simpleTireDataSelector5.Name = "simpleTireDataSelector5";
             this.simpleTireDataSelector5.NumSearch = 5000;
             this.simpleTireDataSelector5.PureSlipX = false;
+            this.simpleTireDataSelector5.SASREnable = true;
             this.simpleTireDataSelector5.Size = new System.Drawing.Size(479, 216);
             this.simpleTireDataSelector5.TabIndex = 65;
             // 
@@ -1705,11 +1710,12 @@
             // simpleTireDataSelector6
             // 
             this.simpleTireDataSelector6.AttachedTable = TTCDataUtils.Table.CorneringTable;
-            this.simpleTireDataSelector6.Location = new System.Drawing.Point(3, 207);
+            this.simpleTireDataSelector6.Location = new System.Drawing.Point(3, 205);
             this.simpleTireDataSelector6.MFFD = null;
             this.simpleTireDataSelector6.Name = "simpleTireDataSelector6";
             this.simpleTireDataSelector6.NumSearch = 5000;
             this.simpleTireDataSelector6.PureSlipX = false;
+            this.simpleTireDataSelector6.SASREnable = true;
             this.simpleTireDataSelector6.Size = new System.Drawing.Size(479, 202);
             this.simpleTireDataSelector6.TabIndex = 51;
             // 
