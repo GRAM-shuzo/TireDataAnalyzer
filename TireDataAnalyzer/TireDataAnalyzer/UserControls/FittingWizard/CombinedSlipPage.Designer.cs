@@ -33,7 +33,7 @@
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.magicFormula_TexEquation4 = new TireDataAnalyzer.TexEquation.MagicFormula_TexEquation();
-            this.label6 = new System.Windows.Forms.Label();
+            this.AdviseText4 = new System.Windows.Forms.Label();
             this.checkBox17 = new System.Windows.Forms.CheckBox();
             this.checkBox16 = new System.Windows.Forms.CheckBox();
             this.checkBox15 = new System.Windows.Forms.CheckBox();
@@ -53,7 +53,7 @@
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.magicFormula_TexEquation3 = new TireDataAnalyzer.TexEquation.MagicFormula_TexEquation();
-            this.label5 = new System.Windows.Forms.Label();
+            this.AdviseText3 = new System.Windows.Forms.Label();
             this.checkBox21 = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
@@ -65,7 +65,7 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.magicFormula_TexEquation2 = new TireDataAnalyzer.TexEquation.MagicFormula_TexEquation();
-            this.label4 = new System.Windows.Forms.Label();
+            this.AdviseText2 = new System.Windows.Forms.Label();
             this.checkBox11 = new System.Windows.Forms.CheckBox();
             this.checkBox10 = new System.Windows.Forms.CheckBox();
             this.checkBox9 = new System.Windows.Forms.CheckBox();
@@ -89,7 +89,7 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.magicFormula_TexEquation1 = new TireDataAnalyzer.TexEquation.MagicFormula_TexEquation();
-            this.label3 = new System.Windows.Forms.Label();
+            this.AdviseText1 = new System.Windows.Forms.Label();
             this.checkBox7 = new System.Windows.Forms.CheckBox();
             this.checkBox6 = new System.Windows.Forms.CheckBox();
             this.checkBox5 = new System.Windows.Forms.CheckBox();
@@ -129,7 +129,7 @@
             this.Theta_FySC = new System.Windows.Forms.SplitContainer();
             this.AdviseBox = new System.Windows.Forms.GroupBox();
             this.magicFormula_TexEquation0 = new TireDataAnalyzer.TexEquation.MagicFormula_TexEquation();
-            this.AdviseText = new System.Windows.Forms.Label();
+            this.AdviseText0 = new System.Windows.Forms.Label();
             this.checkBox20 = new System.Windows.Forms.CheckBox();
             this.checkBox19 = new System.Windows.Forms.CheckBox();
             this.checkBox18 = new System.Windows.Forms.CheckBox();
@@ -242,7 +242,7 @@
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox4.Controls.Add(this.magicFormula_TexEquation4);
-            this.groupBox4.Controls.Add(this.label6);
+            this.groupBox4.Controls.Add(this.AdviseText4);
             this.groupBox4.Location = new System.Drawing.Point(3, 459);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(479, 170);
@@ -259,14 +259,14 @@
             this.magicFormula_TexEquation4.TabIndex = 40;
             this.magicFormula_TexEquation4.Type = TireDataAnalyzer.TexEquation.MagicFormula_TexEquation.MagicFormulaType.FY;
             // 
-            // label6
+            // AdviseText4
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 15);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(23, 12);
-            this.label6.TabIndex = 39;
-            this.label6.Text = "aaa";
+            this.AdviseText4.AutoSize = true;
+            this.AdviseText4.Location = new System.Drawing.Point(6, 15);
+            this.AdviseText4.Name = "AdviseText4";
+            this.AdviseText4.Size = new System.Drawing.Size(23, 12);
+            this.AdviseText4.TabIndex = 39;
+            this.AdviseText4.Text = "aaa";
             // 
             // checkBox17
             // 
@@ -460,7 +460,7 @@
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.magicFormula_TexEquation3);
-            this.groupBox3.Controls.Add(this.label5);
+            this.groupBox3.Controls.Add(this.AdviseText3);
             this.groupBox3.Location = new System.Drawing.Point(3, 459);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(479, 170);
@@ -477,14 +477,14 @@
             this.magicFormula_TexEquation3.TabIndex = 40;
             this.magicFormula_TexEquation3.Type = TireDataAnalyzer.TexEquation.MagicFormula_TexEquation.MagicFormulaType.FY;
             // 
-            // label5
+            // AdviseText3
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 15);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(23, 12);
-            this.label5.TabIndex = 39;
-            this.label5.Text = "aaa";
+            this.AdviseText3.AutoSize = true;
+            this.AdviseText3.Location = new System.Drawing.Point(6, 15);
+            this.AdviseText3.Name = "AdviseText3";
+            this.AdviseText3.Size = new System.Drawing.Size(23, 12);
+            this.AdviseText3.TabIndex = 39;
+            this.AdviseText3.Text = "aaa";
             // 
             // checkBox21
             // 
@@ -618,7 +618,7 @@
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.magicFormula_TexEquation2);
-            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.AdviseText2);
             this.groupBox2.Location = new System.Drawing.Point(3, 459);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(479, 170);
@@ -635,14 +635,14 @@
             this.magicFormula_TexEquation2.TabIndex = 40;
             this.magicFormula_TexEquation2.Type = TireDataAnalyzer.TexEquation.MagicFormula_TexEquation.MagicFormulaType.FY;
             // 
-            // label4
+            // AdviseText2
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 15);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(23, 12);
-            this.label4.TabIndex = 39;
-            this.label4.Text = "aaa";
+            this.AdviseText2.AutoSize = true;
+            this.AdviseText2.Location = new System.Drawing.Point(6, 15);
+            this.AdviseText2.Name = "AdviseText2";
+            this.AdviseText2.Size = new System.Drawing.Size(23, 12);
+            this.AdviseText2.TabIndex = 39;
+            this.AdviseText2.Text = "aaa";
             // 
             // checkBox11
             // 
@@ -897,7 +897,7 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.magicFormula_TexEquation1);
-            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.AdviseText1);
             this.groupBox1.Location = new System.Drawing.Point(3, 459);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(479, 170);
@@ -914,14 +914,14 @@
             this.magicFormula_TexEquation1.TabIndex = 40;
             this.magicFormula_TexEquation1.Type = TireDataAnalyzer.TexEquation.MagicFormula_TexEquation.MagicFormulaType.FY;
             // 
-            // label3
+            // AdviseText1
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 15);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(23, 12);
-            this.label3.TabIndex = 39;
-            this.label3.Text = "aaa";
+            this.AdviseText1.AutoSize = true;
+            this.AdviseText1.Location = new System.Drawing.Point(6, 15);
+            this.AdviseText1.Name = "AdviseText1";
+            this.AdviseText1.Size = new System.Drawing.Size(23, 12);
+            this.AdviseText1.TabIndex = 39;
+            this.AdviseText1.Text = "aaa";
             // 
             // checkBox7
             // 
@@ -1308,7 +1308,7 @@
             this.AdviseBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.AdviseBox.Controls.Add(this.magicFormula_TexEquation0);
-            this.AdviseBox.Controls.Add(this.AdviseText);
+            this.AdviseBox.Controls.Add(this.AdviseText0);
             this.AdviseBox.Location = new System.Drawing.Point(3, 459);
             this.AdviseBox.Name = "AdviseBox";
             this.AdviseBox.Size = new System.Drawing.Size(479, 170);
@@ -1325,14 +1325,14 @@
             this.magicFormula_TexEquation0.TabIndex = 40;
             this.magicFormula_TexEquation0.Type = TireDataAnalyzer.TexEquation.MagicFormula_TexEquation.MagicFormulaType.FY;
             // 
-            // AdviseText
+            // AdviseText0
             // 
-            this.AdviseText.AutoSize = true;
-            this.AdviseText.Location = new System.Drawing.Point(6, 15);
-            this.AdviseText.Name = "AdviseText";
-            this.AdviseText.Size = new System.Drawing.Size(23, 12);
-            this.AdviseText.TabIndex = 39;
-            this.AdviseText.Text = "aaa";
+            this.AdviseText0.AutoSize = true;
+            this.AdviseText0.Location = new System.Drawing.Point(6, 15);
+            this.AdviseText0.Name = "AdviseText0";
+            this.AdviseText0.Size = new System.Drawing.Size(23, 12);
+            this.AdviseText0.TabIndex = 39;
+            this.AdviseText0.Text = "aaa";
             // 
             // checkBox20
             // 
@@ -1786,18 +1786,18 @@
         private System.Windows.Forms.CheckBox checkBox12;
         private System.Windows.Forms.GroupBox groupBox4;
         private TexEquation.MagicFormula_TexEquation magicFormula_TexEquation4;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label AdviseText4;
         private System.Windows.Forms.GroupBox groupBox3;
         private TexEquation.MagicFormula_TexEquation magicFormula_TexEquation3;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label AdviseText3;
         private System.Windows.Forms.GroupBox groupBox2;
         private TexEquation.MagicFormula_TexEquation magicFormula_TexEquation2;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label AdviseText2;
         private System.Windows.Forms.GroupBox groupBox1;
         private TexEquation.MagicFormula_TexEquation magicFormula_TexEquation1;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label AdviseText1;
         private System.Windows.Forms.GroupBox AdviseBox;
         private TexEquation.MagicFormula_TexEquation magicFormula_TexEquation0;
-        private System.Windows.Forms.Label AdviseText;
+        private System.Windows.Forms.Label AdviseText0;
     }
 }

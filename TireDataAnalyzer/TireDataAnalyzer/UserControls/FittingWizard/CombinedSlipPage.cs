@@ -22,6 +22,7 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
         List<TireDataViewer> Viewers = new List<TireDataViewer>();
         List<bool> FirstPlot = new List<bool>();
         List<int> NumPointList = new List<int>();
+        List<Label> Advises = new List<Label>();
         bool ReplotData = false;
         bool ReplotFormula = false;
         bool stopReplot = false;
@@ -34,6 +35,13 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             :base(page,"コンバインドスリップパラメータ")
         {
             InitializeComponent();
+
+            Advises.Add(AdviseText0);
+            Advises.Add(AdviseText1);
+            Advises.Add(AdviseText2);
+            Advises.Add(AdviseText3);
+            Advises.Add(AdviseText4);
+
             ParameterTBX.Add(bx0TB);
             ParameterTBX.Add(bx1TB);
             ParameterTBX.Add(bx2TB);
@@ -118,6 +126,7 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
                 tb.Validated += IsReal_Validated;
                 tb.Validating += IsReal_Validating;
                 tb.Enter += CFX_Enter;
+                tb.Enter += Tb_Enter;
             }
             foreach (var tb in ParameterTBY)
             {
@@ -125,16 +134,19 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
                 tb.Validated += IsReal_Validated;
                 tb.Validating += IsReal_Validating;
                 tb.Enter += CFY_Enter;
+                tb.Enter += Tb_Enter;
             }
             foreach (var cb in FittingParametersCBX)
             {
                 cb.CheckedChanged += FittingCheckedChanged;
                 cb.Enter += CFX_Enter;
+                cb.Enter += Tb_Enter;
             }
             foreach (var cb in FittingParametersCBY)
             {
                 cb.CheckedChanged += FittingCheckedChanged;
                 cb.Enter += CFY_Enter;
+                cb.Enter += Tb_Enter;
             }
             for (int i = 0; i < TDSs.Count; ++i)
             {
@@ -155,6 +167,7 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             Equations.Add(magicFormula_TexEquation2);
             Equations.Add(magicFormula_TexEquation3);
             Equations.Add(magicFormula_TexEquation4);
+            SetClickAllControls(this);
         }
 
         private void CFY_Enter(object sender, EventArgs e)
@@ -206,6 +219,135 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             Viewers[4].SetAxis(MagicFormulaInputVariables.FY, MagicFormulaOutputVariables.FX);
         }
 
+        public void SetClickAllControls(Control top)
+        {
+            var buf = new List<Control>();
+            foreach (Control c in top.Controls)
+            {
+                if (c is TextBox || c is CheckBox) continue;
+                c.Click += PureCorneringPage_Click;
+                SetClickAllControls(c);
+            }
+            return;
+        }
+
+        private void PureCorneringPage_Click(object sender, EventArgs e)
+        {
+            SetAdviceText(-1);
+        }
+
+        private void SetAdviceText(int i)
+        {
+
+            if (i < 0 || i >= ParameterTBX.Count + ParameterTBY.Count)
+            {
+                foreach (var l in Advises)
+                {
+                    l.Text = @"PureFyモデルへのフィッティングを行います。
+入力値：スリップアングル(SA)、輪荷重(FZ)、キャンバ角(IA)、空気圧(P)、タイヤ温度(T)
+出力値：横力(Fy)
+決める必要のあるパラメータはa0～a23の24変数です。(のちに最適化されます)
+中間パラメータD、BCD、C、E、Sv、Shは曲線の特性を表し
+Dは最大横力、BCDはX + Sh = 0での傾き（コーナリングパワー相当）、C、Eはカーブの形状を決めます。";
+                }
+                return;
+            }
+
+            string[] text = new string[24];
+            text[0] = "Cはカーブ形状を決めます。通常は1<C<1.65の値をとります。";
+            text[19] = @"Shはカーブを水平方向にオフセットします。主にキャンバスラストを表します。
+このためキャンバが0の時にはSh=0をとります";
+            text[20] = text[19];
+            text[21] = text[19];
+
+            text[12] = @"Svはカーブを垂直方向にオフセットします。主にキャンバスラストを表します。
+このためキャンバが0の時にはSv=0をとります";
+            text[23] = text[13];
+
+            text[1] = @"Dはキャンバ角0°でのカーブの最大値を決定します。
+Dは輪荷重FZと摩擦係数との積で表せます。
+a1は摩擦係数μの定数成分を決定します。";
+            text[2] = @"Dはキャンバ角0°でのカーブの最大値を決定します。
+Dは輪荷重FZと摩擦係数との積で表せます。
+a2は摩擦係数μの輪荷重依存成分を決定します。
+輪荷重依存度a2は通常負の値をとります。(輪荷重が多いほど摩擦係数が減る)";
+            text[3] = @"Dはキャンバ角0°でのカーブの最大値を決定します。
+Dは輪荷重FZと摩擦係数との積で表せます。
+a3は摩擦係数μのキャンバ依存成分を決定します。
+キャンバ依存度a3は通常負の値をとります。(キャンバスラストによる増分はSv、Shで決定されます)";
+            text[4] = @"Dはキャンバ角0°でのカーブの最大値を決定します。
+Dは輪荷重FZと摩擦係数との積で表せます。
+a4は摩擦係数μの圧力依存成分を決定します。
+圧力依存性はa5と合わせて2次で近似します";
+            text[5] = @"Dはキャンバ角0°でのカーブの最大値を決定します。
+Dは輪荷重FZと摩擦係数との積で表せます。
+a5は摩擦係数μの圧力依存成分を決定します。
+圧力依存性はa4と合わせて2次で近似します";
+            text[6] = @"Dはキャンバ角0°でのカーブの最大値を決定します。
+Dは輪荷重FZと摩擦係数との積で表せます。
+a6は摩擦係数μの温度依存成分を決定します。
+温度依存性は線形近似です。
+温度依存性を加味しない場合はこの係数は0に固定してください";
+
+            text[7] = @"B*C*Dは SA+Sh=0 でのカーブの傾きを表します。
+キャンバ0ではコーナリングパワーと一致します。
+a7はコーナリングパワーのゲイン(FZの何倍か)を決定します。";
+            text[8] = @"B*C*Dは SA+Sh=0 でのカーブの傾きを表します。
+キャンバ0ではコーナリングパワーと一致します。
+a8はコーナリングパワーに対する圧力の線形的な依存性を決定します。";
+            text[9] = @"B*C*Dは SA+Sh=0 でのカーブの傾きを表します。
+キャンバ0ではコーナリングパワーと一致します。
+a9～a12はコーナリングパワーに対するキャンバ、輪荷重、圧力の非線形的依存性を表します。";
+            text[10] = text[9];
+            text[11] = text[9];
+            text[12] = text[9];
+            text[13] = @"B*C*Dは SA+Sh=0 でのカーブの傾きを表します。
+キャンバ0ではコーナリングパワーと一致します。
+a13はコーナリングパワーに対するキャンバー角の線形的な依存性を決定します。";
+            text[14] = @"B*C*Dは SA+Sh=0 でのカーブの傾きを表します。
+キャンバ0ではコーナリングパワーと一致します。
+a13はコーナリングパワーに対するタイヤ温度の線形的な依存性を決定します。";
+
+            text[15] = @"Eはカーブの形状を決定します。
+Eは-(1+0.5C^2) < E < 1を満たす必要があり、
+表示されるすべての点がアッパーとロアーの間に収まっていなければなりません。";
+            text[16] = text[15];
+            text[17] = text[15];
+            text[18] = text[15];
+            foreach (var l in Advises)
+            {
+                l.Text = text[i];
+            }
+        }
+
+        private void Tb_Enter(object sender, EventArgs e)
+        {
+            int i = -1;
+            if (sender is TextBox)
+            {
+                i = ParameterTBX.IndexOf(sender as TextBox);
+                if(i == -1)
+                {
+                    i = ParameterTBY.IndexOf(sender as TextBox) + ParameterTBX.Count;
+                }
+            }
+            else
+            {
+                i = FittingParametersCBX.IndexOf(sender as CheckBox);
+                if (i == -1)
+                {
+                    i = FittingParametersCBY.IndexOf(sender as CheckBox) + FittingParametersCBX.Count;
+                }
+            }
+            foreach (var mf in Equations)
+            {
+                mf.Highlight(i);
+            }
+            SetAdviceText(i);
+        }
+
+       
+
         protected override void Reload(bool back)
         {
             
@@ -240,6 +382,7 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
                 mf.Control_Resize(mf, new EventArgs());
                 mf.Size = new Size(mf.Size.Width, 100);
             }
+            SetAdviceText(-1);
             RePlot();
         }
 
