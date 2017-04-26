@@ -18,7 +18,7 @@ namespace TireDataAnalyzer.UserControls
         {
             InitializeComponent();
             this.ResizeEnd += magicFormula_TexEquation1.Control_Resize;
-            
+            magicFormula_TexEquation1.Type = TexEquation.MagicFormula_TexEquation.MagicFormulaType.FX;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
