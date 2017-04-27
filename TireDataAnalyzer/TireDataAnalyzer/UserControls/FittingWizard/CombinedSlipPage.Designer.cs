@@ -321,9 +321,9 @@
             this.label81.AutoSize = true;
             this.label81.Location = new System.Drawing.Point(3, 82);
             this.label81.Name = "label81";
-            this.label81.Size = new System.Drawing.Size(32, 12);
+            this.label81.Size = new System.Drawing.Size(40, 12);
             this.label81.TabIndex = 63;
-            this.label81.Text = "Cp-T";
+            this.label81.Text = "Bx-SR";
             // 
             // comboBox4
             // 
@@ -391,18 +391,18 @@
             this.label36.AutoSize = true;
             this.label36.Location = new System.Drawing.Point(3, 32);
             this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(32, 12);
+            this.label36.Size = new System.Drawing.Size(53, 12);
             this.label36.TabIndex = 58;
-            this.label36.Text = "Cp-P";
+            this.label36.Text = "Bx-const";
             // 
             // label32
             // 
             this.label32.AutoSize = true;
             this.label32.Location = new System.Drawing.Point(3, 57);
             this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(54, 12);
+            this.label32.Size = new System.Drawing.Size(47, 12);
             this.label32.TabIndex = 59;
-            this.label32.Text = "Cp-atanP";
+            this.label32.Text = "Bx-IA^2";
             // 
             // TireDataViewer4
             // 
@@ -509,9 +509,9 @@
             this.label14.AutoSize = true;
             this.label14.Location = new System.Drawing.Point(4, 32);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(27, 12);
+            this.label14.Size = new System.Drawing.Size(24, 12);
             this.label14.TabIndex = 67;
-            this.label14.Text = "CFY";
+            this.label14.Text = "Shx";
             // 
             // bx6TB
             // 
@@ -694,9 +694,9 @@
             this.label50.AutoSize = true;
             this.label50.Location = new System.Drawing.Point(3, 107);
             this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(52, 12);
+            this.label50.Size = new System.Drawing.Size(56, 12);
             this.label50.TabIndex = 55;
-            this.label50.Text = "Cp-Norm";
+            this.label50.Text = "By-SAofs";
             // 
             // by11TB
             // 
@@ -750,27 +750,27 @@
             this.label34.AutoSize = true;
             this.label34.Location = new System.Drawing.Point(3, 82);
             this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(52, 12);
+            this.label34.Size = new System.Drawing.Size(40, 12);
             this.label34.TabIndex = 41;
-            this.label34.Text = "Cp-Norm";
+            this.label34.Text = "By-SA";
             // 
             // label35
             // 
             this.label35.AutoSize = true;
             this.label35.Location = new System.Drawing.Point(3, 57);
             this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(53, 12);
+            this.label35.Size = new System.Drawing.Size(47, 12);
             this.label35.TabIndex = 40;
-            this.label35.Text = "Cp-atan0";
+            this.label35.Text = "By-IA^2";
             // 
             // label37
             // 
             this.label37.AutoSize = true;
             this.label37.Location = new System.Drawing.Point(3, 32);
             this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(25, 12);
+            this.label37.Size = new System.Drawing.Size(53, 12);
             this.label37.TabIndex = 38;
-            this.label37.Text = "Cp0";
+            this.label37.Text = "By-const";
             // 
             // by10TB
             // 
@@ -1009,9 +1009,9 @@
             this.label42.AutoSize = true;
             this.label42.Location = new System.Drawing.Point(4, 182);
             this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(51, 12);
+            this.label42.Size = new System.Drawing.Size(58, 12);
             this.label42.TabIndex = 65;
-            this.label42.Text = "μ-const";
+            this.label42.Text = "Shy-const";
             // 
             // by6TB
             // 
@@ -1053,27 +1053,27 @@
             this.label46.AutoSize = true;
             this.label46.Location = new System.Drawing.Point(4, 207);
             this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(45, 12);
+            this.label46.Size = new System.Drawing.Size(44, 12);
             this.label46.TabIndex = 60;
-            this.label46.Text = "μ-IA^2";
+            this.label46.Text = "Shy-FZ";
             // 
             // label47
             // 
             this.label47.AutoSize = true;
             this.label47.Location = new System.Drawing.Point(4, 157);
             this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(35, 12);
+            this.label47.Size = new System.Drawing.Size(57, 12);
             this.label47.TabIndex = 59;
-            this.label47.Text = "μ-Fz";
+            this.label47.Text = "Svy-SinIA";
             // 
             // label48
             // 
             this.label48.AutoSize = true;
             this.label48.Location = new System.Drawing.Point(3, 132);
             this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(51, 12);
+            this.label48.Size = new System.Drawing.Size(46, 12);
             this.label48.TabIndex = 58;
-            this.label48.Text = "μ-const";
+            this.label48.Text = "Svy-Sin";
             // 
             // by7TB
             // 
@@ -1113,9 +1113,9 @@
             this.label40.AutoSize = true;
             this.label40.Location = new System.Drawing.Point(4, 107);
             this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(51, 12);
+            this.label40.Size = new System.Drawing.Size(45, 12);
             this.label40.TabIndex = 53;
-            this.label40.Text = "μ-const";
+            this.label40.Text = "Svy-SA";
             // 
             // by3TB
             // 
@@ -1169,27 +1169,27 @@
             this.label22.AutoSize = true;
             this.label22.Location = new System.Drawing.Point(4, 82);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(45, 12);
+            this.label22.Size = new System.Drawing.Size(41, 12);
             this.label22.TabIndex = 40;
-            this.label22.Text = "μ-IA^2";
+            this.label22.Text = "Svy-IA";
             // 
             // label23
             // 
             this.label23.AutoSize = true;
             this.label23.Location = new System.Drawing.Point(4, 57);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(35, 12);
+            this.label23.Size = new System.Drawing.Size(42, 12);
             this.label23.TabIndex = 39;
-            this.label23.Text = "μ-Fz";
+            this.label23.Text = "Svy-Fz";
             // 
             // label24
             // 
             this.label24.AutoSize = true;
             this.label24.Location = new System.Drawing.Point(3, 32);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(51, 12);
+            this.label24.Size = new System.Drawing.Size(58, 12);
             this.label24.TabIndex = 38;
-            this.label24.Text = "μ-const";
+            this.label24.Text = "Svy-const";
             // 
             // by2TB
             // 
@@ -1402,9 +1402,9 @@
             this.label39.AutoSize = true;
             this.label39.Location = new System.Drawing.Point(3, 182);
             this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(27, 12);
+            this.label39.Size = new System.Drawing.Size(36, 12);
             this.label39.TabIndex = 64;
-            this.label39.Text = "CFY";
+            this.label39.Text = "Ey-Fz";
             // 
             // by14TB
             // 
@@ -1428,9 +1428,9 @@
             this.label33.AutoSize = true;
             this.label33.Location = new System.Drawing.Point(3, 132);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(27, 12);
+            this.label33.Size = new System.Drawing.Size(36, 12);
             this.label33.TabIndex = 61;
-            this.label33.Text = "CFY";
+            this.label33.Text = "Ex-Fz";
             // 
             // bx5TB
             // 
@@ -1454,9 +1454,9 @@
             this.label25.AutoSize = true;
             this.label25.Location = new System.Drawing.Point(3, 107);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(27, 12);
+            this.label25.Size = new System.Drawing.Size(52, 12);
             this.label25.TabIndex = 58;
-            this.label25.Text = "CFY";
+            this.label25.Text = "Ex-const";
             // 
             // bx4TB
             // 
@@ -1480,9 +1480,9 @@
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(3, 157);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(27, 12);
+            this.label12.Size = new System.Drawing.Size(52, 12);
             this.label12.TabIndex = 55;
-            this.label12.Text = "CFY";
+            this.label12.Text = "Ex-const";
             // 
             // by13TB
             // 
@@ -1506,9 +1506,9 @@
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(3, 57);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(27, 12);
+            this.label10.Size = new System.Drawing.Size(19, 12);
             this.label10.TabIndex = 52;
-            this.label10.Text = "CFY";
+            this.label10.Text = "Cy";
             // 
             // by12TB
             // 
@@ -1544,9 +1544,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(3, 32);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(27, 12);
+            this.label1.Size = new System.Drawing.Size(19, 12);
             this.label1.TabIndex = 38;
-            this.label1.Text = "CFX";
+            this.label1.Text = "Cx";
             // 
             // bx3TB
             // 

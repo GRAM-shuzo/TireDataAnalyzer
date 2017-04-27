@@ -243,77 +243,45 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             {
                 foreach (var l in Advises)
                 {
-                    l.Text = @"PureFyモデルへのフィッティングを行います。
-入力値：スリップアングル(SA)、輪荷重(FZ)、キャンバ角(IA)、空気圧(P)、タイヤ温度(T)
-出力値：横力(Fy)
-決める必要のあるパラメータはa0～a23の24変数です。(のちに最適化されます)
-中間パラメータD、BCD、C、E、Sv、Shは曲線の特性を表し
-Dは最大横力、BCDはX + Sh = 0での傾き（コーナリングパワー相当）、C、Eはカーブの形状を決めます。";
+                    l.Text = @"CombinedSlipモデルへのフィッティングを行います。
+入力値：Gx導出時→SA：Gy導出時→SR、輪荷重(FZ)、キャンバ角(IA)、空気圧(P)、タイヤ温度(T)
+出力値：係数Gx及びGy(0～1の係数値)、垂直オフセット量Sv(CFyのみ)";
                 }
                 return;
             }
 
             string[] text = new string[24];
-            text[0] = "Cはカーブ形状を決めます。通常は1<C<1.65の値をとります。";
-            text[19] = @"Shはカーブを水平方向にオフセットします。主にキャンバスラストを表します。
-このためキャンバが0の時にはSh=0をとります";
-            text[20] = text[19];
-            text[21] = text[19];
+            text[0] = "BはSA方向のスケールを決めます。b0は定数成分です。";
+            text[1] = "BはSA方向のスケールを決めます。b1はキャンバ依存性を決定します。";
+            text[2] = "BはSA方向のスケールを決めます。b2はスリップ率依存性を決定します。";
+            text[3] = "Cはカーブ形状を決めます。";
+            text[4] = "Eはカーブ形状を決めます。b4はEの定数成分です。";
+            text[5] = "Eはカーブ形状を決めます。b5はEの輪荷重依存成分です。";
+            text[6] = "ShはSA方向のカーブのオフセット量を決めます。通常０固定です";
 
-            text[12] = @"Svはカーブを垂直方向にオフセットします。主にキャンバスラストを表します。
-このためキャンバが0の時にはSv=0をとります";
-            text[23] = text[13];
-
-            text[1] = @"Dはキャンバ角0°でのカーブの最大値を決定します。
-Dは輪荷重FZと摩擦係数との積で表せます。
-a1は摩擦係数μの定数成分を決定します。";
-            text[2] = @"Dはキャンバ角0°でのカーブの最大値を決定します。
-Dは輪荷重FZと摩擦係数との積で表せます。
-a2は摩擦係数μの輪荷重依存成分を決定します。
-輪荷重依存度a2は通常負の値をとります。(輪荷重が多いほど摩擦係数が減る)";
-            text[3] = @"Dはキャンバ角0°でのカーブの最大値を決定します。
-Dは輪荷重FZと摩擦係数との積で表せます。
-a3は摩擦係数μのキャンバ依存成分を決定します。
-キャンバ依存度a3は通常負の値をとります。(キャンバスラストによる増分はSv、Shで決定されます)";
-            text[4] = @"Dはキャンバ角0°でのカーブの最大値を決定します。
-Dは輪荷重FZと摩擦係数との積で表せます。
-a4は摩擦係数μの圧力依存成分を決定します。
-圧力依存性はa5と合わせて2次で近似します";
-            text[5] = @"Dはキャンバ角0°でのカーブの最大値を決定します。
-Dは輪荷重FZと摩擦係数との積で表せます。
-a5は摩擦係数μの圧力依存成分を決定します。
-圧力依存性はa4と合わせて2次で近似します";
-            text[6] = @"Dはキャンバ角0°でのカーブの最大値を決定します。
-Dは輪荷重FZと摩擦係数との積で表せます。
-a6は摩擦係数μの温度依存成分を決定します。
-温度依存性は線形近似です。
-温度依存性を加味しない場合はこの係数は0に固定してください";
-
-            text[7] = @"B*C*Dは SA+Sh=0 でのカーブの傾きを表します。
-キャンバ0ではコーナリングパワーと一致します。
-a7はコーナリングパワーのゲイン(FZの何倍か)を決定します。";
-            text[8] = @"B*C*Dは SA+Sh=0 でのカーブの傾きを表します。
-キャンバ0ではコーナリングパワーと一致します。
-a8はコーナリングパワーに対する圧力の線形的な依存性を決定します。";
-            text[9] = @"B*C*Dは SA+Sh=0 でのカーブの傾きを表します。
-キャンバ0ではコーナリングパワーと一致します。
-a9～a12はコーナリングパワーに対するキャンバ、輪荷重、圧力の非線形的依存性を表します。";
-            text[10] = text[9];
-            text[11] = text[9];
-            text[12] = text[9];
-            text[13] = @"B*C*Dは SA+Sh=0 でのカーブの傾きを表します。
-キャンバ0ではコーナリングパワーと一致します。
-a13はコーナリングパワーに対するキャンバー角の線形的な依存性を決定します。";
-            text[14] = @"B*C*Dは SA+Sh=0 でのカーブの傾きを表します。
-キャンバ0ではコーナリングパワーと一致します。
-a13はコーナリングパワーに対するタイヤ温度の線形的な依存性を決定します。";
-
-            text[15] = @"Eはカーブの形状を決定します。
-Eは-(1+0.5C^2) < E < 1を満たす必要があり、
-表示されるすべての点がアッパーとロアーの間に収まっていなければなりません。";
-            text[16] = text[15];
-            text[17] = text[15];
-            text[18] = text[15];
+            text[7+0] = @"SvはカーブのFy方向へのオフセット量です。（キャンバスラストによる）
+b0はSvの定数成分です";
+            text[7 + 1] = @"SvはカーブのFy方向へのオフセット量です。（キャンバスラストによる）
+b1はSvの輪荷重依存性を決定します";
+            text[7 + 2] = @"SvはカーブのFy方向へのオフセット量です。（キャンバスラストによる）
+b2はSvのキャンバ依存性を決定します";
+            text[7 + 3] = @"SvはカーブのFy方向へのオフセット量です。（キャンバスラストによる）
+b3はSvのスリップアングル依存性を決定します";
+            text[7 + 4] = @"SvはカーブのFy方向へのオフセット量です。（キャンバスラストによる）
+b4はSvのキャンバ依存性の内非線形部分を決定します";
+            text[7 + 5] = @"SvはカーブのFy方向へのオフセット量です。（キャンバスラストによる）
+b5はSvのキャンバ依存性の内非線形部分を決定します";
+            text[7 + 6] = @"ShはSR方向のカーブのオフセット量を決めます。
+b6はShの定数成分です";
+            text[7 + 7] = @"ShはSR方向のカーブのオフセット量を決めます。
+b7はShの輪荷重依存性を決定します";
+            text[7 + 8] = "BはSA方向のスケールを決めます。b8は定数成分です。";
+            text[7 + 9] = "BはSA方向のスケールを決めます。b9はキャンバ依存性を決定します。";
+            text[7 + 10] ="BはSA方向のスケールを決めます。b10はスリップアングル依存性を決定します。";
+            text[7 + 11] = "BはSA方向のスケールを決めます。b11はスリップアングル依存性を決定します。";
+            text[7 + 12] = "Cはカーブ形状を決めます。";
+            text[7 + 13] = "Eはカーブ形状を決めます。b12はEの定数成分です。";
+            text[7 + 14] = "Eはカーブ形状を決めます。b13はEの輪荷重依存成分です。";
             foreach (var l in Advises)
             {
                 l.Text = text[i];
@@ -323,12 +291,18 @@ Eは-(1+0.5C^2) < E < 1を満たす必要があり、
         private void Tb_Enter(object sender, EventArgs e)
         {
             int i = -1;
+            var t = MagicFormula_TexEquation.MagicFormulaType.CFX;
             if (sender is TextBox)
             {
                 i = ParameterTBX.IndexOf(sender as TextBox);
                 if(i == -1)
                 {
-                    i = ParameterTBY.IndexOf(sender as TextBox) + ParameterTBX.Count;
+                    i = ParameterTBY.IndexOf(sender as TextBox);
+                    t = MagicFormula_TexEquation.MagicFormulaType.CFY;
+                }
+                else
+                {
+                    
                 }
             }
             else
@@ -336,17 +310,17 @@ Eは-(1+0.5C^2) < E < 1を満たす必要があり、
                 i = FittingParametersCBX.IndexOf(sender as CheckBox);
                 if (i == -1)
                 {
-                    i = FittingParametersCBY.IndexOf(sender as CheckBox) + FittingParametersCBX.Count;
+                    i = FittingParametersCBY.IndexOf(sender as CheckBox);
+                    t = MagicFormula_TexEquation.MagicFormulaType.CFY;
                 }
             }
             foreach (var mf in Equations)
             {
+                mf.Type = t;
                 mf.Highlight(i);
             }
-            SetAdviceText(i);
+            SetAdviceText(t == MagicFormula_TexEquation.MagicFormulaType.CFX?i:i+ParameterTBX.Count);
         }
-
-       
 
         protected override void Reload(bool back)
         {

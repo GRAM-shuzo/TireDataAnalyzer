@@ -277,7 +277,12 @@ namespace TireDataAnalyzer.UserControls
             TMax.Text = max.T.ToString("f2");
             TMin.Text = min.T.ToString("f2");
             TC.Text = c.T.ToString("f2");
-
+            SAMax.Text = max.SA.ToString("f2");
+            SAMin.Text = min.SA.ToString("f2");
+            SAC.Text = c.SA.ToString("f2");
+            SRMax.Text = max.SR.ToString("f2");
+            SRMin.Text = min.SR.ToString("f2");
+            SRC.Text = c.SR.ToString("f2");
             var bar = sender as CustomTrackBar.DoubleTrackBar;
             Changed = true;
             if (ValueChanged != null && bar !=null && !bar.ThumbClicked ) ValueChanged(this, new EventArgs());

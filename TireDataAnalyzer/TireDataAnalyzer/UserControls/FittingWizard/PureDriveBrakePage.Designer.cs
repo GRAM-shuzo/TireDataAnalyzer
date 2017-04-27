@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PureDriveBrakePage));
             this.TabControl = new System.Windows.Forms.TabControl();
             this.SR_FX = new System.Windows.Forms.TabPage();
             this.Theta_FySC = new System.Windows.Forms.SplitContainer();
@@ -286,9 +287,9 @@
             this.AdviseText0.AutoSize = true;
             this.AdviseText0.Location = new System.Drawing.Point(6, 15);
             this.AdviseText0.Name = "AdviseText0";
-            this.AdviseText0.Size = new System.Drawing.Size(23, 12);
+            this.AdviseText0.Size = new System.Drawing.Size(414, 72);
             this.AdviseText0.TabIndex = 39;
-            this.AdviseText0.Text = "aaa";
+            this.AdviseText0.Text = resources.GetString("AdviseText0.Text");
             // 
             // checkBox18
             // 
