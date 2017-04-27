@@ -339,6 +339,7 @@
             this.SRBar.Text = "doubleTrackBar3";
             this.SRBar.valueL = -100D;
             this.SRBar.valueR = 100D;
+            this.SRBar.ValueChanged += new System.EventHandler(this.BarValueChanged);
             // 
             // SAMin
             // 
@@ -370,6 +371,7 @@
             this.SABar.Text = "doubleTrackBar2";
             this.SABar.valueL = -100D;
             this.SABar.valueR = 100D;
+            this.SABar.ValueChanged += new System.EventHandler(this.BarValueChanged);
             // 
             // SimpleTireDataSelector
             // 

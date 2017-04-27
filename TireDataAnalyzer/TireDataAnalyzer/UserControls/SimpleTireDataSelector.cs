@@ -162,6 +162,12 @@ namespace TireDataAnalyzer.UserControls
             TBar.Max = limit.Max.TSTC;
             TBar.Min = limit.Min.TSTC;
 
+            SABar.Max = limit.Max.SA;
+            SABar.Min = limit.Min.SA;
+
+            SRBar.Max = limit.Max.SR;
+            SRBar.Min = limit.Min.SR;
+
             FZBar.valueR = limit.Max.FZ;
             FZBar.valueL = limit.Min.FZ;
 
@@ -173,6 +179,12 @@ namespace TireDataAnalyzer.UserControls
 
             TBar.valueR = limit.Max.TSTC;
             TBar.valueL = limit.Min.TSTC;
+
+            SABar.valueR = limit.Max.SA;
+            SABar.valueL = limit.Min.SA;
+
+            SRBar.valueR = limit.Max.SR;
+            SRBar.valueL = limit.Min.SR;
         }
     
         TireDataConstrain FZ;
@@ -256,8 +268,8 @@ namespace TireDataAnalyzer.UserControls
 
         private void BarValueChanged(object sender, EventArgs e)
         {
-            MagicFormulaArguments max = new MagicFormulaArguments(0, 0, FZBar.valueR, IABar.valueR, PBar.valueR, TBar.valueR);
-            MagicFormulaArguments min = new MagicFormulaArguments(0, 0, FZBar.valueL, IABar.valueL, PBar.valueL, TBar.valueL);
+            MagicFormulaArguments max = new MagicFormulaArguments(SABar.valueR, SRBar.valueR, FZBar.valueR, IABar.valueR, PBar.valueR, TBar.valueR);
+            MagicFormulaArguments min = new MagicFormulaArguments(SABar.valueL, SRBar.valueL, FZBar.valueL, IABar.valueL, PBar.valueL, TBar.valueL);
             var c = CenterValue;
             if (NormalizedCB.Checked == true)
             {
