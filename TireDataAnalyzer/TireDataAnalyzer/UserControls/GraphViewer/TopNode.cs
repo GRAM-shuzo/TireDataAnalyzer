@@ -66,16 +66,27 @@ namespace TireDataAnalyzer.UserControls.GraphViewer
             return true;
         }
 
-        public static TopNode Load(ZipArchive archive, TreeView tv)
+        public static TopNode Load(ZipArchive archive, TreeView tv, UserControls.ProgressDialog pd = null)
         {
             var entries = archive.Entries;
             TopNode node = new TopNode(tv);
-           foreach (var entry in entries.ToArray())
-           {
+            int max = 0;
+            foreach (var entry in entries.ToArray())
+            {
                 if (!entry.FullName.Contains("graph")) continue;
-                node.Nodes.Add( GraphNode.Load(entry, tv) );
+                ++max;
             }
-
+            if(pd !=null)
+            {
+                pd.Maximum = max;
+                pd.Value = 0;
+            }
+            foreach (var entry in entries.ToArray())
+            {
+                if (!entry.FullName.Contains("graph")) continue;
+                node.Nodes.Add(GraphNode.Load(entry, tv));
+                ++pd.Value;
+            }
 
             return node;
         }

@@ -109,6 +109,12 @@
     <Compile Include="UserControls\VersionInfo.Designer.cs">
       <DependentUpon>VersionInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ProgressDialogDrawing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\ProgressDialogDrawing.Designer.cs">
+      <DependentUpon>ProgressDialogDrawing.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\WPFMathTest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -402,6 +408,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\VersionInfo.resx">
       <DependentUpon>VersionInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ProgressDialogDrawing.resx">
+      <DependentUpon>ProgressDialogDrawing.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\WPFMathTest.resx">
       <DependentUpon>WPFMathTest.cs</DependentUpon>

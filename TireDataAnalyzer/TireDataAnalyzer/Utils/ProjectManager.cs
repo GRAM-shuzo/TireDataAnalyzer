@@ -106,11 +106,16 @@ namespace TireDataAnalyzer
             {
                 using (FileStream zipToOpen = new FileStream(path, FileMode.Open))
                 {
+                    var pd = new UserControls.ProgressDialog();
                     using (ZipArchive archive = new ZipArchive(zipToOpen, ZipArchiveMode.Read, false, Encoding.UTF8))
                     {
-                        LoadAll(archive);
-                        LoadGraph(archive);
+                        pd.Show(MainWindow.Instance);
+                        pd.Message = "データの読み込み中";
+                        LoadAll(archive, pd);
+                        pd.Message = "グラフの読み込み中";
+                        LoadGraph(archive, pd);
                     }
+                    pd.Close();
                 }
                 FilePath = path;
             }
@@ -161,7 +166,7 @@ namespace TireDataAnalyzer
         }
 
        
-        static void LoadAll(ZipArchive archive)
+        static void LoadAll(ZipArchive archive, UserControls.ProgressDialog pd = null)
         {
             List<string> FolderTree = new List<string>();
             foreach( var entry in archive.Entries)
@@ -173,17 +178,28 @@ namespace TireDataAnalyzer
             }
             FolderTree.Sort();
             FolderTree.Reverse();
-            ProjectNode = LoadAll(null, archive, "", FolderTree) as ProjectTree.Node_Project;
+            if(pd != null)
+            {
+                pd.Maximum = FolderTree.Count;
+                pd.Value = 0;
+            }
+
+            ProjectNode = LoadAll(null, archive, "", FolderTree, pd) as ProjectTree.Node_Project;
             ProjectNode.OnStateChanged += DataStateChangedImpl;
             DataStateChangedImpl(ProjectNode.State);
         }
 
-        static ProjectTree.ProjectTreeNode LoadAll(ProjectTree.ProjectTreeNode parent, ZipArchive archive, string path, List<string> folderTree)
+        static ProjectTree.ProjectTreeNode LoadAll(ProjectTree.ProjectTreeNode parent, ZipArchive archive, string path, List<string> folderTree, UserControls.ProgressDialog pd = null)
         {
             var lastPath = folderTree.Last();
             while (lastPath != null && lastPath.Contains(path))
             {
                 var node = ProjectTree.ProjectTreeNode.Load(archive, lastPath+"\\", parent);
+                if(pd != null)
+                {
+                    ++pd.Value;
+                }
+
                 folderTree.RemoveAt(folderTree.Count - 1);
                 if (folderTree.Count == 0)
                 {
@@ -191,7 +207,7 @@ namespace TireDataAnalyzer
                 }
 
 
-                LoadAll(node, archive, lastPath, folderTree);
+                LoadAll(node, archive, lastPath, folderTree, pd);
                 if (folderTree.Count == 0)
                 {
                     return node;
@@ -247,9 +263,9 @@ namespace TireDataAnalyzer
             
         }
 
-        static void LoadGraph(ZipArchive archive)
+        static void LoadGraph(ZipArchive archive, UserControls.ProgressDialog pd = null)
         {
-            var node = UserControls.GraphViewer.TopNode.Load(archive, MainWindow.GraphTreeView);
+            var node = UserControls.GraphViewer.TopNode.Load(archive, MainWindow.GraphTreeView, pd);
             MainWindow.GraphTreeView.Nodes.Clear();
             MainWindow.GraphTreeView.Nodes.Add(node);
             node.Expand();
