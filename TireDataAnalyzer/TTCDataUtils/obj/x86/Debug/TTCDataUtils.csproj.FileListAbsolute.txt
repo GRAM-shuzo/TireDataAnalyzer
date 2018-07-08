@@ -1,0 +1,9 @@
+E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\TTCDataUtils\bin\x86\Debug\TTCDataUtils.dll
+E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\TTCDataUtils\bin\x86\Debug\TTCDataUtils.pdb
+E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\TTCDataUtils\bin\x86\Debug\FittingSolverCore.dll
+E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\TTCDataUtils\bin\x86\Debug\TireDataUtils.dll
+E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\TTCDataUtils\bin\x86\Debug\FittingSolverCore.pdb
+E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\TTCDataUtils\bin\x86\Debug\TireDataUtils.pdb
+E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\TTCDataUtils\obj\x86\Debug\TTCDataUtils.csprojResolveAssemblyReference.cache
+E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\TTCDataUtils\obj\x86\Debug\TTCDataUtils.dll
+E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\TTCDataUtils\obj\x86\Debug\TTCDataUtils.pdb

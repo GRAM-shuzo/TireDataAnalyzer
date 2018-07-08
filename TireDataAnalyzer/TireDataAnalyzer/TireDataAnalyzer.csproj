@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TireDataAnalyzer</RootNamespace>
     <AssemblyName>TireDataAnalyzer</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -92,6 +92,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UserControls\FittingWizard\TransientPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\FittingWizard\TransientPage.Designer.cs">
+      <DependentUpon>TransientPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\MagicFormula_TexEquation.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -314,6 +320,9 @@
       <DependentUpon>TireDataSelector.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\ProjectManager.cs" />
+    <EmbeddedResource Include="UserControls\FittingWizard\TransientPage.resx">
+      <DependentUpon>TransientPage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\MagicFormula_TexEquation.resx">
       <DependentUpon>MagicFormula_TexEquation.cs</DependentUpon>
     </EmbeddedResource>

@@ -253,9 +253,15 @@
             this.TransientDataViewer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.TransientDataViewer.AutoScaleX = true;
+            this.TransientDataViewer.AutoScaleY = true;
             this.TransientDataViewer.Axis = TireDataAnalyzer.UserControls.TireDataViewer.EnumAxis.RawTireData;
+            this.TransientDataViewer.GraphSample = 225;
             this.TransientDataViewer.Location = new System.Drawing.Point(6, 30);
+            this.TransientDataViewer.MaxMinInterval = null;
+            this.TransientDataViewer.MenuEnabled = true;
             this.TransientDataViewer.Name = "TransientDataViewer";
+            this.TransientDataViewer.NumPoints = 2000;
             this.TransientDataViewer.Size = new System.Drawing.Size(843, 354);
             this.TransientDataViewer.TabIndex = 6;
             // 
@@ -335,9 +341,15 @@
             this.DriveBrakeDataViewer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.DriveBrakeDataViewer.AutoScaleX = true;
+            this.DriveBrakeDataViewer.AutoScaleY = true;
             this.DriveBrakeDataViewer.Axis = TireDataAnalyzer.UserControls.TireDataViewer.EnumAxis.RawTireData;
+            this.DriveBrakeDataViewer.GraphSample = 225;
             this.DriveBrakeDataViewer.Location = new System.Drawing.Point(6, 30);
+            this.DriveBrakeDataViewer.MaxMinInterval = null;
+            this.DriveBrakeDataViewer.MenuEnabled = true;
             this.DriveBrakeDataViewer.Name = "DriveBrakeDataViewer";
+            this.DriveBrakeDataViewer.NumPoints = 2000;
             this.DriveBrakeDataViewer.Size = new System.Drawing.Size(843, 354);
             this.DriveBrakeDataViewer.TabIndex = 6;
             // 
@@ -417,9 +429,15 @@
             this.CorneringDataViewer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.CorneringDataViewer.AutoScaleX = true;
+            this.CorneringDataViewer.AutoScaleY = true;
             this.CorneringDataViewer.Axis = TireDataAnalyzer.UserControls.TireDataViewer.EnumAxis.RawTireData;
+            this.CorneringDataViewer.GraphSample = 225;
             this.CorneringDataViewer.Location = new System.Drawing.Point(6, 30);
+            this.CorneringDataViewer.MaxMinInterval = null;
+            this.CorneringDataViewer.MenuEnabled = true;
             this.CorneringDataViewer.Name = "CorneringDataViewer";
+            this.CorneringDataViewer.NumPoints = 2000;
             this.CorneringDataViewer.Size = new System.Drawing.Size(872, 460);
             this.CorneringDataViewer.TabIndex = 6;
             // 

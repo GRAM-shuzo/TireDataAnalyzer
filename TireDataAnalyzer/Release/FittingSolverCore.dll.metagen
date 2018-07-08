@@ -1,0 +1,125 @@
+ImageRuntimeVersion: v4.0.30319
+Assembly FittingSolverCore, Version=1.0.*, Culture=ロケールに依存しない言語 (ロケールに依存しない国): 
+	hash=SHA1, flags=PublicKey
+Assembly mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly TireDataUtils, Version=1.0.*, Culture=ロケールに依存しない言語 (ロケールに依存しない国): 
+	hash=None, flags=None
+Class MagicFormulaFittingSolver.FittingSolver: AutoLayout, AnsiClass, Class, Public, Abstract, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    Double Xtol 'get set' : 
+    Int32 Maxeval 'get set' : 
+  Methods:
+    get_Maxeval(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName
+    set_Maxeval(Int32): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName
+    get_Xtol(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName
+    set_Xtol(Double): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName
+    Run(ApproximatingCurve, List`1, CancellationTokenSource, IProgress`1): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+Class MagicFormulaFittingSolver.NoFitting: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :MagicFormulaFittingSolver.FittingSolver
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    Double Xtol 'get set' : 
+    Int32 Maxeval 'get set' : 
+  Methods:
+    get_Maxeval(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    set_Maxeval(Int32): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    get_Xtol(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    set_Xtol(Double): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    Run(ApproximatingCurve, List`1, CancellationTokenSource, IProgress`1): PrivateScope, Public, Virtual, HideBySig
+Class MagicFormulaFittingSolver.LMFittingSolver: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :MagicFormulaFittingSolver.FittingSolver
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Interfaces:
+    System.IDisposable
+  Fields:
+    MagicFormulaFittingSolver.LMFittingSolverCore* core : Public
+  Properties:
+    Double MaxDataUsage 'get set' : 
+    Double Xtol 'get set' : 
+    Int32 Maxeval 'get set' : 
+  Methods:
+    get_Maxeval(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    set_Maxeval(Int32): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    get_Xtol(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    set_Xtol(Double): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    get_MaxDataUsage(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    set_MaxDataUsage(Double): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    Run(ApproximatingCurve, List`1, CancellationTokenSource, IProgress`1): PrivateScope, Public, Virtual, HideBySig
+    Dispose(): PrivateScope, Public, Final, Virtual, HideBySig
+Class MagicFormulaFittingSolver.NLOptFittingSolver: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :MagicFormulaFittingSolver.FittingSolver
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Interfaces:
+    System.IDisposable
+  Properties:
+    algorithm Algorithm 'get set' : 
+    Double Xtol 'get set' : 
+    Int32 ConstrainsDependOnDataMaxeval 'get set' : 
+    Int32 Maxeval 'get set' : 
+  Methods:
+    get_Maxeval(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    set_Maxeval(Int32): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    get_ConstrainsDependOnDataMaxeval(): PrivateScope, Public, HideBySig, SpecialName
+    set_ConstrainsDependOnDataMaxeval(Int32): PrivateScope, Public, HideBySig, SpecialName
+    get_Xtol(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    set_Xtol(Double): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    get_Algorithm(): PrivateScope, Public, HideBySig, SpecialName
+    set_Algorithm(algorithm): PrivateScope, Public, HideBySig, SpecialName
+    Run(ApproximatingCurve, List`1, CancellationTokenSource, IProgress`1): PrivateScope, Public, Virtual, HideBySig
+    Dispose(): PrivateScope, Public, Final, Virtual, HideBySig
+Struct MagicFormulaFittingSolver.NLOptFittingSolver+algorithm: AutoLayout, AnsiClass, Class, NestedPublic, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    algorithm GN_DIRECT = 0 : Public, Static, Literal, HasDefault
+    algorithm GN_DIRECT_L = 1 : Public, Static, Literal, HasDefault
+    algorithm GN_DIRECT_L_RAND = 2 : Public, Static, Literal, HasDefault
+    algorithm GN_DIRECT_NOSCAL = 3 : Public, Static, Literal, HasDefault
+    algorithm GN_DIRECT_L_NOSCAL = 4 : Public, Static, Literal, HasDefault
+    algorithm GN_DIRECT_L_RAND_NOSCAL = 5 : Public, Static, Literal, HasDefault
+    algorithm GN_ORIG_DIRECT = 6 : Public, Static, Literal, HasDefault
+    algorithm GN_ORIG_DIRECT_L = 7 : Public, Static, Literal, HasDefault
+    algorithm GD_STOGO = 8 : Public, Static, Literal, HasDefault
+    algorithm GD_STOGO_RAND = 9 : Public, Static, Literal, HasDefault
+    algorithm LD_LBFGS_NOCEDAL = 10 : Public, Static, Literal, HasDefault
+    algorithm LD_LBFGS = 11 : Public, Static, Literal, HasDefault
+    algorithm LN_PRAXIS = 12 : Public, Static, Literal, HasDefault
+    algorithm LD_VAR1 = 13 : Public, Static, Literal, HasDefault
+    algorithm LD_VAR2 = 14 : Public, Static, Literal, HasDefault
+    algorithm LD_TNEWTON = 15 : Public, Static, Literal, HasDefault
+    algorithm LD_TNEWTON_RESTART = 16 : Public, Static, Literal, HasDefault
+    algorithm LD_TNEWTON_PRECOND = 17 : Public, Static, Literal, HasDefault
+    algorithm LD_TNEWTON_PRECOND_RESTART = 18 : Public, Static, Literal, HasDefault
+    algorithm GN_CRS2_LM = 19 : Public, Static, Literal, HasDefault
+    algorithm GN_MLSL = 20 : Public, Static, Literal, HasDefault
+    algorithm GD_MLSL = 21 : Public, Static, Literal, HasDefault
+    algorithm GN_MLSL_LDS = 22 : Public, Static, Literal, HasDefault
+    algorithm GD_MLSL_LDS = 23 : Public, Static, Literal, HasDefault
+    algorithm LD_MMA = 24 : Public, Static, Literal, HasDefault
+    algorithm LN_COBYLA = 25 : Public, Static, Literal, HasDefault
+    algorithm LN_NEWUOA = 26 : Public, Static, Literal, HasDefault
+    algorithm LN_NEWUOA_BOUND = 27 : Public, Static, Literal, HasDefault
+    algorithm LN_NELDERMEAD = 28 : Public, Static, Literal, HasDefault
+    algorithm LN_SBPLX = 29 : Public, Static, Literal, HasDefault
+    algorithm LN_AUGLAG = 30 : Public, Static, Literal, HasDefault
+    algorithm LD_AUGLAG = 31 : Public, Static, Literal, HasDefault
+    algorithm LN_AUGLAG_EQ = 32 : Public, Static, Literal, HasDefault
+    algorithm LD_AUGLAG_EQ = 33 : Public, Static, Literal, HasDefault
+    algorithm LN_BOBYQA = 34 : Public, Static, Literal, HasDefault
+    algorithm GN_ISRES = 35 : Public, Static, Literal, HasDefault
+    algorithm AUGLAG = 36 : Public, Static, Literal, HasDefault
+    algorithm AUGLAG_EQ = 37 : Public, Static, Literal, HasDefault
+    algorithm G_MLSL = 38 : Public, Static, Literal, HasDefault
+    algorithm G_MLSL_LDS = 39 : Public, Static, Literal, HasDefault
+    algorithm LD_SLSQP = 40 : Public, Static, Literal, HasDefault
+    algorithm LD_CCSAQ = 41 : Public, Static, Literal, HasDefault
+    algorithm GN_ESCH = 42 : Public, Static, Literal, HasDefault
+    algorithm NUM_ALGORITHMS = 43 : Public, Static, Literal, HasDefault

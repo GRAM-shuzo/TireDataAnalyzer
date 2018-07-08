@@ -164,8 +164,7 @@ namespace TireDataAnalyzer
                 SaveAll(archive, child, path);
             }
         }
-
-       
+      
         static void LoadAll(ZipArchive archive, UserControls.ProgressDialog pd = null)
         {
             List<string> FolderTree = new List<string>();

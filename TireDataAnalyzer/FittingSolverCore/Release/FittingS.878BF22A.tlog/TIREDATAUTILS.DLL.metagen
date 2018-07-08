@@ -1,0 +1,210 @@
+ImageRuntimeVersion: v4.0.30319
+Assembly TireDataUtils, Version=1.0.*, Culture=ロケールに依存しない言語 (ロケールに依存しない国): 
+	hash=SHA1, flags=PublicKey
+Assembly mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.IO.Compression, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Class TTCDataUtils.StaticFunctions: AutoLayout, AnsiClass, Class, Public, Abstract, Sealed, BeforeFieldInit
+  Methods:
+    DeepCopy(T): PrivateScope, Public, Static, HideBySig
+    GetLimitData(List`1): PrivateScope, Public, Static, HideBySig
+Struct TTCDataUtils.TireDataColumn: AutoLayout, AnsiClass, Class, Public, Sealed
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    TTCDataUtils.TireDataColumn ET = 0 : Public, Static, Literal, HasDefault
+    TTCDataUtils.TireDataColumn V = 1 : Public, Static, Literal, HasDefault
+    TTCDataUtils.TireDataColumn N = 2 : Public, Static, Literal, HasDefault
+    TTCDataUtils.TireDataColumn SA = 3 : Public, Static, Literal, HasDefault
+    TTCDataUtils.TireDataColumn IA = 4 : Public, Static, Literal, HasDefault
+    TTCDataUtils.TireDataColumn RL = 5 : Public, Static, Literal, HasDefault
+    TTCDataUtils.TireDataColumn RE = 6 : Public, Static, Literal, HasDefault
+    TTCDataUtils.TireDataColumn P = 7 : Public, Static, Literal, HasDefault
+    TTCDataUtils.TireDataColumn FX = 8 : Public, Static, Literal, HasDefault
+    TTCDataUtils.TireDataColumn FY = 9 : Public, Static, Literal, HasDefault
+    TTCDataUtils.TireDataColumn FZ = 10 : Public, Static, Literal, HasDefault
+    TTCDataUtils.TireDataColumn MX = 11 : Public, Static, Literal, HasDefault
+    TTCDataUtils.TireDataColumn MZ = 12 : Public, Static, Literal, HasDefault
+    TTCDataUtils.TireDataColumn NFX = 13 : Public, Static, Literal, HasDefault
+    TTCDataUtils.TireDataColumn NFY = 14 : Public, Static, Literal, HasDefault
+    TTCDataUtils.TireDataColumn RST = 15 : Public, Static, Literal, HasDefault
+    TTCDataUtils.TireDataColumn TSTI = 16 : Public, Static, Literal, HasDefault
+    TTCDataUtils.TireDataColumn TSTC = 17 : Public, Static, Literal, HasDefault
+    TTCDataUtils.TireDataColumn TSTO = 18 : Public, Static, Literal, HasDefault
+    TTCDataUtils.TireDataColumn AMBTMP = 19 : Public, Static, Literal, HasDefault
+    TTCDataUtils.TireDataColumn SR = 20 : Public, Static, Literal, HasDefault
+    TTCDataUtils.TireDataColumn SL = 21 : Public, Static, Literal, HasDefault
+    TTCDataUtils.TireDataColumn NT = 22 : Public, Static, Literal, HasDefault
+Class TTCDataUtils.TireData: AutoLayout, AnsiClass, Class, Public, Serializable, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.Collections.Generic.Dictionary`2[TTCDataUtils.TireDataColumn,System.String] Label : Public, Static
+    System.Collections.Generic.Dictionary`2[TTCDataUtils.TireDataColumn,System.String] ColumnFormal : Public, Static
+  Properties:
+    Double ET  'get set' : 
+    Double V   'get set' : 
+    Double N   'get set' : 
+    Double SA  'get set' : 
+    Double IA  'get set' : 
+    Double RL  'get set' : 
+    Double RE  'get set' : 
+    Double P   'get set' : 
+    Double FX  'get set' : 
+    Double FY  'get set' : 
+    Double FZ  'get set' : 
+    Double MX  'get set' : 
+    Double MZ  'get set' : 
+    Double NFX 'get set' : 
+    Double NFY 'get set' : 
+    Double RST 'get set' : 
+    Double TSTI 'get set' : 
+    Double TSTC 'get set' : 
+    Double TSTO 'get set' : 
+    Double TST 'get ' : 
+    Double AMBTMP 'get set' : 
+    Double SR  'get set' : 
+    Double SL  'get set' : 
+    Double NT  'get ' : 
+    Double Item [TTCDataUtils.TireDataColumn] 'get set' : 
+  Methods:
+    get_ET(): PrivateScope, Public, HideBySig, SpecialName
+    set_ET(Double): PrivateScope, Public, HideBySig, SpecialName
+    get_V(): PrivateScope, Public, HideBySig, SpecialName
+    set_V(Double): PrivateScope, Public, HideBySig, SpecialName
+    get_N(): PrivateScope, Public, HideBySig, SpecialName
+    set_N(Double): PrivateScope, Public, HideBySig, SpecialName
+    get_SA(): PrivateScope, Public, HideBySig, SpecialName
+    set_SA(Double): PrivateScope, Public, HideBySig, SpecialName
+    get_IA(): PrivateScope, Public, HideBySig, SpecialName
+    set_IA(Double): PrivateScope, Public, HideBySig, SpecialName
+    get_RL(): PrivateScope, Public, HideBySig, SpecialName
+    set_RL(Double): PrivateScope, Public, HideBySig, SpecialName
+    get_RE(): PrivateScope, Public, HideBySig, SpecialName
+    set_RE(Double): PrivateScope, Public, HideBySig, SpecialName
+    get_P(): PrivateScope, Public, HideBySig, SpecialName
+    set_P(Double): PrivateScope, Public, HideBySig, SpecialName
+    get_FX(): PrivateScope, Public, HideBySig, SpecialName
+    set_FX(Double): PrivateScope, Public, HideBySig, SpecialName
+    get_FY(): PrivateScope, Public, HideBySig, SpecialName
+    set_FY(Double): PrivateScope, Public, HideBySig, SpecialName
+    get_FZ(): PrivateScope, Public, HideBySig, SpecialName
+    set_FZ(Double): PrivateScope, Public, HideBySig, SpecialName
+    get_MX(): PrivateScope, Public, HideBySig, SpecialName
+    set_MX(Double): PrivateScope, Public, HideBySig, SpecialName
+    get_MZ(): PrivateScope, Public, HideBySig, SpecialName
+    set_MZ(Double): PrivateScope, Public, HideBySig, SpecialName
+    get_NFX(): PrivateScope, Public, HideBySig, SpecialName
+    set_NFX(Double): PrivateScope, Public, HideBySig, SpecialName
+    get_NFY(): PrivateScope, Public, HideBySig, SpecialName
+    set_NFY(Double): PrivateScope, Public, HideBySig, SpecialName
+    get_RST(): PrivateScope, Public, HideBySig, SpecialName
+    set_RST(Double): PrivateScope, Public, HideBySig, SpecialName
+    get_TSTI(): PrivateScope, Public, HideBySig, SpecialName
+    set_TSTI(Double): PrivateScope, Public, HideBySig, SpecialName
+    get_TSTC(): PrivateScope, Public, HideBySig, SpecialName
+    set_TSTC(Double): PrivateScope, Public, HideBySig, SpecialName
+    get_TSTO(): PrivateScope, Public, HideBySig, SpecialName
+    set_TSTO(Double): PrivateScope, Public, HideBySig, SpecialName
+    get_TST(): PrivateScope, Public, HideBySig, SpecialName
+    get_AMBTMP(): PrivateScope, Public, HideBySig, SpecialName
+    set_AMBTMP(Double): PrivateScope, Public, HideBySig, SpecialName
+    get_SR(): PrivateScope, Public, HideBySig, SpecialName
+    set_SR(Double): PrivateScope, Public, HideBySig, SpecialName
+    get_SL(): PrivateScope, Public, HideBySig, SpecialName
+    set_SL(Double): PrivateScope, Public, HideBySig, SpecialName
+    get_NT(): PrivateScope, Public, HideBySig, SpecialName
+    set_Item(TireDataColumn, Double): PrivateScope, Public, HideBySig, SpecialName
+    get_Item(TireDataColumn): PrivateScope, Public, HideBySig, SpecialName
+    Count(): PrivateScope, Public, Static, HideBySig
+    Copy(): PrivateScope, Public, HideBySig
+    Resolution(): PrivateScope, Public, Static, HideBySig
+Class TTCDataUtils.TireDataMaxmin: AutoLayout, AnsiClass, Class, Public, Serializable, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    Int32 count : Public
+    TTCDataUtils.TireData Max : Public
+    TTCDataUtils.TireData Min : Public
+    TTCDataUtils.TireData Mean : Public
+  Methods:
+    MaxValue(TireDataColumn): PrivateScope, Public, HideBySig
+    MinValue(TireDataColumn): PrivateScope, Public, HideBySig
+    MeanValue(TireDataColumn): PrivateScope, Public, HideBySig
+    Copy(): PrivateScope, Public, HideBySig
+Class TTCDataUtils.TireDataMaxminSet: AutoLayout, AnsiClass, Class, Public, Serializable, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    TTCDataUtils.TireDataMaxmin CorneringTableLimit : Public
+    TTCDataUtils.TireDataMaxmin DriveBrakeTableLimit : Public
+    TTCDataUtils.TireDataMaxmin TransientTableLimit : Public
+  Methods:
+    Limit(Table): PrivateScope, Public, HideBySig
+    Copy(): PrivateScope, Public, HideBySig
+    TireDataMaxminMerge(TireDataMaxmin, TireDataMaxmin): PrivateScope, Public, Static, HideBySig
+Struct TTCDataUtils.Table: AutoLayout, AnsiClass, Class, Public, Sealed
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    TTCDataUtils.Table CorneringTable = 0 : Public, Static, Literal, HasDefault
+    TTCDataUtils.Table DriveBrakeTable = 1 : Public, Static, Literal, HasDefault
+    TTCDataUtils.Table StaticTable = 2 : Public, Static, Literal, HasDefault
+    TTCDataUtils.Table TransientTable = 3 : Public, Static, Literal, HasDefault
+    TTCDataUtils.Table None = 4 : Public, Static, Literal, HasDefault
+Class TTCDataUtils.TireDataSet: AutoLayout, AnsiClass, Class, Public, Serializable, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    TireDataSetState CorneringTableState : Public
+    TireDataSetState DriveBrakeTableState : Public
+    TireDataSetState TransientTableState : Public
+    System.Collections.Generic.List`1[TTCDataUtils.TireData] CorneringTable : Public
+    System.Collections.Generic.List`1[TTCDataUtils.TireData] DriveBrakeTable : Public
+    System.Collections.Generic.List`1[TTCDataUtils.TireData] TransientTable : Public
+    TTCDataUtils.TireDataMaxminSet MaxminSet : Public
+  Methods:
+    Load(String): PrivateScope, Public, Static, HideBySig
+    Load(Stream): PrivateScope, Public, Static, HideBySig
+    Save(String): PrivateScope, Public, HideBySig
+    Save(Stream): PrivateScope, Public, HideBySig
+    Copy(): PrivateScope, Public, HideBySig
+    GetDataList(Table): PrivateScope, Public, HideBySig
+    GetLimitDataAll(): PrivateScope, Public, HideBySig
+    GetLimitData(Table): PrivateScope, Public, HideBySig
+Struct TTCDataUtils.FuncResult: AutoLayout, AnsiClass, Class, Public, SequentialLayout, Sealed, BeforeFieldInit
+  :System.ValueType
+  Fields:
+    Double value : Public
+    System.Collections.Generic.List`1[System.Double] grads : Public
+Interface TTCDataUtils.ApproximatingCurve: AutoLayout, AnsiClass, Class, Public, ClassSemanticsMask, Abstract
+  Properties:
+    System.Collections.Generic.List`1[System.Double] Parameters 'get ' : 
+    System.Collections.Generic.List`1[System.Boolean] FittingParameters 'get ' : 
+  Methods:
+    get_Parameters(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName
+    Error(TireData): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+    ConstraintsPure(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+    get_FittingParameters(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName
+    ConstraintsDependOnData(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+    ResetDiff(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+Class TTCDataUtils.ProgressNotification: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    Boolean finished : Public
+  Properties:
+    Int32 Stage 'get set' : 
+    Int32 Count 'get set' : 
+    Double Error 'get set' : 
+  Methods:
+    get_Stage(): PrivateScope, Public, HideBySig, SpecialName
+    set_Stage(Int32): PrivateScope, Public, HideBySig, SpecialName
+    get_Count(): PrivateScope, Public, HideBySig, SpecialName
+    set_Count(Int32): PrivateScope, Public, HideBySig, SpecialName
+    get_Error(): PrivateScope, Public, HideBySig, SpecialName
+    set_Error(Double): PrivateScope, Public, HideBySig, SpecialName
+Struct TTCDataUtils.TireDataSet+TireDataSetState: AutoLayout, AnsiClass, Class, NestedPublic, Sealed
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    TireDataSetState Changed = 0 : Public, Static, Literal, HasDefault
+    TireDataSetState NotChanged = 1 : Public, Static, Literal, HasDefault

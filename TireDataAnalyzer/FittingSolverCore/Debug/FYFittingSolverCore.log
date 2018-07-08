@@ -1,0 +1,3 @@
+﻿NLOptFittingSolverCore.obj : warning LNK4248: 未解決の typeref トークン (0100001E) ('nlopt_opt_s') です。イメージを実行できません。
+LMFittingSolverCore.obj : warning LNK4248: 未解決の typeref トークン (0100001D) ('nlopt_opt_s') です。イメージを実行できません。
+  FYFittingSolverCore.vcxproj -> E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\Debug\FittingSolverCore.dll

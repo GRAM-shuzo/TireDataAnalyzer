@@ -1,0 +1,119 @@
+﻿  Stdafx.cpp
+  AssemblyInfo.cpp
+  LMFittingSolverCore.cpp
+LMFittingSolverCore.cpp(242): warning C4490: 'override': オーバーライド指定子の使用法が不適切です。'MagicFormulaFittingSolver::LMFittingSolver::MaxDataUsage::get' は基本 ref クラス メソッドと一致しません
+  LMFittingSolverCore.cpp(242): note: 'new' または 'override' は、ref クラスからの一致する基本メソッドが存在するときにのみ使用できます
+LMFittingSolverCore.cpp(246): warning C4490: 'override': オーバーライド指定子の使用法が不適切です。'MagicFormulaFittingSolver::LMFittingSolver::MaxDataUsage::set' は基本 ref クラス メソッドと一致しません
+  LMFittingSolverCore.cpp(246): note: 'new' または 'override' は、ref クラスからの一致する基本メソッドが存在するときにのみ使用できます
+LMFittingSolverCore.cpp(237): warning C4244: '=': 'double' から 'int' への変換です。データが失われる可能性があります。
+LMFittingSolverCore.cpp(248): warning C4244: '=': 'double' から 'int' への変換です。データが失われる可能性があります。
+  コードを生成中...
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(488): warning C4793: Eigen::internal::predux_max<__m128d>': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(488): warning C4793: Eigen::internal::predux_max<__m128d>': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(394): warning C4793: Eigen::internal::predux<__m128d>': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(394): warning C4793: Eigen::internal::predux<__m128d>': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(274): warning C4793: Eigen::internal::pstore<double,__m128d>': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(279): warning C4793: Eigen::internal::pstoreu<double,__m128d>': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(280): warning C4793: Eigen::internal::pstoreu<double,__m128d>': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(275): warning C4793: Eigen::internal::pstore<int,__m128i>': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(283): warning C4793: Eigen::internal::pstoreu<int,__m128i>': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(114): warning C4793: Eigen::internal::pset1<__m128d>': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(220): warning C4793: Eigen::internal::pload<__m128d>': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(251): warning C4793: Eigen::internal::ploadu<__m128d>': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(602): warning C4793: Eigen::internal::palign_impl<1,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(602): warning C4793: Eigen::internal::palign_impl<1,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(602): warning C4793: Eigen::internal::palign_impl<1,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(602): warning C4793: Eigen::internal::palign_impl<1,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(603): warning C4793: Eigen::internal::palign_impl<1,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(603): warning C4793: Eigen::internal::palign_impl<1,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(603): warning C4793: Eigen::internal::palign_impl<1,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(603): warning C4793: Eigen::internal::palign_impl<1,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(602): warning C4793: Eigen::internal::palign_impl<2,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(602): warning C4793: Eigen::internal::palign_impl<2,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(602): warning C4793: Eigen::internal::palign_impl<2,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(602): warning C4793: Eigen::internal::palign_impl<2,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(603): warning C4793: Eigen::internal::palign_impl<2,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(603): warning C4793: Eigen::internal::palign_impl<2,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(603): warning C4793: Eigen::internal::palign_impl<2,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(603): warning C4793: Eigen::internal::palign_impl<2,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(602): warning C4793: Eigen::internal::palign_impl<3,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(602): warning C4793: Eigen::internal::palign_impl<3,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(602): warning C4793: Eigen::internal::palign_impl<3,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(602): warning C4793: Eigen::internal::palign_impl<3,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(603): warning C4793: Eigen::internal::palign_impl<3,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(603): warning C4793: Eigen::internal::palign_impl<3,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(603): warning C4793: Eigen::internal::palign_impl<3,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(603): warning C4793: Eigen::internal::palign_impl<3,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(311): warning C4793: Eigen::internal::pfirst<__m128d>': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(123): warning C4793: Eigen::internal::padd<__m128d>': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(191): warning C4793: Eigen::internal::pmax<__m128d>': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(150): warning C4793: Eigen::internal::pmul<__m128d>': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(127): warning C4793: Eigen::internal::psub<__m128d>': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(334): warning C4793: Eigen::internal::pabs<__m128d>': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(334): warning C4793: Eigen::internal::pabs<__m128d>': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(335): warning C4793: Eigen::internal::pabs<__m128d>': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(221): warning C4793: Eigen::internal::pload<__m128i>': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(256): warning C4793: Eigen::internal::ploadu<__m128i>': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(137): warning C4793: Eigen::internal::pnegate<__m128d>': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(137): warning C4793: Eigen::internal::pnegate<__m128d>': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(138): warning C4793: Eigen::internal::pnegate<__m128d>': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\eigen\eigen\src\core\arch\sse\packetmath.h(168): warning C4793: Eigen::internal::pdiv<__m128d>': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+  NLOptFittingSolverCore.cpp
+NLOptFittingSolverCore.cpp(77): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+NLOptFittingSolverCore.cpp(81): warning C4244: '初期化中': 'std::chrono::system_clock::rep' から 'unsigned int' への変換です。データが失われる可能性があります。
+  .NETFramework,Version=v4.6.1.AssemblyAttributes.cpp
+  AssemblyInfo.obj : マネージ コードが存在する場合は、/DEBUG:FASTLINK はサポートされません。/DEBUG:FULL でリンクを再開します
+NLOptFittingSolverCore.obj : warning LNK4248: 未解決の typeref トークン (0100001E) ('nlopt_opt_s') です。イメージを実行できません。
+LMFittingSolverCore.obj : warning LNK4248: 未解決の typeref トークン (0100001D) ('nlopt_opt_s') です。イメージを実行できません。
+  FittingSolverCore.vcxproj -> E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\Debug\FittingSolverCore.dll
+  FittingSolverCore.vcxproj -> E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\Debug\FittingSolverCore.pdb (Partial PDB)

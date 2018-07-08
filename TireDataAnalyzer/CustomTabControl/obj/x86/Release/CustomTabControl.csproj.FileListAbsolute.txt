@@ -1,0 +1,3 @@
+E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\CustomTabControl\bin\Release\JacksonSoft.CustomTabControl.dll
+E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\CustomTabControl\obj\x86\Release\CustomTabControl.csprojResolveAssemblyReference.cache
+E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\CustomTabControl\obj\x86\Release\JacksonSoft.CustomTabControl.dll

@@ -27,3 +27,5 @@
 *.exe
 *.out
 *.app
+/TireDataAnalyzer/.vs/TireDataAnalyzer
+/TireDataAnalyzer/.vs/TireDataAnalyzer/v15/Solution.VC.db

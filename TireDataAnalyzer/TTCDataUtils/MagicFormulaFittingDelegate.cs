@@ -34,7 +34,7 @@ namespace TTCDataUtils
 
         public MagicFormulaFittingDelegate Copy()
         {
-            var mffd =  new MagicFormulaFittingDelegate(MagicFormula.Copy(), IDataset);
+            var mffd = new MagicFormulaFittingDelegate(MagicFormula.Copy(), IDataset);
             mffd.Initialized = this.Initialized;
             mffd.FittingResolved = this.FittingResolved;
             mffd.FittingPFX = FittingPFX;
@@ -46,7 +46,7 @@ namespace TTCDataUtils
             return mffd;
         }
 
-        public void  CopyFrom(MagicFormulaFittingDelegate mffd, bool sameParent)
+        public void CopyFrom(MagicFormulaFittingDelegate mffd, bool sameParent)
         {
             MagicFormula = mffd.MagicFormula;
             idataset = mffd.IDataset;
@@ -95,7 +95,7 @@ namespace TTCDataUtils
             private set
             {
                 initialized = value;
-                if(initialized == true && OnInitialized != null)
+                if (initialized == true && OnInitialized != null)
                 {
                     OnInitialized(this, new EventArgs());
                 }
@@ -129,7 +129,7 @@ namespace TTCDataUtils
             Initialized = true;
         }
 
-        public void Run( CancellationTokenSource cancel, IProgress<ProgressNotification> prg)
+        public void Run(CancellationTokenSource cancel, IProgress<ProgressNotification> prg)
         {
             var pn = new ProgressNotification();
             if (!(Solver is NoFitting))
@@ -138,7 +138,7 @@ namespace TTCDataUtils
                 var dataset = IDataset.GetDataSet();
 
                 //PureFY
-                
+
                 pn.Stage = 1;
                 prg.Report(pn);
                 if (FittingPFY) solver.Run(MagicFormula.FY, dataset.CorneringTable, cancel, prg);
@@ -188,11 +188,11 @@ namespace TTCDataUtils
                     solver.Run(MagicFormula.MZ.MZR, list, cancel, prg);
                 }
             }
-            
-            
+
+
 
             FittingResolved = true;
-            
+
             pn = new ProgressNotification();
             pn.finished = true;
             prg.Report(pn);

@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -2673,7 +2674,8 @@ namespace TTCDataUtils
         }
         override public double X(MagicFormulaArguments args)
         {
-            return args.SA;
+            double sa = args.SA;
+            return sa;
         }
         override public double B(MagicFormulaArguments args)
         {

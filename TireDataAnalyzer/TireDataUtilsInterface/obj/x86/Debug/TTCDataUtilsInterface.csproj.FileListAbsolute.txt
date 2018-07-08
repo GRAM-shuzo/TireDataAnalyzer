@@ -1,0 +1,5 @@
+E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\TireDataUtilsInterface\bin\x86\Debug\TireDataUtils.dll
+E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\TireDataUtilsInterface\bin\x86\Debug\TireDataUtils.pdb
+E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\TireDataUtilsInterface\obj\x86\Debug\TTCDataUtilsInterface.csprojResolveAssemblyReference.cache
+E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\TireDataUtilsInterface\obj\x86\Debug\TireDataUtils.dll
+E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\TireDataUtilsInterface\obj\x86\Debug\TireDataUtils.pdb

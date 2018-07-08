@@ -1,0 +1,5 @@
+E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\Gnuplot\bin\x86\Debug\Gnuplot.dll
+E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\Gnuplot\bin\x86\Debug\Gnuplot.pdb
+E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\Gnuplot\obj\x86\Debug\Gnuplot.csprojResolveAssemblyReference.cache
+E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\Gnuplot\obj\x86\Debug\Gnuplot.dll
+E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\Gnuplot\obj\x86\Debug\Gnuplot.pdb

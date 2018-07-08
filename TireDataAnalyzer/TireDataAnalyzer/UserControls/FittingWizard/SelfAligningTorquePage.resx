@@ -117,43 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="label6.Text" xml:space="preserve">
-    <value>d*cos(c*atan(b*(x+sh)-e*(b*(x+sh)-atan(b*(x+sh)))))*cos(x);
-B = (a2 * Math.Pow(FZ, 2) + a1 * FZ + a0) * (a3 * Math.Abs(IA) + 1)
-C = a4
-D = FZ * (a5 * FZ + a6) * (a8 * Math.Abs(IA) + a9 * Math.Pow(IA, 2) + 1) * (1 - a7 * P)
-E  = (a10+a11*FZ+a12*FZ*FZ)*(1+(a13+a14*IA)*(2/%pi)
-      *atan(B(a0,a1,a2,a3)*a4*(SA+SH(a15,a16,a17,a18))));
-Sh= a15+a16*FZ + a17*(1+a18*FZ)*IA;</value>
-  </data>
-  <data name="label4.Text" xml:space="preserve">
-    <value>d*cos(c*atan(b*(x+sh)-e*(b*(x+sh)-atan(b*(x+sh)))))*cos(x);
-B = (a2 * Math.Pow(FZ, 2) + a1 * FZ + a0) * (a3 * Math.Abs(IA) + 1)
-C = a4
-D = FZ * (a5 * FZ + a6) * (a8 * Math.Abs(IA) + a9 * Math.Pow(IA, 2) + 1) * (1 - a7 * P)
-E  = (a10+a11*FZ+a12*FZ*FZ)*(1+(a13+a14*IA)*(2/%pi)
-      *atan(B(a0,a1,a2,a3)*a4*(SA+SH(a15,a16,a17,a18))));
-Sh= a15+a16*FZ + a17*(1+a18*FZ)*IA;</value>
-  </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>d*cos(c*atan(b*(x+sh)-e*(b*(x+sh)-atan(b*(x+sh)))))*cos(x);
-B = (a2 * Math.Pow(FZ, 2) + a1 * FZ + a0) * (a3 * Math.Abs(IA) + 1)
-C = a4
-D = FZ * (a5 * FZ + a6) * (a8 * Math.Abs(IA) + a9 * Math.Pow(IA, 2) + 1) * (1 - a7 * P)
-E  = (a10+a11*FZ+a12*FZ*FZ)*(1+(a13+a14*IA)*(2/%pi)
-      *atan(B(a0,a1,a2,a3)*a4*(SA+SH(a15,a16,a17,a18))));
-Sh= a15+a16*FZ + a17*(1+a18*FZ)*IA;</value>
-  </data>
-  <data name="AdviseText.Text" xml:space="preserve">
-    <value>d*cos(c*atan(b*(x+sh)-e*(b*(x+sh)-atan(b*(x+sh)))))*cos(x);
-B = (a2 * Math.Pow(FZ, 2) + a1 * FZ + a0) * (a3 * Math.Abs(IA) + 1)
-C = a4
-D = FZ * (a5 * FZ + a6) * (a8 * Math.Abs(IA) + a9 * Math.Pow(IA, 2) + 1) * (1 - a7 * P)
-E  = (a10+a11*FZ+a12*FZ*FZ)*(1+(a13+a14*IA)*(2/%pi)
-      *atan(B(a0,a1,a2,a3)*a4*(SA+SH(a15,a16,a17,a18))));
-Sh= a15+a16*FZ + a17*(1+a18*FZ)*IA;</value>
-  </data>
   <metadata name="EP_NumericalInput.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
+  </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>56</value>
   </metadata>
 </root>
