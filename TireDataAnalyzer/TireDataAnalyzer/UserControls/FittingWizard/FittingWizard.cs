@@ -38,8 +38,8 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             PureDriveBrakePage four = new PureDriveBrakePage(three);
             CombinedSlipPage five = new CombinedSlipPage(four);
             SelfAligningTorquePage six = new SelfAligningTorquePage(five);
-            TransientPage sixp5 = new TransientPage(six);
-            SolverSettingPage seven = new SolverSettingPage(sixp5);
+            //TransientPage sixp5 = new TransientPage(six);
+            SolverSettingPage seven = new SolverSettingPage(six);
             ProgressPage eight = new ProgressPage(seven);
             FinishedPage nine = new FinishedPage(eight);
             this.Controls.Add(one);

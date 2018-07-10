@@ -33,7 +33,7 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
         string ELowerLegend = "ELowerLine";
 
         public SelfAligningTorquePage(FittingWizardPage previous)
-            : base(previous, "PureSlip横力パラメータ")
+            : base(previous, "セルフアライニングトルクパラメータ")
         {
             InitializeComponent();
 
@@ -41,10 +41,8 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             Advises.Add(AdviseText1);
             Advises.Add(AdviseText2);
             Advises.Add(AdviseText3);
-            Advises.Add(AdviseText4);
-            Advises.Add(AdviseText5);
 
-            ParameterTB.Add(a100TB);
+            ParameterTB.Add(a0TB);
             ParameterTB.Add(a1TB);
             ParameterTB.Add(a2TB);
             ParameterTB.Add(a3TB);
@@ -63,11 +61,10 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             ParameterTB.Add(a16TB);
             ParameterTB.Add(a17TB);
             ParameterTB.Add(a18TB);
-            ParameterTB.Add(a19TB);
-            ParameterTB.Add(a20TB);
-            ParameterTB.Add(a21TB);
-            ParameterTB.Add(a22TB);
-            ParameterTB.Add(a23TB);
+            ParameterTB.Add(s1TB);
+            ParameterTB.Add(s2TB);
+            ParameterTB.Add(s3TB);
+            ParameterTB.Add(s4TB);
 
             FittingParametersCB.Add(checkBox0);
             FittingParametersCB.Add(checkBox1);
@@ -88,35 +85,27 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             FittingParametersCB.Add(checkBox16);
             FittingParametersCB.Add(checkBox17);
             FittingParametersCB.Add(checkBox18);
-            FittingParametersCB.Add(checkBox19);
-            FittingParametersCB.Add(checkBox20);
-            FittingParametersCB.Add(checkBox21);
-            FittingParametersCB.Add(checkBox22);
-            FittingParametersCB.Add(checkBox23);
+
+            FittingParametersCB.Add(checkBoxs1);
+            FittingParametersCB.Add(checkBoxs2);
+            FittingParametersCB.Add(checkBoxs3);
+            FittingParametersCB.Add(checkBoxs4);
 
             TDSs.Add(simpleTireDataSelector1);
             TDSs.Add(simpleTireDataSelector2);
             TDSs.Add(simpleTireDataSelector3);
             TDSs.Add(simpleTireDataSelector4);
-            TDSs.Add(simpleTireDataSelector5);
-            TDSs.Add(simpleTireDataSelector6);
 
             Viewers.Add(Theta_FyViewer);
             Viewers.Add(Fz_FyViewer);
             Viewers.Add(Fz_CpViewer);
             Viewers.Add(P_FyViewer);
-            Viewers.Add(P_CpViewer);
-            Viewers.Add(CurveFactorViewer);
 
             Viewers[0].Axis = TireDataViewer.EnumAxis.MagicFormula;
             Viewers[1].Axis = TireDataViewer.EnumAxis.MagicFormula;
             Viewers[2].Axis = TireDataViewer.EnumAxis.MagicFormula;
             Viewers[3].Axis = TireDataViewer.EnumAxis.MagicFormula;
-            Viewers[4].Axis = TireDataViewer.EnumAxis.MagicFormula;
-            Viewers[5].Axis = TireDataViewer.EnumAxis.MagicFormula;
 
-            FirstPlot.Add(false);
-            FirstPlot.Add(false);
             FirstPlot.Add(false);
             FirstPlot.Add(false);
             FirstPlot.Add(false);
@@ -153,17 +142,16 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
                 Viewers[i].SetDataListRefMF(dataLegend, formulaLegend);
                 Viewers[i].SetLineWidth(5, formulaLegend);
             }
+            /*
             Viewers[5].SetChartType(System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine, EUpperLegend);
             Viewers[5].SetChartType(System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine, ELowerLegend);
             Viewers[5].SetLineWidth(5, EUpperLegend);
             Viewers[5].SetLineWidth(5, ELowerLegend);
-
+            */
             Equations.Add(magicFormula_TexEquation0);
             Equations.Add(magicFormula_TexEquation1);
             Equations.Add(magicFormula_TexEquation2);
             Equations.Add(magicFormula_TexEquation3);
-            Equations.Add(magicFormula_TexEquation4);
-            Equations.Add(magicFormula_TexEquation5);
             SetClickAllControls(this);
         }
 
@@ -194,28 +182,31 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
 
             if (i < 0 || i >= ParameterTB.Count)
             {
-                foreach (var l in Advises)
-                {
-                    l.Text = @"PureFyモデルへのフィッティングを行います。
-入力値：スリップアングル(SA)、輪荷重(FZ)、キャンバ角(IA)、空気圧(P)、タイヤ温度(T)
-出力値：横力(Fy)
-決める必要のあるパラメータはa0～a23の24変数です。(のちに最適化されます)
-中間パラメータD、BCD、C、E、Sv、Shは曲線の特性を表し
-Dは最大横力、BCDはSA + Sh = 0での傾き（コーナリングパワー相当）、C、Eはカーブの形状を決めます。";
-                }
+                AdviseText0.Text = @"SelfAligningTorqueモデルへのフィッティングを行います。
+入力値：スリップアングル(SA)、スリップ率(SR)、輪荷重(FZ)、キャンバ角(IA)、空気圧(P)
+出力値：横力(Mz)
+決める必要のあるパラメータはa0～a18, s1～s4の23変数です。(のちに最適化されます)
+ニューマチックトレールPTと前後力影響度sを決めます";
+
+                AdviseText1.Text = @"ニューマチックトレールのフィッティングを行います。
+入力値：スリップアングル(SA)、スリップ率(SR)、輪荷重(FZ)、キャンバ角(IA)、空気圧(P)
+出力値：ニューマチックトレール(PT)
+ここではニューマチックトレールのカーブ形状を決めます";
+
+                AdviseText2.Text = @"ニューマチックトレールのフィッティングを行います。
+入力値：スリップアングル(SA)、輪荷重(FZ)、キャンバ角(IA)、空気圧(P)
+出力値：ニューマチックトレール(PT)
+ここではニューマチックトレールの最大値を決めます";
+
+                AdviseText3.Text = @"セルフアライニングトルクのコンバインドスリップ要素です。
+入力値：スリップアングル(SA)、輪荷重(FZ)、キャンバ角(IA)、空気圧(P)
+出力値：コンバインドスリップ要素(s)
+この値はコンバインドスリップ時のセルフアライニングトルクのカーブのずれ（Fxに比例と仮定）を埋めます";
                 return;
             }
 
             string[] text = new string[24];
             text[0] = "Cはカーブ形状を決めます。通常は1<C<1.65の値をとります。";
-            text[19] = @"Shはカーブを水平方向にオフセットします。主にキャンバスラストを表します。
-このためキャンバが0の時にはSh=0をとります";
-            text[20] = text[19];
-            text[21] = text[19];
-
-            text[22] = @"Svはカーブを垂直方向にオフセットします。主にキャンバスラストを表します。
-このためキャンバが0の時にはSv=0をとります";
-            text[23] = text[22];
 
             text[1] = @"Dはキャンバ角0°でのカーブの最大値を決定します。
 Dは輪荷重FZと摩擦係数との積で表せます。
@@ -303,8 +294,6 @@ Eは-(1+0.5C^2) < E < 1を満たす必要があり、
             Viewers[1].SetAxis(MagicFormulaInputVariables.FZ, MagicFormulaOutputVariables.FY_D);
             Viewers[2].SetAxis(MagicFormulaInputVariables.FZ, MagicFormulaOutputVariables.FY_BCD);
             Viewers[3].SetAxis(MagicFormulaInputVariables.P, MagicFormulaOutputVariables.FY_D);
-            Viewers[4].SetAxis(MagicFormulaInputVariables.P, MagicFormulaOutputVariables.FY_BCD);
-            Viewers[5].SetAxis(MagicFormulaInputVariables.SA, MagicFormulaOutputVariables.FY_E);
         }
 
         protected override void Reload(bool back)
@@ -325,8 +314,6 @@ Eは-(1+0.5C^2) < E < 1を満たす必要があり、
             comboBox1.SelectedIndex = 4;
             comboBox2.SelectedIndex = 4;
             comboBox3.SelectedIndex = 4;
-            comboBox4.SelectedIndex = 4;
-            comboBox5.SelectedIndex = 4;
             stopReplot = false;
             ReplotFormula = true;
             ReplotData = true;

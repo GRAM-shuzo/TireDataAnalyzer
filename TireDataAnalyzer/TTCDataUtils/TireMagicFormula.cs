@@ -17,8 +17,12 @@ namespace TTCDataUtils
     [Serializable]
     public class MagicFormulaArguments
     {
-
-        public MagicFormulaArguments(double sa, double sr, double fz, double ia, double p, double t)
+        //4次のアダムスバッシュフォース法まで使用可能
+        public MagicFormulaArguments(double sa, double sr, double fz, double ia, double p, double t,
+            double dt_ = -1, double fy1 = double.NaN, double fx1 = double.NaN,
+            double fy2 = double.NaN, double fx2 = double.NaN,
+            double fy3 = double.NaN, double fx3 = double.NaN
+            )
         {
             SA = sa;
             SR = sr;
@@ -26,6 +30,13 @@ namespace TTCDataUtils
             IA = ia;
             P = p;
             T = t;
+            dt = dt_;
+            Fy1 = fy1;
+            Fx1 = fx1;
+            Fy2 = fy2;
+            Fx2 = fx2;
+            Fy3 = fy3;
+            Fx3 = fx3;
         }
         public MagicFormulaArguments(TireData data)
         {
@@ -37,6 +48,13 @@ namespace TTCDataUtils
         public double IA;  //キャンバ角
         public double P;   //タイヤ空気圧
         public double T;   //タイヤ平均温度
+        public double dt;  //時間微分（トランジェント）
+        public double Fy1;  //タイヤ横力(直前値1)
+        public double Fx1;  //タイヤ前後力(直前値1)
+        public double Fy2;  //タイヤ横力(直前値2)
+        public double Fx2;  //タイヤ前後力(直前値2)
+        public double Fy3;  //タイヤ横力(直前値3)
+        public double Fx3;  //タイヤ前後力(直前値3)
         public MagicFormulaArguments Copy()
         {
             return StaticFunctions.DeepCopy(this);
@@ -63,6 +81,27 @@ namespace TTCDataUtils
                 case MagicFormulaInputVariables.T:
                     T = value;
                     return;
+                case MagicFormulaInputVariables.dt:
+                    dt = value;
+                    return;
+                case MagicFormulaInputVariables.FY1:
+                    Fy1 = value;
+                    return;
+                case MagicFormulaInputVariables.FX1:
+                    Fx1 = value;
+                    return;
+                case MagicFormulaInputVariables.FY2:
+                    Fy2 = value;
+                    return;
+                case MagicFormulaInputVariables.FX2:
+                    Fx2 = value;
+                    return;
+                case MagicFormulaInputVariables.FY3:
+                    Fy3 = value;
+                    return;
+                case MagicFormulaInputVariables.FX3:
+                    Fx3 = value;
+                    return;
                 default:
                     return;
             }
@@ -76,6 +115,13 @@ namespace TTCDataUtils
             IA = data.IA;
             P = data.P;
             T = data.TSTC;
+            dt = -1;
+            Fy1 = 0;
+            Fx1 = 0;
+            Fy2 = 0;
+            Fx2 = 0;
+            Fy3 = 0;
+            Fx3 = 0;
         }
         public double getValue(MagicFormulaInputVariables name)
         {
@@ -93,6 +139,20 @@ namespace TTCDataUtils
                     return P;
                 case MagicFormulaInputVariables.T:
                     return T;
+                case MagicFormulaInputVariables.dt:
+                    return dt;
+                case MagicFormulaInputVariables.FY1:
+                    return Fy1;
+                case MagicFormulaInputVariables.FX1:
+                    return Fx1;
+                case MagicFormulaInputVariables.FY2:
+                    return Fy2;
+                case MagicFormulaInputVariables.FX2:
+                    return Fx2;
+                case MagicFormulaInputVariables.FY3:
+                    return Fy3;
+                case MagicFormulaInputVariables.FX3:
+                    return Fx3;
                 default:
                     return 0;
             }
@@ -119,8 +179,29 @@ namespace TTCDataUtils
                     case 4:
                         P = value;
                         break;
-                    default:
+                    case 5:
                         T = value;
+                        break;
+                    case 6:
+                        dt = value;
+                        break;
+                    case 7:
+                        Fy1 = value;
+                        break;
+                    case 8:
+                        Fx1 = value;
+                        break;
+                    case 9:
+                        Fy2 = value;
+                        break;
+                    case 10:
+                        Fx2 = value;
+                        break;
+                    case 11:
+                        Fy3 = value;
+                        break;
+                    default:
+                        Fx3 = value;
                         break;
                 }
             }
@@ -138,8 +219,22 @@ namespace TTCDataUtils
                         return FZ;
                     case 4:
                         return P;
-                    default:
+                    case 5:
                         return T;
+                    case 6:
+                        return dt;
+                    case 7:
+                        return Fy1;
+                    case 8:
+                        return Fx1;
+                    case 9:
+                        return Fy2;
+                    case 10:
+                        return Fx2;
+                    case 11:
+                        return Fy3;
+                    default:
+                        return Fx3;
                 }
 
             }
@@ -171,6 +266,7 @@ namespace TTCDataUtils
         public CombinedFYMagicFormula CFY { get; private set; }
 
         public MZMagicFormula MZ { get; private set; }
+        public TransientFormula TF { get; private set; }
 
         public TireMagicFormula(string tireName)
         {
@@ -183,6 +279,7 @@ namespace TTCDataUtils
             var CMZM = new CombinedMzMember(PTM);
             var MZRM = new MzrMagicFormula(CMZM);
             MZ = new MZMagicFormula(MZRM);
+            TF = new TransientFormula(CFX, CFY);
         }
         public MagicFormulaArguments GetNormalizedValue(MagicFormulaArguments args)
         {
@@ -241,9 +338,25 @@ namespace TTCDataUtils
             return 0;
         }
 
+        public void ResetComposite()
+        {
+            FY.MFX = FX;
+            CFX.PureMagicFormula = FX;
+            CFY.PureMagicFormula = FY;
+            MZ.PT.MFX = CFX;
+            MZ.PT.MFY = CFY;
+            MZ.CMZM.PTM = MZ.PT;
+            MZ.MZR.CMZM = MZ.CMZM;
+            TF.CFX = CFX;
+            TF.CFY = CFY;
+        }
+
         public TireMagicFormula Copy()
         {
-            return StaticFunctions.DeepCopy(this);
+            var data =  StaticFunctions.DeepCopy(this);
+            data.ResetComposite();
+            data.ResetDiff();
+            return data;
         }
 
         public void ResetDiff()
@@ -253,13 +366,15 @@ namespace TTCDataUtils
             CFX.ResetDiff();
             CFY.ResetDiff();
             MZ.ResetDiff();
+            TF.ResetDiff();
         }
 
         public static TireMagicFormula Load(Stream reader)
         {
             BinaryFormatter binaryFormatter = new BinaryFormatter();
             var data = binaryFormatter.Deserialize(reader) as TireMagicFormula;
-            data.ResetDiff();
+            data.ResetComposite();
+             data.ResetDiff();
             return data;
         }
 
@@ -278,7 +393,13 @@ namespace TTCDataUtils
         IA,
         P,
         T,
-        FY,
+        dt,
+        FY1,
+        FX1,
+        FY2,
+        FX2,
+        FY3,
+        FX3,
     }
 
     public enum MagicFormulaOutputVariables
@@ -450,7 +571,7 @@ namespace TTCDataUtils
     {
         public List<double> Parameters { get; protected set; }
         public List<bool> FittingParameters { get; protected set; }
-        public SinTypePureMagicFormula PureMagicFormula { get; private set; }
+        public SinTypePureMagicFormula PureMagicFormula { get; set; }
         public SinTypeCombinedMagicFormula(SinTypePureMagicFormula pm)
         {
             PureMagicFormula = pm;
@@ -1432,7 +1553,7 @@ namespace TTCDataUtils
             return new Tuple<double, double>(argNp2.SA, argNm2.SA);
 
         }
-        PureFXMagicFormula MFX;
+        public PureFXMagicFormula MFX;
         public override MagicFormulaArguments Normalize(MagicFormulaArguments args)
         {
             return MFX.Normalize(args);
@@ -2642,7 +2763,7 @@ namespace TTCDataUtils
         #endregion
     }
 
-    //diffだめ
+    //diffだめ 2018/07/09
     [Serializable]
     public class PTMagicFormula : CosTypeMagicFormula, ApproximatingCurve
     {
@@ -2758,7 +2879,7 @@ namespace TTCDataUtils
             double a16 = a[16];
             double a17 = a[17];
             double a18 = a[18];
-            return a15  + a16 * FZ + a17 * (1 + a18 * FZ) * IA;
+            return a15  + a16 * FZ + (a17 + a18 * FZ) * IA;
         }
 
         public FuncResult Error(TireData data)
@@ -4030,4 +4151,180 @@ namespace TTCDataUtils
     }
 
     #endregion
+
+#region Transient
+
+    [Serializable]
+    public class TransientFormula : ApproximatingCurve
+    {
+        const int numParam = 4;
+        public SinTypeCombinedMagicFormula CFX;
+        public SinTypeCombinedMagicFormula CFY;
+        public TransientFormula(SinTypeCombinedMagicFormula x, SinTypeCombinedMagicFormula y)
+        {
+            CFX = x;
+            CFY = y;
+            Parameters = new List<double>(numParam);
+            for (int i = 0; i < numParam; ++i)
+            {
+                Parameters.Add(0);
+            }
+            FittingParameters = new List<bool>(numParam);
+            for (int i = 0; i < numParam; ++i)
+            {
+                FittingParameters.Add(true);
+            }
+            ResetDiff();
+        }
+        
+
+        public List<double> Parameters
+        {
+            get; private set;
+        }
+        public List<bool> FittingParameters { get; protected set; }
+        public FuncResult Error(TireData data)
+        {
+            
+        }
+        public List<Func<FuncResult>> ConstraintsPure()
+        {
+            var list = new List<Func<FuncResult>>();
+            return list;
+        }
+        public List<Func<TireData, FuncResult>> ConstraintsDependOnData()
+        {
+            var list = new List<Func<TireData, FuncResult>>();
+            return list;
+        }
+
+
+        public double Function(MagicFormulaArguments args)
+        {
+
+            var s = Parameters;
+
+            double SA = args.SA;
+            double SR = args.SR;
+            double FZ = args.FZ;
+            double IA = args.IA;
+            double P = args.P;
+            double T = args.T;
+
+            double s1 = s[0];
+            double s2 = s[1];
+            double s3 = s[2];
+            double s4 = s[3];
+            double Fy = PTM.MFY.CombinedFunction(args);
+
+            return s1 + s2 * (Fy / FZ) + (s3 + s4 * FZ) * IA;
+        }
+
+        public void ResetDiff()
+        {
+            var param = new List<double>(numParam);
+            var fitting = new List<bool>(numParam);
+            for (int i = 0; i < numParam; ++i)
+            {
+                param.Add(0);
+                fitting.Add(true);
+            }
+            if (Parameters == null) Parameters = new List<double>();
+            if (FittingParameters == null) FittingParameters = new List<bool>();
+            for (int i = 0; i < Math.Min(Parameters.Count, numParam); ++i)
+            {
+                param[i] = Parameters[i];
+            }
+            for (int i = 0; i < Math.Min(FittingParameters.Count, numParam); ++i)
+            {
+                fitting[i] = FittingParameters[i];
+            }
+            Parameters = param;
+            FittingParameters = fitting;
+        }
+
+        public List<double> Grad(MagicFormulaArguments args)
+        {
+            var result = new List<double>();
+            result.Add(dF_ds1(args));
+            result.Add(dF_ds2(args));
+            result.Add(dF_ds3(args));
+            result.Add(dF_ds4(args));
+            return result;
+        }
+
+        public double dF_ds1(MagicFormulaArguments args)
+        {
+            var s = Parameters;
+
+            double SA = args.SA;
+            double SR = args.SR;
+            double FZ = args.FZ;
+            double IA = args.IA;
+            double P = args.P;
+            double T = args.T;
+
+            double s1 = s[1];
+            double s2 = s[2];
+            double s3 = s[3];
+            double s4 = s[4];
+            return 1;
+        }
+        public double dF_ds2(MagicFormulaArguments args)
+        {
+            var s = Parameters;
+
+            double SA = args.SA;
+            double SR = args.SR;
+            double FZ = args.FZ;
+            double IA = args.IA;
+            double P = args.P;
+            double T = args.T;
+
+            double s1 = s[1];
+            double s2 = s[2];
+            double s3 = s[3];
+            double s4 = s[4];
+            double Fy = PTM.MFY.CombinedFunction(args);
+            return Fy / FZ;
+        }
+        public double dF_ds3(MagicFormulaArguments args)
+        {
+            var s = Parameters;
+
+            double SA = args.SA;
+            double SR = args.SR;
+            double FZ = args.FZ;
+            double IA = args.IA;
+            double P = args.P;
+            double T = args.T;
+
+            double s1 = s[1];
+            double s2 = s[2];
+            double s3 = s[3];
+            double s4 = s[4];
+            return IA;
+        }
+        public double dF_ds4(MagicFormulaArguments args)
+        {
+            var s = Parameters;
+
+            double SA = args.SA;
+            double SR = args.SR;
+            double FZ = args.FZ;
+            double IA = args.IA;
+            double P = args.P;
+            double T = args.T;
+
+            double s1 = s[1];
+            double s2 = s[2];
+            double s3 = s[3];
+            double s4 = s[4];
+            return IA * FZ;
+        }
+
+    }
+
+#endregion
+
 }

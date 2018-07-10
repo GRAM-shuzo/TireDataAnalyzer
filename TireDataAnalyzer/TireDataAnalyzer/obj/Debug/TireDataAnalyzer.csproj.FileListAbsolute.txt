@@ -58,3 +58,4 @@ E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\TireDataAnalyzer\obj\Debug\Tir
 E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\TireDataAnalyzer\obj\Debug\TireDataAnalyzer.csproj.GenerateResource.Cache
 E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\TireDataAnalyzer\obj\Debug\TireDataAnalyzer.exe
 E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\TireDataAnalyzer\obj\Debug\TireDataAnalyzer.pdb
+E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\TireDataAnalyzer\obj\Debug\TireDataAnalyzer.UserControls.FittingWizard.TransientPage.resources
