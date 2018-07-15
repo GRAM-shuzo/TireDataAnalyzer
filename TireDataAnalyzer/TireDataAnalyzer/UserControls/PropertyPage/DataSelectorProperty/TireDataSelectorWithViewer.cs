@@ -63,10 +63,13 @@ namespace TireDataAnalyzer.UserControls.PropertyPage
                     {
                         int lastIndex = Math.Min(property.PointToDraw(), dataLists[i].Count - 1);
                         dataLists[i] = dataLists[i].OrderBy(j => Guid.NewGuid()).ToList().GetRange(0, lastIndex);
+                        
                     }
                     
                 }
+                DataViewer.numPoints = property.PointToDraw();
                 DataViewer.SetDataList(dataLists[i],Table,  LegendTexts[i]);
+                
             }
         }
 

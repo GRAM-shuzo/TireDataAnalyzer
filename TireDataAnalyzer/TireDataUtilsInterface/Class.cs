@@ -480,6 +480,7 @@ namespace TTCDataUtils
                 var corneringTableEntry = archive.GetEntry("CorneringTable");
                 var driveBrakeTableEntry = archive.GetEntry("DriveBrakeTable");
                 var transientTableEntry = archive.GetEntry("TransientTable");
+                var transientTableIndexHolderEntry = archive.GetEntry("TransientTableIndexHolder");
                 var MaxminEntry = archive.GetEntry("Maxmin");
 
                 using (Stream s = corneringTableEntry.Open())
@@ -496,6 +497,11 @@ namespace TTCDataUtils
                 {
                     data.TransientTable = binaryFormatter.Deserialize(s) as List<TireData>;
                     if (data.TransientTable == null) data.TransientTable = new List<TireData>();
+                }
+                using (Stream s = transientTableIndexHolderEntry.Open())
+                {
+                    data.TransientTableIndexHolder = binaryFormatter.Deserialize(s) as List<int>;
+                    if (data.TransientTableIndexHolder == null) data.TransientTableIndexHolder = new List<int>();
                 }
                 if (MaxminEntry != null)
                 {
@@ -541,6 +547,11 @@ namespace TTCDataUtils
                 {
                     transientTableEntry = archive.CreateEntry("TransientTable");
                 }
+                var transientTableIndexHolderEntry = archive.GetEntry("TransientTableIndexHolder");
+                if (transientTableIndexHolderEntry == null)
+                {
+                    transientTableIndexHolderEntry = archive.CreateEntry("TransientTableIndexHolder");
+                }
                 var maxminEntry = archive.GetEntry("Maxmin");
                 if (maxminEntry == null)
                 {
@@ -560,10 +571,17 @@ namespace TTCDataUtils
                     }
 
                 if (TransientTableState == TireDataSetState.Changed)
-                    using (Stream s = transientTableEntry.Open())
+                {
+                    using(Stream s = transientTableEntry.Open())
                     {
                         binaryFormatter.Serialize(s, TransientTable);
                     }
+                    using (Stream s = transientTableIndexHolderEntry.Open())
+                    {
+                        binaryFormatter.Serialize(s, TransientTableIndexHolder);
+                    }
+                }
+                    
                 using (Stream s = maxminEntry.Open())
                 {
                     binaryFormatter.Serialize(s, MaxminSet);

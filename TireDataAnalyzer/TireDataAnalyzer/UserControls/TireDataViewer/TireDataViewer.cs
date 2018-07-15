@@ -484,6 +484,19 @@ namespace TireDataAnalyzer.UserControls
             return Color.FromArgb(rr, gg, bb);
         }
 
+        TireDataColumn? GradationColumn = null;
+        double GradationMax = 0;
+        double GradationMin = 0;
+        public void SetGradation(TireDataColumn? column, double min, double max, string legendText)
+        {
+            GradationColumn = column;
+            GradationMax = max;
+            GradationMin = min;
+        }
+        public Tuple<TireDataColumn?, double, double> GetGradation(string legendText)
+        {
+            return new Tuple<TireDataColumn?, double, double>(GradationColumn, GradationMax, GradationMin);
+        }
 
         public void DrawGraph(string legendText)
         {

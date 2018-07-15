@@ -55,7 +55,16 @@ namespace TireDataAnalyzer.UserControls.PropertyPage
             CorneringDataSelector.Viewer.SetAxis(TireDataColumn.IA, TireDataColumn.FY, 1);
             CorneringDataSelector.Viewer.SetAxis(TireDataColumn.FZ, TireDataColumn.FY, 2);
             CorneringDataSelector.Viewer.SetAxis(TireDataColumn.P, TireDataColumn.FY, 3);
-
+            DriveBrakeDataSelector.Viewer.ResetScreen(MultiTireDataViewer.EnumScreenCount.Four);
+            DriveBrakeDataSelector.Viewer.SetAxis(TireDataColumn.SA, TireDataColumn.FX, 0);
+            DriveBrakeDataSelector.Viewer.SetAxis(TireDataColumn.IA, TireDataColumn.FX, 1);
+            DriveBrakeDataSelector.Viewer.SetAxis(TireDataColumn.FZ, TireDataColumn.FX, 2);
+            DriveBrakeDataSelector.Viewer.SetAxis(TireDataColumn.P, TireDataColumn.FX, 3);
+            TransientDataSelector.Viewer.ResetScreen(MultiTireDataViewer.EnumScreenCount.Four);
+            TransientDataSelector.Viewer.SetAxis(TireDataColumn.ET, TireDataColumn.V, 0);
+            TransientDataSelector.Viewer.SetAxis(TireDataColumn.ET, TireDataColumn.FY, 1);
+            TransientDataSelector.Viewer.SetAxis(TireDataColumn.IA, TireDataColumn.FY, 2);
+            TransientDataSelector.Viewer.SetAxis(TireDataColumn.P, TireDataColumn.FY, 3);
             foreach ( var viewer in Viewers)
             {
                 viewer.SetColor(Color.Green, TireDataSelectorWithViewer.LegendTexts[0]);

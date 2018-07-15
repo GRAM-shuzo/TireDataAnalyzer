@@ -76,6 +76,7 @@ namespace TireDataAnalyzer.UserControls
                 if (d.DialogResult == DialogResult.OK)
                 {
                     constrain.CopyFrom(d.Constrain);
+                    Selector.ExtractData();
                     Selector.ConfirmStateChanged(Table);
                     node.Text = constrain.Name;
                     if (SelectedAreaChanged != null) SelectedAreaChanged(Selector);

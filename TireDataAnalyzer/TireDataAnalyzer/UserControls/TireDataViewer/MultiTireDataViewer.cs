@@ -17,6 +17,7 @@ namespace TireDataAnalyzer.UserControls
     public partial class MultiTireDataViewer : UserControl
     {
         Guid uuid = Guid.NewGuid();
+
         public Guid ID { get { return uuid; } }
         public string GraphName;
         private EnumScreenCount screenCount;
@@ -478,6 +479,7 @@ namespace TireDataAnalyzer.UserControls
             }
             changed = true;
         }
+
         public void SetChartType(SeriesChartType ct, string legendText)
         {
             foreach (var viewer in Viewers)
@@ -563,6 +565,17 @@ namespace TireDataAnalyzer.UserControls
         public bool GetEnable(string legendText)
         {
             return Viewers[ViewerNumber].GetEnable(legendText);
+        }
+        public void SetGradation(TireDataColumn? column, double min, double max, string legendText)
+        {
+            foreach (var viewer in Viewers)
+            {
+                viewer.SetGradation(column, min,max, legendText);
+            }
+        }
+        public Tuple<TireDataColumn?, double, double> SetGradation(string legendText)
+        {
+            return Viewers[0].GetGradation(legendText);
         }
 
         public int numPoints

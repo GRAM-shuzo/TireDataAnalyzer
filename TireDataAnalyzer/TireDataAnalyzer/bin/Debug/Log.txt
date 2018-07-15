@@ -1,6 +1,8 @@
-パス名を空にすることはできません。
-別のプロセスで使用されているため、プロセスはファイル 'E:\Desktop\TireData\Hoosier-LC0-Rim7\TransientTest.dat' にアクセスできません。
-別のプロセスで使用されているため、プロセスはファイル 'E:\Desktop\TireData\Hoosier-LC0-Rim7\TransientTest.dat' にアクセスできません。
-別のプロセスで使用されているため、プロセスはファイル 'E:\Desktop\TireData\Hoosier-LC0-Rim7\TransientTest.dat' にアクセスできません。
-別のプロセスで使用されているため、プロセスはファイル 'E:\Desktop\TireData\Hoosier-LC0-Rim7\TransientTest.dat' にアクセスできません。
-別のプロセスで使用されているため、プロセスはファイル 'E:\Desktop\TireData\Hoosier-LC0-Rim7\TransientTest.dat' にアクセスできません。
+入力文字列の形式が正しくありません。
+入力文字列の形式が正しくありません。
+入力文字列の形式が正しくありません。
+入力文字列の形式が正しくありません。
+入力文字列の形式が正しくありません。
+入力文字列の形式が正しくありません。
+入力文字列の形式が正しくありません。
+入力文字列の形式が正しくありません。

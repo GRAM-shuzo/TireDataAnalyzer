@@ -109,7 +109,11 @@ namespace TTCDataUtils
             InsertData(manager.CorneringTable, Table.CorneringTable, true);
             InsertData(manager.DriveBrakeTable, Table.DriveBrakeTable, true);
             InsertData(manager.TransientTable, Table.TransientTable, true);
-            saveData.TransientTableIndexHolder = StaticFunctions.DeepCopy(manager.saveData.TransientTableIndexHolder);
+            int offset = saveData.TransientTable.Count;
+            for (int i = 0; i< manager.saveData.TransientTableIndexHolder.Count; ++i)
+            {
+                saveData.TransientTableIndexHolder.Add(offset + manager.saveData.TransientTableIndexHolder[i]);
+            }
         }
 
         public TireDataSet GetDataSet()
@@ -121,7 +125,14 @@ namespace TTCDataUtils
         {
             List<TireData> rvalue = new List<TireData>() ;
             List<int> indexes = new List<int>();
-            indexes.Add(0);
+            int offset = 0;
+            if (saveData.TransientTableIndexHolder.Count == 0)
+                indexes.Add(0);
+            else
+            {
+                indexes.Add(saveData.TransientTable.Count);
+                offset = saveData.TransientTable.Count;
+            }
             bool raised = false;
             int end = 0;
             int start = 0;
@@ -140,12 +151,12 @@ namespace TTCDataUtils
                     int j = i;
                     for(j = i; j > 0; --j)
                     {
-                        if (data[j].V >= TransientVelocityThresholdOnDrop && !getend)
+                        if (data[j].V > TransientVelocityThresholdOnDrop && !getend)
                         {
                             end = j;
                             getend = true;
                         }
-                        if(data[j].V <= TransientVelocityThresholdOnRaise && j <= temp)
+                        if(data[j].V < TransientVelocityThresholdOnRaise && j <= temp)
                         {
                             start = j;
                             break;
@@ -160,11 +171,11 @@ namespace TTCDataUtils
                         list[k].ET -= t0;
                     }
                     rvalue.AddRange(list);
-                    indexes.Add(rvalue.Count);
+                    indexes.Add(offset+rvalue.Count);
                 }
                 
             }
-            saveData.TransientTableIndexHolder = indexes;
+            saveData.TransientTableIndexHolder.AddRange(indexes);
             return rvalue;
 
         }
