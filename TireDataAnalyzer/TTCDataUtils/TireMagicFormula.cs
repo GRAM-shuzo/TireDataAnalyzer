@@ -18,10 +18,11 @@ namespace TTCDataUtils
     public class MagicFormulaArguments
     {
         //4次のアダムスバッシュフォース法まで使用可能
-        public MagicFormulaArguments(double sa, double sr, double fz, double ia, double p, double t,
-            double dt_ = -1, double fy1 = double.NaN, double fx1 = double.NaN,
-            double fy2 = double.NaN, double fx2 = double.NaN,
-            double fy3 = double.NaN, double fx3 = double.NaN
+        public MagicFormulaArguments(double sa, double sr, double fz, double ia, double p, double t, double v = 50/3.6,
+            double dt_ = -1, double sab = double.NaN, double srb = double.NaN,
+            double dsa1 = double.NaN, double dsr1 = double.NaN,
+            double dsa2 = double.NaN, double dsr2 = double.NaN,
+            double dsa3 = double.NaN, double dsr3 = double.NaN
             )
         {
             SA = sa;
@@ -30,13 +31,16 @@ namespace TTCDataUtils
             IA = ia;
             P = p;
             T = t;
+            V = v;
             dt = dt_;
-            Fy1 = fy1;
-            Fx1 = fx1;
-            Fy2 = fy2;
-            Fx2 = fx2;
-            Fy3 = fy3;
-            Fx3 = fx3;
+            SAb = sab;
+            SRb = srb;
+            dSAdt1 = dsa1;
+            dSRdt1 = dsr1;
+            dSAdt2 = dsa2;
+            dSRdt2 = dsr2;
+            dSAdt3 = dsa3;
+            dSRdt3 = dsr3;
         }
         public MagicFormulaArguments(TireData data)
         {
@@ -48,13 +52,16 @@ namespace TTCDataUtils
         public double IA;  //キャンバ角
         public double P;   //タイヤ空気圧
         public double T;   //タイヤ平均温度
+        public double V;   //速度
         public double dt;  //時間微分（トランジェント）
-        public double Fy1;  //タイヤ横力(直前値1)
-        public double Fx1;  //タイヤ前後力(直前値1)
-        public double Fy2;  //タイヤ横力(直前値2)
-        public double Fx2;  //タイヤ前後力(直前値2)
-        public double Fy3;  //タイヤ横力(直前値3)
-        public double Fx3;  //タイヤ前後力(直前値3)
+        public double SAb;  //タイヤ横力(直前値)
+        public double SRb;  //タイヤ前後力(直前値)
+        public double dSAdt1;  //タイヤSA微分(直前値1)
+        public double dSRdt1;  //タイヤSR微分(直前値1)
+        public double dSAdt2;  //タイヤSA微分(直前値2)
+        public double dSRdt2;  //タイヤSR微分(直前値2)
+        public double dSAdt3;  //タイヤSA微分(直前値3)
+        public double dSRdt3;  //タイヤSR微分(直前値3)
         public MagicFormulaArguments Copy()
         {
             return StaticFunctions.DeepCopy(this);
@@ -81,26 +88,35 @@ namespace TTCDataUtils
                 case MagicFormulaInputVariables.T:
                     T = value;
                     return;
+                case MagicFormulaInputVariables.V:
+                    V = value;
+                    return;
                 case MagicFormulaInputVariables.dt:
                     dt = value;
                     return;
-                case MagicFormulaInputVariables.FY1:
-                    Fy1 = value;
+                case MagicFormulaInputVariables.SAb:
+                    SAb = value;
                     return;
-                case MagicFormulaInputVariables.FX1:
-                    Fx1 = value;
+                case MagicFormulaInputVariables.SRb:
+                    SRb = value;
                     return;
-                case MagicFormulaInputVariables.FY2:
-                    Fy2 = value;
+                case MagicFormulaInputVariables.dSAdt1:
+                    dSAdt1 = value;
                     return;
-                case MagicFormulaInputVariables.FX2:
-                    Fx2 = value;
+                case MagicFormulaInputVariables.dSRdt1:
+                    dSRdt1 = value;
                     return;
-                case MagicFormulaInputVariables.FY3:
-                    Fy3 = value;
+                case MagicFormulaInputVariables.dSAdt2:
+                    dSAdt2 = value;
                     return;
-                case MagicFormulaInputVariables.FX3:
-                    Fx3 = value;
+                case MagicFormulaInputVariables.dSRdt2:
+                    dSRdt2 = value;
+                    return;
+                case MagicFormulaInputVariables.dSAdt3:
+                    dSAdt3 = value;
+                    return;
+                case MagicFormulaInputVariables.dSRdt3:
+                    dSRdt3 = value;
                     return;
                 default:
                     return;
@@ -115,13 +131,16 @@ namespace TTCDataUtils
             IA = data.IA;
             P = data.P;
             T = data.TSTC;
+            V = data.V;
             dt = -1;
-            Fy1 = 0;
-            Fx1 = 0;
-            Fy2 = 0;
-            Fx2 = 0;
-            Fy3 = 0;
-            Fx3 = 0;
+            SAb = 0;
+            SRb = 0;
+            dSAdt1 = 0;
+            dSRdt1 = 0;
+            dSAdt2 = 0;
+            dSRdt2 = 0;
+            dSAdt3 = 0;
+            dSRdt3 = 0;
         }
         public double getValue(MagicFormulaInputVariables name)
         {
@@ -139,20 +158,26 @@ namespace TTCDataUtils
                     return P;
                 case MagicFormulaInputVariables.T:
                     return T;
+                case MagicFormulaInputVariables.V:
+                    return V;
                 case MagicFormulaInputVariables.dt:
                     return dt;
-                case MagicFormulaInputVariables.FY1:
-                    return Fy1;
-                case MagicFormulaInputVariables.FX1:
-                    return Fx1;
-                case MagicFormulaInputVariables.FY2:
-                    return Fy2;
-                case MagicFormulaInputVariables.FX2:
-                    return Fx2;
-                case MagicFormulaInputVariables.FY3:
-                    return Fy3;
-                case MagicFormulaInputVariables.FX3:
-                    return Fx3;
+                case MagicFormulaInputVariables.SAb:
+                    return SAb;
+                case MagicFormulaInputVariables.SRb:
+                    return SRb;
+                case MagicFormulaInputVariables.dSAdt1:
+                    return dSAdt1;
+                case MagicFormulaInputVariables.dSRdt1:
+                    return dSRdt1;
+                case MagicFormulaInputVariables.dSAdt2:
+                    return dSAdt2;
+                case MagicFormulaInputVariables.dSRdt2:
+                    return dSRdt2;
+                case MagicFormulaInputVariables.dSAdt3:
+                    return dSAdt3;
+                case MagicFormulaInputVariables.dSRdt3:
+                    return dSRdt3;
                 default:
                     return 0;
             }
@@ -183,25 +208,34 @@ namespace TTCDataUtils
                         T = value;
                         break;
                     case 6:
-                        dt = value;
+                        V = value;
                         break;
                     case 7:
-                        Fy1 = value;
+                        SAb = value;
                         break;
                     case 8:
-                        Fx1 = value;
+                        SRb = value;
                         break;
                     case 9:
-                        Fy2 = value;
+                        dt = value;
                         break;
                     case 10:
-                        Fx2 = value;
+                        dSAdt1 = value;
                         break;
                     case 11:
-                        Fy3 = value;
+                        dSRdt1 = value;
+                        break;
+                    case 12:
+                        dSAdt2 = value;
+                        break;
+                    case 13:
+                        dSRdt2 = value;
+                        break;
+                    case 14:
+                        dSAdt3 = value;
                         break;
                     default:
-                        Fx3 = value;
+                        dSRdt3 = value;
                         break;
                 }
             }
@@ -222,19 +256,25 @@ namespace TTCDataUtils
                     case 5:
                         return T;
                     case 6:
-                        return dt;
+                        return V;
                     case 7:
-                        return Fy1;
+                        return SAb;
                     case 8:
-                        return Fx1;
+                        return SRb;
                     case 9:
-                        return Fy2;
+                        return dt;
                     case 10:
-                        return Fx2;
+                        return dSAdt1;
                     case 11:
-                        return Fy3;
+                        return dSRdt1;
+                    case 12:
+                        return dSAdt2;
+                    case 13:
+                        return dSRdt2;
+                    case 14:
+                        return dSAdt3;
                     default:
-                        return Fx3;
+                        return dSRdt3;
                 }
 
             }
@@ -244,15 +284,24 @@ namespace TTCDataUtils
     [Serializable]
     public class MagicFormulaOutputs
     {
-        public MagicFormulaOutputs(double fx, double fy, double mz)
+        public MagicFormulaOutputs(double fx, double fy, double mz, double SATransient_, double SRTransient_, double dSRdt_, double dSAdt_)
         {
             FX = fx;
             FY = fy;
             MZ = mz;
+            SATransient = SATransient_;
+            SRTransient = SRTransient_;
+            dSRdt = dSRdt_;
+            dSAdt = dSAdt_;
         }
         public double FX { get; private set; }
         public double FY { get; private set; }
         public double MZ { get; private set; }
+        public double SATransient { get; private set; }
+        public double SRTransient { get; private set; }
+        public double dSRdt { get; private set; }
+        public double dSAdt { get; private set; }
+
     }
 
     [Serializable]
@@ -262,31 +311,33 @@ namespace TTCDataUtils
 
         public PureFXMagicFormula FX { get; private set; }
         public PureFYMagicFormula FY { get; private set; }
-        public CombinedFXMagicFormula CFX { get; private set; }
-        public CombinedFYMagicFormula CFY { get; private set; }
+        public CombinedsrMagicFormula CFX { get; private set; }
+        public CombinedsaMagicFormula CFY { get; private set; }
 
         public MZMagicFormula MZ { get; private set; }
-        public TransientFormula TF { get; private set; }
+        public TransientFormula TFX { get; private set; }
+        public TransientFormula TFY { get; private set; }
 
         public TireMagicFormula(string tireName)
         {
             TireName = tireName;
             FX = new PureFXMagicFormula();
             FY = new PureFYMagicFormula(FX);
-            CFX = new CombinedFXMagicFormula(FX);
-            CFY = new CombinedFYMagicFormula(FY);
+            CFX = new CombinedsrMagicFormula(FX);
+            CFY = new CombinedsaMagicFormula(FY);
             var PTM = new PTMagicFormula(CFX, CFY);
             var CMZM = new CombinedMzMember(PTM);
             var MZRM = new MzrMagicFormula(CMZM);
             MZ = new MZMagicFormula(MZRM);
-            TF = new TransientFormula(CFX, CFY);
+            TFX = new TransientFormula();
+            TFY = new TransientFormula();
         }
         public MagicFormulaArguments GetNormalizedValue(MagicFormulaArguments args)
         {
             args = FX.Normalize(args);
             foreach(MagicFormulaInputVariables iv in Enum.GetValues(typeof(MagicFormulaInputVariables)))
             {
-                if(double.IsNaN(args.getValue(iv)) || double.IsInfinity(args.getValue(iv)))
+                if(double.IsInfinity(args.getValue(iv)))
                 {
                     args.setValue(iv, 0);
                 }
@@ -297,15 +348,80 @@ namespace TTCDataUtils
         {
             return FX.Denormalize(args);
         }
-        public MagicFormulaOutputs NonSlipFunction(MagicFormulaArguments args)
+        /*public MagicFormulaOutputs NonSlipFunction(MagicFormulaArguments args)
         {
             args = GetNormalizedValue(args);
             return new MagicFormulaOutputs(0,FY.PureFunction(args),MZ.PureFunction(args));
         }
+        */
         public MagicFormulaOutputs CombinedFunction(MagicFormulaArguments args)
         {
+            args = args.Copy();
+            double sa = args.SAb;
+            double sr = args.SRb;
+            double Vsx = args.V * args.SR;
+            double Vsy = Math.Tan(args.SA * Math.PI / 180) * args.V;
+            double dSRdt0 = double.NaN;
+            double dSAdt0 = double.NaN;
+            if (args.dt >= 0 && !double.IsNaN(sr))
+            {
+                double tau = TFX.Function(args);
+                
+                if (tau > 0)
+                {
+                    dSRdt0 =( Vsx - args.V * sr)/ tau;
+                    if (double.IsNaN(args.dSRdt1))
+                    {
+                        sr = sr + dSRdt0 * args.dt;
+                    }
+                    else if (double.IsNaN(args.dSRdt2))
+                    {
+                        sr = sr + dSRdt0 * args.dt - 0.5 * args.dt * args.dSRdt1;
+                    }
+                    else if (double.IsNaN(args.dSRdt3))
+                    {
+                        sr = sr + (23 * dSRdt0 - 16 * args.dSRdt1 + 5 * args.dSRdt2) * args.dt / 12;
+                    }
+                    else
+                    {
+                        sr = sr + (55 * dSRdt0 - 59 * args.dSRdt1 + 37 * args.dSRdt2 - 9 * args.dSRdt3) * args.dt / 24;
+                    }
+                }
+                args.SR = sr;
+            }
+            if (args.dt >= 0 && !double.IsNaN(sa))
+            {
+                double tau = TFY.Function(args);
+                if (tau > 0)
+                {
+                    dSAdt0 = (Vsx - args.V * sa) / tau;
+                    if (double.IsNaN(args.dSAdt1))
+                    {
+                        sa = sa + dSAdt0 * args.dt;
+                    }
+                    else if (double.IsNaN(args.dSAdt2))
+                    {
+                        sa = sa + 1.5*dSAdt0 * args.dt - 0.5 * args.dt * args.dSAdt1;
+                    }
+                    else if (double.IsNaN(args.dSAdt3))
+                    {
+                        sa = sa + (23 * dSAdt0 - 16 * args.dSAdt1 + 5 * args.dSAdt2) * args.dt / 12;
+                    }
+                    else
+                    {
+                        sa = sa + (55 * dSAdt0 - 59 * args.dSAdt1 + 37 * args.dSAdt2 - 9 * args.dSAdt3) * args.dt / 24;
+                    }
+                }
+                args.SA = sa;
+            }
             args = GetNormalizedValue(args);
-            return new MagicFormulaOutputs(CFX.CombinedFunction(args), CFY.CombinedFunction(args), MZ.CombinedFunction(args));
+            double cfx = CFX.CombinedFunction(args);
+            double cfy = CFY.CombinedFunction(args);
+            double cmz = MZ.CombinedFunction(args);
+            if (double.IsNaN(cfx)) cfx = 0;
+            if (double.IsNaN(cfy)) cfy = 0;
+            if (double.IsNaN(cmz)) cmz = 0;
+            return new MagicFormulaOutputs(cfx, cfy, cmz, sa, sr, dSRdt0, dSAdt0);
         }
 
         public double GetVariables(MagicFormulaOutputVariables name, MagicFormulaArguments args)
@@ -347,8 +463,6 @@ namespace TTCDataUtils
             MZ.PT.MFY = CFY;
             MZ.CMZM.PTM = MZ.PT;
             MZ.MZR.CMZM = MZ.CMZM;
-            TF.CFX = CFX;
-            TF.CFY = CFY;
         }
 
         public TireMagicFormula Copy()
@@ -366,7 +480,8 @@ namespace TTCDataUtils
             CFX.ResetDiff();
             CFY.ResetDiff();
             MZ.ResetDiff();
-            TF.ResetDiff();
+            TFX.ResetDiff();
+            TFY.ResetDiff();
         }
 
         public static TireMagicFormula Load(Stream reader)
@@ -393,13 +508,18 @@ namespace TTCDataUtils
         IA,
         P,
         T,
+        V,
+        FY,
+        //FX,
+        SAb,
+        SRb,
         dt,
-        FY1,
-        FX1,
-        FY2,
-        FX2,
-        FY3,
-        FX3,
+        dSAdt1,
+        dSRdt1,
+        dSAdt2,
+        dSRdt2,
+        dSAdt3,
+        dSRdt3,
     }
 
     public enum MagicFormulaOutputVariables
@@ -443,7 +563,9 @@ namespace TTCDataUtils
             double d = D(args);
             double c = C(args);
             double bcd = BCD(args);
-            double b = bcd / (c * d);
+            double cd = c * d;
+            if (cd == 0) cd = 1;
+            double b = bcd / (cd);
             double e = E(args);
             x = x * b;
             return d * Math.Sin(c * Math.Atan(x - e * (x - Math.Atan(x))));
@@ -738,8 +860,10 @@ namespace TTCDataUtils
             {
                 x = (Math.Tan(Math.PI / (2 * c)) + e * Math.Atan(x)) / (e - 1);
             }
+            
             if (x < 0) x = -x;
             x = x / b;
+            if (double.IsNaN(x)) x = 0.0;
             var argNp = argsN.Copy();
             var argNm = argsN.Copy();
             double sh = Sh(argsN);
@@ -1266,10 +1390,10 @@ namespace TTCDataUtils
     }
 
     [Serializable]
-    public class CombinedFXMagicFormula : SinTypeCombinedMagicFormula, ApproximatingCurve
+    public class CombinedsrMagicFormula : SinTypeCombinedMagicFormula, ApproximatingCurve
     {
         const int numParam = 7;
-        public CombinedFXMagicFormula(PureFXMagicFormula fx)
+        public CombinedsrMagicFormula(PureFXMagicFormula fx)
             :base(fx)
         {
             
@@ -2189,10 +2313,10 @@ namespace TTCDataUtils
     }
 
     [Serializable]
-    public class CombinedFYMagicFormula : SinTypeCombinedMagicFormula, ApproximatingCurve
+    public class CombinedsaMagicFormula : SinTypeCombinedMagicFormula, ApproximatingCurve
     {
         const int numParam = 15;
-        public CombinedFYMagicFormula(PureFYMagicFormula fy)
+        public CombinedsaMagicFormula(PureFYMagicFormula fy)
             : base(fy)
         {
             
@@ -4158,12 +4282,8 @@ namespace TTCDataUtils
     public class TransientFormula : ApproximatingCurve
     {
         const int numParam = 4;
-        public SinTypeCombinedMagicFormula CFX;
-        public SinTypeCombinedMagicFormula CFY;
-        public TransientFormula(SinTypeCombinedMagicFormula x, SinTypeCombinedMagicFormula y)
+        public TransientFormula()
         {
-            CFX = x;
-            CFY = y;
             Parameters = new List<double>(numParam);
             for (int i = 0; i < numParam; ++i)
             {
@@ -4185,7 +4305,13 @@ namespace TTCDataUtils
         public List<bool> FittingParameters { get; protected set; }
         public FuncResult Error(TireData data)
         {
-            
+            var result = new FuncResult();
+            /*result.value = -PTM.CombinedFunction(arg) * Fy + Function(arg) * Fx - data.MZ;
+            result.grads = Grad(arg);
+
+            for (int i = 0; i < result.grads.Count; ++i) result.grads[i] *= Fx;
+            */
+            return result;
         }
         public List<Func<FuncResult>> ConstraintsPure()
         {
@@ -4201,23 +4327,7 @@ namespace TTCDataUtils
 
         public double Function(MagicFormulaArguments args)
         {
-
-            var s = Parameters;
-
-            double SA = args.SA;
-            double SR = args.SR;
-            double FZ = args.FZ;
-            double IA = args.IA;
-            double P = args.P;
-            double T = args.T;
-
-            double s1 = s[0];
-            double s2 = s[1];
-            double s3 = s[2];
-            double s4 = s[3];
-            double Fy = PTM.MFY.CombinedFunction(args);
-
-            return s1 + s2 * (Fy / FZ) + (s3 + s4 * FZ) * IA;
+            return 1;
         }
 
         public void ResetDiff()
@@ -4285,8 +4395,7 @@ namespace TTCDataUtils
             double s2 = s[2];
             double s3 = s[3];
             double s4 = s[4];
-            double Fy = PTM.MFY.CombinedFunction(args);
-            return Fy / FZ;
+            return 0;
         }
         public double dF_ds3(MagicFormulaArguments args)
         {

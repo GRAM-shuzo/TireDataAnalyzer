@@ -451,6 +451,17 @@ namespace TTCDataUtils
         public List<TireData> CorneringTable = new List<TireData>();
         public List<TireData> DriveBrakeTable = new List<TireData>();
         public List<TireData> TransientTable = new List<TireData>();
+        public List<int> TransientTableIndexHolder = new List<int>();
+
+        public List<TireData> SplitedTransientTable(int i)
+        {
+            if (i >= TransientTableIndexHolder.Count)
+                i = TransientTableIndexHolder.Count - 1;
+            int lhs = TransientTableIndexHolder[i];
+            int rhs = TransientTableIndexHolder[i + 1];
+            return TransientTable.GetRange(lhs, rhs - lhs);
+        }
+
 
         public TireDataMaxminSet MaxminSet = new TireDataMaxminSet();
 

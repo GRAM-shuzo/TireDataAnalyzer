@@ -41,7 +41,7 @@ namespace TireDataAnalyzer.UserControls.PropertyPage
 
             CorneringDataViewer.SetAxis(TireDataColumn.SA, TireDataColumn.FY);
             DriveBrakeDataViewer.SetAxis(TireDataColumn.SL, TireDataColumn.FX);
-            TransientDataViewer.SetAxis(TireDataColumn.ET, TireDataColumn.SA);
+            TransientDataViewer.SetAxis(TireDataColumn.ET, TireDataColumn.FY);
 
             string[] legends = { "追加済みデータ", "新規データ" };
             foreach (Table table in Enum.GetValues(typeof(Table)))

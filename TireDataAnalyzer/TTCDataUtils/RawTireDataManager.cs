@@ -21,8 +21,8 @@ namespace TTCDataUtils
             New();
         }
 
-        
-
+        public double TransientVelocityThresholdOnRaise = 0.2;
+        public double TransientVelocityThresholdOnDrop = 1;
         public int Count(Table table)
         {
             return GetDataList(table).Count;
@@ -52,6 +52,21 @@ namespace TTCDataUtils
             }
         }
 
+        private List<TireData> SplitedTransientTable(int i)
+        {
+            
+            return saveData.SplitedTransientTable(i);
+        }
+
+        public int SplitedTransientTableCount
+        {
+            get
+            {
+                return saveData.TransientTableIndexHolder.Count;
+            }
+        }
+
+
         public enum ManagerState
         {
             NotChanged,
@@ -66,13 +81,22 @@ namespace TTCDataUtils
         public delegate void OnStateChangedDelegate(ManagerState State);
         public OnStateChangedDelegate OnStateChanged;
 
-        public void InsertData(List<TireData> dataList,  Table table)
+        public void InsertData(List<TireData> dataList,  Table table, bool copying = false)
         {
             if(dataList.Count != 0)
             {
                 var tgt = GetDataList(table);
-                GetDataList(table).AddRange(dataList);
-                GetDataList(table).Sort((j,k) => Guid.NewGuid().CompareTo(Guid.NewGuid()));
+                if(table == Table.TransientTable)
+                {
+                    if(!copying)dataList = ExtractTransientTest(dataList);
+                    GetDataList(table).AddRange(dataList);
+                }
+                else
+                {
+                    GetDataList(table).AddRange(dataList);
+                    GetDataList(table).Sort((j, k) => Guid.NewGuid().CompareTo(Guid.NewGuid()));
+                }
+                
 
                 State = ManagerState.Changed;
                 ChangeState(ManagerState.Changed, table);
@@ -82,20 +106,72 @@ namespace TTCDataUtils
         }
         public void InsertData(RawTireDataManager manager)
         {
-            InsertData(manager.CorneringTable, Table.CorneringTable);
-            InsertData(manager.DriveBrakeTable, Table.DriveBrakeTable);
-            InsertData(manager.TransientTable, Table.TransientTable);
+            InsertData(manager.CorneringTable, Table.CorneringTable, true);
+            InsertData(manager.DriveBrakeTable, Table.DriveBrakeTable, true);
+            InsertData(manager.TransientTable, Table.TransientTable, true);
+            saveData.TransientTableIndexHolder = StaticFunctions.DeepCopy(manager.saveData.TransientTableIndexHolder);
         }
 
         public TireDataSet GetDataSet()
         {
             return saveData;
         }
-        
+
+        List<TireData> ExtractTransientTest(List<TireData> data)
+        {
+            List<TireData> rvalue = new List<TireData>() ;
+            List<int> indexes = new List<int>();
+            indexes.Add(0);
+            bool raised = false;
+            int end = 0;
+            int start = 0;
+            int temp = 0;
+            for(int i=0; i<data.Count; ++i)
+            {
+                if (raised == false && data[i].V >= TransientVelocityThresholdOnDrop)
+                {
+                    raised = true;
+                    temp = i;
+                }
+                if (raised == true && data[i].V <= TransientVelocityThresholdOnRaise)
+                {
+                    bool getend = false;
+                    raised = false;
+                    int j = i;
+                    for(j = i; j > 0; --j)
+                    {
+                        if (data[j].V >= TransientVelocityThresholdOnDrop && !getend)
+                        {
+                            end = j;
+                            getend = true;
+                        }
+                        if(data[j].V <= TransientVelocityThresholdOnRaise && j <= temp)
+                        {
+                            start = j;
+                            break;
+                        }
+
+                    }
+                    if (j == 0) continue;
+                    var list = data.GetRange(start, end - start+1);
+                    double t0 = list[0].ET;
+                    for (int k = 0; k < list.Count; ++k)
+                    {
+                        list[k].ET -= t0;
+                    }
+                    rvalue.AddRange(list);
+                    indexes.Add(rvalue.Count);
+                }
+                
+            }
+            saveData.TransientTableIndexHolder = indexes;
+            return rvalue;
+
+        }
 
         #region Private
 
-        public List<TireData> GetDataList(Table table)
+        public List<TireData> GetDataList(Table table, int transientTestNum = -1)
         {
             switch(table)
             {
@@ -104,7 +180,15 @@ namespace TTCDataUtils
                 case Table.DriveBrakeTable:
                     return DriveBrakeTable;
                 case Table.TransientTable:
-                    return TransientTable;
+                    if(transientTestNum >= 0)
+                    {
+                        return SplitedTransientTable(transientTestNum);
+                    }
+                    else
+                    {
+                        return TransientTable;
+                    }
+                    
                 default:
                     return null;
             }

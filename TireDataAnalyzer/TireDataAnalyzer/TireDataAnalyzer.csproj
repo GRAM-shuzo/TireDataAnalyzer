@@ -92,6 +92,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Utils\ChartTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Utils\ChartTest.Designer.cs">
+      <DependentUpon>ChartTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\FittingWizard\TransientPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -320,6 +326,9 @@
       <DependentUpon>TireDataSelector.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\ProjectManager.cs" />
+    <EmbeddedResource Include="Utils\ChartTest.resx">
+      <DependentUpon>ChartTest.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\FittingWizard\TransientPage.resx">
       <DependentUpon>TransientPage.cs</DependentUpon>
     </EmbeddedResource>

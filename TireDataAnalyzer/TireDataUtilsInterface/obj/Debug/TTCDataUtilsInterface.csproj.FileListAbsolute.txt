@@ -2,3 +2,4 @@ E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\TireDataUtilsInterface\bin\Deb
 E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\TireDataUtilsInterface\bin\Debug\TireDataUtils.pdb
 E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\TireDataUtilsInterface\obj\Debug\TireDataUtils.dll
 E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\TireDataUtilsInterface\obj\Debug\TireDataUtils.pdb
+E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\TireDataUtilsInterface\obj\Debug\TTCDataUtilsInterface.csprojResolveAssemblyReference.cache

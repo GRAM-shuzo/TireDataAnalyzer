@@ -97,10 +97,11 @@ namespace TireDataAnalyzer.UserControls.GraphViewer
            foreach (var entry in entries.ToArray())
            {
                 bool exist = false;
+                string directory = Path.GetFileName(Path.GetDirectoryName(entry.FullName));
+                if (!directory.Contains("graph")) exist = true;
                 foreach (GraphNode child in this.Nodes)
                 {
-                    string directory = Path.GetFileName(Path.GetDirectoryName(entry.FullName));
-                    if (!directory.Contains("graph")) exist = true;
+                    
                     if (entry.FullName == "graph\\" + child.Viewer.ID +".graph") exist = true;
                 }
                 if (!exist)

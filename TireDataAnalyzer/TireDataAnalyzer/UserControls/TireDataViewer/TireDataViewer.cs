@@ -273,6 +273,7 @@ namespace TireDataAnalyzer.UserControls
         }
         public void SetChartType(SeriesChartType ct, string legendText)
         {
+            if (ct == SeriesChartType.FastPoint) ct = SeriesChartType.Point;
             GetSeries(legendText).ChartType = ct;
         }
         public void SetLineWidth(int width, string legendText)
@@ -434,6 +435,55 @@ namespace TireDataAnalyzer.UserControls
             }
             return series;
         }
+        private Color GetGradationColorFromRangedValue(double min, double max, double value)
+        {
+            if(max < min)
+            {
+                double temp = max;
+                max = min;
+                min = temp;
+            }
+            if (max - min == 0) return Color.Red;
+            if (value > max) value = max;
+            if (value < min) value = min;
+            value = value - min;
+            value = value / (max - min);
+            value = value * 8;
+            double r = 0;
+            double g = 0;
+            double b = 0;
+            if( value >= 3 && value <= 7)
+            {
+                r = Math.Min((value - 3) * 0.5, 1);
+            }
+            if(value >7 )
+            {
+                r = 1-(value - 7) * 0.5;
+            }
+
+            if (value >= 1 && value <= 5)
+            {
+                g = Math.Min((value - 1) * 0.5, 1);
+            }
+            if (value > 5)
+            {
+                g = Math.Max( 1-(value - 5) * 0.5, 0);
+            }
+
+            if (value <= 3)
+            {
+                b = Math.Min((value + 1) * 0.5, 1);
+            }
+            if (value > 5)
+            {
+                b = Math.Max(1 - (value - 3) * 0.5, 0);
+            }
+            int rr = (int)(255 * r);
+            int gg = (int)(255 * g);
+            int bb = (int)(255 * b);
+            return Color.FromArgb(rr, gg, bb);
+        }
+
 
         public void DrawGraph(string legendText)
         {
@@ -507,7 +557,10 @@ namespace TireDataAnalyzer.UserControls
                     if (!StaticFunctions.IsNotValidValue(data[X1]) && !StaticFunctions.IsNotValidValue(data[Y1]))
                     {
                         var point = new DataPoint(data[X1], data[Y1]);
+                        //point.Color = Color.Red;
+                        //point.MarkerColor = Color.Red;
                         series.Points.Add(point);
+
                     }
                 }
                 //maxMinInterval.XMax = xmax;
@@ -570,6 +623,11 @@ namespace TireDataAnalyzer.UserControls
                             if (!StaticFunctions.IsNotValidValue(data[X1]) && !StaticFunctions.IsNotValidValue(y))
                             {
                                 var point = new DataPoint(data[X1], y);
+                                //point.Color = Color.Red;
+                                //point.MarkerColor = Color.Red;
+                                Color c = GetGradationColorFromRangedValue(0, 1200, data.FZ);
+                                point.MarkerColor = c;
+                                point.Color = c;
                                 series.Points.Add(point);
                             }
                                 
@@ -949,6 +1007,8 @@ namespace TireDataAnalyzer.UserControls
                     return TireDataColumn.FX;
                 case MagicFormulaOutputVariables.FY:
                     return TireDataColumn.FY;
+                case MagicFormulaOutputVariables.MZ:
+                    return TireDataColumn.MZ;
                 case MagicFormulaOutputVariables.FX_D:
                     return TireDataColumn.FX;
                 case MagicFormulaOutputVariables.FY_D:
