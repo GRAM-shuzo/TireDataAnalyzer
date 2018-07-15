@@ -515,8 +515,8 @@ namespace TTCDataUtils
         }
         public List<TireData> SplitedTransientTable(int i)
         {
-            if (i >= IndexHolderParent.Count)
-                i = IndexHolderParent.Count - 1;
+            if (i >= IndexHolderParent.Count-1)
+                i = IndexHolderParent.Count - 2;
             int lhs = IndexHolderParent[i];
             int rhs = IndexHolderParent[i + 1];
             return Target.GetRange(lhs, rhs - lhs );
@@ -585,7 +585,7 @@ namespace TTCDataUtils
             NotExtractedData.Clear();
             IndexHolder.Clear();
             IndexHolder.Add(0);
-            for( int i=0; i<IndexHolderParent.Count; ++i)
+            for( int i=0; i<IndexHolderParent.Count-1; ++i)
             {
                 if (NumSearch > 0 && i >= NumSearch) break;
                 var list = SplitedTransientTable(i);

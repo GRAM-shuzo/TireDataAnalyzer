@@ -455,8 +455,8 @@ namespace TTCDataUtils
 
         public List<TireData> SplitedTransientTable(int i)
         {
-            if (i >= TransientTableIndexHolder.Count)
-                i = TransientTableIndexHolder.Count - 1;
+            if (i >= TransientTableIndexHolder.Count-1)
+                i = TransientTableIndexHolder.Count - 2;
             int lhs = TransientTableIndexHolder[i];
             int rhs = TransientTableIndexHolder[i + 1];
             return TransientTable.GetRange(lhs, rhs - lhs);

@@ -62,7 +62,7 @@ namespace TTCDataUtils
         {
             get
             {
-                return saveData.TransientTableIndexHolder.Count;
+                return saveData.TransientTableIndexHolder.Count-1;
             }
         }
 
