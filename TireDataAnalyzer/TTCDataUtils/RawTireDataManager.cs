@@ -106,10 +106,11 @@ namespace TTCDataUtils
         }
         public void InsertData(RawTireDataManager manager)
         {
+            int offset = saveData.TransientTable.Count;
             InsertData(manager.CorneringTable, Table.CorneringTable, true);
             InsertData(manager.DriveBrakeTable, Table.DriveBrakeTable, true);
             InsertData(manager.TransientTable, Table.TransientTable, true);
-            int offset = saveData.TransientTable.Count;
+            
             for (int i = 0; i< manager.saveData.TransientTableIndexHolder.Count; ++i)
             {
                 saveData.TransientTableIndexHolder.Add(offset + manager.saveData.TransientTableIndexHolder[i]);

@@ -360,8 +360,6 @@ Eは-(1+0.5C^2) < E < 1を満たす必要があり、
             var Params = MFFD.MagicFormula.FY.Parameters;
             int i = ParameterTB.IndexOf((TextBox)sender);
             Params[i] = double.Parse(((TextBox)sender).Text);
-
-
         }
 
         private void IsReal_Validated(object sender, EventArgs e)

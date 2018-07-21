@@ -40,7 +40,7 @@ namespace TireDataAnalyzer.UserControls.GraphViewer
             );*/
             TV = tv;
             
-            Viewer = new MultiTireDataViewer(MultiTireDataViewer.EnumScreenCount.One);
+            Viewer = new MultiTireDataViewer(MultiTireDataViewer.EnumScreenCount.One,true,true);
             Viewer.GraphName = label;
             Viewer.Dock = DockStyle.Fill;
             Viewer.SeriesChanged += ViewerChanged;

@@ -68,9 +68,14 @@
             // 
             // DataViewer
             // 
+            this.DataViewer.AutoScaleX = true;
+            this.DataViewer.AutoScaleY = true;
             this.DataViewer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DataViewer.Location = new System.Drawing.Point(0, 0);
             this.DataViewer.Name = "DataViewer";
+            this.DataViewer.numPoints = 2000;
+            this.DataViewer.PropertyEnable = false;
+            this.DataViewer.ScreenCountEnable = true;
             this.DataViewer.Size = new System.Drawing.Size(743, 636);
             this.DataViewer.TabIndex = 0;
             // 

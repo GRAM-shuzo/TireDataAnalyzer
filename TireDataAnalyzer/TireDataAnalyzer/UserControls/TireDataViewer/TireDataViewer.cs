@@ -435,67 +435,107 @@ namespace TireDataAnalyzer.UserControls
             }
             return series;
         }
-        private Color GetGradationColorFromRangedValue(double min, double max, double value)
+
+        public interface GradationCalcurator
         {
-            if(max < min)
+            Color GetGradationColorFromValue(double min, double max, double value);
+            string ToString();
+        };
+        [Serializable]
+        public class GradationJet
+            : GradationCalcurator
+        {
+            public Color GetGradationColorFromValue(double min, double max, double value)
             {
-                double temp = max;
-                max = min;
-                min = temp;
-            }
-            if (max - min == 0) return Color.Red;
-            if (value > max) value = max;
-            if (value < min) value = min;
-            value = value - min;
-            value = value / (max - min);
-            value = value * 8;
-            double r = 0;
-            double g = 0;
-            double b = 0;
-            if( value >= 3 && value <= 7)
-            {
-                r = Math.Min((value - 3) * 0.5, 1);
-            }
-            if(value >7 )
-            {
-                r = 1-(value - 7) * 0.5;
-            }
+                if (max < min)
+                {
+                    double temp = max;
+                    max = min;
+                    min = temp;
+                }
+                if (max - min == 0) return Color.Red;
+                if (value > max) value = max;
+                if (value < min) value = min;
+                value = value - min;
+                value = value / (max - min);
+                value = value * 8;
+                double r = 0;
+                double g = 0;
+                double b = 0;
+                if (value >= 3 && value <= 7)
+                {
+                    r = Math.Min((value - 3) * 0.5, 1);
+                }
+                if (value > 7)
+                {
+                    r = 1 - (value - 7) * 0.5;
+                }
 
-            if (value >= 1 && value <= 5)
-            {
-                g = Math.Min((value - 1) * 0.5, 1);
-            }
-            if (value > 5)
-            {
-                g = Math.Max( 1-(value - 5) * 0.5, 0);
-            }
+                if (value >= 1 && value <= 5)
+                {
+                    g = Math.Min((value - 1) * 0.5, 1);
+                }
+                if (value > 5)
+                {
+                    g = Math.Max(1 - (value - 5) * 0.5, 0);
+                }
 
-            if (value <= 3)
-            {
-                b = Math.Min((value + 1) * 0.5, 1);
+                if (value <= 3)
+                {
+                    b = Math.Min((value + 1) * 0.5, 1);
+                }
+                if (value > 5)
+                {
+                    b = Math.Max(1 - (value - 3) * 0.5, 0);
+                }
+                int rr = (int)(255 * r);
+                int gg = (int)(255 * g);
+                int bb = (int)(255 * b);
+                return Color.FromArgb(rr, gg, bb);
             }
-            if (value > 5)
+            override public string ToString()
             {
-                b = Math.Max(1 - (value - 3) * 0.5, 0);
+                return "Jet";
             }
-            int rr = (int)(255 * r);
-            int gg = (int)(255 * g);
-            int bb = (int)(255 * b);
-            return Color.FromArgb(rr, gg, bb);
+        }
+        [Serializable]
+        public class GradationNone
+            : GradationCalcurator
+        {
+            public Color GetGradationColorFromValue(double min, double max, double value)
+            {
+                return Color.Empty;
+            }
+            override public string ToString()
+            {
+                return "None";
+            }
         }
 
-        TireDataColumn? GradationColumn = null;
-        double GradationMax = 0;
-        double GradationMin = 0;
-        public void SetGradation(TireDataColumn? column, double min, double max, string legendText)
+
+        public void SetGradation(TireDataColumn? column, double min, double max, GradationCalcurator gradation, string legendText)
         {
-            GradationColumn = column;
-            GradationMax = max;
-            GradationMin = min;
+            if (saveData.DicGradation == null)
+            {
+                saveData.DicGradation = new Dictionary<string, Tuple<TireDataColumn?, double, double, GradationCalcurator>>();
+            }
+            if (gradation == null)
+                gradation = new GradationNone();
+            saveData.DicGradation[legendText] = new Tuple<TireDataColumn?, double, double, GradationCalcurator>(column, min, max, gradation);
+
         }
-        public Tuple<TireDataColumn?, double, double> GetGradation(string legendText)
+        public Tuple<TireDataColumn?, double, double, GradationCalcurator> GetGradation(string legendText)
         {
-            return new Tuple<TireDataColumn?, double, double>(GradationColumn, GradationMax, GradationMin);
+            var gradation = new Tuple<TireDataColumn?, double, double, GradationCalcurator>(null, 0, 0, null);
+            if(saveData.DicGradation == null)
+            {
+                saveData.DicGradation = new Dictionary<string, Tuple<TireDataColumn?, double, double, GradationCalcurator>>();
+            }
+            if (!saveData.DicGradation.TryGetValue(legendText, out gradation))
+            {
+                saveData.DicGradation[legendText] = new Tuple<TireDataColumn?, double, double, GradationCalcurator>(null, 0, 0, new GradationNone());
+            }
+            return saveData.DicGradation[legendText];
         }
 
         public void DrawGraph(string legendText)
@@ -554,12 +594,16 @@ namespace TireDataAnalyzer.UserControls
 
 
             series.Points.Clear();
-            
+            var gradation = GetGradation(legendText);
+            //var color = GetColor(legendText);
             if (dataType == DataType.RawTireData && Axis != EnumAxis.MagicFormula)
             {
                 var dataList = saveData.DicTireData[legendText];
                 //var maxMinInterval = new CMaxMinInterval();
                 int points = saveData.numPoints < 0 ? dataList.Count : saveData.numPoints;
+                
+                
+
                 for (int i = 0; i < Math.Min(dataList.Count, points); ++i)
                 {
                     var data = dataList[i];
@@ -570,8 +614,13 @@ namespace TireDataAnalyzer.UserControls
                     if (!StaticFunctions.IsNotValidValue(data[X1]) && !StaticFunctions.IsNotValidValue(data[Y1]))
                     {
                         var point = new DataPoint(data[X1], data[Y1]);
-                        //point.Color = Color.Red;
-                        //point.MarkerColor = Color.Red;
+
+                        if(gradation.Item1 != null )//&& !(gradation.Item4 is GradationNone))
+                        {
+                            Color c = gradation.Item4.GetGradationColorFromValue(gradation.Item2, gradation.Item3, data[gradation.Item1.Value]);
+                            point.MarkerColor = c;
+                            point.Color = c;
+                        }
                         series.Points.Add(point);
 
                     }
@@ -636,11 +685,12 @@ namespace TireDataAnalyzer.UserControls
                             if (!StaticFunctions.IsNotValidValue(data[X1]) && !StaticFunctions.IsNotValidValue(y))
                             {
                                 var point = new DataPoint(data[X1], y);
-                                //point.Color = Color.Red;
-                                //point.MarkerColor = Color.Red;
-                                Color c = GetGradationColorFromRangedValue(0, 1200, data.FZ);
-                                point.MarkerColor = c;
-                                point.Color = c;
+                                if (gradation.Item1 != null)// && !(gradation.Item4 is GradationNone))
+                                {
+                                    Color c = gradation.Item4.GetGradationColorFromValue(gradation.Item2, gradation.Item3, data[gradation.Item1.Value]);
+                                    point.MarkerColor = c;
+                                    point.Color = c;
+                                }
                                 series.Points.Add(point);
                             }
                                 
@@ -1074,6 +1124,7 @@ namespace TireDataAnalyzer.UserControls
             [NonSerialized]
             public Dictionary<string, List<TireData>> DicTireData = new Dictionary<string, List<TireData>>();
             public Dictionary<string, string> DicTireDataRef = new Dictionary<string, string>();
+            public Dictionary<string, Tuple<TireDataColumn?, double, double, GradationCalcurator>> DicGradation = new Dictionary<string, Tuple<TireDataColumn?, double, double, GradationCalcurator>>();
             [NonSerialized]
             public Dictionary<string, TireMagicFormula> DicMagicFormula = new Dictionary<string, TireMagicFormula>();
             public Dictionary<string, DataType> DicDataType = new Dictionary<string, DataType>();

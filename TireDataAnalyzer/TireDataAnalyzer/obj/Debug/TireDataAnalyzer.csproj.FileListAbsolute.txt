@@ -22,6 +22,8 @@ E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\TireDataAnalyzer\bin\Debug\Wpf
 E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\TireDataAnalyzer\obj\Debug\TireDataAnalyzer.csprojResolveAssemblyReference.cache
 E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\TireDataAnalyzer\obj\Debug\Interop.Office.dll
 E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\TireDataAnalyzer\obj\Debug\TireDataAnalyzer.csproj.ResolveComReference.cache
+E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\TireDataAnalyzer\obj\Debug\TireDataAnalyzer.ChartTest.resources
+E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\TireDataAnalyzer\obj\Debug\TireDataAnalyzer.UserControls.FittingWizard.TransientPage.resources
 E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\TireDataAnalyzer\obj\Debug\TireDataAnalyzer.TexEquation.MagicFormula_TexEquation.resources
 E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\TireDataAnalyzer\obj\Debug\TireDataAnalyzer.Properties.Resources.resources
 E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\TireDataAnalyzer\obj\Debug\TireDataAnalyzer.UserControls.FittingWizard.CombinedSlipPage.resources
@@ -58,5 +60,3 @@ E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\TireDataAnalyzer\obj\Debug\Tir
 E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\TireDataAnalyzer\obj\Debug\TireDataAnalyzer.csproj.GenerateResource.Cache
 E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\TireDataAnalyzer\obj\Debug\TireDataAnalyzer.exe
 E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\TireDataAnalyzer\obj\Debug\TireDataAnalyzer.pdb
-E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\TireDataAnalyzer\obj\Debug\TireDataAnalyzer.UserControls.FittingWizard.TransientPage.resources
-E:\Desktop\kart\TireDataAnalyzer\TireDataAnalyzer\TireDataAnalyzer\obj\Debug\TireDataAnalyzer.ChartTest.resources

@@ -34,7 +34,8 @@ namespace TireDataAnalyzer.UserControls
                     var htr = viewer.Chart.HitTest(e.X, e.Y);
                     if (htr.ChartElementType == ChartElementType.DataPoint || htr.ChartElementType == ChartElementType.PlottingArea)
                     {
-                        Property(viewer,new EventArgs());
+
+                            Property(viewer,new EventArgs());
                     }
                 };
             }
@@ -155,10 +156,15 @@ namespace TireDataAnalyzer.UserControls
         }
         List<TireDataViewer> Viewers = new List<TireDataViewer>(9);
         public EnumScreenCount ScreenCount { get { return screenCount; } private set { screenCount = value; } }
-        public MultiTireDataViewer(EnumScreenCount Num)
+        public bool PropertyEnable { get; set; }
+        public bool ScreenCountEnable { get; set; }
+        public MultiTireDataViewer(EnumScreenCount Num, bool propertyEnable, bool screenCountEnable)
             : this()
         {
+            PropertyEnable = propertyEnable;
+            ScreenCountEnable = screenCountEnable;
             ResetScreen(Num);
+
         }
         public void SetDrawPriority(int diff, string legendText)
         {
@@ -175,6 +181,22 @@ namespace TireDataAnalyzer.UserControls
         private void MultiTireDataViewer_Load(object sender, EventArgs e)
         {
             //throw new NotImplementedException();
+            //Property(new COnload());
+            for (int i = 0; i < 9; ++i)
+            {
+                int k = 6;
+                if (!ScreenCountEnable)
+                {
+                    for (int j = 0; j < 6; ++j)
+                    {
+                        Viewers[i].ContextMenuStrip.Items.RemoveAt(Viewers[i].ContextMenuStrip.Items.Count - 1);
+                    }
+                    k = 0;
+                }
+
+                if (!PropertyEnable)
+                    (Viewers[i].ContextMenuStrip.Items[Viewers[i].ContextMenuStrip.Items.Count - 2-k] as ToolStripMenuItem).Enabled = false;
+            }
         }
 
         public void ResetScreen(EnumScreenCount Num)
@@ -535,6 +557,8 @@ namespace TireDataAnalyzer.UserControls
                 changed = false;
             }
         }
+
+        bool firstTimeDraw = true;
         public void DrawAllGraph()
         {
             foreach (var viewer in Viewers)
@@ -546,6 +570,12 @@ namespace TireDataAnalyzer.UserControls
                 SeriesChanged(this, new EventArgs());
                 changed = false;
             }
+            if (firstTimeDraw)
+            {
+                Property(new COnload());
+                firstTimeDraw = false;
+            }
+            
         }
         public void UpdateViewer()
         {
@@ -566,14 +596,14 @@ namespace TireDataAnalyzer.UserControls
         {
             return Viewers[ViewerNumber].GetEnable(legendText);
         }
-        public void SetGradation(TireDataColumn? column, double min, double max, string legendText)
+        public void SetGradation(TireDataColumn? column, double min, double max, string legendText, TireDataViewer.GradationCalcurator gradation)
         {
             foreach (var viewer in Viewers)
             {
-                viewer.SetGradation(column, min,max, legendText);
+                viewer.SetGradation(column, min,max, gradation, legendText);
             }
         }
-        public Tuple<TireDataColumn?, double, double> SetGradation(string legendText)
+        public Tuple<TireDataColumn?, double, double, TireDataViewer.GradationCalcurator> SetGradation(string legendText)
         {
             return Viewers[0].GetGradation(legendText);
         }
@@ -602,10 +632,17 @@ namespace TireDataAnalyzer.UserControls
 
         bool changed = false;
 
-        public void Property()
+        public void Property(EventArgs onload = null)
         {
-            Property(this, new EventArgs());
+            Property(this, onload);
         }
+
+        private class COnload
+            : EventArgs
+        {
+
+        }
+
 
         public int ViewerNumber = 0;
         void Property(object sender, EventArgs e)
@@ -635,7 +672,15 @@ namespace TireDataAnalyzer.UserControls
                 ViewerNumber = 0;
             }
             var dialog = new TireDataViewerProperty(this);
-            DialogResult result = dialog.ShowDialog();
+            if (!(e is COnload) &&  PropertyEnable)
+            {
+                DialogResult result = dialog.ShowDialog();
+            }
+            else
+            {
+                
+            }
+                
         }
 
         [Serializable]
