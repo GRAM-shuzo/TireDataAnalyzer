@@ -43,7 +43,15 @@ namespace TireDataAnalyzer.UserControls
             
             ResetScreen(EnumScreenCount.Four);
             this.Load += MultiTireDataViewer_Load;
+            Application.Idle += Application_Idle;
         }
+
+        private void Application_Idle(object sender, EventArgs e)
+        {
+            Application.Idle -= Application_Idle;
+            RefreshViewer();
+        }
+
         [field: NonSerialized]
         public EventHandler SeriesChanged;
         public void AddContextMenuChildren()
@@ -570,12 +578,16 @@ namespace TireDataAnalyzer.UserControls
                 SeriesChanged(this, new EventArgs());
                 changed = false;
             }
-            if (firstTimeDraw)
+            //if (firstTimeDraw)
             {
-                Property(new COnload());
+                RefreshViewer();
                 firstTimeDraw = false;
             }
             
+        }
+        private void RefreshViewer()
+        {
+            Property(new COnload());
         }
         public void UpdateViewer()
         {
@@ -724,5 +736,7 @@ namespace TireDataAnalyzer.UserControls
 
             binaryFormatter.Serialize(writer, data);
         }
+
+      
     }
 }

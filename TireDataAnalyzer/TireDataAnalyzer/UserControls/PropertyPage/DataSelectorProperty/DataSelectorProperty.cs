@@ -21,8 +21,10 @@ namespace TireDataAnalyzer.UserControls.PropertyPage
             DataSelector = selector;
             tempSelector = selector.TDSS.Copy();
             DataSelector.OnUpdated += OnUpdated;
-
+            
         }
+
+        
         private void OnUpdated()
         {
             tempSelector.Reset();
@@ -55,15 +57,17 @@ namespace TireDataAnalyzer.UserControls.PropertyPage
             TableColumnCB.SelectedIndex = 0;
             GradationCB.SelectedIndexChanged += GradationCB_SelectedIndexChanged;
             TableColumnCB.SelectedIndexChanged += TableColumnCB_SelectedIndexChanged;
-            GradationCB.Items.Add(new TireDataViewer.GradationNone());
-            GradationCB.Items.Add(new TireDataViewer.GradationJet());
+            foreach(var item in TireDataViewer.DefaultGradations)
+            {
+                GradationCB.Items.Add(item);
+            }
             GradationCB.SelectedIndex = 0;
 
 
 
             DataSelector.OnRename += OnRename;
             loaded = true;
-            ReplotSelectedGraph();    
+            //ReplotSelectedGraph();    
         }
 
         private void TableColumnCB_SelectedIndexChanged(object sender, EventArgs e)
@@ -110,7 +114,7 @@ namespace TireDataAnalyzer.UserControls.PropertyPage
             }
             TableColumnCB_SelectedIndexChanged(sender, e);
 
-            ReplotSelectedGraph();
+            //ReplotSelectedGraph();
         }
 
         bool hasError = false;
@@ -245,6 +249,7 @@ namespace TireDataAnalyzer.UserControls.PropertyPage
             foreach (var viewer in Viewers)
             {
                 viewer.SetGradation((TireDataColumn)(TableColumnCB.SelectedIndex), min, max, TireDataSelectorWithViewer.LegendTexts[0], GradationCB.SelectedItem as TireDataViewer.GradationCalcurator);
+                
             }
             switch (MainTabControl.SelectedIndex)
                 {

@@ -512,6 +512,18 @@ namespace TireDataAnalyzer.UserControls
             }
         }
 
+        static public List<GradationCalcurator> DefaultGradations
+        {
+            get
+            {
+                var list = new List<GradationCalcurator>();
+                list.Add(new GradationNone());
+                list.Add(new GradationJet());
+                return list;
+            }
+        }
+
+
 
         public void SetGradation(TireDataColumn? column, double min, double max, GradationCalcurator gradation, string legendText)
         {
