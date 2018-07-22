@@ -44,7 +44,9 @@ namespace TireDataAnalyzer.TexEquation
             FY,
             FX,
             CFY,
-            CFX
+            CFX,
+            MZ,
+            Transient
         }
 
         MagicFormulaType type;
@@ -105,7 +107,7 @@ namespace TireDataAnalyzer.TexEquation
                 case MagicFormulaType.CFX:
                     return CFX;
             }
-            return null;
+            return None;
         }
 
         string GetParameterString(int i)
@@ -122,6 +124,13 @@ namespace TireDataAnalyzer.TexEquation
             }
             return "nothing_____";
         }
+
+        string[] None =
+        {
+            @"{None} = {n}",
+            @"{None} = {n}"
+        };
+
 
         string[] FX = {
             @"{F_x} = D\, \sin(C \arctan(B(SR + S_h) - E(B(SR + S_h)  - \arctan B(SR+ S_h) )))",

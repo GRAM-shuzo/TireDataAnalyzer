@@ -29,8 +29,6 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
         string formulaLegend = "CenterLine";
         string formulaLegendU = "UpperLine";
         string formulaLegendL = "LowerLine";
-        string EUpperLegend = "EUpperLine";
-        string ELowerLegend = "ELowerLine";
 
         public SelfAligningTorquePage(FittingWizardPage previous)
             : base(previous, "セルフアライニングトルクパラメータ")
@@ -122,6 +120,8 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
                 tb.KeyDown += TextBox_KeyDown;
                 tb.Enter += Tb_Enter;
                 tb.Leave += Tb_Leave;
+                tb.Validating += IsReal_Validating;
+                tb.Validated += IsReal_Validated;
             }
             foreach (var cb in FittingParametersCB)
             {
@@ -287,23 +287,29 @@ Eは-(1+0.5C^2) < E < 1を満たす必要があり、
             foreach (var mf in Equations)
             {
                 (Parent as Form).ResizeEnd += mf.Control_Resize;
-                mf.Type = MagicFormula_TexEquation.MagicFormulaType.FY;
+                mf.Type = MagicFormula_TexEquation.MagicFormulaType.MZ;
             }
 
-            Viewers[0].SetAxis(MagicFormulaInputVariables.SA, MagicFormulaOutputVariables.FY);
-            Viewers[1].SetAxis(MagicFormulaInputVariables.FZ, MagicFormulaOutputVariables.FY_D);
-            Viewers[2].SetAxis(MagicFormulaInputVariables.FZ, MagicFormulaOutputVariables.FY_BCD);
-            Viewers[3].SetAxis(MagicFormulaInputVariables.P, MagicFormulaOutputVariables.FY_D);
+            Viewers[0].SetAxis(MagicFormulaInputVariables.SA, MagicFormulaOutputVariables.MZ);
+            Viewers[1].SetAxis(MagicFormulaInputVariables.SA, MagicFormulaOutputVariables.PT);
+            Viewers[2].SetAxis(MagicFormulaInputVariables.FZ, MagicFormulaOutputVariables.PT_D);
+            Viewers[3].SetAxis(MagicFormulaInputVariables.SA, MagicFormulaOutputVariables.MZ);
         }
 
         protected override void Reload(bool back)
         {
             stopReplot = true;
-            var Params = MFFD.MagicFormula.FY.Parameters;
-            for (int i = 0; i < ParameterTB.Count(); ++i)
+            var PTParams = MFFD.MagicFormula.MZ.PT.Parameters;
+            var SParams = MFFD.MagicFormula.MZ.CMZM.Parameters;
+            for (int i = 0; i < PTParams.Count(); ++i)
             {
-                ParameterTB[i].Text = Params[i].ToString();
-                FittingParametersCB[i].Checked = MFFD.MagicFormula.FY.FittingParameters[i];
+                ParameterTB[i].Text = PTParams[i].ToString();
+                FittingParametersCB[i].Checked = MFFD.MagicFormula.MZ.PT.FittingParameters[i];
+            }
+            for (int i = 0; i < SParams.Count(); ++i)
+            {
+                ParameterTB[PTParams.Count()+i].Text = SParams[i].ToString();
+                FittingParametersCB[PTParams.Count()+i].Checked = MFFD.MagicFormula.MZ.CMZM.FittingParameters[i];
             }
             for (int i = 0; i < TDSs.Count; ++i)
             {
@@ -344,11 +350,15 @@ Eは-(1+0.5C^2) < E < 1を満たす必要があり、
                 return;
             }
 
-            var Params = MFFD.MagicFormula.FY.Parameters;
+            var PTParams = MFFD.MagicFormula.MZ.PT.Parameters;
+            var SParams = MFFD.MagicFormula.MZ.CMZM.Parameters;
             int i = ParameterTB.IndexOf((TextBox)sender);
-            Params[i] = double.Parse(((TextBox)sender).Text);
-
-
+            if (i < PTParams.Count)
+                PTParams[i] = double.Parse(((TextBox)sender).Text);
+            else
+            {
+                SParams[i- PTParams.Count] = double.Parse(((TextBox)sender).Text);
+            }
         }
 
         private void IsReal_Validated(object sender, EventArgs e)
@@ -379,61 +389,27 @@ Eは-(1+0.5C^2) < E < 1を満たす必要があり、
         {
             if (stopReplot) return;
             int tabIndex = TabControl.SelectedIndex;
-            if (tabIndex != 5)
+            if (ReplotData || !FirstPlot[tabIndex])
             {
-                if (ReplotData || !FirstPlot[tabIndex])
-                {
-                    var corneringTable = TDSs[tabIndex].SelectedData().GetDataSet().CorneringTable;
-                    Viewers[tabIndex].SetDataList(corneringTable, Table.CorneringTable, dataLegend);
-                    Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, TDSs[tabIndex].CenterValue, formulaLegend);
-                    Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, TDSs[tabIndex].UpperValue, formulaLegendU);
-                    Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, TDSs[tabIndex].LowerValue, formulaLegendL);
-                    Viewers[tabIndex].DrawGraph(dataLegend);
-                    ReplotData = false;
-                }
-                if ((ReplotFormula || !FirstPlot[tabIndex]))
-                {
-
-                    Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, TDSs[tabIndex].CenterValue, formulaLegend);
-                    Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, TDSs[tabIndex].UpperValue, formulaLegendU);
-                    Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, TDSs[tabIndex].LowerValue, formulaLegendL);
-                    Viewers[tabIndex].DrawGraph(formulaLegend);
-                    Viewers[tabIndex].DrawGraph(formulaLegendU);
-                    Viewers[tabIndex].DrawGraph(formulaLegendL);
-                    ReplotFormula = false;
-                    FirstPlot[tabIndex] = true;
-                }
-            }
-            else
-            {
-                //-(1+0.5c^2) < E < 1
                 var corneringTable = TDSs[tabIndex].SelectedData().GetDataSet().CorneringTable;
-                var maxmin = TDSs[tabIndex].SelectedData().GetDataSet().MaxminSet.CorneringTableLimit;
-                EList.Clear();
-                var Eupper = new List<TireDataViewer.XY>(corneringTable.Count);
-                var Elower = new List<TireDataViewer.XY>(corneringTable.Count);
-                Eupper.Add(new TireDataViewer.XY(new MagicFormulaArguments(maxmin.Max), 1));
-                Eupper.Add(new TireDataViewer.XY(new MagicFormulaArguments(maxmin.Min), 1));
-
-                var C = MFFD.MagicFormula.GetVariables(MagicFormulaOutputVariables.FY_C, new MagicFormulaArguments(maxmin.Max));
-                Elower.Add(new TireDataViewer.XY(new MagicFormulaArguments(maxmin.Max), -(1 + 0.5 * C * C)));
-                Elower.Add(new TireDataViewer.XY(new MagicFormulaArguments(maxmin.Min), -(1 + 0.5 * C * C)));
-
-                foreach (var data in corneringTable)
-                {
-                    var inputData = new MagicFormulaArguments(data);
-                    var E = MFFD.MagicFormula.GetVariables(MagicFormulaOutputVariables.FY_E, inputData);
-
-                    EList.Add(new TireDataViewer.XY(inputData, E));
-
-                }
-                Viewers[tabIndex].SetNonManagedData(EList, dataLegend);
+                Viewers[tabIndex].SetDataList(corneringTable, Table.CorneringTable, dataLegend);
+                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, TDSs[tabIndex].CenterValue, formulaLegend);
+                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, TDSs[tabIndex].UpperValue, formulaLegendU);
+                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, TDSs[tabIndex].LowerValue, formulaLegendL);
                 Viewers[tabIndex].DrawGraph(dataLegend);
+                ReplotData = false;
+            }
+            if ((ReplotFormula || !FirstPlot[tabIndex]))
+            {
 
-                Viewers[tabIndex].SetNonManagedData(Eupper, EUpperLegend);
-                Viewers[tabIndex].DrawGraph(EUpperLegend);
-                Viewers[tabIndex].SetNonManagedData(Elower, ELowerLegend);
-                Viewers[tabIndex].DrawGraph(ELowerLegend);
+                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, TDSs[tabIndex].CenterValue, formulaLegend);
+                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, TDSs[tabIndex].UpperValue, formulaLegendU);
+                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, TDSs[tabIndex].LowerValue, formulaLegendL);
+                Viewers[tabIndex].DrawGraph(formulaLegend);
+                Viewers[tabIndex].DrawGraph(formulaLegendU);
+                Viewers[tabIndex].DrawGraph(formulaLegendL);
+                ReplotFormula = false;
+                FirstPlot[tabIndex] = true;
             }
 
         }
@@ -484,7 +460,14 @@ Eは-(1+0.5C^2) < E < 1を満たす必要があり、
         private void FittingCheckedChanged(object sender, EventArgs e)
         {
             var i = FittingParametersCB.IndexOf(sender as CheckBox);
-            MFFD.MagicFormula.FY.FittingParameters[i] = FittingParametersCB[i].Checked;
+            if (i < MFFD.MagicFormula.MZ.PT.FittingParameters.Count)
+            {
+                MFFD.MagicFormula.MZ.PT.FittingParameters[i] = FittingParametersCB[i].Checked;
+            }
+            else
+            {
+                MFFD.MagicFormula.FY.FittingParameters[i- MFFD.MagicFormula.MZ.PT.FittingParameters.Count] = FittingParametersCB[i].Checked;
+            }
         }
     }
 }

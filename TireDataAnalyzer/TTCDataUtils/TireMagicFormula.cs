@@ -329,8 +329,8 @@ namespace TTCDataUtils
             var CMZM = new CombinedMzMember(PTM);
             var MZRM = new MzrMagicFormula(CMZM);
             MZ = new MZMagicFormula(MZRM);
-            TFX = new TransientFormula();
-            TFY = new TransientFormula();
+            TFX = new TransientFormula(CFX);
+            TFY = new TransientFormula(CFY);
         }
         public MagicFormulaArguments GetNormalizedValue(MagicFormulaArguments args)
         {
@@ -463,6 +463,9 @@ namespace TTCDataUtils
             MZ.PT.MFY = CFY;
             MZ.CMZM.PTM = MZ.PT;
             MZ.MZR.CMZM = MZ.CMZM;
+            TFX.CMF = CFX;
+            TFY.CMF = CFY;
+
         }
 
         public TireMagicFormula Copy()
@@ -489,7 +492,7 @@ namespace TTCDataUtils
             BinaryFormatter binaryFormatter = new BinaryFormatter();
             var data = binaryFormatter.Deserialize(reader) as TireMagicFormula;
             data.ResetComposite();
-             data.ResetDiff();
+            data.ResetDiff();
             return data;
         }
 
@@ -520,6 +523,7 @@ namespace TTCDataUtils
         dSRdt2,
         dSAdt3,
         dSRdt3,
+        ET
     }
 
     public enum MagicFormulaOutputVariables
@@ -544,7 +548,7 @@ namespace TTCDataUtils
         FY_Sh,
         FY_Sv,
 
-        MZ_D
+        PT_D
     }
 
     #region F
@@ -552,7 +556,7 @@ namespace TTCDataUtils
     [Serializable]
     public abstract class SinTypePureMagicFormula
     {
-        public string FunctionTex = @"{F_y} = D\, \sin(C \arctan(B(x+ S_h) - E(B(x + S_h)  - \arctan B(x+ S_h) ))) + S_v";
+        //public string FunctionTex = @"{F_y} = D\, \sin(C \arctan(B(x+ S_h) - E(B(x + S_h)  - \arctan B(x+ S_h) ))) + S_v";
 
         public List<double> Parameters { get; protected set; }
         public List<bool> FittingParameters { get; protected set; }
@@ -4281,9 +4285,11 @@ namespace TTCDataUtils
     [Serializable]
     public class TransientFormula : ApproximatingCurve
     {
-        const int numParam = 4;
-        public TransientFormula()
+        public const int numParam = 4;
+        public SinTypeCombinedMagicFormula CMF;
+        public TransientFormula(SinTypeCombinedMagicFormula type)
         {
+            CMF = type;
             Parameters = new List<double>(numParam);
             for (int i = 0; i < numParam; ++i)
             {
@@ -4295,6 +4301,8 @@ namespace TTCDataUtils
                 FittingParameters.Add(true);
             }
             ResetDiff();
+            T_F.Add(new Tuple<double, double>(double.MinValue, 0));
+            T_F.Add(new Tuple<double, double>(double.MaxValue, 0));
         }
         
 
@@ -4303,14 +4311,25 @@ namespace TTCDataUtils
             get; private set;
         }
         public List<bool> FittingParameters { get; protected set; }
+        public List<Tuple<double,double>> T_F = new List<Tuple<double, double>>();
         public FuncResult Error(TireData data)
         {
+            var arg = new MagicFormulaArguments(data.SA, data.SR, data.FZ, data.IA, data.P, data.TSTC);
             var result = new FuncResult();
             /*result.value = -PTM.CombinedFunction(arg) * Fy + Function(arg) * Fx - data.MZ;
             result.grads = Grad(arg);
 
             for (int i = 0; i < result.grads.Count; ++i) result.grads[i] *= Fx;
             */
+            double Ffunc = StaticFunctions.InterpolateLinear(data.ET, T_F);
+            if (CMF is CombinedsaMagicFormula)
+                result.value = -data.FY;
+            if (CMF is CombinedsrMagicFormula)
+                result.value = -data.FX;
+            result.value = Ffunc + result.value;
+            result.grads = Grad(arg);
+            for (int i = 0; i < result.grads.Count; ++i) result.grads[i] *= 1;
+
             return result;
         }
         public List<Func<FuncResult>> ConstraintsPure()
@@ -4327,7 +4346,21 @@ namespace TTCDataUtils
 
         public double Function(MagicFormulaArguments args)
         {
-            return 1;
+            var s = Parameters;
+
+            double SA = args.SA;
+            double SR = args.SR;
+            double FZ = args.FZ;
+            double IA = args.IA;
+            double P = args.P;
+            double T = args.T;
+
+            double s1 = s[0];
+            double s2 = s[1];
+            double s3 = s[2];
+            double s4 = s[3];
+
+            return s1 + s2 * FZ + s3 * P + s4 * FZ * P;
         }
 
         public void ResetDiff()
@@ -4395,7 +4428,7 @@ namespace TTCDataUtils
             double s2 = s[2];
             double s3 = s[3];
             double s4 = s[4];
-            return 0;
+            return FZ;
         }
         public double dF_ds3(MagicFormulaArguments args)
         {
@@ -4412,7 +4445,7 @@ namespace TTCDataUtils
             double s2 = s[2];
             double s3 = s[3];
             double s4 = s[4];
-            return IA;
+            return P;
         }
         public double dF_ds4(MagicFormulaArguments args)
         {
@@ -4429,7 +4462,7 @@ namespace TTCDataUtils
             double s2 = s[2];
             double s3 = s[3];
             double s4 = s[4];
-            return IA * FZ;
+            return P * FZ;
         }
 
     }

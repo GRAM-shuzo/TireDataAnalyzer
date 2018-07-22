@@ -13,6 +13,35 @@ namespace TTCDataUtils
 {
     static public class StaticFunctions
     {
+        public static double InterpolateLinear(double x_new, List<Tuple<double, double>>xy)
+        {
+            double xmin = xy[0].Item1;
+            double xmax = xy[xy.Count - 1].Item1;
+            if (x_new < xmin)
+            {
+                return xy[0].Item2;
+            }
+            if (x_new > xmax)
+            {
+                return xy[xy.Count - 1].Item2;
+            }
+            for (int i = 1; i < xy.Count; ++i)
+            {
+                double x0 = xy[i - 1].Item1;
+                double x1 = xy[i].Item1;
+                if (x_new < x1)
+                {
+                    double y0 = xy[i - 1].Item2;
+                    double y1 = xy[i].Item2;
+
+                    double t = x_new - x0;
+                    t = t / (x1 - x0);
+                    return y0 * (1 - t) + y1 * t;
+                }
+            }
+            return xy[xy.Count - 1].Item2;
+        }
+
         public static T DeepCopy<T>(T target)
         {
 
