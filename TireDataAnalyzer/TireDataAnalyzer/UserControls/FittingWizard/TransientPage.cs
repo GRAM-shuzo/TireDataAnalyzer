@@ -109,6 +109,8 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             Equations.Add(magicFormula_TexEquation0);
             Equations.Add(magicFormula_TexEquation1);
             SetClickAllControls(this);
+
+           
         }
 
         public void  SetClickAllControls(Control top)
@@ -182,7 +184,7 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             SetAdviceText(i);
         }
 
-        private void PureCorneringPage_Load(object sender, EventArgs e)
+        private void TransientPage_Load(object sender, EventArgs e)
         {
 
             foreach (var mf in Equations)
@@ -193,6 +195,13 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
 
             Viewers[0].SetAxis(MagicFormulaInputVariables.ET, MagicFormulaOutputVariables.FY);
             Viewers[1].SetAxis(MagicFormulaInputVariables.ET, MagicFormulaOutputVariables.FX);
+
+            testNumTrackBar.Minimum = 1;
+            testNumTrackBar.Maximum = MFFD.IDataset.GetDataSet().TransientTableIndexHolder.Count;
+            testNumTrackBar.TickFrequency = 1;
+            testNumTrackBar.Value = 1;
+            testMaxLabel.Text = "/" + MFFD.IDataset.GetDataSet().TransientTableIndexHolder.Count.ToString();
+            testNumTB.Text = "1";
         }
 
         protected override void Reload(bool back)
@@ -288,20 +297,21 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             int tabIndex = TabControl.SelectedIndex;
             if (ReplotData || !FirstPlot[tabIndex])
             {
-                var corneringTable = TDSs[tabIndex].SelectedData().GetDataSet().CorneringTable;
-                Viewers[tabIndex].SetDataList(corneringTable, Table.CorneringTable, dataLegend);
-                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, TDSs[tabIndex].CenterValue, formulaLegend);
-                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, TDSs[tabIndex].UpperValue, formulaLegendU);
-                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, TDSs[tabIndex].LowerValue, formulaLegendL);
+                var transientTable = TDSs[tabIndex].SelectedData().GetDataSet().TransientTable;
+                var transientTableIndex = TDSs[tabIndex].SelectedData().GetDataSet().TransientTableIndexHolder;
+                var indexToDraw = new List<int>();
+                indexToDraw.Add(testNumTrackBar.Value-1);
+                Viewers[tabIndex].SetDataList(transientTable, Table.TransientTable, dataLegend, transientTableIndex, indexToDraw);
                 Viewers[tabIndex].DrawGraph(dataLegend);
                 ReplotData = false;
+                ReplotFormula = true;
             }
             if ((ReplotFormula || !FirstPlot[tabIndex]))
             {
 
-                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, TDSs[tabIndex].CenterValue, formulaLegend);
-                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, TDSs[tabIndex].UpperValue, formulaLegendU);
-                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, TDSs[tabIndex].LowerValue, formulaLegendL);
+                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, StaticFunctions.ConstArgToViewer(TDSs[tabIndex].CenterValue), formulaLegend);
+                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, StaticFunctions.ConstArgToViewer(TDSs[tabIndex].UpperValue), formulaLegendU);
+                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, StaticFunctions.ConstArgToViewer(TDSs[tabIndex].LowerValue), formulaLegendL);
                 Viewers[tabIndex].DrawGraph(formulaLegend);
                 Viewers[tabIndex].DrawGraph(formulaLegendU);
                 Viewers[tabIndex].DrawGraph(formulaLegendL);
@@ -360,6 +370,45 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
                 MFFD.MagicFormula.TFY.FittingParameters[i] = FittingParametersCB[i].Checked;
             else
                 MFFD.MagicFormula.TFX.FittingParameters[i- MFFD.MagicFormula.TFY.FittingParameters.Count] = FittingParametersCB[i].Checked;
+        }
+
+        private void testNumTrackBar_ValueChanged(object sender, EventArgs e)
+        {
+            ReplotData = true;
+            RePlot();
+        }
+
+        private void testNumTB_Validated(object sender, EventArgs e)
+        {
+            hasError = false;
+            var tb = (sender as TextBox);
+            this.EP_NumericalInput.SetError(tb, null);
+            
+            //testNumTrackBar_ValueChanged(sende, e);
+            
+            NextButton.Enabled = true;
+            PreviousButton.Enabled = true;
+            testNumTrackBar.Value = int.Parse(testNumTB.Text);
+            
+        }
+
+        private void testNumTB_Validating(object sender, CancelEventArgs e)
+        {
+            var tb = (sender as TextBox);
+
+            string s = tb.Text;
+            int i = MFFD.IDataset.GetDataSet().TransientTableIndexHolder.Count-1;
+            if (!(StaticFunctions.IsNInt(s) || s == "" || int.Parse(s) > i))
+            {
+
+                this.EP_NumericalInput.SetError(tb, i.ToString() +"以下の自然数のみ入力");
+
+                hasError = true;
+                e.Cancel = true;
+                NextButton.Enabled = false;
+                PreviousButton.Enabled = false;
+                return;
+            }
         }
     }
 }

@@ -59,7 +59,7 @@ namespace TireDataAnalyzer.UserControls
             ToolStripMenuItem[,] TSMIs = new ToolStripMenuItem[9, 6];
             for (int i = 0; i < 9; ++i)
             {
-                
+                Viewers[i].OnSelectAxis += OnSelectAxis;
                
                 TSMIs[i, 0] = new ToolStripMenuItem("1画面", null, delegate (object sender, EventArgs e) { ResetScreen(EnumScreenCount.One); }, null);
                 TSMIs[i, 1] = new ToolStripMenuItem("2画面(縦)", null, delegate (object sender, EventArgs e) { ResetScreen(EnumScreenCount.Two_Ver); }, null);
@@ -89,6 +89,10 @@ namespace TireDataAnalyzer.UserControls
                     }
                 }
             };
+        }
+        void OnSelectAxis()
+        {
+            RefreshViewer();
         }
 
         public bool AutoScaleX
@@ -374,18 +378,22 @@ namespace TireDataAnalyzer.UserControls
         public void SetAxis(TireDataColumn x, TireDataColumn y, int number)
         {
             Viewers[number].SetAxis(x, y);
+            //RefreshViewer();
         }
         public void SetAxis(MagicFormulaInputVariables x, MagicFormulaOutputVariables y, int number)
         {
             Viewers[number].SetAxis(x, y);
+            //RefreshViewer();
         }
         public void SetAxis(TireDataColumn x, TireDataColumn y)
         {
             Viewers[ViewerNumber].SetAxis(x, y);
+            //RefreshViewer();
         }
         public void SetAxis(MagicFormulaInputVariables x, MagicFormulaOutputVariables y)
         {
             Viewers[ViewerNumber].SetAxis(x, y);
+            //RefreshViewer();
         }
         public Legend GetLegend()
         {
@@ -428,7 +436,7 @@ namespace TireDataAnalyzer.UserControls
         {
             return Viewers[ViewerNumber].GetDataListRefMF(dataListLegend);
         }
-        public MagicFormulaArguments GetArguments(string legendText)
+        public List<MagicFormulaArguments> GetArguments(string legendText)
         {
             return Viewers[0].GetArguments(legendText);
         }
@@ -447,11 +455,11 @@ namespace TireDataAnalyzer.UserControls
             Viewers[ViewerNumber].SetLegend(l);
             changed = true;
         }
-        public void SetDataList(List<TireData> dataList, Table t, string legendText)
+        public void SetDataList(List<TireData> dataList, Table t, string legendText, List<int> transientIndex = null, List<int> indexToDraw = null)
         {
             foreach (var viewer in Viewers)
             {
-                viewer.SetDataList(dataList, t, legendText);
+                viewer.SetDataList(dataList, t, legendText, transientIndex, indexToDraw);
             }
             changed = true;
         }
@@ -467,11 +475,11 @@ namespace TireDataAnalyzer.UserControls
             }
             changed = true;
         }
-        public void SetMagicFormula(TireMagicFormula formula, MagicFormulaArguments constantArgs, string legendText)
+        public void SetMagicFormula(TireMagicFormula formula, List<MagicFormulaArguments> Args, string legendText)
         {
             foreach (var viewer in Viewers)
             {
-                viewer.SetMagicFormula(formula, constantArgs, legendText);
+                viewer.SetMagicFormula(formula, Args, legendText);
             }
             changed = true;
         }
@@ -714,10 +722,15 @@ namespace TireDataAnalyzer.UserControls
             {
                 viewer.Viewers[i].SetSaveData(data.listSaveData[i]);
             }
+            viewer.PropertyEnable = true;
+            viewer.ScreenCountEnable = true;
             viewer.ResetScreen(data.screenCount);
             viewer.uuid = data.uuid;
             viewer.GraphName = data.GraphName;
             viewer.AddContextMenuChildren();
+            viewer.Load += viewer.MultiTireDataViewer_Load;
+            Application.Idle += viewer.Application_Idle;
+
             return viewer;
         }
 

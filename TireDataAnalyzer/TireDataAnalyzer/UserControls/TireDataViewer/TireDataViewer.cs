@@ -56,6 +56,7 @@ namespace TireDataAnalyzer.UserControls
             saveData.DicTireData = new Dictionary<string, List<TireData>>();
             saveData.DicNotManagedData = new Dictionary<string, List<XY>>();
             saveData.DicSeries = new Dictionary<string, Series>();
+            saveData.DicIndexData = new Dictionary<string, List<int>>();
             OnSaveDataLoad();
         }
 
@@ -217,6 +218,7 @@ namespace TireDataAnalyzer.UserControls
             return dataType;
         }
 
+        
 
         public Legend GetLegend()
         {
@@ -227,9 +229,9 @@ namespace TireDataAnalyzer.UserControls
             chart.Legends[0] = l;
         }
 
-        public MagicFormulaArguments GetArguments(string legendText)
+        public List<MagicFormulaArguments> GetArguments(string legendText)
         {
-            MagicFormulaArguments args = null;
+            List<MagicFormulaArguments> args = null;
             if(legendText != null)
                 saveData.DicMFArgs.TryGetValue(legendText, out args);
             return args;
@@ -341,11 +343,12 @@ namespace TireDataAnalyzer.UserControls
             }
             return mfLegend;
         }
-        public void SetDataList(List<TireData> dataList, Table table, string legendText)
+        public void SetDataList(List<TireData> dataList, Table table, string legendText, List<int> transientIndex = null, List<int> indexToDraw = null)
         {
             saveData.DicTireData[legendText] = dataList;
             saveData.DicDataType[legendText] = DataType.RawTireData;
             saveData.TableInfo[legendText] = table;
+            saveData.DicIndexData[legendText] = new Tuple<List<int>,List<int>>(transientIndex,indexToDraw);
         }
         public Table? GetTableInfo(string legendText)
         {
@@ -357,12 +360,12 @@ namespace TireDataAnalyzer.UserControls
             return null;
         }
 
-        public void SetMagicFormula(TireMagicFormula formula, MagicFormulaArguments constantArgs, string legendText)
+        public void SetMagicFormula(TireMagicFormula formula, List<MagicFormulaArguments> Args, string legendText)
         {
             //if (Axis == EnumAxis.RawTireData) throw new Exception("軸タイプ違反");
             saveData.DicMagicFormula[legendText] = formula;
             saveData.DicDataType[legendText] = DataType.MagicFormula;
-            saveData.DicMFArgs[legendText] = constantArgs;
+            saveData.DicMFArgs[legendText] = Args;
         }
         public void SetNonManagedData(List<XY> xyList, string legendText)
         {
@@ -611,8 +614,9 @@ namespace TireDataAnalyzer.UserControls
             if (dataType == DataType.RawTireData && Axis != EnumAxis.MagicFormula)
             {
                 var dataList = saveData.DicTireData[legendText];
+                var table = saveData.TableInfo[legendText];
                 //var maxMinInterval = new CMaxMinInterval();
-                int points = saveData.numPoints < 0 ? dataList.Count : saveData.numPoints;
+                int points = saveData.numPoints < 0 || table==Table.TransientTable? dataList.Count : saveData.numPoints;
                 
                 
 
@@ -645,6 +649,8 @@ namespace TireDataAnalyzer.UserControls
             {
                 var dataList = saveData.DicTireData[legendText];
                 //var maxMinInterval = new CMaxMinInterval();
+                var table = saveData.TableInfo[legendText];
+                //var maxMinInterval = new CMaxMinInterval();
                 bool Y1Convert = false;
                 Y1 = TireDataColumn.FY;
                 try
@@ -652,7 +658,7 @@ namespace TireDataAnalyzer.UserControls
                     Y1 = ConvertEnum(Y2);
                     Y1Convert = true;
                     var mf = saveData.DicMagicFormula[saveData.DicTireDataRef[legendText]];
-                    var points = saveData.numPoints > 0 ? saveData.numPoints : dataList.Count;
+                    int points = saveData.numPoints < 0 || table == Table.TransientTable ? dataList.Count : saveData.numPoints;
                     for (int i = 0; i < Math.Min(dataList.Count, points); ++i)
                     {
                         var data = dataList[i];
@@ -715,11 +721,11 @@ namespace TireDataAnalyzer.UserControls
                 }
                 
             }
-            else if (Axis == EnumAxis.MagicFormula && dataType == DataType.MagicFormula && X2 != MagicFormulaInputVariables.FY)
+            else if (Axis == EnumAxis.MagicFormula && dataType == DataType.MagicFormula && X2 != MagicFormulaInputVariables.FY && X2 != MagicFormulaInputVariables.ET)
             {
                 var magicFormula = saveData.DicMagicFormula[legendText];
                 var dif = (xmax - xmin) / (double)(GraphSample);
-                var arg = saveData.DicMFArgs[legendText].Copy();
+                var arg = saveData.DicMFArgs[legendText][0].Copy();
                 if(X2 == MagicFormulaInputVariables.SR && Y2 == MagicFormulaOutputVariables.FY)
                 {
                     if(arg.SA == 0)
@@ -754,7 +760,7 @@ namespace TireDataAnalyzer.UserControls
             else if (Axis == EnumAxis.MagicFormula && dataType == DataType.MagicFormula && X2 == MagicFormulaInputVariables.FY)
             {
                 var magicFormula = saveData.DicMagicFormula[legendText];
-                var arg = saveData.DicMFArgs[legendText].Copy();
+                var arg = saveData.DicMFArgs[legendText][0].Copy();
                 var Xlim = magicFormula.FX.GetPeak(arg);
                 var Ylim = magicFormula.FY.GetPeak(arg);
                 var random = new RandomBoxMuller();
@@ -1019,7 +1025,11 @@ namespace TireDataAnalyzer.UserControls
                 }
             }
             DrawAllGraph();
+            OnSelectAxis();
         }
+
+        public delegate void OnSelectAxis_delegate();
+        public OnSelectAxis_delegate OnSelectAxis;
 
         public void UpdateViewer()
         {
@@ -1135,12 +1145,14 @@ namespace TireDataAnalyzer.UserControls
             public Dictionary<string, Series> DicSeries = new Dictionary<string, Series>();
             [NonSerialized]
             public Dictionary<string, List<TireData>> DicTireData = new Dictionary<string, List<TireData>>();
+            [NonSerialized]
+            public Dictionary<string, Tuple<List<int>,List<int>>> DicIndexData = new Dictionary<string, Tuple<List<int>, List<int>>>();
             public Dictionary<string, string> DicTireDataRef = new Dictionary<string, string>();
             public Dictionary<string, Tuple<TireDataColumn?, double, double, GradationCalcurator>> DicGradation = new Dictionary<string, Tuple<TireDataColumn?, double, double, GradationCalcurator>>();
             [NonSerialized]
             public Dictionary<string, TireMagicFormula> DicMagicFormula = new Dictionary<string, TireMagicFormula>();
             public Dictionary<string, DataType> DicDataType = new Dictionary<string, DataType>();
-            public Dictionary<string, MagicFormulaArguments> DicMFArgs = new Dictionary<string, MagicFormulaArguments>();
+            public Dictionary<string, List<MagicFormulaArguments>> DicMFArgs = new Dictionary<string, List<MagicFormulaArguments>>();
             [NonSerialized]
             public Dictionary<string, List<XY>> DicNotManagedData = new Dictionary<string, List<XY>>();
             public Dictionary<string, string> legendTextOverride = new Dictionary<string, string>();

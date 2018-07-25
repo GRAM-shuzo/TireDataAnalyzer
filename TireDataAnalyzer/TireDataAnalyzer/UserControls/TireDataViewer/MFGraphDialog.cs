@@ -26,7 +26,7 @@ namespace TireDataAnalyzer.UserControls
             Editor.Location = new Point(12, 38);
             this.Controls.Add(Editor);
 
-            var args = Viewer.GetArguments(ID);
+            var args = Viewer.GetArguments(ID)[0];
 
             SATB.Text = args.SA.ToString();
             SRTB.Text = args.SR.ToString();

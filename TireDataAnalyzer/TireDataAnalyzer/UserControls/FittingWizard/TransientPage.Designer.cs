@@ -168,6 +168,8 @@
             this.testNumTB.Name = "testNumTB";
             this.testNumTB.Size = new System.Drawing.Size(50, 19);
             this.testNumTB.TabIndex = 76;
+            this.testNumTB.Validating += new System.ComponentModel.CancelEventHandler(this.testNumTB_Validating);
+            this.testNumTB.Validated += new System.EventHandler(this.testNumTB_Validated);
             // 
             // testNumTrackBar
             // 
@@ -175,6 +177,7 @@
             this.testNumTrackBar.Name = "testNumTrackBar";
             this.testNumTrackBar.Size = new System.Drawing.Size(374, 45);
             this.testNumTrackBar.TabIndex = 75;
+            this.testNumTrackBar.ValueChanged += new System.EventHandler(this.testNumTrackBar_ValueChanged);
             // 
             // checkBox4
             // 
@@ -711,7 +714,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.TabControl);
             this.Name = "TransientPage";
-            this.Load += new System.EventHandler(this.PureCorneringPage_Load);
+            this.Load += new System.EventHandler(this.TransientPage_Load);
             this.Controls.SetChildIndex(this.CancelButton, 0);
             this.Controls.SetChildIndex(this.NextButton, 0);
             this.Controls.SetChildIndex(this.PreviousButton, 0);

@@ -433,9 +433,9 @@ b7はShの輪荷重依存性を決定します";
                 corneringTable.AddRange(driveBrakeTable);
 
                 Viewers[tabIndex].SetDataList(corneringTable, Table.CorneringTable, dataLegend);
-                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, TDSs[tabIndex].CenterValue, formulaLegend);
-                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, TDSs[tabIndex].UpperValue, formulaLegendU);
-                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, TDSs[tabIndex].LowerValue, formulaLegendL);
+                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, StaticFunctions.ConstArgToViewer(TDSs[tabIndex].CenterValue), formulaLegend);
+                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, StaticFunctions.ConstArgToViewer(TDSs[tabIndex].UpperValue), formulaLegendU);
+                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, StaticFunctions.ConstArgToViewer(TDSs[tabIndex].LowerValue), formulaLegendL);
 
                 Viewers[tabIndex].DrawGraph(dataLegend);
                 ReplotData = false;
@@ -443,9 +443,9 @@ b7はShの輪荷重依存性を決定します";
             if ((ReplotFormula || !FirstPlot[tabIndex]))
             {
                 var formula = TDSs[tabIndex].CenterValue;
-                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, formula , formulaLegend);
-                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, TDSs[tabIndex].UpperValue, formulaLegendU);
-                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, TDSs[tabIndex].LowerValue, formulaLegendL);
+                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, StaticFunctions.ConstArgToViewer(formula) , formulaLegend);
+                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, StaticFunctions.ConstArgToViewer(TDSs[tabIndex].UpperValue), formulaLegendU);
+                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, StaticFunctions.ConstArgToViewer(TDSs[tabIndex].LowerValue), formulaLegendL);
                 Viewers[tabIndex].DrawGraph(formulaLegend);
                 Viewers[tabIndex].DrawGraph(formulaLegendU);
                 Viewers[tabIndex].DrawGraph(formulaLegendL);

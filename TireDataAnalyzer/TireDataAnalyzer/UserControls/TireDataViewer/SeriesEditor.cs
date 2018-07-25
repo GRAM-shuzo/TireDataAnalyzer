@@ -74,7 +74,7 @@ namespace TireDataAnalyzer.UserControls
             ID = id;
             suffix = int.Parse(stArrayData[0]);
             InitSourceList();
-            Args = Viewer.GetArguments(ID);
+            Args = Viewer.GetArguments(ID)[0];
             if(Args == null) Args = new MagicFormulaArguments(0, 0, 1000, 0, 75, 50);
             if (ID != null)
             {
@@ -110,7 +110,7 @@ namespace TireDataAnalyzer.UserControls
                     ColorCB.SelectedIndex = (int)color - 1;
                 }
             }
-            Args = Viewer.GetArguments(ID) != null? Viewer.GetArguments(ID).Copy():null;
+            Args = Viewer.GetArguments(ID) != null? Viewer.GetArguments(ID)[0].Copy():null;
             SizeTB.Text = Viewer.GetLineWidth(ID).ToString();
             NameTB.Text = Viewer.LegendTextOverride(ID);
             CheckInitialized();
@@ -319,7 +319,11 @@ namespace TireDataAnalyzer.UserControls
                         OnDelete();
                     }
                     ID = suffix.ToString("000") + "_" + node.ID.ToString();
-                    Viewer.SetDataList(node.IDataSet.GetDataSet().GetDataList(t), t, ID);
+                    List<int> transientIndex = null;
+                    if (t == Table.TransientTable)
+                        transientIndex = node.IDataSet.GetDataSet().TransientTableIndexHolder;
+
+                    Viewer.SetDataList(node.IDataSet.GetDataSet().GetDataList(t), t, ID, transientIndex);
                     if (MFSourceCB.SelectedIndex >= 0)
                     {
                         
@@ -332,7 +336,7 @@ namespace TireDataAnalyzer.UserControls
                         var nodeMF = MFSourceCB.SelectedItem as ProjectTree.Node_MagicFormula;
                         Viewer.SetDataListRefMF(ID, nodeMF.ID.ToString());
 
-                        Viewer.SetMagicFormula(nodeMF.MFFD.MagicFormula, Args, nodeMF.ID.ToString());
+                        Viewer.SetMagicFormula(nodeMF.MFFD.MagicFormula, StaticFunctions.ConstArgToViewer(Args), nodeMF.ID.ToString());
                     }
                     else
                     {
@@ -361,7 +365,7 @@ namespace TireDataAnalyzer.UserControls
                         Args = new MagicFormulaArguments(data);
                     }
                     ID = suffix.ToString("000") + "_" + node.ID.ToString();
-                    Viewer.SetMagicFormula(node.MFFD.MagicFormula, Args, ID);
+                    Viewer.SetMagicFormula(node.MFFD.MagicFormula, StaticFunctions.ConstArgToViewer(Args), ID);
 
                 }
                 KnownColor color = (KnownColor)(ColorCB.SelectedIndex + 1);

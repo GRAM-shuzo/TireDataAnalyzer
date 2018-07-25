@@ -125,6 +125,13 @@ namespace TireDataAnalyzer
             }
             return unique;
         }
+        
+        public static List<MagicFormulaArguments> ConstArgToViewer(MagicFormulaArguments arg)
+        {
+            var list = new List<MagicFormulaArguments>();
+            list.Add(arg);
+            return list;
+        }
 
         public static void AddPropertyPage(UserControls.PropertyPage.PropertyPage property)
         {         

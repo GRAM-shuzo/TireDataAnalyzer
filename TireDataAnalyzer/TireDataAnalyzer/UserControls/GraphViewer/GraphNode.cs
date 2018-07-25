@@ -174,7 +174,6 @@ namespace TireDataAnalyzer.UserControls.GraphViewer
 
                 return node;
             }
-            return null;
         }
 
         public void Save(ZipArchive archive)
