@@ -130,7 +130,8 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             }
             for (int i = 0; i < TDSs.Count; ++i)
             {
-                TDSs[i].SASREnable = false;
+                TDSs[i].SASREnable = true;
+                TDSs[i].AttachedTable = Table.StaticTable;
                 TDSs[i].Size = new Size(TDSs[i].Size.Width, 200);
                 TDSs[i].MFFD = MFFD;
                 TDSs[i].ValueChanged += SelectorValueChanged;

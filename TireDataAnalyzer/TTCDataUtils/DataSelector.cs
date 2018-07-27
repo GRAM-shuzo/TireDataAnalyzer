@@ -626,6 +626,11 @@ namespace TTCDataUtils
                                     remove = false;
                                     break;
                                 }
+                                else
+                                {
+
+
+                                }
                             }
 
                             if (counttemp == 0) remove = false;

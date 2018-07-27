@@ -91,7 +91,8 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             }
             for (int i = 0; i < TDSs.Count; ++i)
             {
-                TDSs[i].SASREnable = false;
+                TDSs[i].SASREnable = true;
+                TDSs[i].AttachedTable = Table.TransientTable;
                 TDSs[i].Size = new Size(TDSs[i].Size.Width, 200);
                 TDSs[i].MFFD = MFFD;
                 TDSs[i].ValueChanged += SelectorValueChanged;
@@ -197,7 +198,7 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             Viewers[1].SetAxis(MagicFormulaInputVariables.ET, MagicFormulaOutputVariables.FX);
 
             testNumTrackBar.Minimum = 1;
-            testNumTrackBar.Maximum = MFFD.IDataset.GetDataSet().TransientTableIndexHolder.Count;
+            testNumTrackBar.Maximum = MFFD.IDataset.GetDataSet().TransientTableIndexHolder.Count-1;
             testNumTrackBar.TickFrequency = 1;
             testNumTrackBar.Value = 1;
             testMaxLabel.Text = "/" + MFFD.IDataset.GetDataSet().TransientTableIndexHolder.Count.ToString();
@@ -300,11 +301,19 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
                 var transientTable = TDSs[tabIndex].SelectedData().GetDataSet().TransientTable;
                 var transientTableIndex = TDSs[tabIndex].SelectedData().GetDataSet().TransientTableIndexHolder;
                 var indexToDraw = new List<int>();
+                /*for (int i = 0; i < TDSs[tabIndex].SelectedData().GetDataSet().TransientTableIndexHolder.Count; ++i)
+                {
+                    indexToDraw.Add(i);
+                }*/
+               
                 indexToDraw.Add(testNumTrackBar.Value-1);
                 Viewers[tabIndex].SetDataList(transientTable, Table.TransientTable, dataLegend, transientTableIndex, indexToDraw);
+                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, StaticFunctions.ConstArgToViewer(TDSs[tabIndex].CenterValue), formulaLegend);
+                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, StaticFunctions.ConstArgToViewer(TDSs[tabIndex].UpperValue), formulaLegendU);
+                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, StaticFunctions.ConstArgToViewer(TDSs[tabIndex].LowerValue), formulaLegendL);
                 Viewers[tabIndex].DrawGraph(dataLegend);
                 ReplotData = false;
-                ReplotFormula = true;
+                return;
             }
             if ((ReplotFormula || !FirstPlot[tabIndex]))
             {
@@ -375,6 +384,8 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
         private void testNumTrackBar_ValueChanged(object sender, EventArgs e)
         {
             ReplotData = true;
+            testNumTB.Text = testNumTrackBar.Value.ToString();
+            Refresh();
             RePlot();
         }
 

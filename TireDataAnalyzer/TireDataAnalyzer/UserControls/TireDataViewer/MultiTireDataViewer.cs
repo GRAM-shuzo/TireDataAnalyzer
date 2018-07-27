@@ -572,6 +572,7 @@ namespace TireDataAnalyzer.UserControls
                 SeriesChanged(this, new EventArgs());
                 changed = false;
             }
+            RefreshViewer();
         }
 
         bool firstTimeDraw = true;

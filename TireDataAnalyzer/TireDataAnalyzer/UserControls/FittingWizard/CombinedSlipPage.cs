@@ -150,7 +150,9 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
             }
             for (int i = 0; i < TDSs.Count; ++i)
             {
+                TDSs[i].AttachedTable = Table.StaticTable;
                 TDSs[i].MFFD = MFFD;
+                
                 TDSs[i].ValueChanged += SelectorValueChanged;
 
                 Viewers[i].SetChartType(System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastPoint, dataLegend);

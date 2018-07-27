@@ -129,6 +129,10 @@ namespace TireDataAnalyzer.UserControls
                     MFFD.IDataset.GetDataSet().MaxminSet.Limit(Table.CorneringTable),
                     MFFD.IDataset.GetDataSet().MaxminSet.Limit(Table.DriveBrakeTable)
                     );
+                limit = StaticFunctions.TireDataMaxminMerge(
+                    limit,
+                    MFFD.IDataset.GetDataSet().MaxminSet.Limit(Table.TransientTable)
+                    );
                 FZ = new TireDataConstrain("FZ", TireDataColumn.FZ, limit.Max.FZ, limit.Min.FZ);
                 P = new TireDataConstrain("P", TireDataColumn.P, limit.Max.P, limit.Min.P);
                 IA = new TireDataConstrain("IA", TireDataColumn.IA, limit.Max.IA, limit.Min.IA);
@@ -234,6 +238,14 @@ namespace TireDataAnalyzer.UserControls
                     Selector.RemoveConstrain(T, Table.DriveBrakeTable);
                     Selector.RemoveConstrain(SA, Table.DriveBrakeTable);
                     Selector.RemoveConstrain(SR, Table.DriveBrakeTable);
+
+                    Selector.RemoveConstrain(FZ, Table.TransientTable);
+                    Selector.RemoveConstrain(P, Table.TransientTable);
+                    Selector.RemoveConstrain(IA, Table.TransientTable);
+                    Selector.RemoveConstrain(T, Table.TransientTable);
+                    Selector.RemoveConstrain(SA, Table.TransientTable);
+                    Selector.RemoveConstrain(SR, Table.TransientTable);
+
                     FZ = new TireDataConstrain("FZ", TireDataColumn.FZ, FZBar.valueR, FZBar.valueL);
                     P = new TireDataConstrain("P", TireDataColumn.P, PBar.valueR, PBar.valueL);
                     IA = new TireDataConstrain("IA", TireDataColumn.IA, IABar.valueR, IABar.valueL);
@@ -254,8 +266,16 @@ namespace TireDataAnalyzer.UserControls
                     Selector.AddConstrain(T, Table.DriveBrakeTable);
                     Selector.AddConstrain(SA, Table.DriveBrakeTable);
                     Selector.AddConstrain(SR, Table.DriveBrakeTable);
+
+                    Selector.AddConstrain(FZ, Table.TransientTable);
+                    Selector.AddConstrain(P, Table.TransientTable);
+                    Selector.AddConstrain(IA, Table.TransientTable);
+                    Selector.AddConstrain(T, Table.TransientTable);
+                    Selector.AddConstrain(SA, Table.TransientTable);
+                    Selector.AddConstrain(SR, Table.TransientTable);
                     Selector.ExtractData(Table.CorneringTable, NumSearch/4);
                     Selector.ExtractData(Table.DriveBrakeTable, NumSearch*3/4);
+                    Selector.ExtractData(Table.TransientTable, NumSearch);
                 }
             }
             

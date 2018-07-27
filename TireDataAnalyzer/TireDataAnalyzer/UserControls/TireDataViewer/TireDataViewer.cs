@@ -56,7 +56,7 @@ namespace TireDataAnalyzer.UserControls
             saveData.DicTireData = new Dictionary<string, List<TireData>>();
             saveData.DicNotManagedData = new Dictionary<string, List<XY>>();
             saveData.DicSeries = new Dictionary<string, Series>();
-            saveData.DicIndexData = new Dictionary<string, List<int>>();
+            saveData.DicIndexData = new Dictionary<string, Tuple<List<int>,List<int>>>();
             OnSaveDataLoad();
         }
 
@@ -617,11 +617,23 @@ namespace TireDataAnalyzer.UserControls
                 var table = saveData.TableInfo[legendText];
                 //var maxMinInterval = new CMaxMinInterval();
                 int points = saveData.numPoints < 0 || table==Table.TransientTable? dataList.Count : saveData.numPoints;
-                
-                
+                Tuple<List<int>, List<int>> transientData = new Tuple<List<int>, List<int>>(null,null);
+                bool haveTransientData = saveData.DicIndexData.TryGetValue(legendText, out transientData);
+                if (transientData.Item1 == null || transientData.Item2 == null) haveTransientData = false;
+                int transientIndexNow = 0;
+
 
                 for (int i = 0; i < Math.Min(dataList.Count, points); ++i)
                 {
+                    if (haveTransientData && i >= transientData.Item1[transientIndexNow + 1])
+                    {
+                        ++transientIndexNow;
+                    }
+                    if (haveTransientData && !transientData.Item2.Contains(transientIndexNow))
+                    {
+                        continue;
+                    }
+
                     var data = dataList[i];
                     if (xmax < data[X1]) xmax = data[X1];
                     if (xmin > data[X1]) xmin = data[X1];
@@ -659,8 +671,20 @@ namespace TireDataAnalyzer.UserControls
                     Y1Convert = true;
                     var mf = saveData.DicMagicFormula[saveData.DicTireDataRef[legendText]];
                     int points = saveData.numPoints < 0 || table == Table.TransientTable ? dataList.Count : saveData.numPoints;
+                    Tuple<List<int>, List<int>> transientData = new Tuple<List<int>, List<int>>(null, null);
+                    bool haveTransientData = saveData.DicIndexData.TryGetValue(legendText, out transientData);
+                    if(transientData.Item1 == null || transientData.Item2 == null) haveTransientData = false;
+                    int transientIndexNow = 0;
                     for (int i = 0; i < Math.Min(dataList.Count, points); ++i)
                     {
+                        if (haveTransientData && i >= transientData.Item1[transientIndexNow + 1])
+                        {
+                            ++transientIndexNow;
+                        }
+                        if (haveTransientData && !transientData.Item2.Contains(transientIndexNow))
+                        {
+                            continue;
+                        }
                         var data = dataList[i];
                         var sa = data.SA;
                         var sr = data.SR;
@@ -1079,6 +1103,8 @@ namespace TireDataAnalyzer.UserControls
                     return TireDataColumn.P;
                 case MagicFormulaInputVariables.FY:
                     return TireDataColumn.FY;
+                case MagicFormulaInputVariables.ET:
+                    return TireDataColumn.ET;
                 default:
                     return TireDataColumn.TSTC;
             }
