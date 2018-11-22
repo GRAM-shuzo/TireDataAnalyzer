@@ -301,7 +301,20 @@ namespace TTCDataUtils
         public double SRTransient { get; private set; }
         public double dSRdt { get; private set; }
         public double dSAdt { get; private set; }
+        public double GetVariables(MagicFormulaOutputVariables name)
+        {
+            switch (name)
+            {
+                case MagicFormulaOutputVariables.FY:
+                    return FY;
+                case MagicFormulaOutputVariables.FX:
+                    return FX;
+                case MagicFormulaOutputVariables.MZ:
+                    return MZ;
+            }
 
+            return 0;
+        }
     }
 
     [Serializable]
@@ -394,7 +407,7 @@ namespace TTCDataUtils
                 double tau = TFY.Function(args);
                 if (tau > 0)
                 {
-                    dSAdt0 = (Vsx - args.V * sa) / tau;
+                    dSAdt0 = (Vsy - args.V * sa * Math.PI / 180) / tau * 180 / Math.PI;
                     if (double.IsNaN(args.dSAdt1))
                     {
                         sa = sa + dSAdt0 * args.dt;

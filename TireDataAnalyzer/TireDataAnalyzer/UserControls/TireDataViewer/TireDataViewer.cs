@@ -852,6 +852,52 @@ namespace TireDataAnalyzer.UserControls
                 }
                 
             }
+            else if (Axis == EnumAxis.MagicFormula && dataType == DataType.MagicFormula && X2 == MagicFormulaInputVariables.ET)
+            {
+                var magicFormula = saveData.DicMagicFormula[legendText];
+                var dt = saveData.DicMFArgs[legendText][0].dt;
+                double time = 0;
+                int count = 0;
+                double fx1 = 0, fx2 = 0, fx3 = 0;
+                double fy1 = 0, fy2 = 0, fy3 = 0;
+                double sab = saveData.DicMFArgs[legendText][0].SA;
+                double srb = saveData.DicMFArgs[legendText][0].SR;
+                while (time <= saveData.DicMFArgs[legendText].Count*dt && count < saveData.DicMFArgs[legendText].Count)
+                {
+                    var arg = saveData.DicMFArgs[legendText][count];
+                    arg.dSAdt1 = fy1;
+                    arg.dSAdt2 = fy2;
+                    arg.dSAdt3 = fy3;
+
+                    arg.dSRdt1 = fx1;
+                    arg.dSRdt2 = fx2;
+                    arg.dSRdt3 = fx3;
+
+                    arg.SAb = sab;
+                    arg.SRb = srb;
+                    var Y = magicFormula.CombinedFunction(arg);
+
+                    fy3 = fy2;
+                    fy2 = fy1;
+                    fy1 = Y.dSAdt;756269
+
+                    fx3 = fx2;
+                    fx2 = fx1;
+                    fx1 = Y.dSRdt;
+
+                    sab = Y.SATransient;
+                    srb = Y.SRTransient;
+
+                    double y = Y.GetVariables(Y2);
+                    if (!StaticFunctions.IsNotValidValue(y))
+                    {
+                        var point = new DataPoint(time, y);
+                        series.Points.Add(point);
+                    }
+                    time = time + dt;
+                    ++count;
+                }
+            }
             else if(dataType == DataType.NonManagedData)
             {
                 var dataList = saveData.DicNotManagedData[legendText];

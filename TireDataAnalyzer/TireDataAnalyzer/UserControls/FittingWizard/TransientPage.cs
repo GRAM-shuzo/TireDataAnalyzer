@@ -296,34 +296,60 @@ namespace TireDataAnalyzer.UserControls.FittingWizard
         {
             if (stopReplot) return;
             int tabIndex = TabControl.SelectedIndex;
+            var transientTable = TDSs[tabIndex].SelectedData().GetDataSet().TransientTable;
+            var transientTableIndex = TDSs[tabIndex].SelectedData().GetDataSet().TransientTableIndexHolder;
+            var data = TDSs[tabIndex].SelectedData().GetDataSet().SplitedTransientTable(testNumTrackBar.Value - 1);
+            var indexToDraw = new List<int>();
+            /*for (int i = 0; i < TDSs[tabIndex].SelectedData().GetDataSet().TransientTableIndexHolder.Count; ++i)
+            {
+                indexToDraw.Add(i);
+            }*/
+
+            indexToDraw.Add(testNumTrackBar.Value - 1);
+
+            List<MagicFormulaArguments> centerValue = new List<MagicFormulaArguments>();
+            List<MagicFormulaArguments> upperValue = new List<MagicFormulaArguments>();
+            List<MagicFormulaArguments> lowerValue = new List<MagicFormulaArguments>();
+            double dt = data[1].ET - data[0].ET;
+
+
+            for (int i = 0; i < data.Count; ++i)
+            {
+                MagicFormulaArguments arg1 = new MagicFormulaArguments(data[i]);
+                var arg2 = TDSs[tabIndex].UpperValue;
+                var arg3 = TDSs[tabIndex].LowerValue;
+
+                arg1.dt = arg2.dt = arg3.dt = dt;
+                arg1.SA = arg2.SA = arg3.SA = data[i].SA;
+                arg1.SR = arg2.SR = arg3.SR = data[i].SR;
+                centerValue.Add(arg1);
+                upperValue.Add(arg2);
+                lowerValue.Add(arg3);
+            }
+            centerValue[0].SA = 0;
+            upperValue[0].SA = 0;
+            lowerValue[0].SA = 0;
+
+            centerValue[0].SR = 0;
+            upperValue[0].SR = 0;
+            lowerValue[0].SR = 0;
+
+            Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, centerValue, formulaLegend);
+            Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, upperValue, formulaLegendU);
+            Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, lowerValue, formulaLegendL);
+
             if (ReplotData || !FirstPlot[tabIndex])
             {
-                var transientTable = TDSs[tabIndex].SelectedData().GetDataSet().TransientTable;
-                var transientTableIndex = TDSs[tabIndex].SelectedData().GetDataSet().TransientTableIndexHolder;
-                var indexToDraw = new List<int>();
-                /*for (int i = 0; i < TDSs[tabIndex].SelectedData().GetDataSet().TransientTableIndexHolder.Count; ++i)
-                {
-                    indexToDraw.Add(i);
-                }*/
-               
-                indexToDraw.Add(testNumTrackBar.Value-1);
-                Viewers[tabIndex].SetDataList(transientTable, Table.TransientTable, dataLegend, transientTableIndex, indexToDraw);
-                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, StaticFunctions.ConstArgToViewer(TDSs[tabIndex].CenterValue), formulaLegend);
-                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, StaticFunctions.ConstArgToViewer(TDSs[tabIndex].UpperValue), formulaLegendU);
-                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, StaticFunctions.ConstArgToViewer(TDSs[tabIndex].LowerValue), formulaLegendL);
+                Viewers[tabIndex].SetDataList(transientTable, Table.TransientTable, dataLegend, transientTableIndex, indexToDraw);  
                 Viewers[tabIndex].DrawGraph(dataLegend);
+                Viewers[tabIndex].DrawGraph(formulaLegend);
                 ReplotData = false;
-                return;
+                //return;
             }
             if ((ReplotFormula || !FirstPlot[tabIndex]))
             {
-
-                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, StaticFunctions.ConstArgToViewer(TDSs[tabIndex].CenterValue), formulaLegend);
-                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, StaticFunctions.ConstArgToViewer(TDSs[tabIndex].UpperValue), formulaLegendU);
-                Viewers[tabIndex].SetMagicFormula(MFFD.MagicFormula, StaticFunctions.ConstArgToViewer(TDSs[tabIndex].LowerValue), formulaLegendL);
-                Viewers[tabIndex].DrawGraph(formulaLegend);
-                Viewers[tabIndex].DrawGraph(formulaLegendU);
-                Viewers[tabIndex].DrawGraph(formulaLegendL);
+                //Viewers[tabIndex].DrawGraph(formulaLegendU);
+                //Viewers[tabIndex].DrawGraph(formulaLegendL);
                 ReplotFormula = false;
                 FirstPlot[tabIndex] = true;
             }
